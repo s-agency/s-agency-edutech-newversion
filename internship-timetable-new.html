@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Timetable</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f1f5f9;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  background: #ffffff;
+  width: 100%;
+  max-width: 750px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0f172a;
+}
+
+.input-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #cbd5f5;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+.message {
+  text-align: center;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.error {
+  color: #dc2626;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+th {
+  background: #2563eb;
+  color: #fff;
+  padding: 14px;
+  font-size: 15px;
+}
+
+td {
+  padding: 14px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #334155;
+}
+
+@media(max-width:600px){
+  .input-box {
+    flex-direction: column;
+  }
+  button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <h1>Student Timetable</h1>
+
+  <div class="input-box">
+    <input type="email" id="email" placeholder="Enter your email">
+    <button onclick="getTimetable()">Check</button>
+  </div>
+
+  <div id="result" class="message"></div>
+</div>
+
+<script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxWdBDbk2wefGrnA3Sfl2buwMLmijCHwHuLJ9v8NhkfV8Svv8nqNSDd6xvQYTC7aFXG/exec";
+
+function getTimetable() {
+  const email = document.getElementById("email").value.trim();
+  const result = document.getElementById("result");
+
+  if (!email) {
+    result.innerHTML = "<span class='error'>Enter email first</span>";
+    return;
+  }
+
+  result.innerHTML = "Loading timetable...";
+
+  fetch(`${WEB_APP_URL}?email=${encodeURIComponent(email)}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") {
+
+        // split timetable
+        const rows = data.timetable.split("\n");
+        let tableRows = "";
+
+        rows.forEach(line => {
+          const parts = line.split("|").map(p => p.trim());
+          if (parts.length === 3) {
+            tableRows += `
+              <tr>
+                <td>${parts[0]}</td>
+                <td>${parts[1]}</td>
+                <td>${parts[2]}</td>
+              </tr>
+            `;
+          }
+        });
+
+        result.innerHTML = `
+          <table>
+            <tr>
+              <th>Date</th>
+              <th>Timing</th>
+              <th>Domain</th>
+            </tr>
+            ${tableRows}
+          </table>
+        `;
+      } else {
+        result.innerHTML = `<span class='error'>${data.message}</span>`;
+      }
+    })
+    .catch(() => {
+      result.innerHTML = "<span class='error'>Server error</span>";
+    });
+}
+</script>
+
+</body>
+</html>
