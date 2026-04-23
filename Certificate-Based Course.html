@@ -31,6 +31,9 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 
+  <!-- Favicon -->
+  <link rel="icon" href="download.png" type="image/x-icon">
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>3Skill – Summer Internship 2026</title>
@@ -849,7 +852,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
          <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
 
 <script>
-  var seats = [200, 180, 150, 120, 100, 80, 50, 35, 20];
+  var seats = [50, 45, 40, 30, 35, 20, 10];
   
   // Date ko seed ki tarah use karo - har din ek fixed number aayega
   var today = new Date();
@@ -967,7 +970,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
        <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
 
 <script>
-  var seats = [200, 180, 150, 120, 100, 80, 50, 35, 20];
+  var seats = [50, 45, 40, 30, 35, 20, 10];
   
   // Date ko seed ki tarah use karo - har din ek fixed number aayega
   var today = new Date();
@@ -1017,7 +1020,8 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 </div>
 
 <script>
-  var seats = [200, 180, 150, 120, 100, 80, 50, 35, 20];
+  var seats = [50, 45, 40, 30, 35, 20, 10];
+
   var today = new Date();
   var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
   var index = seed % seats.length;
@@ -3900,6 +3904,27 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   }, Math.floor(Math.random() * 3000) + 3000);
 </script>
 
+
+
+<script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+    </script>
 
 
 

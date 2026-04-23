@@ -700,5 +700,24 @@
             }
         });
     </script>
+    <script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+    </script>
 </body>
 </html>
