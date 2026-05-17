@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3Skill Certificate Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: #dce8ff;
+      min-height: 100vh;
+      padding: 20px;
+      background-image:
+        radial-gradient(ellipse at 10% 0%, rgba(37,99,235,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 100%, rgba(99,102,241,0.1) 0%, transparent 50%);
+    }
+
+    .dashboard {
+      width: 100%;
+      min-height: calc(100vh - 40px);
+      background: #f0f6ff;
+      border-radius: 32px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 30px 80px rgba(30,58,138,0.15), 0 0 0 1px rgba(37,99,235,0.08);
+    }
+
+    /* ══════════════════
+       SIDEBAR
+    ══════════════════ */
+    .sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      background: linear-gradient(160deg, #1a3a8f 0%, #2563eb 45%, #3730a3 100%);
+      color: white;
+      padding: 36px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      top: -140px; right: -130px;
+      pointer-events: none;
+    }
+    .sidebar::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      bottom: -120px; left: -90px;
+      pointer-events: none;
+    }
+
+    .logo-wrap { position: relative; z-index: 2; }
+
+    .logo {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+    .logo span { color: rgba(255,255,255,0.55); font-weight: 400; }
+
+    .logo-line {
+      width: 36px; height: 3px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+      border-radius: 4px;
+      margin: 14px 0 12px;
+    }
+
+    .logo-desc {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+    }
+
+    .nav { margin-top: 38px; position: relative; z-index: 2; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: white;
+      color: #1e40af;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .nav-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    .nav-item.active .nav-dot { opacity: 1; background: #2563eb; }
+
+    .secure-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 24px 22px;
+    }
+    .secure-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .secure-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+    .status-pill {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+    }
+    .dot-pulse {
+      width: 8px; height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px rgba(74,222,128,0.3);
+      animation: dotPulse 2s ease infinite;
+    }
+    @keyframes dotPulse {
+      0%,100% { box-shadow: 0 0 0 2px rgba(74,222,128,0.3); }
+      50%      { box-shadow: 0 0 0 5px rgba(74,222,128,0.1); }
+    }
+
+    /* ══════════════════
+       MAIN
+    ══════════════════ */
+    .main {
+      flex: 1;
+      padding: 40px 44px;
+      background: #f0f6ff;
+      overflow-y: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .topbar-left h1 {
+      font-size: 38px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+    .topbar-left p {
+      margin-top: 8px;
+      font-size: 15px;
+      color: #64748b;
+      font-weight: 400;
+    }
+    .secure-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      color: #1d4ed8;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .chip-dot {
+      width: 7px; height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    .card {
+      background: white;
+      border-radius: 26px;
+      box-shadow: 0 4px 24px rgba(30,58,138,0.07), 0 0 0 1px rgba(30,58,138,0.06);
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    .verify-inner { padding: 34px; }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #2563eb;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .input-wrap {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+      display: flex;
+    }
+    input {
+      width: 100%;
+      padding: 16px 18px 16px 48px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      background: #f8fafc;
+      font-size: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    input::placeholder { color: #94a3b8; }
+    input:focus {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+    }
+
+    button {
+      border: none;
+      background: linear-gradient(135deg, #2563eb 0%, #4338ca 100%);
+      color: white;
+      padding: 16px 28px;
+      border-radius: 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(37,99,235,0.3);
+    }
+    button:active { transform: translateY(0); }
+
+    .msg {
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      animation: slideUp 0.3s ease;
+    }
+    .msg.loading {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      color: #1d4ed8;
+    }
+    .msg.error {
+      background: #fff1f2;
+      border: 1.5px solid #fecdd3;
+      color: #be123c;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .cert-card { animation: slideUp 0.35s ease; }
+
+    .cert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 28px 34px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .student-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      width: 60px; height: 60px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+      flex-shrink: 0;
+    }
+    .student-name {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+    .student-role {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      color: #15803d;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .check-icon {
+      width: 16px; height: 16px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pdf-wrap { padding: 22px 34px 0; }
+    .pdf-box {
+      position: relative;
+      width: 100%;
+      height: 580px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    iframe { width: 100%; height: 100%; border: none; }
+    .protect-layer {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      z-index: 10;
+    }
+
+    .download-wrap { padding: 20px 34px 28px; }
+    .download-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 15px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: white;
+      padding: 26px;
+      border-radius: 22px;
+      box-shadow: 0 4px 20px rgba(30,58,138,0.07), 0 0 0 1px rgba(30,58,138,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37,99,235,0.1), 0 0 0 1px rgba(30,58,138,0.06);
+    }
+    .info-icon {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: #eff6ff;
+      border: 1.5px solid #dbeafe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #2563eb;
+    }
+    .info-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .info-card p {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 960px) {
+      .dashboard { flex-direction: column; }
+      .sidebar { width: 100%; padding: 28px 24px; }
+      .nav { display: none; }
+      .main { padding: 28px 24px; }
+      .topbar-left h1 { font-size: 30px; }
+      .pdf-box { height: 420px; }
+    }
+    @media (max-width: 540px) {
+      body { padding: 12px; }
+      .input-row { flex-direction: column; }
+      button { width: 100%; }
+      .verify-inner { padding: 24px; }
+      .cert-header, .pdf-wrap, .download-wrap { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div>
+      <div class="logo-wrap">
+        <div class="logo">3SKILL<span>.</span></div>
+        <div class="logo-line"></div>
+        <div class="logo-desc">Professional Certificate Verification Portal for students and interns.</div>
+      </div>
+      <div class="nav">
+        <div class="nav-item active"><div class="nav-dot"></div>Dashboard</div>
+        <div class="nav-item"><div class="nav-dot"></div>Verify Certificate</div>
+        <div class="nav-item"><div class="nav-dot"></div>About 3Skill</div>
+        <div class="nav-item"><div class="nav-dot"></div>Contact Support</div>
+      </div>
+    </div>
+    <div class="secure-box">
+      <div class="secure-title" id="sidebarName">Secure Portal</div>
+      <div class="secure-desc">All certificates are securely verified through our protected verification system.</div>
+      <div class="status-pill">
+        <div class="dot-pulse"></div>
+        Verification Active
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Certificate Dashboard</h1>
+        <p>Verify your email to access your certificate</p>
+      </div>
+      <div class="secure-chip">
+        <div class="chip-dot"></div>
+        100% Secure Platform
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="verify-inner">
+        <div class="card-label">Step 01</div>
+        <div class="card-title">Email Verification</div>
+        <div class="input-row">
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </span>
+            <input type="email" id="email" placeholder="Enter your registered email address">
+          </div>
+          <button onclick="verifyEmail()">Verify Email &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="result"></div>
+
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbyw7T-Nn_YzxIBnCvRGbqC6LFhsJT-B_4xGx-yf1ZkPixlV6gje4GkjXmT-RNUwl27I/exec";
+
+  async function verifyEmail() {
+    const email       = document.getElementById("email").value;
+    const result      = document.getElementById("result");
+    const sidebarName = document.getElementById("sidebarName");
+
+    if (email === "") {
+      result.innerHTML = `<div class="msg error">⚠ Please enter your email address.</div>`;
+      return;
+    }
+
+    result.innerHTML = `<div class="msg loading">⏳ Verifying your certificate, please wait…</div>`;
+
+    try {
+      const response = await fetch(`${SCRIPT_URL}?email=${email}`);
+      const data     = await response.json();
+
+      if (data.success) {
+        sidebarName.innerHTML = data.name;
+
+        const previewLink =
+          data.certificate.replace("uc?export=download&id=", "file/d/") + "/preview";
+
+        const firstLetter = data.name.charAt(0).toUpperCase();
+
+        result.innerHTML = `
+          <div class="card cert-card">
+            <div class="cert-header">
+              <div class="student-row">
+                <div class="avatar">${firstLetter}</div>
+                <div>
+                  <div class="student-name">${data.name}</div>
+                  <div class="student-role">Certificate Holder</div>
+                </div>
+              </div>
+              <div class="verified-badge">
+                <div class="check-icon">
+                  <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 5l2.5 2.5 3.5-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                Verified Certificate
+              </div>
+            </div>
+            <div class="pdf-wrap">
+              <div class="pdf-box">
+                <iframe src="${previewLink}#toolbar=0&navpanes=0&scrollbar=0" allow="autoplay"></iframe>
+                <div class="protect-layer"></div>
+              </div>
+            </div>
+            <div class="download-wrap">
+              <a href="${data.certificate}">
+                <button class="download-btn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+                  </svg>
+                  Download Certificate
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+              <h3>Trusted & Secure</h3>
+              <p>All certificates are verified and protected through our secure platform.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <h3>Instant Access</h3>
+              <p>Download your certificate instantly after successful verification.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <h3>Official Certificate</h3>
+              <p>This certificate is officially issued and verified by 3Skill.</p>
+            </div>
+          </div>
+        `;
+
+      } else {
+        result.innerHTML = `<div class="msg error"> Don’t worry — your certificate will be issued on your internship completion date.<br><br>
+
+    If your internship is completed today and your certificate is still not available, please contact the support team.</div>`;
+      }
+
+    } catch (error) {
+      result.innerHTML = `<div class="msg error">✗ Something went wrong. Please try again later.</div>`;
+    }
+  }
+
+  document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+</script>
+
+</body>
+</html>
