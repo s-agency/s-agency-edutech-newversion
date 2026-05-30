@@ -756,7 +756,7 @@
 
     <script>
         // Configuration
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpNkvMW_cL4hw1sIa4xkCmTeQqIFsG-UIXSIkojH6x6URSiPtj7bXLfGPT1Xm84u1usw/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_SL7rpHSEPlaUFXy74FuAjvfydqv6ohHdnUPyNNHWiIW5D0r2EO4bxkN9FDzQhkoG3w/exec';
         
         // DOM Elements
         const loginPage = document.getElementById('loginPage');
@@ -930,7 +930,7 @@
                 
                 return data;
             } catch (error) {
-                console.error('Error fetching student data:', error);
+                console.error('This is your live class joining section. It will be visible 1 day before your internship/program starts. So don’t worry  please login again before 1 day of your program start date. If your program has already started but the section is still not visible, please contact the support team.', error);
                 throw error;
             }
         }
@@ -1014,7 +1014,7 @@
                 
             } catch (error) {
                 hideLoading();
-                showError(`Failed to load dashboard: ${error.message}. Please check your email or try again later.`);
+                showError(` ${error.message}. `);
                 console.error('Dashboard error:', error);
             }
         }
@@ -1041,6 +1041,25 @@
             
             // Pre-fill with a sample email for testing (remove in production)
         });
+    </script>
+    <script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
     </script>
 </body>
 </html>
