@@ -619,111 +619,204 @@ function checkDeviceCompatibility() {
 ],
 
 
-            "AIML":[
-  {q: "Which of the following is NOT a supervised learning algorithm?", options: ["Linear Regression", "Decision Tree", "K-Means Clustering", "Random Forest"], correct: 2},
-  {q: "Gradient Descent is used to:", options: ["Increase the cost function", "Minimize the loss function", "Normalize input data", "Split datasets"], correct: 1},
-  {q: "Activation function in neural networks introduces:", options: ["Linearity", "Non-linearity", "Regularization", "Normalization"], correct: 1},
-  {q: "Which of the following is an example of reinforcement learning?", options: ["Predicting house prices", "Self-driving car learning by rewards", "Image classification", "Spam filtering"], correct: 1},
-  {q: "What does 'epoch' mean in deep learning?", options: ["One complete pass through training data", "A single batch of training", "Number of layers", "A neural activation"], correct: 0},
-  {q: "In SVM, the hyperplane is:", options: ["A decision boundary separating classes", "A data normalization function", "A kernel function", "A type of loss"], correct: 0},
-  {q: "Overfitting occurs when:", options: ["Model fits training data too well and fails to generalize", "Model under-learns the data", "Model performs well on both sets", "Model lacks parameters"], correct: 0},
-  {q: "Dropout in neural networks is used for:", options: ["Increasing bias", "Preventing overfitting", "Increasing training time", "Reducing batch size"], correct: 1},
-  {q: "Which of the following is true for ReLU activation?", options: ["Outputs only negative values", "Is non-linear and fast to compute", "Has vanishing gradient always", "Is linear for all inputs"], correct: 1},
-  {q: "Confusion matrix is used to evaluate:", options: ["Clustering models", "Classification models", "Regression models", "Dimensionality reduction"], correct: 1},
-  {q: "The vanishing gradient problem mainly affects:", options: ["CNNs", "RNNs with deep time steps", "Decision trees", "KNN"], correct: 1},
-  {q: "Which optimizer adapts learning rates using first and second moment estimates?", options: ["SGD", "Adam", "Adagrad", "RMSProp"], correct: 1},
-  {q: "What does the Jacobian matrix represent in backpropagation?", options: ["Weight initialization", "Derivative of output w.r.t inputs", "Bias regularization", "Covariance of activations"], correct: 1},
-  {q: "L1 regularization encourages:", options: ["Sparse weights", "Small weights but non-zero", "Zero mean", "Large gradients"], correct: 0},
-  {q: "The softmax function is typically used in:", options: ["Hidden layers", "Output layer for multi-class classification", "Recurrent cells", "Dropout layers"], correct: 1},
-  {q: "The curse of dimensionality refers to:", options: ["Model overfitting in low dimensions", "Performance degradation as feature space grows", "Training time reduction", "Fewer parameters in high dimension"], correct: 1},
-  {q: "PCA reduces dimensionality by:", options: ["Removing correlated features", "Projecting data onto principal components", "Increasing variance", "Removing noise only"], correct: 1},
-  {q: "Gradient clipping helps in:", options: ["Preventing exploding gradients", "Avoiding vanishing gradients", "Regularizing weights", "Improving accuracy"], correct: 0},
-  {q: "The loss function used in logistic regression is:", options: ["Mean Squared Error", "Cross Entropy", "Hinge Loss", "KL Divergence"], correct: 1},
-  {q: "KL Divergence measures:", options: ["Distance between two probability distributions", "Correlation of variables", "Weight decay", "Mean difference"], correct: 0},
-  {q: "Batch Normalization normalizes:", options: ["Layer inputs per batch", "Gradients per epoch", "Weights per layer", "Outputs per dataset"], correct: 0},
-  {q: "What is the main advantage of the Transformer architecture?", options: ["Sequential processing", "Parallelization via attention", "Reduced model size", "No need for embeddings"], correct: 1},
-  {q: "In reinforcement learning, the Bellman equation defines:", options: ["Loss function", "Relationship between state and value", "Policy gradient", "Reward normalization"], correct: 1},
-  {q: "The attention mechanism improves:", options: ["Memory of long-term dependencies", "Training speed", "Weight initialization", "Gradient flow only"], correct: 0},
-  {q: "The output of a sigmoid neuron lies between:", options: ["0 and 1", "−1 and 1", "0 and ∞", "−∞ and +∞"], correct: 0},
-  {q: "LSTM cells solve:", options: ["Vanishing gradient in RNNs", "Dropout problems", "Weight initialization", "Feature extraction"], correct: 0},
-  {q: "Xavier initialization is used for:", options: ["Keeping variance of activations constant", "Increasing learning rate", "Reducing batch size", "Preventing bias updates"], correct: 0},
-  {q: "A convolution kernel of size 3×3 with stride 2 reduces:", options: ["Output dimension", "Batch size", "Channel depth", "Activation count"], correct: 0},
-  {q: "Autoencoders are trained to:", options: ["Predict class labels", "Reconstruct input data", "Minimize gradient", "Classify objects"], correct: 1},
-  {q: "GANs consist of:", options: ["Two discriminators", "A generator and discriminator", "Two encoders", "Two decoders"], correct: 1},
-  {q: "The generator in a GAN tries to:", options: ["Classify images", "Fool the discriminator", "Minimize accuracy", "Increase bias"], correct: 1},
-  {q: "In k-NN, increasing k too much causes:", options: ["Overfitting", "Underfitting", "Faster learning", "No change"], correct: 1},
-  {q: "ROC curve plots:", options: ["Precision vs Recall", "True Positive Rate vs False Positive Rate", "Accuracy vs Recall", "F1 vs Precision"], correct: 1},
-  {q: "Ensemble methods reduce:", options: ["Variance and bias", "Only variance", "Only bias", "Overhead"], correct: 0},
-  {q: "Bagging works by:", options: ["Using different subsets of data", "Sequential model training", "Boosting weak learners", "Reducing learning rate"], correct: 0},
-  {q: "AdaBoost assigns:", options: ["Equal weights to all samples", "Higher weights to misclassified samples", "Lower weights to important samples", "Random weights"], correct: 1},
-  {q: "The 'Q' in Q-learning stands for:", options: ["Quantity", "Quality", "Query", "Quotient"], correct: 1},
-  {q: "Policy Gradient methods optimize:", options: ["Expected reward directly", "Loss indirectly", "Value functions", "Bellman error"], correct: 0},
-  {q: "Word2Vec uses which training objective?", options: ["Cross Entropy", "Skip-gram / CBOW prediction", "Reconstruction", "Attention loss"], correct: 1},
-  {q: "BERT uses:", options: ["Bidirectional transformers", "Unidirectional RNNs", "CNN layers", "Only decoder blocks"], correct: 0},
-  {q: "In reinforcement learning, exploration vs exploitation trade-off occurs because:", options: ["Model cannot access all states", "Agent must balance trying new actions vs maximizing reward", "Policy updates are fixed", "Rewards are constant"], correct: 1},
-  {q: "A deep neural network with too many parameters tends to:", options: ["Overfit", "Underfit", "Learn faster", "Be more stable"], correct: 0},
-  {q: "Variational Autoencoder introduces:", options: ["Probabilistic latent variables", "Deterministic encoding", "Hard clustering", "Fixed weights"], correct: 0},
-  {q: "The universal approximation theorem states that:", options: ["A neural network can approximate any function", "Only linear models can generalize", "CNNs are universal classifiers", "Transformers outperform all"], correct: 0},
-  {q: "Which metric is best for imbalanced datasets?", options: ["Accuracy", "F1 Score", "Mean Squared Error", "R²"], correct: 1},
-  {q: "The ReLU derivative is:", options: ["0 for x < 0, 1 for x ≥ 0", "1 for all x", "tanh(x)", "sigmoid(x)"], correct: 0},
-  {q: "In CNN, pooling layers help:", options: ["Reduce spatial dimensions", "Increase overfitting", "Add channels", "Compute gradients"], correct: 0},
-  {q: "The Transformer’s positional encoding provides:", options: ["Word order information", "Word meaning", "Regularization", "Dropout"], correct: 0},
-  {q: "Label smoothing is used to:", options: ["Prevent overconfidence in classification", "Increase precision", "Reduce dropout", "Normalize gradients"], correct: 0},
-  {q: "Self-supervised learning is:", options: ["Learning without manual labels", "Reinforcement learning variant", "Unsupervised clustering", "Fully labeled data"], correct: 0}
+        "AIML":[
+  {q:"A global bank serves over 15 million loan applications annually using a real-time credit risk model with a strict inference latency budget of 50 ms. During a quarterly retraining cycle, a newly engineered feature called 'Days Since Last Recovery Team Contact' becomes the highest-ranked predictor, improving offline ROC-AUC from 0.81 to 0.97. The feature store validation passes successfully, and even time-based cross-validation shows almost identical performance across all folds. Later, an audit reveals that recovery agents contact customers only after they begin missing loan repayments. What is the most defensible explanation for the unusually high performance?", options:["Severe multicollinearity between engineered features","Covariate shift between training and production populations","Target leakage hidden behind temporal dependency","Simpson’s paradox caused by customer segmentation"], correct:2},
+
+  {q:"A payment platform processes over 80 million transactions per day using an ML-based fraud detection system. Offline evaluation reports ROC-AUC = 0.98, PR-AUC = 0.09, Fraud prevalence = 0.03%. Leadership wants immediate deployment because ROC-AUC significantly exceeds the previous model. However, every flagged transaction requires manual review by investigators with limited daily capacity. Which statement is the strongest technical assessment?", options:["The model is production-ready because ROC-AUC is extremely high.","ROC-AUC alone is sufficient for evaluating highly imbalanced fraud datasets.","ROC-AUC may be overly optimistic because of the extreme class imbalance.","Precision must exceed 90% before deployment."], correct:2},
+
+  {q:"A large-scale recommendation system undergoes an explainability review before deployment. SHAP analysis shows that one feature consistently contributes positively for specific high-value users. However, in the global SHAP summary, the same feature has almost zero overall importance. The feature pipeline is verified, and no leakage or preprocessing issues are detected. What is the most plausible explanation?", options:["The feature is leaking future information.","The feature has localized interactions affecting only subsets of the data.","The feature contains too many missing values.","The model is underfitting."], correct:1},
+
+  {q:"A video streaming platform deploys a new recommendation model after achieving an offline NDCG of 0.92, outperforming every previous model. During the first online A/B experiment, click-through rate decreases by 18%, while monitoring confirms that feature distributions, inference latency, and serving infrastructure remain unchanged. What should the ML team investigate first?", options:["Covariate drift","Concept drift","Offline metric-business metric mismatch","Missing value handling"], correct:2},
+
+  {q:"A healthcare startup trains a disease prediction model using 500 patient records and nearly 20,000 engineered genomic features. A Random Forest achieves 100% training accuracy, but repeatedly scores only 51% on an unseen test set despite extensive hyperparameter tuning. What is the strongest conclusion?", options:["More trees are needed.","Curse of dimensionality is likely dominating.","Feature scaling is missing.","The dataset is balanced."], correct:1},
+
+  {q:"An online advertising platform combines predictions from 50 independently trained models to improve click-through prediction. Despite increasing inference cost significantly, the ensemble performs only marginally better than a single model. Investigation shows that all models were trained on nearly identical data using almost identical features and hyperparameters. What is the most likely explanation?", options:["Bias reduction failed.","Lack of model diversity.","Class imbalance.","Data leakage."], correct:1},
+
+  {q:"A telecom company deploys a churn prediction model that scores customers every night to trigger retention campaigns. During a feature engineering review, the team introduces a new feature based on customer complaint records logged within 14 days after the customer’s account closure date. Offline validation accuracy improves dramatically across every temporal validation split, and the model becomes the new production candidate. What is the most accurate assessment?", options:["Strong feature engineering","Leakage through post-event information","Better representation learning","Distribution correction"], correct:1},
+
+  {q:"A pricing model used by an online marketplace undergoes a quarterly monitoring review. Engineers observe that the model’s ROC-AUC remains virtually unchanged, but the reliability diagram now deviates significantly from the ideal diagonal. Business teams relying on predicted probabilities for automated pricing decisions begin reporting inconsistent outcomes. What is the strongest interpretation?", options:["Ranking quality has deteriorated.","Probability estimates are unreliable.","Overfitting has disappeared.","Feature drift has occurred."], correct:1},
+
+  {q:"An ML team is building a fraud detection system using thousands of engineered features. During feature selection, two variables appear individually useless because each has almost zero correlation with the target. However, keeping both together consistently improves validation performance across multiple retraining cycles. What is the most likely explanation?", options:["Simpson’s Paradox","Feature Interaction","Label Drift","Data Leakage"], correct:1},
+
+  {q:"An e-commerce ranking model undergoes an explainability audit before deployment. For one feature, SHAP analysis shows that its contribution is positive for many customers but negative for others with similar overall prediction scores. Data quality checks, preprocessing validation, and feature freshness monitoring reveal no anomalies. What is the strongest interpretation?", options:["The feature is corrupted.","The feature effect depends on context and interactions.","The feature is leaking target information.","The feature should be removed."], correct:1},
+
+  {q:"A global payment processor deploys a fraud detection model with Precision = 2%, Recall = 98%, Fraud Rate = 0.1%. Every transaction flagged by the model must be manually reviewed by an investigation team with limited daily capacity. What is the biggest operational concern?", options:["Missing fraud cases.","Operational overload.","Data leakage.","Bias."], correct:1},
+
+  {q:"While evaluating candidate features for a real-time recommendation system, an engineer observes that one feature has very high Mutual Information with the target but almost zero Pearson correlation. Data quality checks confirm that the feature is complete and correctly processed. What is the most plausible explanation?", options:["The feature has a non-linear relationship with the target.","The feature is leaking target information.","The feature contains excessive missing values.","The feature requires scaling."], correct:0},
+
+  {q:"A demand forecasting model performs consistently across every offline validation fold and significantly outperforms previous production models. Immediately after deployment, forecasting accuracy drops sharply despite identical serving infrastructure and successful pipeline validation. What should be the team’s first hypothesis?", options:["Hyperparameter instability.","The data-generating process has changed.","PCA preprocessing failed.","Class weights were configured incorrectly."], correct:1},
+
+  {q:"A production ML monitoring dashboard reports that model performance has gradually declined over several weeks. Engineers verify that feature distributions remain stable, missing-value rates are unchanged, and the serving pipeline is functioning correctly. However, the relationship between historical inputs and business outcomes appears different from what the model learned during training. Which scenario best explains the observed behavior?", options:["Input feature distribution changed.","Missing value percentage changed.","Relationship between predictors and target changed.","Sample size changed."], correct:2},
+
+  {q:"A marketplace ranking model achieves both low training error and low validation error after extensive hyperparameter tuning. Despite excellent offline metrics, the online A/B experiment shows no improvement in revenue, customer retention, or conversion rate. What is the most likely explanation?", options:["Overfitting.","Underfitting.","Wrong optimization objective.","Target leakage."], correct:2},
+
+  {q:"A lending platform trains a credit approval model using records collected over the last five years. The training dataset contains only applicants who were historically approved under previous underwriting policies. Offline validation consistently shows excellent performance. After deployment, however, the model performs poorly on newly arriving applicants, even though monitoring confirms stable feature distributions and no serving issues. What is the most likely root cause?", options:["Concept Drift","Selection Bias caused by historical approval policy","Multicollinearity","Class Imbalance"], correct:1},
+
+  {q:"A payment company evaluates a new fraud detection model before deployment. The offline evaluation reports ROC-AUC = 0.96, PR-AUC = 0.11, Fraud prevalence = 0.05%. The engineering team has not yet selected an operating threshold or estimated the business cost of false positives and false negatives. Without additional information, which conclusion is the safest?", options:["The model is production ready.","The model separates classes well, but its usefulness for the positive class remains uncertain.","Precision must exceed 90%.","Recall must be below 50%."], correct:1},
+    {q:"A production recommendation model undergoes a feature audit before its quarterly release. One feature consistently ranks as the most influential according to the feature importance report. However, after retraining the model without this feature, offline and online performance remain nearly unchanged, and business KPIs show no measurable difference. What is the most plausible explanation?", options:["Data Leakage","Multicollinearity or redundant information","Underfitting","Scaling Error"], correct:1},
+
+  {q:"During a compliance review of a fraud detection system, engineers discover that one highly predictive feature was manually entered by investigators after they had already reviewed and finalized each fraud case. This feature contributed heavily to the model’s outstanding offline performance. How should this feature be interpreted?", options:["High Signal","Target Leakage","Concept Drift","Feature Interaction"], correct:1},
+
+  {q:"Two credit-risk models achieve identical ROC-AUC on the same evaluation dataset. However, Model A produces probability estimates that closely match observed default rates, while Model B consistently overestimates and underestimates risk across different probability ranges. Loan approval decisions depend directly on predicted probabilities. Which statement is most accurate?", options:["Both models will always produce identical business outcomes.","Calibration only matters for regression models.","Probability-based decisions may favor Model A.","ROC-AUC guarantees good calibration."], correct:2},
+
+  {q:"A demand forecasting model is automatically retrained every week using the latest available production data. Although the amount of training data continues to grow, forecasting accuracy steadily declines over several months. No hardware failures or pipeline errors are detected. What should be investigated first?", options:["Data Drift","Hardware Failure","PCA Components","Train-Test Split Ratio"], correct:0},
+
+  {q:"A recommendation system contains two engineered features. Feature A strongly predicts Feature B, and Feature B strongly predicts user conversion. Feature A, however, shows almost no direct correlation with conversion when analyzed independently. Removing Feature A consistently reduces overall model performance. What is the most likely explanation?", options:["Feature Interaction Structure","Leakage","Underfitting","Noise"], correct:0},
+
+  {q:"A fraud detection team evaluates models using Accuracy as the only optimization metric. The production dataset contains only 0.2% fraudulent transactions, and leadership approves the highest-accuracy model without reviewing any additional metrics. What is the biggest risk of this evaluation strategy?", options:["Underfitting","False sense of model quality","Increased variance","Better calibration"], correct:1},
+
+  {q:"A large-scale video recommendation system is retrained every week using user interaction logs. After deployment, the new recommendations begin influencing what users watch, which in turn changes the data collected for future training cycles. Engineers notice that each successive model is increasingly shaped by the behavior induced by previous models. What phenomenon best describes this situation?", options:["Feedback Loop","PCA Drift","Multicollinearity","Stratification Bias"], correct:0},
+
+  {q:"A production credit-risk model has shown stable feature distributions for several weeks according to monitoring dashboards. However, engineers suddenly observe that the distribution of model predictions changes dramatically, while the actual target distribution remains essentially unchanged. Investigation confirms that the training dataset has not changed. What is the most likely explanation?", options:["Software Bug or Model Serving Issue","Concept Drift","Covariate Shift","Label Drift"], correct:0},
+
+  {q:"During feature engineering for a customer retention model, one variable exhibits zero Pearson correlation with the target but consistently ranks among the most informative features based on Mutual Information. The feature pipeline and data quality checks show no anomalies. Which statement is most likely true?", options:["A non-linear predictive relationship exists.","The feature is useless.","Target leakage exists.","Missing values dominate the feature."], correct:0},
+
+  {q:"A financial institution deploys an automated loan approval system for millions of customers. Regulatory authorities require that every rejected application include a clear, human-understandable justification explaining how the decision was made. Which model characteristic becomes most critical under these requirements?", options:["Interpretability","Accuracy","Training Speed","Number of Features"], correct:0},
+
+  {q:"An ML team removes approximately 30% of the training data after identifying inconsistencies in labeling and feature quality. Surprisingly, the retrained production model achieves higher validation performance and better online business metrics than the previous version trained on the full dataset. What is the most plausible explanation?", options:["Data Quality Issue","More Features","Higher Variance","Larger Search Space"], correct:0},
+
+  {q:"A fraud detection model is evaluated using five-fold cross-validation with validation scores of 95%, 58%, 92%, 61%, and 94%. The feature engineering pipeline, hyperparameters, and evaluation procedure remain identical across all folds, yet model performance fluctuates dramatically. What should be suspected first?", options:["Data Leakage","Distributional Instability","Scaling","PCA"], correct:1},
+
+  {q:"While developing a real-time recommendation engine, engineers identify two candidate features that individually provide almost no predictive power. Surprisingly, when both features are included together, the model consistently achieves significantly better validation and online performance. What does this most likely demonstrate?", options:["Interaction Effects","Data Leakage","Label Drift","Variance Inflation"], correct:0},
+
+  {q:"A deep learning model for ad ranking achieves the lowest validation loss among all candidate models during offline evaluation. However, after deployment, key business metrics such as revenue, click-through rate, and conversion rate consistently underperform compared to the previous production model. What is the most likely explanation?", options:["Objective Function Misalignment","Underfitting","Leakage","Missing Values"], correct:0},
+
+  {q:"A retail company develops a forecasting model to predict future monthly sales before the month begins. During feature engineering, a new variable named 'Actual End-of-Month Revenue' is introduced. After retraining, the model achieves nearly perfect validation performance across every evaluation fold. What is the most appropriate interpretation?", options:["Strong Feature Engineering","Target Leakage","Calibration Improvement","Dimensionality Reduction"], correct:1},
+
+  {q:"A production demand forecasting model demonstrates low bias and low variance across multiple retraining cycles. Despite stable evaluation metrics and no evidence of overfitting or underfitting, the model consistently fails to achieve acceptable forecasting accuracy in production. What is the most likely explanation?", options:["Wrong Features","Overfitting","Underfitting","Scaling"], correct:0},
+
+  {q:"A recommendation team performs an explainability audit before deployment. Based on feature attribution analysis, several highly ranked features are removed because they appear noisy and inconsistent across different user segments. After retraining, both offline metrics and online business KPIs improve unexpectedly. What is the most plausible explanation?", options:["Noise Reduction","Calibration Failure","Drift Elimination","Leakage Removal"], correct:0},
+  {q:"A subscription platform builds a churn prediction model using only customers who remained active for at least one year. Customers who canceled shortly after signing up are excluded from the training dataset because their historical records are incomplete. The resulting model performs well offline but generalizes poorly to new users. Which issue most likely explains this behavior?", options:["Training only on customers who remained active (Survivorship Bias)","Standardizing features","Removing duplicates","Cross-validation"], correct:0},
+
+  {q:"A production recommendation model is retrained every month using fresh user interaction data. Across multiple retraining cycles, the importance of one feature fluctuates significantly, sometimes ranking first and other times dropping outside the top ten. Despite this, validation metrics and online business KPIs remain stable. What is the most likely explanation?", options:["Correlated Features Competing for Importance","Leakage","PCA Failure","Label Noise"], correct:0},
+
+  {q:"A large-scale content recommendation platform optimizes its ranking model exclusively for Click-Through Rate (CTR). Initially, engagement improves, but after several months, user retention, session duration, and customer satisfaction steadily decline despite CTR remaining high. What is the most likely explanation?", options:["Metric Gaming","PCA Drift","Scaling Failure","Variance Collapse"], correct:0},
+
+  {q:"A fraud detection model deployed in production reports the following metrics: Precision = 99%, Recall = 3%. The model is designed to identify fraudulent transactions while minimizing unnecessary investigations. Which statement is most accurate?", options:["The model is highly conservative in predicting positive cases.","The model captures most fraudulent transactions.","The model is perfectly calibrated.","The model is underfitting."], correct:0},
+
+  {q:"A multilingual customer support classifier is deployed using the same architecture, hyperparameters, and infrastructure across two countries. The model performs exceptionally well in one region but experiences a significant drop in accuracy in the other, despite no software or hardware changes. What is the most likely explanation?", options:["Distribution Shift","GPU Difference","Random Seed","Batch Size"], correct:0},
+
+  {q:"A real-time fraud detection system depends heavily on a third-party feature generated by an external service. The feature contributes significantly to prediction quality but is unavailable for a noticeable fraction of live requests due to intermittent service failures. What is the biggest production concern?", options:["Feature Reliability Risk","Underfitting","Overfitting","PCA Sensitivity"], correct:0},
+
+  {q:"An organization develops an automated hiring model using historical recruitment decisions collected over the past decade. After deployment, an internal audit finds that the model consistently reproduces patterns of discrimination present in previous hiring decisions. This is best described as:", options:["Historical Bias Propagation","Label Drift","Covariate Shift","Ensemble Instability"], correct:0},
+
+  {q:"A payment platform deploys a fraud detection model where the estimated business cost of approving a fraudulent transaction is nearly 100 times greater than incorrectly flagging a legitimate one. The ML team must choose the optimal operating threshold before production rollout. Which factor should primarily guide threshold selection?", options:["Accuracy","Cost Function","ROC-AUC","Feature Importance"], correct:1},
+
+  {q:"A production recommendation model relies heavily on a user behavior feature that is unavailable for approximately 20% of live predictions because of upstream logging failures. Whenever this feature is missing, model quality drops significantly. What does this situation most strongly indicate?", options:["Feature Dependency Risk","Class Imbalance","Drift","Leakage"], correct:0},
+
+  {q:"A production ML pipeline successfully completes feature validation, preprocessing, model loading, and health checks after deployment. Despite all monitoring dashboards appearing normal, the model suddenly begins returning nearly identical predictions for every incoming request. What is the most likely explanation?", options:["Serving Pipeline Bug","Overfitting","Underfitting","Drift"], correct:0},
+
+  {q:"Two ranking models produce identical customer ordering on the evaluation dataset. However, one model’s predicted probabilities closely match observed outcomes, while the other’s confidence scores are consistently inaccurate. Which metric can still remain high for both models?", options:["ROC-AUC","Brier Score","Log Loss","Calibration Error"], correct:0},
+
+  {q:"During feature engineering, two variables individually show almost no predictive value and have virtually zero linear correlation with one another. However, their combination consistently improves model performance across multiple validation datasets. Which algorithm is most likely to capture this relationship naturally?", options:["Decision Tree Ensemble","Linear Regression","Naive Bayes","StandardScaler"], correct:0},
+
+  {q:"A customer risk model consistently outperforms every baseline during offline evaluation. Months later, engineers discover that the training pipeline accidentally included a unique customer identifier capable of distinguishing nearly every individual record. What is the most likely issue?", options:["Leakage through memorization","Underfitting","Calibration","Sampling"], correct:0},
+
+  {q:"A large-scale recommendation engine continuously retrains using user interactions generated by previous versions of the same model. Over time, recommendations increasingly shape future user behavior, which subsequently becomes the primary source of training data. This situation is best described as:", options:["Closed-Loop Learning Dynamics","PCA Drift","Feature Explosion","Variance Collapse"], correct:0},
+
+  {q:"A credit risk model maintains stable ranking performance across several months of production. However, monitoring reveals that predicted confidence scores become increasingly extreme, while observed event frequencies remain largely unchanged. What is the primary concern?", options:["Calibration Degradation","Underfitting","Multicollinearity","Label Encoding"], correct:0},
+
+  {q:"A state-of-the-art deep learning model achieves the best benchmark scores among all competing solutions during offline evaluation. After deployment, however, it repeatedly fails to improve revenue, customer retention, and other critical business objectives despite stable infrastructure and data pipelines. What is the strongest conclusion?", options:["Benchmark performance alone is insufficient evidence of real-world value.","More layers are needed.","More GPUs are needed.","More features are needed."], correct:0}
 ],
 
+     "Data Analytics": [
+  {q:"A Data Analyst is validating a monthly sales report where some values have been entered directly into a formula instead of referencing worksheet cells. To identify how Excel treats text values that appear numeric, the analyst uses the following formula: =COUNT(\"10\",\"20\",\"ABC\"). Considering that all three values are supplied directly as text arguments inside the formula, what result will Excel return?", options:["2, because \"10\" and \"20\" represent numbers","3, because COUNT evaluates all supplied arguments","0, because COUNT ignores text values even when they look numeric if provided directly as text","#VALUE! Error because COUNT cannot process text arguments"], correct:2},
 
-            "Data Analytics": [
-  {q: "Which of the following is a measure of central tendency?", options: ["Variance", "Mean", "Range", "Standard deviation"], correct: 1},
-  {q: "What is the primary purpose of data cleaning?", options: ["Increase dataset size", "Remove or correct inaccurate data", "Add noise to data", "Normalize variables"], correct: 1},
-  {q: "Which type of visualization is best for showing proportions?", options: ["Line chart", "Pie chart", "Scatter plot", "Histogram"], correct: 1},
-  {q: "Correlation coefficient measures:", options: ["Strength of nonlinear relationship", "Degree of linear relationship", "Independence of variables", "Probability distribution"], correct: 1},
-  {q: "In SQL, which clause is used to group rows that have the same values?", options: ["WHERE", "ORDER BY", "GROUP BY", "HAVING"], correct: 2},
-  {q: "Which function in Python’s pandas library removes missing values?", options: ["dropna()", "fillna()", "remove()", "delete()"], correct: 0},
-  {q: "What is the purpose of normalization in data preprocessing?", options: ["Increase variance", "Scale data to a uniform range", "Introduce bias", "Add new features"], correct: 1},
-  {q: "Which distribution is symmetrical and bell-shaped?", options: ["Normal distribution", "Exponential distribution", "Uniform distribution", "Poisson distribution"], correct: 0},
-  {q: "Which metric measures model accuracy for regression problems?", options: ["RMSE", "Precision", "Recall", "F1-score"], correct: 0},
-  {q: "In A/B testing, the 'B' version represents:", options: ["Control group", "Treatment or variant", "Random baseline", "Outlier sample"], correct: 1},
-  {q: "What does heteroscedasticity indicate in regression analysis?", options: ["Constant variance of residuals", "Non-constant variance of residuals", "Perfect linearity", "Multicollinearity"], correct: 1},
-  {q: "In PCA, principal components are:", options: ["Orthogonal", "Dependent", "Correlated", "Nonlinear"], correct: 0},
-  {q: "The p-value in hypothesis testing represents:", options: ["Probability that null hypothesis is true", "Probability of observing data as extreme as sample, assuming null is true", "Type II error", "Sample mean"], correct: 1},
-  {q: "In time series, seasonality refers to:", options: ["Long-term trend", "Short-term repetitive pattern", "Random noise", "Structural break"], correct: 1},
-  {q: "The 'elbow method' is used to determine:", options: ["Optimal number of clusters in K-means", "Gradient descent step", "Bias-variance tradeoff", "Outlier threshold"], correct: 0},
-  {q: "What is multicollinearity?", options: ["Correlation among independent variables", "Correlation between dependent and independent variable", "Nonlinear regression pattern", "Residual autocorrelation"], correct: 0},
-  {q: "The ROC-AUC metric is used to measure:", options: ["Regression error", "Classification performance", "Clustering accuracy", "Data distribution"], correct: 1},
-  {q: "In SQL, a window function:", options: ["Performs row-by-row operations over partitions", "Deletes duplicate records", "Joins tables", "Changes schema"], correct: 0},
-  {q: "Which algorithm is used for dimensionality reduction while preserving distance metrics?", options: ["t-SNE", "Random Forest", "Naïve Bayes", "XGBoost"], correct: 0},
-  {q: "What does a VIF (Variance Inflation Factor) greater than 10 indicate?", options: ["Strong multicollinearity", "Weak regression model", "Homoscedasticity", "Normal residuals"], correct: 0},
-  {q: "In Bayesian inference, the posterior is proportional to:", options: ["Prior × Likelihood", "Prior ÷ Likelihood", "Likelihood – Prior", "Prior + Likelihood"], correct: 0},
-  {q: "Which test is used to check the normality of data?", options: ["Shapiro-Wilk test", "t-test", "Chi-square test", "ANOVA"], correct: 0},
-  {q: "Cross-validation is primarily used to:", options: ["Detect overfitting", "Improve training speed", "Reduce dataset size", "Increase model complexity"], correct: 0},
-  {q: "What does an R² value of 0.9 indicate?", options: ["90% variance explained by model", "90% accuracy", "Strong heteroscedasticity", "Poor fit"], correct: 0},
-  {q: "What is the key assumption of linear regression?", options: ["Linear relationship between features and target", "Nonlinear mapping", "Categorical features", "Random target"], correct: 0},
-  {q: "The covariance matrix in PCA contains:", options: ["Covariances between variables", "Gradients of loss", "Distances between points", "Probabilities"], correct: 0},
-  {q: "What is the main goal of feature selection?", options: ["Reduce overfitting and improve interpretability", "Add redundancy", "Increase data imbalance", "Increase training time"], correct: 0},
-  {q: "Chi-square test is suitable for:", options: ["Categorical variables", "Continuous variables", "Ordinal variables", "Binary regression"], correct: 0},
-  {q: "What does an autocorrelation of 1 imply?", options: ["Perfect positive correlation with lagged value", "No correlation", "Perfect negative correlation", "Randomness"], correct: 0},
-  {q: "A confusion matrix is used to derive:", options: ["Precision, Recall, and F1-score", "RMSE", "Adjusted R²", "Mean Absolute Error"], correct: 0},
-  {q: "In logistic regression, the logit function maps:", options: ["Probability to log-odds", "Log-odds to probability", "Target to mean", "Loss to weights"], correct: 0},
-  {q: "The central limit theorem states:", options: ["Sample means approximate normal distribution for large n", "Population is always normal", "Small samples are normally distributed", "Means are skewed"], correct: 0},
-  {q: "Outliers can significantly distort:", options: ["Mean", "Median", "Mode", "Interquartile range"], correct: 0},
-  {q: "Which clustering method does not require the number of clusters beforehand?", options: ["DBSCAN", "K-means", "Hierarchical (agglomerative)", "Mean Shift"], correct: 0},
-  {q: "The bias-variance trade-off is crucial for:", options: ["Model generalization", "Model speed", "Feature extraction", "Scaling"], correct: 0},
-  {q: "The p-value < 0.05 typically indicates:", options: ["Reject null hypothesis", "Fail to reject null", "High correlation", "No significant relationship"], correct: 0},
-  {q: "Dimensionality reduction helps to:", options: ["Combat the curse of dimensionality", "Increase feature redundancy", "Reduce interpretability", "Increase overfitting"], correct: 0},
-  {q: "Anomaly detection algorithms are useful for:", options: ["Fraud detection", "Clustering", "Regression", "Text generation"], correct: 0},
-  {q: "A Pareto chart is a combination of:", options: ["Bar chart and line graph", "Histogram and pie chart", "Scatter and box plot", "Line and area plot"], correct: 0},
-  {q: "In regression, residuals represent:", options: ["Errors between predicted and actual values", "Feature correlations", "Weights", "Model bias"], correct: 0},
-  {q: "Ridge regression adds penalty on:", options: ["Sum of squared coefficients", "Absolute coefficients", "Variance", "Bias"], correct: 0},
-  {q: "What is the role of a confusion matrix diagonal?", options: ["Correctly classified instances", "Misclassifications", "False positives only", "Random predictions"], correct: 0},
-  {q: "Missing data that depends on unobserved variables is called:", options: ["MNAR (Missing Not At Random)", "MCAR", "MAR", "Imputed data"], correct: 0},
-  {q: "What is the difference between descriptive and predictive analytics?", options: ["Descriptive explains the past; predictive forecasts the future", "Predictive explains past data", "Descriptive uses machine learning", "Predictive uses SQL"], correct: 0},
-  {q: "Which test compares means between more than two groups?", options: ["ANOVA", "t-test", "Chi-square", "F-test"], correct: 0},
-  {q: "What does a heatmap visualize?", options: ["Correlations or matrix values via colors", "Regression lines", "Time series", "Random points"], correct: 0},
-  {q: "A high leverage point in regression is:", options: ["Far from mean in predictor space", "Residual close to zero", "Uncorrelated variable", "Data with small variance"], correct: 0},
-  {q: "Mutual information measures:", options: ["Dependence between two variables", "Error variance", "Standard deviation", "Randomness"], correct: 0},
-  {q: "Cross-entropy loss is used for:", options: ["Classification problems", "Regression problems", "Clustering", "Outlier detection"], correct: 0},
-  {q: "Which of the following best defines data storytelling?", options: ["Communicating insights using visuals and narrative", "Building machine learning models", "Raw data presentation", "SQL query explanation"], correct: 0}
+  {q:"A company maintains a database containing over 50,000 customer records. An analyst needs a formula that can identify the relative position of a specific Customer ID within a selected range without actually returning the value itself. The result should represent the location of the match within the lookup range. Which function is most appropriate for this requirement?", options:["FIND","SEARCH","MATCH","INDEX"], correct:2},
+
+  {q:"A retail company stores product quantities in Column A and corresponding sales revenue in Column B. Management wants to calculate revenue generated only from products whose quantity sold exceeded 10 units. The analyst writes the formula =SUMPRODUCT((A1:A5>10)*(B1:B5)). What is the primary purpose of this formula?", options:["Sum all values from Column B regardless of any condition","Sum values from Column B only when the corresponding value in Column A is greater than 10","Count how many rows contain values greater than 10","Return all matching records as an array"], correct:1},
+
+  {q:"A financial forecasting workbook contains hundreds of thousands of formulas and takes several seconds to recalculate after every change. The analyst wants to replace volatile functions with a function that recalculates only when its dependent cells change. Which of the following functions is considered non-volatile?", options:["NOW()","RAND()","OFFSET()","INDEX()"], correct:3},
+
+  {q:"A data analyst receives daily CSV files containing duplicate records, inconsistent date formats, blank values, and unwanted columns. Before building dashboards, the analyst uses a tool to automate data cleaning and transformation steps so that the process can be refreshed whenever new files arrive. Which category best describes the primary purpose of Power Query?", options:["Data Cleaning and Transformation","Dashboard Visualization","VBA Automation","Goal Seek and Solver Analysis"], correct:0},
+
+  {q:"A company's employee database frequently changes structure. New columns are often inserted between existing fields, causing traditional lookup formulas to break. The analyst requires a lookup function that can search both left and right while remaining flexible when columns are added or removed. Which function is best suited for this scenario?", options:["VLOOKUP","HLOOKUP","XLOOKUP","LOOKUP"], correct:2},
+
+  {q:"A manufacturing company stores machine-level production logs in Excel. The analyst is considering whether Excel can handle a dataset containing more than one million records in a single worksheet. What is the maximum number of rows supported in modern Excel versions?", options:["65,536","1,048,576","2,097,152","Unlimited"], correct:1},
+
+  {q:"A reporting workbook receives fresh customer transaction data every day. The analyst wants a formula that automatically generates a list of distinct customer names and updates itself whenever new records are added, without requiring manual removal of duplicates. Which function should be used?", options:["UNIQUE()","DISTINCT()","FILTER()","REMOVE()"], correct:0},
+
+  {q:"A business analyst has received a dataset containing millions of sales transactions. Senior management wants a quick summary showing total sales by region, category, and month without writing formulas for each calculation. Which Excel feature is specifically designed for this type of aggregation and summarization?", options:["Data Validation","Pivot Table","Conditional Formatting","Name Manager"], correct:1},
+
+  {q:"A data analyst is using Excel's Dynamic Array functionality to extract only records that satisfy certain conditions. The analyst wants the results to automatically expand into neighboring cells whenever additional matching records are found. Which function naturally produces this spill behavior?", options:["SUM()","FILTER()","COUNTIF()","IF()"], correct:1},
+
+  {q:"An analyst is searching for the word \"Sales\" inside thousands of product descriptions. The search process must distinguish between uppercase and lowercase letters because \"Sales\" and \"SALES\" are treated differently by the business rules. Which statement correctly describes the difference between FIND and SEARCH?", options:["SEARCH is case-sensitive while FIND is not","FIND is case-sensitive while SEARCH is not","Both functions behave identically","FIND ignores wildcard characters completely"], correct:1},
+
+  {q:"A company wants to identify the small number of products responsible for the majority of revenue using the 80/20 principle. The analyst must display both individual product contribution and cumulative percentage contribution within the same visualization. Which chart type is most suitable for performing a Pareto Analysis?", options:["Pie Chart","Combination Chart","Scatter Plot","Radar Chart"], correct:1},
+
+  {q:"A workbook contains references stored as text strings such as \"A1\", \"B25\", and \"D100\". Instead of manually editing formulas every time a reference changes, the analyst wants Excel to interpret the text itself as a valid cell reference. Which function performs this task?", options:["INDIRECT()","TEXT()","CONCAT()","ADDRESS()"], correct:0},
+
+  {q:"A dynamic reporting solution needs to identify the current row number of formulas so that calculations automatically adjust when rows are inserted or deleted. The analyst wants a function that returns the row position of the cell in which the formula is located. Which function should be used?", options:["ROW()","COLUMN()","INDEX()","MATCH()"], correct:0},
+
+  {q:"While auditing a complex budgeting workbook, an analyst notices that a formula depends on its own result either directly or indirectly through other formulas. As a result, Excel generates a warning and cannot calculate the value correctly. What is this situation called?", options:["Circular Reference","Broken Link","Invalid Formula","Locked Reference"], correct:0},
+
+  {q:"A Data Analyst is importing sales data from multiple Excel files, cleaning column names, removing duplicates, splitting fields, and converting data types before loading it into the Power BI model. While reviewing the transformation steps, a junior analyst asks which language is actually used behind the scenes to perform these Power Query transformations. Which language powers Power Query transformations in Power BI?", options:["DAX","SQL","M Language","Python"], correct:2},
+
+  {q:"A report contains a measure that calculates Total Sales. The value changes dynamically depending on the filters applied by users, such as Region, Product Category, and Year. The analyst explains that DAX calculations do not simply work row by row but instead depend heavily on the current evaluation environment. Which concept is primarily responsible for this behavior?", options:["Row Storage","Column Aggregation","Context-Based Evaluation","Query Folding"], correct:2},
+    {q:"A sales dashboard contains a measure that must calculate revenue only for customers belonging to a specific region, regardless of the filters currently applied by the user. The analyst chooses a DAX function that can modify the existing filter context before performing the calculation. Which DAX function is specifically designed for modifying filter context?", options:["SUM()","CALCULATE()","COUNTROWS()","VALUES()"], correct:1},
+
+  {q:"A company is designing its data model for reporting. The architecture contains one central table holding transaction-level sales data, while surrounding tables contain information about products, customers, dates, and locations. What is this modeling approach commonly called?", options:["Snowflake Schema","Flat File Structure","Star Schema","Transaction Schema"], correct:2},
+
+  {q:"An analyst has two relationships between a Sales table and a Date table: Order Date → Active Relationship, Delivery Date → Inactive Relationship. Management wants a measure that calculates sales based on Delivery Date instead of Order Date without permanently changing the model. Which DAX function should be used?", options:["RELATED()","LOOKUPVALUE()","USERELATIONSHIP()","DISTINCT()"], correct:2},
+
+  {q:"A business dashboard contains a hierarchy: Country → State → City → Store. Management wants users to expand and collapse hierarchy levels interactively while analyzing performance. Which visual is most suitable?", options:["Card Visual","Matrix Visual","Gauge Visual","KPI Visual"], correct:1},
+
+  {q:"A Power BI report contains over 50 million rows and still performs efficiently because Power BI compresses the data in memory before executing calculations. What is the name of this storage engine?", options:["DirectQuery Engine","VertiPaq Engine","SQL Engine","Power Query Engine"], correct:1},
+
+  {q:"A calculated column contains the formula Sales[Profit] = Sales[Revenue] - Sales[Cost]. The calculation is performed separately for every row in the Sales table. Which type of context exists naturally while this calculated column is being evaluated?", options:["Filter Context","Visual Context","Row Context","Query Context"], correct:2},
+
+  {q:"A report user selects Region = North and Year = 2025. The Total Sales measure instantly recalculates based on only the visible data after these selections. Which concept is primarily affecting the result?", options:["Data Compression","Filter Context","Query Folding","Row Context"], correct:1},
+
+  {q:"A company wants to display each product's contribution as a percentage of overall company sales. Even when users filter the report, the denominator should always represent total company sales across all products. Which DAX function is most commonly used to remove filters from a calculation?", options:["REMOVEERRORS()","ALL()","VALUES()","DISTINCT()"], correct:1},
+
+  {q:"A dashboard displays the Top 10 Customers based on annual revenue. The analyst needs a measure that assigns ranking values such as 1st, 2nd, 3rd, and so on according to sales performance. Which DAX function is designed specifically for ranking?", options:["TOPN()","RANKX()","SORTBY()","ORDERBY()"], correct:1},
+
+  {q:"A Power BI solution connects to SQL Server using DirectQuery and Excel files using Import Mode. The analyst wants both sources to exist within the same report model. What is this architecture called?", options:["Import Model","DirectQuery Model","Composite Model","Live Connection"], correct:2},
+
+  {q:"After creating a dashboard in Power BI Desktop, the analyst wants executives across different departments to access the reports online, schedule refreshes, configure security, and share dashboards with stakeholders. Which platform is designed for these activities?", options:["Power Query","Power BI Desktop","Power BI Service","SQL Server Management Studio"], correct:2},
+
+  {q:"An analyst drags a numeric field called 'Sales Amount' into a visual. Without manually changing any settings, Power BI automatically aggregates the values. Which aggregation is typically applied by default?", options:["Average","Maximum","Count","Sum"], correct:3},
+
+  {q:"A Sales table contains a Product ID column linked to a Products table. The analyst wants to retrieve Product Category from the related Products table inside a calculated column without performing a merge operation. Which DAX function is specifically designed for this purpose?", options:["FILTER()","LOOKUPVALUE()","RELATED()","VALUES()"], correct:2},
+
+  {q:"An analyst creates the following measure: Total Sales = SUM(Sales[Amount]). He places the measure in a table visual containing Product Category and notices that the same measure returns different values for different categories, even though the DAX formula never references Product Category. Why does this happen?", options:["DAX automatically creates new measures","The measure is affected by Filter Context generated by the visual","SUM() behaves differently inside visuals","Power BI duplicates the measure for every category"], correct:1},
+
+  {q:"A junior analyst is reviewing a Python script that validates user inputs. While debugging the code, he notices that the string 'False' is being passed into the bool() function. What will be the output of print(bool('False'))?", options:["False, because the word 'False' represents a false value","True, because any non-empty string evaluates to True","Error, because bool() only accepts Boolean values","None"], correct:1},
+
+  {q:"A developer stores customer IDs inside a Python list and wants to retrieve the last element without knowing the exact length of the list. Consider: a=[1,2,3]; print(a[-1]). What will be displayed?", options:["1","2","3","IndexError"], correct:2},
+
+  {q:"A customer transaction dataset contains duplicate records because the same file was accidentally loaded twice into the reporting system. Before creating dashboards, the analyst needs to remove duplicate rows while keeping the first occurrence of each record. Which Pandas function is commonly used for this task?", options:["remove_duplicates()","unique()","drop_duplicates()","delete_duplicates()"], correct:2},
+    {q:"A retail company wants to calculate total sales for each product category. Instead of manually filtering every category one by one, the analyst wants to split the dataset into groups and apply aggregation functions such as SUM, AVG, and COUNT automatically. Which Pandas function is designed for this purpose?", options:["sort_values()","filter()","groupby()","merge()"], correct:2},
+
+  {q:"A data analyst encounters the following code while reviewing a machine learning project: print(type(lambda x: x)). What will be the output?", options:["class","function","lambda","method"], correct:1},
+
+  {q:"An analyst receives monthly sales data in Excel format (.xlsx). The file must be loaded into Python for cleaning and analysis. Which statement is most accurate?", options:["Only Pandas can read Excel files","Only OpenPyXL can read Excel files","Both Pandas and OpenPyXL can work with Excel files","NumPy is the preferred Excel-reading library"], correct:2},
+
+  {q:"A Pandas DataFrame contains customer information in rows and columns. The analyst wants to apply a function across each row horizontally rather than down each column. In Pandas, what does axis=1 generally represent?", options:["Rows","Columns","Index","Missing Values"], correct:1},
+
+  {q:"A junior analyst is learning NumPy and notices that mathematical operations can be applied directly to arrays without using loops. What will be the output of: import numpy as np; print(np.array([1,2])+10)?", options:["Error because arrays cannot be added to integers","[1, 2, 10]","[11 12]","[10 20]"], correct:2},
+
+  {q:"Before performing advanced analysis, a data scientist wants to quickly understand the distribution of numerical columns, including count, mean, standard deviation, minimum value, quartiles, and maximum value. Which Pandas method provides this summary?", options:["summary()","describe()","statistics()","info()"], correct:1},
+
+  {q:"A data analyst executes the following code: x=[1,2,3]; y=x; y.append(4); print(x). What will be the output?", options:["[1, 2, 3]","[4]","[1, 2, 3, 4]","Error"], correct:2},
+
+  {q:"Consider the following code: print(10 == 10.0). What will Python return?", options:["False","True","TypeError","None"], correct:1},
+
+  {q:"A DataFrame contains the values 100, NaN, and 200 in the Sales column. The analyst executes df['Sales'].sum(). What will Pandas return by default?", options:["NaN","300","Error","100"], correct:1},
+
+  {q:"What will be the output? a=[1,2,3]; print(a*2)", options:["[2, 4, 6]","[1, 2, 3, 1, 2, 3]","Error","[1, 4, 9]"], correct:1},
+
+  {q:"A Data Analyst creates the following code: import pandas as pd; df=pd.DataFrame({'A':[1,2,3],'B':[10,20,30]}); print(df.shape). What will be the output?", options:["(2, 3)","(3, 2)","(3, 3)","6"], correct:1},
+
+  {q:"A company maintains an employee database containing thousands of records. The HR team wants to generate a report showing departments whose average employee salary exceeds ₹75,000. An analyst initially writes a query using the WHERE clause after applying the AVG() function but receives an error. Which statement correctly explains why the query fails and what should be used instead?", options:["WHERE cannot be used with aggregate functions; HAVING should be used to filter grouped results","HAVING can only be used with COUNT()","WHERE executes after aggregation, so it cannot access row-level data","Both WHERE and HAVING work identically in this scenario"], correct:0},
+
+  {q:"A retail company has two tables: Customers and Orders. Management wants a report that includes customers who placed orders, customers who did not place orders, and orders that might not have matching customers. Which JOIN operation returns all matching and non-matching records from both tables?", options:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"], correct:3},
+
+  {q:"An employee salary table contains salaries: 100000, 90000, 90000, and 80000. Management asks for the second highest unique salary. Which query logic correctly solves this requirement?", options:["SELECT MAX(Salary) FROM Employee","SELECT Salary FROM Employee ORDER BY Salary DESC LIMIT 1","Use a subquery to exclude the highest salary and then find the maximum remaining salary","SELECT COUNT(*) FROM Employee"], correct:2},
+
+  {q:"A sales analyst wants to calculate a running rank of products based on revenue without collapsing rows into groups. Every product record should remain visible while an additional ranking column is calculated. Which SQL feature is specifically designed for this requirement?", options:["Aggregate Functions","Window Functions","GROUP BY","DISTINCT"], correct:1},
+
+  {q:"A database administrator explains that SQL statements follow a logical execution order, which is different from the order in which clauses are written. In the query SELECT ... FROM Employees WHERE Salary>50000 GROUP BY Department HAVING AVG(Salary)>70000 ORDER BY AVG(Salary) DESC;, which clause is logically executed first by the SQL engine?", options:["SELECT","WHERE","FROM","ORDER BY"], correct:2}
 ],
 
 
