@@ -1597,6 +1597,50 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   .dcard.frontend .dcard-apply { background: #0ea5e9; }
   .dcard.frontend .dcard-apply:hover { background: #0284c7; }
 
+  /* AIML 3-MONTH (FEATURED / MOST PURCHASED) - additive only, no existing rules touched */
+  .dcard.featured {
+    border-color: #f59e0b;
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.25);
+    overflow: visible;
+  }
+  .dcard.featured .dcard-head { border-radius: 20px 20px 0 0; }
+  .dcard.featured .dcard-body { border-radius: 0 0 20px 20px; }
+  .dcard.featured .dcard-domain-tag { background: #fef3c7; color: #92400e; }
+  .dcard.featured .dcard-apply { background: #f59e0b; }
+  .dcard.featured .dcard-apply:hover { background: #d97706; }
+  .most-purchased-badge {
+    position: absolute;
+    top: -16px; left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #fbbf24, #ea580c);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 8px 8px 8px 2px;
+    box-shadow: 0 6px 14px rgba(234, 88, 12, 0.4), 0 0 0 2px #fff;
+    z-index: 6;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .most-purchased-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .duration-chip {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
   /* BOTTOM BANNER */
   .domains-banner {
     max-width: 1200px; margin: 0 auto;
@@ -1631,7 +1675,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   <div class="domains-header">
    
     <h2>Pick Your <span class="sec-brush">Internship Domain<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
-    <p>4 domains available. Pick one and get your offer letter, certificate &amp; report card.</p>
+    <p>5 domains available. Pick one and get your offer letter, certificate &amp; report card.</p>
   </div>
 
   <div class="domains-grid">
@@ -1650,7 +1694,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
       </div>
       <div class="dcard-body">
         <div class="dcard-domain-tag">🤖 AIML</div>
-        <h3>AI / ML<br>Internship</h3>
+        <h3>AI / ML<br> 2 Months Internship</h3>
         <p>Build real ML models under mentor guidance and complete an industry project in 2 months.</p>
         <div class="dcard-techs">
           <span class="tech-pill">Python</span>
@@ -1665,6 +1709,41 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
             <span>Returned after completion</span>
           </div>
           <a href="intern-aiml.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIML 3-MONTH DEDICATED PROGRAM (FEATURED / MOST PURCHASED) - 2ND POSITION -->
+    <div class="dcard aiml featured" onclick="window.open('3skill-3months-aiml-internship-course.html', '_blank')">
+      <div class="most-purchased-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.4 7 .8-5.2 4.8 1.5 6.9L12 17.6 5.8 21l1.5-6.9L2.1 9.3l7-.9L12 2z"/></svg>Most Purchased</div>
+      <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+          <div class="dcard-icon" style="background:#1e293b;font-size:20px;">🤖</div>
+          <div class="dcard-icon" style="background:#0f172a;font-size:20px;">🧠</div>
+          <div class="dcard-icon" style="background:#ede9fe;font-size:20px;">📊</div>
+        </div>
+        <div class="dcard-domain-label">AI & Machine Learning — Dedicated Track</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">⭐ AIML DEDICATED</div>
+        <h3>AI / ML<br>3-Month Dedicated Internship</h3>
+        <p> Deeper mentorship, more live projects and extra weeks to truly master ML under expert guidance.</p>
+        <div class="dcard-perks">
+         
+          
+        </div>
+        <div class="dcard-techs">
+          <span class="tech-pill">📁 6 Live Projects</span>
+          <span class="tech-pill">Priority Certificate</span>
+          
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>🔥 100% Refundable</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="3skill-3months-aiml-internship-course.html" class="dcard-apply">Apply Now →</a>
         </div>
       </div>
     </div>
