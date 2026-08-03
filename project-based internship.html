@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3Skill Project-Based Internship Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --green:#15803d;
+  --green-dark:#0f5c2c;
+  --green-mid:#16a34a;
+  --green-light:#ecfdf5;
+  --green-lighter:#f5fdf8;
+  --green-pale:#dcfce7;
+  --green-border:#bbf7d0;
+  --ink:#0f172a;
+  --gray:#475569;
+  --gray-light:#94a3b8;
+  --gray-600:#475569;
+  --gray-700:#334155;
+  --gray-900:#0f172a;
+  --gray-100:#f1f5f9;
+  --border:#e2e8f0;
+  --amber-light:#fffbeb;
+  --radius:16px;
+  --shadow:0 4px 20px rgba(15,23,42,0.06);
+  --shadow-lg:0 10px 40px rgba(15,23,42,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.logo{font-family:'Poppins',sans-serif;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+
+/* ---------- NAV ---------- */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:#fff;z-index:60;
+}
+.logo{font-size:21px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:8px;}
+.btn-signin{
+  border:1.5px solid var(--green);color:var(--green);background:#fff;
+  padding:9px 22px;border-radius:999px;font-weight:600;font-size:14px;
+  cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;
+}
+.btn-signin:hover{background:var(--green);color:#fff;}
+
+/* ---------- HERO ---------- */
+.hero-wrapper{background:#fff;padding:40px 32px 60px;}
+.hero{
+  max-width:1220px;margin:0 auto;
+  display:grid;grid-template-columns:1.02fr 0.98fr;gap:46px;align-items:start;
+}
+.hero-left{min-width:0;}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green-light);border:1px solid #bbf7d0;color:#166534;
+  padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:22px;
+}
+.badge span{font-weight:800;color:var(--green-dark);}
+
+.section-tag{
+  display:inline-block;background:var(--green-pale);border:1px solid var(--green-border);
+  color:var(--green-dark);padding:6px 16px;border-radius:999px;font-size:12.5px;
+  font-weight:800;margin-bottom:14px;letter-spacing:.02em;
+}
+
+
+.hero-title{font-size:clamp(30px,3.9vw,46px);font-weight:800;line-height:1.16;margin-bottom:18px;}
+.hero-title .highlight{color:var(--green);display:block;}
+.ps-brush{position:relative;display:inline-block;}
+.brush-svg{position:absolute;left:0;bottom:-10px;width:100%;height:16px;overflow:visible;pointer-events:none;}
+
+.hero-subtitle{color:var(--gray);font-size:clamp(14.5px,1.5vw,16.5px);line-height:1.65;max-width:540px;margin-bottom:26px;}
+.hero-subtitle strong{color:var(--ink);font-weight:700;}
+
+/* ---------- INFO BLOCK (price block ki jagah) ---------- */
+.pricing-block{margin-bottom:24px;}
+.pricing-top-row{
+  background:var(--green-light);border:1px solid #bbf7d0;border-radius:14px;
+  padding:20px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:16px;
+}
+.pricing-main{flex:1;min-width:190px;}
+.pricing-label{
+  display:block;font-size:12px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:#166534;margin-bottom:6px;
+}
+.pricing-amount-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.price-now{font-family:'Poppins',sans-serif;font-size:clamp(26px,3.2vw,36px);font-weight:800;color:var(--green);line-height:1;}
+.price-original{font-size:15px;font-weight:600;color:var(--gray);}
+.pricing-divider{width:1px;align-self:stretch;background:#bbf7d0;min-height:48px;}
+.pricing-rest{display:flex;flex-direction:column;gap:4px;min-width:170px;}
+.pricing-rest-label{font-size:17px;font-weight:800;color:var(--ink);}
+.pricing-rest-sub{font-size:13.5px;font-weight:600;color:#166534;}
+
+.pricing-steps{
+  display:flex;align-items:center;gap:6px;
+  border:1px solid var(--border);border-radius:14px;padding:16px 18px;background:#fff;
+  box-shadow:var(--shadow);
+}
+.pricing-step{display:flex;align-items:flex-start;gap:10px;flex:1;min-width:0;}
+.pstep-circle{
+  width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13.5px;font-weight:800;flex-shrink:0;
+}
+.pstep-circle--mid{background:var(--green-mid);}
+.pstep-circle--last{background:#f59e0b;}
+.pstep-info strong{display:block;font-size:13px;font-weight:700;line-height:1.3;color:var(--ink);}
+.pstep-info span{font-size:11.5px;color:var(--gray);line-height:1.35;display:block;margin-top:2px;}
+.pstep-connector{height:1px;background:var(--border);flex:0 0 26px;margin-top:14px;}
+
+.pricing-seats-badge{
+  margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+  background:var(--amber-light);border:1px solid #fde68a;color:#92400e;
+  font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:10px;
+}
+
+.mob-hero-pill{display:none;}
+
+.cta-buttons{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-cta{
+  background:var(--green);color:#fff;padding:15px 40px;border-radius:12px;
+  font-weight:700;font-size:15.5px;box-shadow:0 8px 22px rgba(21,128,61,.28);
+  display:inline-block;transition:.2s;
+}
+.btn-cta:hover{background:var(--green-dark);}
+.btn-download{
+  background:#fff;color:var(--green);padding:15px 34px;border-radius:12px;
+  font-weight:700;font-size:15.5px;border:1.6px solid var(--green);
+  display:inline-block;transition:.2s;
+}
+.btn-download:hover{background:var(--green-light);}
+
+/* ---------- HERO RIGHT ---------- */
+.hero-right{min-width:0;}
+.video-wrapper{
+  position:relative;background:var(--green-light);border:1px solid #bbf7d0;
+  border-radius:22px;padding:8px;margin-bottom:20px;
+}
+.video-thumb{
+  position:relative;cursor:pointer;border-radius:18px;overflow:hidden;
+  width:100%;background:#0f2318;aspect-ratio:16/9;
+}
+.video-thumb img{width:100%;height:100%;object-fit:cover;display:block;border-radius:18px;}
+.play-ring{
+  position:absolute;top:50%;left:50%;width:110px;height:110px;
+  border:3px solid rgba(255,0,0,0.4);border-radius:50%;
+  transform:translate(-50%,-50%);animation:pulse 2s infinite;z-index:2;
+}
+@keyframes pulse{
+  0%{transform:translate(-50%,-50%) scale(0.9);opacity:1;}
+  100%{transform:translate(-50%,-50%) scale(1.3);opacity:0;}
+}
+.play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(255,0,0,0.95);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 15px 40px rgba(255,0,0,0.5);transition:all .3s ease;z-index:3;
+}
+.play-btn svg{width:30px;height:30px;fill:#fff;margin-left:4px;}
+.video-thumb:hover .play-btn{transform:translate(-50%,-50%) scale(1.12);box-shadow:0 20px 50px rgba(255,0,0,0.7);}
+
+.prove-it-card,.hero-perk-card{
+  display:flex;gap:14px;align-items:flex-start;background:#fff;
+  border:1px solid var(--border);border-radius:14px;padding:16px 18px;
+  margin-bottom:14px;box-shadow:var(--shadow);
+}
+.prove-it-card{border-left:4px solid var(--green);}
+.hero-perk-card{border-left:4px solid #6366f1;}
+.hero-perk-card--kit{border-left:4px solid #f59e0b;}
+.prove-it-icon,.hero-perk-icon{font-size:22px;line-height:1;flex-shrink:0;margin-top:2px;}
+.prove-it-text strong,.hero-perk-text strong{display:block;font-size:15px;font-weight:700;margin-bottom:5px;color:var(--ink);}
+.prove-it-text span,.hero-perk-text span{font-size:13.2px;color:var(--gray);line-height:1.6;display:block;}
+.prove-it-text em,.hero-perk-text em{font-style:normal;font-weight:700;color:var(--green-dark);}
+.prove-it-text strong strong,.hero-perk-text span strong{font-weight:700;color:var(--ink);}
+
+.stats-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;}
+.stat-card{
+  flex:1;min-width:210px;display:flex;align-items:center;gap:12px;
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;box-shadow:var(--shadow);
+}
+.community-card{background:var(--green-lighter);border-color:#bbf7d0;}
+.stat-avatars{display:flex;}
+.stat-avatars .avatar{
+  width:32px;height:32px;border-radius:50%;overflow:hidden;
+  border:2px solid #fff;margin-left:-9px;background:#e2e8f0;
+}
+.stat-avatars .avatar:first-child{margin-left:0;}
+.community-icon{flex-shrink:0;}
+.stat-text small{display:block;font-size:11.5px;color:var(--gray);font-weight:500;margin-bottom:2px;}
+.stat-text strong{font-size:15px;font-weight:800;color:var(--ink);}
+.community-count{color:var(--green-dark);}
+.community-dots{display:flex;gap:4px;margin-top:5px;}
+.community-dots span{width:7px;height:7px;border-radius:50%;background:var(--green-mid);animation:blink 1.4s infinite;}
+.community-dots span:nth-child(2){animation-delay:.2s;}
+.community-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+
+.mob-below-stats{display:none;}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:30px;}
+  .pricing-steps{flex-direction:column;align-items:flex-start;gap:14px;}
+  .pstep-connector{display:none;}
+}
+@media(max-width:720px){
+  nav{padding:14px 18px;}
+  .hero-wrapper{padding:28px 18px 40px;}
+  .pricing-block{display:none;}          /* desktop info block hidden */
+  .mob-hero-pill{
+    display:block;background:var(--green-light);border:1px solid #bbf7d0;
+    border-radius:12px;padding:14px 16px;margin-bottom:20px;
+  }
+  .mob-pill-tag{font-size:13.5px;font-weight:600;color:#166534;line-height:1.55;display:block;}
+  .cta-buttons .btn-cta,.cta-buttons .btn-download{flex:1;text-align:center;padding:14px 18px;font-size:14.5px;}
+
+  .mob-below-stats{display:block;margin-top:18px;}
+  .mob-price-card{
+    background:var(--green-light);border:1px solid #bbf7d0;border-radius:14px;
+    padding:16px 18px;display:flex;align-items:center;gap:16px;margin-bottom:12px;
+  }
+  .mob-price-main{flex:1;}
+  .mob-label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#166534;margin-bottom:4px;}
+  .mob-price-row{display:flex;align-items:baseline;gap:8px;}
+  .mob-price{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--green);}
+  .mob-strike{font-size:13px;font-weight:600;color:var(--gray);}
+  .mob-price-divider{width:1px;align-self:stretch;background:#bbf7d0;min-height:40px;}
+  .mob-price-right{display:flex;flex-direction:column;gap:2px;}
+  .mob-remaining{font-size:14px;font-weight:800;color:var(--ink);}
+  .mob-remaining-sub{font-size:12px;font-weight:600;color:#166534;}
+  .mob-seats-badge{
+    display:block;background:var(--amber-light);border:1px solid #fde68a;color:#92400e;
+    font-size:13px;font-weight:600;padding:9px 14px;border-radius:10px;margin-bottom:12px;
+  }
+  .mob-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+  .mob-step{
+    display:flex;gap:11px;align-items:flex-start;background:#fff;
+    border:1px solid var(--border);border-radius:12px;padding:12px 14px;
+  }
+  .mob-step-num{
+    width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;flex-shrink:0;
+  }
+  .mob-step--2 .mob-step-num{background:var(--green-mid);}
+  .mob-step--3 .mob-step-num{background:#f59e0b;}
+  .mob-step-info strong{display:block;font-size:13.5px;font-weight:700;}
+  .mob-step-info span{font-size:12px;color:var(--gray);}
+  .mob-prove-card{
+    display:flex;gap:11px;align-items:flex-start;background:var(--green-lighter);
+    border:1px solid #bbf7d0;border-radius:12px;padding:13px 15px;
+  }
+  .mob-prove-icon{font-size:19px;flex-shrink:0;}
+  .mob-prove-text strong{display:block;font-size:14px;font-weight:700;margin-bottom:4px;}
+  .mob-prove-text span{font-size:12.5px;color:var(--gray);line-height:1.55;}
+  .mob-prove-text em{font-style:normal;font-weight:700;color:var(--green-dark);}
+  .play-btn{width:62px;height:62px;}
+  .play-btn svg{width:24px;height:24px;}
+  .play-ring{width:86px;height:86px;}
+}
+
+/* ---------- REST OF PAGE ---------- */
+.section{padding:64px 24px;}
+.section-head{text-align:center;margin-bottom:44px;}
+.section-head h2{font-size:clamp(24px,4vw,36px);font-weight:800;}
+.section-head p{color:var(--gray);margin-top:14px;font-size:15.5px;}
+.section-head .ps-brush{color:var(--green);}
+
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;max-width:1180px;margin:0 auto;}
+.domain-card{
+  position:relative;border:1px solid var(--border);border-radius:20px;padding:26px;
+  cursor:pointer;background:#fff;transition:.25s ease;overflow:hidden;
+}
+.domain-card::before{
+  content:"";position:absolute;top:-46%;right:-30%;width:150px;height:150px;
+  background:radial-gradient(circle, var(--dcolor,#15803d) 0%, transparent 70%);
+  opacity:.10;border-radius:50%;transition:.3s ease;pointer-events:none;
+}
+.domain-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.domain-card:hover::before{opacity:.20;transform:scale(1.2);}
+.domain-icon{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;position:relative;z-index:1;box-shadow:0 8px 18px -4px rgba(0,0,0,.25);
+}
+.domain-icon i{width:25px;height:25px;color:#fff;}
+.domain-card h3{font-size:16.5px;font-weight:700;margin-bottom:8px;line-height:1.35;position:relative;z-index:1;}
+.domain-card p{font-size:13.5px;color:var(--gray);line-height:1.5;margin-bottom:16px;position:relative;z-index:1;}
+.project-pill{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:#fef3c7;color:#92400e;margin-bottom:10px;position:relative;z-index:1;}
+.card-cta{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:6px;position:relative;z-index:1;}
+.card-cta i{width:14px;height:14px;transition:transform .2s ease;}
+.domain-card:hover .card-cta i{transform:translateX(4px);}
+
+@media(max-width:640px){
+  .domain-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .domain-card{padding:14px;border-radius:16px;}
+  .domain-icon{width:38px;height:38px;border-radius:11px;margin-bottom:10px;}
+  .domain-icon i{width:18px;height:18px;}
+  .domain-card h3{font-size:12.5px;margin-bottom:5px;line-height:1.3;}
+  .domain-card p{
+    font-size:11px;margin-bottom:10px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .project-pill{font-size:9px;padding:3px 7px;margin-bottom:6px;}
+  .card-cta{font-size:11px;gap:4px;}
+  .card-cta i{width:11px;height:11px;}
+}
+
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;max-width:1180px;margin:0 auto;}
+.feature-card{border-left:4px solid var(--green);background:var(--green-lighter);border-radius:12px;padding:22px;}
+.feature-card .f-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.feature-card .f-icon{width:38px;height:38px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.feature-card .f-icon i{width:19px;height:19px;color:#fff;}
+.feature-card h3{font-size:15.5px;font-weight:700;}
+.feature-card p{font-size:13.5px;color:var(--gray);line-height:1.55;}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.step{padding:26px 20px;border-radius:var(--radius);background:#fff;border:1px solid var(--border);}
+.step .num{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;-webkit-text-stroke:1.5px var(--green);color:transparent;margin-bottom:10px;}
+.step h3{font-size:15.5px;font-weight:700;margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--gray);line-height:1.5;}
+
+@media(max-width:640px){
+  .feature-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .feature-card{padding:14px;border-radius:12px;}
+  .feature-card .f-top{gap:8px;margin-bottom:8px;}
+  .feature-card .f-icon{width:30px;height:30px;border-radius:8px;}
+  .feature-card .f-icon i{width:15px;height:15px;}
+  .feature-card h3{font-size:12px;line-height:1.3;}
+  .feature-card p{font-size:11px;line-height:1.45;}
+
+  .steps{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .step{padding:16px 14px;border-radius:14px;}
+  .step .num{font-size:22px;margin-bottom:6px;}
+  .step h3{font-size:12.5px;margin-bottom:5px;}
+  .step p{font-size:11px;line-height:1.4;}
+}
+
+.bottom-cta{background:var(--green);border-radius:24px;max-width:1000px;margin:0 auto;padding:48px 32px;text-align:center;color:#fff;}
+.bottom-cta h2{font-size:clamp(22px,3.5vw,30px);font-weight:800;margin-bottom:14px;}
+.bottom-cta p{opacity:.9;margin-bottom:26px;font-size:15px;}
+.bottom-cta .btn-white{background:#fff;color:var(--green);padding:14px 30px;border-radius:12px;font-weight:700;font-size:15px;border:none;cursor:pointer;}
+
+footer{text-align:center;padding:28px 24px;color:var(--gray-light);font-size:13px;border-top:1px solid var(--border);}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,0.55);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;backdrop-filter:blur(2px);}
+.overlay.active{display:flex;}
+.modal{background:#fff;border-radius:20px;max-width:460px;width:100%;max-height:88vh;overflow-y:auto;padding:30px;position:relative;animation:pop .18s ease;}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-close{position:absolute;top:16px;right:16px;background:#f1f5f9;border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.modal-close i{width:16px;height:16px;color:var(--gray);}
+.modal-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.modal-icon i{width:26px;height:26px;color:#fff;}
+.modal h3{font-size:19px;font-weight:700;margin-bottom:6px;}
+.modal .modal-desc{font-size:13.5px;color:var(--gray);margin-bottom:20px;line-height:1.5;}
+.modal label.field-label{font-size:13px;font-weight:700;display:block;margin-bottom:10px;}
+.duration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.duration-opt{border:1.5px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;background:#fff;}
+.duration-opt.active{border-color:var(--green);background:var(--green-light);color:var(--green-dark);}
+
+.batch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;}
+.batch-opt{
+  border:1.5px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;
+  cursor:pointer;background:#fff;transition:.15s ease;
+}
+.batch-opt.active{border-color:var(--green);background:var(--green-light);}
+.batch-opt .b-date{font-family:'Poppins',sans-serif;font-size:19px;font-weight:800;color:var(--ink);line-height:1;}
+.batch-opt.active .b-date{color:var(--green-dark);}
+.batch-opt .b-month{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-top:4px;}
+.batch-opt .b-day{font-size:10.5px;color:var(--gray-light);margin-top:2px;}
+.modal-info{background:var(--green-lighter);border-radius:12px;padding:14px 16px;margin-bottom:22px;}
+.modal-info div{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);margin-bottom:6px;}
+.modal-info div:last-child{margin-bottom:0;}
+.modal-info i{width:15px;height:15px;color:var(--green);flex-shrink:0;}
+.apply-btn{width:100%;background:var(--green);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;}
+.form-group{margin-bottom:14px;}
+.form-group label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;}
+.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;}
+.form-group input:focus{outline:none;border-color:var(--green);}
+.success-box{text-align:center;padding:10px 0;}
+.success-box .s-icon{width:60px;height:60px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.success-box .s-icon i{width:30px;height:30px;color:var(--green);}
+.success-box h3{margin-bottom:8px;}
+.success-box p{font-size:13.5px;color:var(--gray);}
+
+/* ===== VERIFIED SECTION ===== */
+.verified-wrapper{
+    background:#ffffff;
+    padding:60px 0;
+}
+.verified-inner{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+}
+.verified-heading{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    letter-spacing:4px;
+    font-weight:600;
+    color:#7b818a;
+    margin-bottom:45px;
+    font-family:'Inter',sans-serif;
+}
+.verified-heading span{
+    flex:1;
+    height:1px;
+    background:#d9dde3;
+    margin:0 15px;
+    max-width:120px;
+}
+.verified-logos{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    flex-wrap:nowrap;
+}
+.logo-item{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.logo-item img{
+    max-height:60px;
+    width:auto;
+    max-width:90%;
+    object-fit:contain;
+    transition:0.3s ease;
+    opacity:0.9;
+}
+.iso-logo img{
+    max-height:80px;
+}
+.logo-item img:hover{
+    transform:scale(1.05);
+    opacity:1;
+}
+@media (max-width: 768px){
+    .verified-wrapper{padding:40px 0;}
+    .verified-heading{font-size:12px;letter-spacing:3px;margin-bottom:30px;}
+    .verified-heading span{max-width:70px;}
+    .verified-logos{gap:10px;}
+    .logo-item img{max-height:38px;max-width:85%;}
+    .iso-logo img{max-height:50px;}
+}
+
+/* MOBILE STICKY ENROLL */
+.mobile-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  padding: 14px 20px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+  z-index: 998;
+  border-top: 1px solid var(--green-border);
+}
+.btn-enroll {
+  display: block; text-align: center; width: 100%;
+  background: var(--green); color: #fff; border: none;
+  padding: 14px 20px; border-radius: 12px;
+  font-weight: 700; font-size: 15px; font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 20px rgba(21,128,61,0.28);
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-enroll:hover { background: var(--green-dark); }
+
+@media (max-width: 720px) {
+  .mobile-sticky { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">3Skill Training</a>
+  <button class="btn-signin" onclick="window.location.href='dashbord.html'">Dashboard</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrapper">
+<div class="hero">
+  <div class="hero-left">
+
+    <div class="badge">🏛️ Registered Under <span>DPIIT</span>, Govt. of India</div>
+
+    <h1 class="hero-title">
+      India's #1
+      <span class="highlight">
+        <span class="ps-brush">Project-Based
+          <svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none">
+            <path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10"
+              stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13"
+              stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </span><br>Internship Program
+      </span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Go from <strong>Beginner to Industry-Ready</strong> in the domain of your choice —
+      submit a real-world project, get live doubt-clearing support, and earn a certificate + internship offer letter.
+    </p>
+
+    <!-- DESKTOP-ONLY INFO BLOCK (no pricing) -->
+    <div class="pricing-block">
+      <div class="pricing-top-row">
+        <div class="pricing-main">
+          <span class="pricing-label">Choose Your Track</span>
+          <div class="pricing-amount-row">
+            <span class="price-now">1–6 Months</span>
+            <span class="price-original">Your Pace, Your Plan</span>
+          </div>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-rest">
+          <span class="pricing-rest-label">15 Domains Available</span>
+          <span class="pricing-rest-sub">100% Project-Based ✅</span>
+        </div>
+      </div>
+
+      <div class="pricing-steps">
+        <div class="pricing-step pricing-step--active">
+          <div class="pstep-circle">1</div>
+          <div class="pstep-info"><strong>Pick Your Domain</strong><span>Choose from 15 tracks</span></div>
+        </div>
+        <div class="pstep-connector"></div>
+        <div class="pricing-step">
+          <div class="pstep-circle pstep-circle--mid">2</div>
+          <div class="pstep-info"><strong>Work on Your Project</strong><span>Submit it at your own pace</span></div>
+        </div>
+        <div class="pstep-connector"></div>
+        <div class="pricing-step">
+          <div class="pstep-circle pstep-circle--last">3</div>
+          <div class="pstep-info"><strong>Get Certificate + Offer Letter</strong><span>On successful project submission 🎓</span></div>
+        </div>
+      </div>
+
+      <div class="pricing-seats-badge">
+        🔥 <strong>Few seats left</strong> — this batch is filling fast!
+      </div>
+    </div>
+
+    <!-- MOBILE-ONLY catchy line -->
+    <div class="mob-hero-pill">
+      <span class="mob-pill-tag">🛡️ Learn from Scratch to Advanced in 15+ domains. Master industry-ready skills with hands-on live projects.</span>
+    </div>
+
+    <div class="cta-buttons">
+      <a href="#domains" class="btn-cta">Explore Domains</a>
+      <a href="3Skill-Internship-Brochure.pdf" class="btn-download" download>Download</a>
+    </div>
+
+  </div>
+
+  <div class="hero-right">
+    <div class="video-wrapper">
+      <!-- Apna thumbnail image ka naam yaha rakhna -->
+      <div class="video-thumb" id="videoBox" onclick="loadVideo()">
+        <img src="project-based-internhsip-thumb.png" alt="Program Preview">
+        <div class="play-ring"></div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 1 -->
+    <div class="prove-it-card">
+      <div class="prove-it-icon">🛡️</div>
+      <div class="prove-it-text">
+        <strong>Flexible Duration, Your Choice</strong>
+        <span>Pick a track from <em>1 to 6 months</em> and choose <em>dates that suit you</em> — at your own pace.</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="hero-perk-card">
+      <div class="hero-perk-icon">🎓</div>
+      <div class="hero-perk-text">
+        <strong>Certificate &amp; Offer Letter</strong>
+        <span>After completing the program, receive an <em>official 3Skill certificate</em> along with an <em>internship offer letter</em> from 3Skill.</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="hero-perk-card hero-perk-card--kit">
+      <div class="hero-perk-icon">🎥</div>
+      <div class="hero-perk-text">
+        <strong>Live Doubt-Clearing Classes</strong>
+        <span>Get access to <em>live doubt-clearing sessions</em> while you work on your project, so you're never stuck without support.</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-avatars">
+          <div class="avatar"><img src="https://i.pravatar.cc/32?img=47" alt="s"></div>
+          <div class="avatar"><img src="https://i.pravatar.cc/32?img=12" alt="s"></div>
+          <div class="avatar"><img src="https://i.pravatar.cc/32?img=33" alt="s"></div>
+          <div class="avatar"><img src="https://i.pravatar.cc/32?img=68" alt="s"></div>
+        </div>
+        <div class="stat-text">
+          <small>Total</small>
+          <strong>180k+ Learners</strong>
+        </div>
+      </div>
+
+      <div class="stat-card community-card">
+        <div class="community-icon">
+          <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
+            <circle cx="22" cy="22" r="22" fill="#16a34a" opacity="0.1"/>
+            <circle cx="15" cy="18" r="4.5" fill="#16a34a"/>
+            <circle cx="29" cy="18" r="4.5" fill="#16a34a"/>
+            <circle cx="22" cy="15" r="5.5" fill="#15803d"/>
+            <path d="M5 34c0-5 4.5-8 10-8h14c5.5 0 10 3 10 8" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="stat-text">
+          <small>Growing Community</small>
+          <strong class="community-count">100k+ Students</strong>
+          <div class="community-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE-ONLY block below stats -->
+    <div class="mob-below-stats">
+      <div class="mob-price-card">
+        <div class="mob-price-main">
+          <span class="mob-label">Choose Your Track</span>
+          <div class="mob-price-row">
+            <span class="mob-price">1–6 Months</span>
+          </div>
+        </div>
+        <div class="mob-price-divider"></div>
+        <div class="mob-price-right">
+          <span class="mob-remaining">15 Domains</span>
+          <span class="mob-remaining-sub">100% Project-Based ✅</span>
+        </div>
+      </div>
+
+      <div class="mob-seats-badge">🔥 <strong>Few seats left</strong> — batch filling fast!</div>
+
+      <div class="mob-steps">
+        <div class="mob-step mob-step--1">
+          <div class="mob-step-num">1</div>
+          <div class="mob-step-info"><strong>Pick Your Domain</strong><span>Choose from 15 tracks</span></div>
+        </div>
+        <div class="mob-step mob-step--2">
+          <div class="mob-step-num">2</div>
+          <div class="mob-step-info"><strong>Work on Your Project</strong><span>Submit it at your own pace</span></div>
+        </div>
+        <div class="mob-step mob-step--3">
+          <div class="mob-step-num">3</div>
+          <div class="mob-step-info"><strong>Get Certificate + Offer Letter</strong><span>On successful project submission 🎓</span></div>
+        </div>
+      </div>
+
+      <div class="mob-prove-card">
+        <span class="mob-prove-icon">🛡️</span>
+        <div class="mob-prove-text">
+          <strong>Flexible Duration, Your Choice</strong>
+          <span>Pick a track from <em>1 to 6 months</em> and choose <em>dates that suit you</em> — at your own pace.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ===== VERIFIED SECTION START ===== -->
+<div class="verified-wrapper">
+    <div class="verified-inner">
+
+        <h3 class="verified-heading">
+            <span></span>
+            VERIFIED BY
+            <span></span>
+        </h3>
+
+        <div class="verified-logos">
+
+            <div class="logo-item">
+                <img src="startupindia.png" alt="Startup India">
+            </div>
+
+            <div class="logo-item iso-logo">
+                <img src="isoveri.png" alt="ISO Verified">
+            </div>
+
+            <div class="logo-item">
+                <img src="msmeveri.png" alt="MSME Registered">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- ===== VERIFIED SECTION END ===== -->
+
+<section class="section" id="domains">
+  <div class="section-head">
+    <h2>Choose Your <span class="ps-brush">Domain<svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/></svg></span></h2>
+    <p>Tap any card to pick your duration and see exactly what's included.</p>
+  </div>
+  <div class="domain-grid" id="domainGrid"></div>
+</section>
+
+<!-- ========== CERTIFICATE SECTION ========== -->
+<style>
+  .cert-section { background: #f0fdf4; padding: 80px 60px; border-bottom: 1px solid var(--green-border); }
+  .cert-header { text-align: center; margin-bottom: 52px; }
+  .cert-header h2 { font-size: 38px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1.2; }
+  .cert-header h2 .sec-brush { color: var(--green-dark); position: relative; display: inline-block; white-space: nowrap; }
+  .cert-header h2 .sec-brush-svg { position: absolute; left: -4px; bottom: -6px; width: calc(100% + 8px); height: 18px; pointer-events: none; }
+
+  .cert-card { max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 24px; border: 1.5px solid #e5e7eb; box-shadow: 0 4px 32px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 0; overflow: hidden; }
+  .cert-preview { flex: 0 0 420px; background: #f8fafc; border-right: 1.5px solid #e5e7eb; padding: 32px 28px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .cert-img-wrap { background: #fff; border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.13); overflow: hidden; width: 100%; position: relative; }
+
+  .cert-info { flex: 1; padding: 48px 48px; display: flex; flex-direction: column; gap: 0; }
+  .cert-info h3 { font-size: 26px; font-weight: 900; color: var(--green-dark); margin-bottom: 16px; line-height: 1.2; font-family:'Poppins',sans-serif; }
+  .cert-info p { font-size: 15px; color: var(--gray-600); font-weight: 600; line-height: 1.75; margin-bottom: 20px; font-family:'Nunito',sans-serif; }
+  .cert-info p b { color: var(--gray-900); }
+  .cert-id-box { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 700; color: var(--gray-700); margin-bottom: 28px; display: inline-block; font-family:'Nunito',sans-serif; }
+  .cert-id-box span { color: var(--gray-900); font-weight: 900; }
+  .btn-view-cert {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-dark); color: #fff; border: none; border-radius: 50px;
+    padding: 14px 32px; font-size: 15px; font-weight: 800; font-family: 'Nunito', sans-serif;
+    cursor: pointer; text-decoration: none; transition: all 0.2s; width: fit-content;
+    box-shadow: 0 4px 16px rgba(21,128,61,0.3);
+  }
+  .btn-view-cert:hover { background: #166534; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(21,128,61,0.4); }
+
+  @media (max-width: 860px) {
+    .cert-section { padding: 48px 20px; }
+    .cert-card { flex-direction: column; }
+    .cert-preview { flex: none; width: 100%; border-right: none; border-bottom: 1.5px solid #e5e7eb; }
+    .cert-info { padding: 28px 24px; }
+    .cert-header h2 { font-size: 28px; }
+  }
+</style>
+
+<section class="cert-section">
+  <div class="cert-header">
+    <h2>Professional <span class="sec-brush">Certificates<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+  </div>
+
+  <div class="cert-card">
+    <div class="cert-preview">
+      <div class="cert-img-wrap">
+        <!-- Yahan apni certificate ki image ka path/URL daalo -->
+        <img src="internshipcomplete-certificate.png" alt="3Skill Internship Certificate" style="width:100%;height:auto;display:block;border-radius:12px;" />
+      </div>
+    </div>
+
+    <div class="cert-info">
+      <h3>Internship Completion Certificate</h3>
+      <p>
+        Successfully completed a project-based internship under <b>3Skill</b>, gaining hands-on
+        experience by building and submitting a real-world project in the chosen domain.
+      </p>
+      <div class="cert-id-box">
+        <b>Certificate ID:</b> <span>3SK-INT-2026-XXX</span>
+      </div>
+      <a href="internshipcomplete-certificate.png" class="btn-view-cert">View Certificate</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="perks" style="background:var(--green-lighter);">
+  <div class="section-head">
+    <h2>Everything You Get with <span class="ps-brush">3Skill Internship<svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/></svg></span></h2>
+    <p>No matter which domain or duration you choose, every intern gets this.</p>
+  </div>
+  <div class="feature-grid" id="featureGrid"></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>How It <span class="ps-brush">Works<svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/></svg></span></h2>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="num">01</div><h3>Choose Your Domain</h3><p>Pick from 15 in-demand domains — from Web Dev to Business Analytics.</p></div>
+    <div class="step"><div class="num">02</div><h3>Select Duration</h3><p>Go anywhere from 1 month to 6 months, based on your pace.</p></div>
+    <div class="step"><div class="num">03</div><h3>Work on Your Project</h3><p>Build and submit a real-world project in your chosen domain, with live doubt-clearing sessions available.</p></div>
+    <div class="step"><div class="num">04</div><h3>Get Certificate + Offer Letter</h3><p>Finish strong with an official 3Skill certificate and internship offer letter.</p></div>
+  </div>
+</section>
+
+<!-- ========== STORIES / REVIEW SECTION ========== -->
+<style>
+  .stories-section { background: #f8fafc; padding: 80px 60px; border-bottom: 1px solid var(--green-border); }
+  .stories-header { text-align: center; margin-bottom: 52px; }
+  .stories-header h2 { font-size: 38px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 10px; }
+  .stories-header h2 .sec-brush { color: var(--green-dark); position: relative; display: inline-block; white-space: nowrap; }
+  .stories-header h2 .sec-brush-svg { position: absolute; left: -4px; bottom: -6px; width: calc(100% + 8px); height: 18px; pointer-events: none; }
+  .stories-header .sub { font-size: 15px; font-weight: 700; color: var(--gray-600); letter-spacing: 1px; font-family:'Nunito',sans-serif; }
+
+  .stories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; }
+  .story-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1.5px solid #e5e7eb; box-shadow: 0 2px 12px rgba(0,0,0,0.05); transition: transform 0.25s, box-shadow 0.25s; }
+  .story-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.10); }
+
+  .story-thumb { position: relative; aspect-ratio: 16/9; background: #e2e8f0; overflow: hidden; cursor: pointer; }
+  .story-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+  .story-card:hover .story-thumb img { transform: scale(1.04); }
+
+  .story-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; background: rgba(255,255,255,0.95); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25); z-index: 2; transition: transform 0.2s, background 0.2s;
+  }
+  .story-card:hover .story-play { transform: translate(-50%, -50%) scale(1.12); background: #fff; }
+  .story-play svg { width: 20px; height: 20px; fill: #16a34a; margin-left: 3px; }
+
+  .story-body { padding: 20px 22px 24px; font-family:'Nunito',sans-serif; }
+  .quote-open { font-size: 32px; font-weight: 900; color: #7c3aed; line-height: 0.5; display: block; margin-bottom: 10px; }
+  .story-body h4 { font-size: 15px; font-weight: 900; color: var(--gray-900); line-height: 1.4; margin-bottom: 12px; font-family:'Nunito',sans-serif; }
+  .quote-close { text-align: right; font-size: 32px; font-weight: 900; color: #7c3aed; line-height: 0.5; display: block; margin-bottom: 10px; }
+  .story-divider { width: 100%; height: 1.5px; background: #f1f5f9; margin-bottom: 12px; }
+  .story-body p { font-size: 13px; color: var(--gray-600); font-weight: 600; line-height: 1.7; }
+
+  .story-iframe-wrap { display: none; position: absolute; inset: 0; z-index: 10; }
+  .story-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
+  .story-iframe-wrap.active { display: block; }
+
+  @media (max-width: 900px) {
+    .stories-section { padding: 48px 20px; }
+    .stories-grid { grid-template-columns: 1fr; gap: 20px; }
+    .stories-header h2 { font-size: 22px; }
+  }
+</style>
+
+<section class="stories-section">
+  <div class="stories-header">
+    <h2>From Free Intern to <span class="sec-brush">Paid Intern<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <div class="sub">Real growth stories from our interns 🚀</div>
+  </div>
+
+  <div class="stories-grid">
+
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb1" onclick="loadStory(1)">
+        <img src="janvireviewposter.png" alt="Story 1" onerror="this.style.display='none'" />
+        <div class="story-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="story-iframe-wrap" id="sFrame1">
+          <iframe id="sIframe1" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Learn project planning, lead teams, and turn ideas into real outcomes</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I started my journey as a free project management intern and, through consistent performance and learning, earned the opportunity to convert into a paid intern. Managing real projects, coordinating with teams, and delivering results helped me grow professionally.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb3" onclick="loadStory(3)">
+        <img src="aarya-review-3skill.png" alt="Story 3" onerror="this.style.display='none'" />
+        <div class="story-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="story-iframe-wrap" id="sFrame3">
+          <iframe id="sIframe3" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Start as a free intern, grow your skills, and step into a paid internship</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I started as a free intern and ended up getting a paid internship! 3Skill helped me step into Data Science with a real project and made it count.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb2" onclick="loadStory(2)">
+        <img src="payelreview poster.png" alt="Story 2" onerror="this.style.display='none'" />
+        <div class="story-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="story-iframe-wrap" id="sFrame2">
+          <iframe id="sIframe2" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Started as a free intern, grew into a paid web development role</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I began as a free intern and gradually earned a paid web development internship by delivering tasks on time and improving my coding skills. This experience gave me hands-on exposure to real projects and professional workflows.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // ✅ Yahan apne 3 YouTube video IDs daalo
+  var storyVideos = {
+    1: "5Ja2UtYjtWk",
+    2: "hLEKzRY2wvw",
+    3: "kLimNAe5ivg"
+  };
+  function loadStory(n) {
+    var iframe = document.getElementById("sIframe" + n);
+    var frame  = document.getElementById("sFrame" + n);
+    var thumb  = document.getElementById("sThumb" + n);
+    iframe.src = "https://www.youtube.com/embed/" + storyVideos[n] + "?autoplay=1&rel=0";
+    frame.classList.add("active");
+    thumb.querySelectorAll('.story-play, .story-tag, .story-name, img').forEach(function(el){ el.style.display='none'; });
+  }
+</script>
+
+<!-- WHY CHOOSE US COMPARISON -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="stories-header">
+      <h2>Why <span class="sec-brush">3Skill Training?<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+      <div class="sub">See how we stack up against other platforms.</div>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="col-feature">Features</th>
+            <th class="col-us"><div class="us-header">3Skill Training</div></th>
+            <th class="col-other">Other Platforms</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Affordable Pricing</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Flexible Duration (1–6 Months)</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Live Doubt-Clearing Support</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>15+ Domain Options</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Real-World Project Focus</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Industry Certificate</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Paid Internship Opportunity</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Internship Offer Letter</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare-section { padding: 70px 60px; background: var(--gray-100); }
+  .compare-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .compare-table-wrap { overflow-x: auto; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.07); border: 1.5px solid #e5e7eb; }
+  .compare-table { width: 100%; border-collapse: collapse; background: #fff; text-align: center; font-family:'Nunito',sans-serif; }
+  .compare-table thead tr { border-bottom: 1.5px solid #e5e7eb; }
+  .compare-table th { padding: 22px 20px; font-size: 15px; font-weight: 800; color: var(--gray-700); }
+  .compare-table th.col-feature { text-align: left; padding-left: 32px; width: 50%; color: var(--gray-600); font-size: 14px; font-weight: 700; }
+  .compare-table th.col-us { background: #f0fdf4; color: var(--green-dark); font-size: 16px; font-weight: 900; border-left: 1.5px solid var(--green-border); border-right: 1.5px solid var(--green-border); }
+  .compare-table th.col-other { color: var(--gray-600); font-size: 14px; font-weight: 700; }
+  .us-header { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .compare-table tbody tr { border-bottom: 1.5px solid #f3f4f6; transition: background 0.15s; }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table tbody tr:hover { background: #f9fafb; }
+  .compare-table td { padding: 22px 20px; font-size: 15px; font-weight: 700; color: var(--gray-900); }
+  .compare-table td:first-child { text-align: left; padding-left: 32px; }
+  .compare-table td:nth-child(2) { background: rgba(240,253,244,0.5); border-left: 1.5px solid var(--green-border); border-right: 1.5px solid var(--green-border); }
+  .chk { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; }
+  .chk.yes { background: #22c55e; box-shadow: 0 4px 12px rgba(34,197,94,0.35); }
+  .chk.no { background: #f87171; box-shadow: 0 4px 12px rgba(248,113,113,0.3); }
+
+  @media (max-width: 960px) {
+    .compare-section { padding: 50px 20px; }
+    .compare-table th, .compare-table td { padding: 16px 12px; font-size: 13px; }
+    .compare-table th.col-feature, .compare-table td:first-child { padding-left: 16px; }
+    .chk { width: 30px; height: 30px; }
+    .chk svg { width: 13px; height: 13px; }
+  }
+</style>
+
+<!-- ========== TESTIMONIAL SECTION ========== -->
+<style>
+  .testi-section { background: #f0fdf4; padding: 80px 0 80px; overflow: hidden; border-top: 1px solid var(--green-border); border-bottom: 1px solid var(--green-border); }
+  .testi-header { text-align: center; margin-bottom: 48px; padding: 0 60px; }
+  .testi-header h2 { font-size: 36px; font-weight: 900; color: var(--gray-900); line-height: 1.25; margin-bottom: 10px; }
+  .testi-header h2 .sec-brush { color: var(--green-dark); position: relative; display: inline-block; }
+  .testi-header h2 .sec-brush-svg { position: absolute; left: -4px; bottom: -6px; width: calc(100% + 8px); height: 18px; pointer-events: none; }
+  .testi-header p { font-size: 15px; color: var(--gray-600); font-weight: 600; font-family:'Nunito',sans-serif; }
+
+  .testi-track-wrap { position: relative; }
+  .testi-track-wrap::before, .testi-track-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+  .testi-track-wrap::before { left: 0; background: linear-gradient(to right, #f0fdf4, transparent); }
+  .testi-track-wrap::after { right: 0; background: linear-gradient(to left, #f0fdf4, transparent); }
+  .testi-track { display: flex; gap: 20px; width: max-content; animation: testiScroll 35s linear infinite; }
+  .testi-track:hover { animation-play-state: paused; }
+  @keyframes testiScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .testi-card { width: 320px; flex-shrink: 0; background: #fff; border: 1.5px solid var(--green-border); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 2px 12px rgba(22,163,74,0.06); transition: box-shadow 0.2s, transform 0.2s; font-family:'Nunito',sans-serif; }
+  .testi-card:hover { box-shadow: 0 8px 28px rgba(22,163,74,0.13); transform: translateY(-3px); }
+  .testi-top { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--green-border); flex-shrink: 0; background: #dcfce7; }
+  .testi-avatar-fallback { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #16a34a, #4ade80); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; flex-shrink: 0; border: 2.5px solid var(--green-border); }
+  .testi-name { font-size: 15px; font-weight: 900; color: var(--gray-900); }
+  .testi-role { font-size: 12px; font-weight: 700; color: var(--green-dark); background: var(--green-pale); border-radius: 20px; padding: 2px 10px; display: inline-block; margin-top: 3px; }
+  .testi-stars { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+  .testi-card hr { border: none; border-top: 1.5px solid #dcfce7; margin: 0; }
+  .testi-text { font-size: 13.5px; color: var(--gray-600); font-weight: 600; line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .testi-quote { font-size: 40px; color: var(--green-border); line-height: 0.5; font-family: Georgia, serif; }
+
+  @media(max-width: 600px){
+    .testi-section { padding: 48px 0; }
+    .testi-header { padding: 0 20px; }
+    .testi-header h2 { font-size: 26px; }
+    .testi-card { width: 280px; }
+  }
+</style>
+
+<section class="testi-section">
+  <div class="testi-header">
+    <div class="section-tag">⭐ Student Reviews</div>
+    <h2>Hear What Our <span class="sec-brush">Interns<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span> Have to Say</h2>
+    <p>Hear directly from our interns about their project experience and growth.</p>
+  </div>
+
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testiTrack">
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Udit Rathore.jpeg" alt="Udit Rathore" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">U</div>
+          <div><div class="testi-name">Udit Rathore</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My web development internship at 3Skill was an amazing hands-on learning experience. Each concept was explained clearly, from HTML and CSS to APIs and hosting. Working on a real project gave me confidence from start to finish.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250627-WA0003 - Renee Chettiar.jpg" alt="Renee Chettiar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">R</div>
+          <div><div class="testi-name">Renee Chettiar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship at 3Skill helped me gain practical exposure to real-world data. I learned how to clean, analyze, and visualize data using Python and Excel, with doubts cleared quickly through live sessions.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_8763 - Garima kaushik.jpeg" alt="Garima Kaushik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Garima Kaushik</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Digital Marketing internship gave me real experience in running campaigns, creating content, and understanding analytics. It genuinely helped me understand how marketing works in the industry.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_20250905_174610 - puja Vermaa.jpg" alt="Puja Vermaa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Puja Vermaa</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship taught me how to turn raw data into meaningful insights. I was guided step-by-step through live doubt-clearing sessions and worked on multiple mini projects that improved my analytical skills.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1637 Neha - Neha Mirajkar.jpg" alt="Neha Mirajkar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Neha Mirajkar</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AI/ML internship gave me the perfect balance of theory and practice. I worked on a live machine learning project and learned to use libraries like TensorFlow and Scikit-learn, understanding each topic deeply.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Snigdh Kumar.jpeg" alt="Snigdh Kumar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Snigdh Kumar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Learning data analytics at 3Skill was an eye-opening experience. We worked on live datasets, learned visualization tools, and got real feedback in live sessions. Collaborating with other interns helped me learn teamwork and communication.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250901-WA0013 - Lavanya rastogi.jpg" alt="Lavanya Rastogi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">L</div>
+          <div><div class="testi-name">Lavanya Rastogi</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship helped me understand the full cycle of digital marketing — from content creation to running ad campaigns. Doubts were cleared quickly, and every task improved my creativity.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Photo - Prerna Deshmukh.jpg" alt="Prerna Deshmukh" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Prerna Deshmukh</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AIML internship at 3Skill helped me gain confidence in working with real-world data and machine learning models. The live doubt-clearing sessions were always available and the environment stayed positive and motivating.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="SHE PHOTO - Shekhar Jha.jpg" alt="Shekhar Jha" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Shekhar Jha</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship not only improved my technical knowledge but also prepared me professionally. My project work helped me build confidence for any analytics-related interview.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250715-WA0035 - Samyak Jain.jpg" alt="Samyak Jain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Samyak Jain</div><div class="testi-role">Fullstack Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Fullstack Development internship at 3Skill was super practical. I worked on both frontend and backend for my project, learned about APIs, and deployed a real app. Every task gave me new problem-solving challenges.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG20250906120911 - Geetanjali Nakhate.jpg" alt="Geetanjali Nakhate" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Geetanjali Nakhate</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">At 3Skill, I got to build a real website from scratch using HTML, CSS, and JavaScript. Every doubt was cleared with patience in live sessions. The internship gave me confidence to work on freelance projects.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG20250215133641 - Nikita Zade.jpg" alt="Nikita Zade" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Nikita Zade</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship helped me explore the real power of data. I worked on a full analysis project using Python and Excel — everything was explained clearly in live sessions, encouraging us to think critically.</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1000088212 - SOHAIL AHMED.png" alt="Sohail Ahmed" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Sohail Ahmed</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My digital marketing internship was full of creativity and learning. We ran ad campaigns, studied audience behavior, and learned content strategy. The live classes were fun, with honest feedback always available.</div>
+      </div>
+
+      <!-- DUPLICATE SET FOR INFINITE SCROLL -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Udit Rathore.jpeg" alt="Udit Rathore" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">U</div>
+          <div><div class="testi-name">Udit Rathore</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My web development internship at 3Skill was an amazing hands-on learning experience. Each concept was explained clearly, from HTML and CSS to APIs and hosting. Working on a real project gave me confidence from start to finish.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250627-WA0003 - Renee Chettiar.jpg" alt="Renee Chettiar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">R</div>
+          <div><div class="testi-name">Renee Chettiar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship at 3Skill helped me gain practical exposure to real-world data. I learned how to clean, analyze, and visualize data using Python and Excel.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_8763 - Garima kaushik.jpeg" alt="Garima Kaushik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Garima Kaushik</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Digital Marketing internship gave me real experience in running campaigns, creating content, and understanding analytics. Every week I learned something new and applied it practically.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_20250905_174610 - puja Vermaa.jpg" alt="Puja Vermaa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Puja Vermaa</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship taught me how to turn raw data into meaningful insights. I was guided step-by-step through live doubt-clearing sessions and worked on multiple mini projects that improved my analytical skills.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1637 Neha - Neha Mirajkar.jpg" alt="Neha Mirajkar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Neha Mirajkar</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AI/ML internship gave me the perfect balance of theory and practice. I worked on a live machine learning project and learned to use libraries like TensorFlow and Scikit-learn.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Snigdh Kumar.jpeg" alt="Snigdh Kumar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Snigdh Kumar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div><hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Learning data analytics at 3Skill was an eye-opening experience. We worked on live datasets, learned visualization tools, and got real feedback in live sessions.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<style>
+  .faq-section { background: #f0fdf4; padding: 80px 60px; border-bottom: 1px solid var(--green-border); }
+  .faq-header { text-align: center; margin-bottom: 48px; }
+  .faq-header h2 { font-size: 38px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.2; }
+  .faq-header h2 .sec-brush { color: var(--green-dark); position: relative; display: inline-block; white-space: nowrap; }
+  .faq-header h2 .sec-brush-svg { position: absolute; left: -4px; bottom: -6px; width: calc(100% + 8px); height: 18px; pointer-events: none; }
+  .faq-header p { font-size: 15px; color: var(--gray-600); font-weight: 600; font-family:'Nunito',sans-serif; }
+
+  .faq-list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+  .faq-item { border: 1.5px solid #e5e7eb; border-radius: 12px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; background: #fff; }
+  .faq-item.open { border-color: #bbf7d0; box-shadow: 0 4px 16px rgba(22,163,74,0.08); }
+
+  .faq-q { width: 100%; background: none; border: none; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; text-align: left; font-family: 'Nunito', sans-serif; }
+  .faq-q-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .faq-emoji { font-size: 18px; flex-shrink: 0; }
+  .faq-q-text { font-size: 15px; font-weight: 700; color: var(--gray-900); line-height: 1.4; }
+  .faq-item.open .faq-q-text { color: var(--green-dark); }
+
+  .faq-chevron { width: 28px; height: 28px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #e5e7eb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.25s; color: var(--gray-600); }
+  .faq-chevron svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; transition: transform 0.25s; }
+  .faq-item.open .faq-chevron { background: var(--green-pale); border-color: var(--green-border); color: var(--green-dark); }
+  .faq-item.open .faq-chevron svg { transform: rotate(180deg); }
+
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s ease; padding: 0 20px 0 50px; }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 20px 18px 50px; }
+  .faq-a p { font-size: 14px; color: var(--gray-600); font-weight: 600; line-height: 1.75; border-top: 1.5px solid #f3f4f6; padding-top: 14px; }
+
+  @media (max-width: 768px) {
+    .faq-section { padding: 52px 20px; }
+    .faq-header h2 { font-size: 24px; }
+    .faq-a { padding: 0 16px 0 16px; }
+    .faq-item.open .faq-a { padding: 0 16px 16px 16px; }
+  }
+</style>
+
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-tag">❓ Got Questions?</div>
+    <h2>3Skill Internship Program – <span class="sec-brush">FAQs<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <p>All you need to know about our internship, projects, benefits &amp; certification.</p>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">💡</span><span class="faq-q-text">What is this internship program?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>It's a project-based internship across 15 domains. You pick a domain, choose a duration from 1 to 6 months, and work on submitting a real-world project — with live doubt-clearing sessions available whenever you need help.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🧑</span><span class="faq-q-text">Who can join this internship?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Any student from any college or university can join — 1st year to final year. Whether you're from CSE, IT, or any other branch, as long as you're eager to learn and build, you're welcome!</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🌐</span><span class="faq-q-text">Which domains are available?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>We currently offer 15 domains — including Web Development, AI &amp; Machine Learning, Data Analytics, Cyber Security, UI/UX, Digital Marketing, Business Analytics and more. Pick the one that matches your interest.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🗓️</span><span class="faq-q-text">How is the internship structured?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Choose your domain and duration (1 to 6 months), pick an upcoming batch date, and work on your real-world project. Live doubt-clearing sessions are available throughout so you're never stuck.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">💼</span><span class="faq-q-text">Will I get job or paid internship opportunities after completion?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Top performers are considered for a paid internship opportunity at 3Skill, based on their project quality and consistency.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">💰</span><span class="faq-q-text">How much does the internship cost?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>The fee depends on the duration you choose — each plan from 1 to 6 months has its own pricing. Once you select your domain, duration and batch date, you'll be taken to the payment page for that exact plan.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">📚</span><span class="faq-q-text">Will I get learning materials and resources?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Yes! Along with your project work, you'll get free access to 1000+ DSA practice questions and company-wise interview preparation questions to help you get ready for technical interviews.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🎓</span><span class="faq-q-text">Will I get a certificate after completion?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Yes! Every intern who successfully submits their project receives an official 3Skill Internship Completion Certificate along with an internship offer letter — useful for your resume and LinkedIn profile.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🎥</span><span class="faq-q-text">Are there fixed daily classes?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>No — this is a project-based internship, not a fixed daily course. You work on your project at your own pace within your chosen duration, with live doubt-clearing sessions available whenever you need support.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🚀</span><span class="faq-q-text">How do I apply for the internship?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Pick a domain above, choose your duration and an upcoming batch date, and proceed to the payment page for that plan. Our team will reach out with onboarding details before your batch starts.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+<section class="section">
+  <div class="bottom-cta">
+    <h2>Ready to start your internship?</h2>
+    <p>Choose a domain above and pick a duration that fits you.</p>
+    <button class="btn-white" onclick="document.getElementById('domains').scrollIntoView({behavior:'smooth'})">Choose Your Domain</button>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<style>
+  .footer-wave { display: block; width: 100%; background: #f8fafc; line-height: 0; margin-bottom: -2px; }
+  .footer-wave svg { width: 100%; height: 80px; display: block; }
+  .site-footer { background: #166534; font-family: 'Nunito', sans-serif; color: #d1d5db; }
+  .footer-main { max-width: 1280px; margin: 0 auto; padding: 60px 60px 48px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1.8fr; gap: 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .fc h4 { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 22px; }
+  .fc ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .fc ul li a { text-decoration: none; color: #a5b4a8; font-size: 14.5px; font-weight: 600; transition: color 0.18s; }
+  .fc ul li a:hover { color: #fff; }
+  .fc ul li a.green { color: #4ade80; }
+  .fc-right { display: flex; flex-direction: column; gap: 0; }
+  .fc-right .signup-label { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.4; }
+  .email-row { display: flex; gap: 0; margin-bottom: 28px; border-radius: 50px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+  .email-row input { flex: 1; padding: 13px 20px; background: #fff; border: none; outline: none; font-size: 13.5px; font-weight: 600; font-family: 'Nunito', sans-serif; color: #111; border-radius: 50px 0 0 50px; }
+  .email-row input::placeholder { color: #9ca3af; }
+  .email-row button { background: #f59e0b; color: #fff; border: none; padding: 13px 22px; font-size: 14px; font-weight: 900; font-family: 'Nunito', sans-serif; cursor: pointer; white-space: nowrap; border-radius: 0 50px 50px 0; transition: background 0.18s; }
+  .email-row button:hover { background: #d97706; }
+  .f-socials-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .f-soc { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #d1d5db; text-decoration: none; transition: color 0.18s, transform 0.18s; font-size: 22px; }
+  .f-soc:hover { color: #fff; transform: translateY(-2px); }
+  .f-soc svg { width: 22px; height: 22px; fill: currentColor; }
+  .f-contact-info { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; margin-bottom: 20px; }
+  .f-contact-item { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; color: #a5b4a8; text-decoration: none; transition: color 0.18s; }
+  .f-contact-item:hover { color: #fff; }
+  .fci-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .fci-icon svg { width: 15px; height: 15px; stroke: #4ade80; }
+  .footer-bar { max-width: 1280px; margin: 0 auto; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .footer-bar-left { font-size: 13px; color: #6b7280; font-weight: 600; }
+  .footer-bar-right { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-bar-right a { font-size: 13px; color: #6b7280; font-weight: 600; text-decoration: none; transition: color 0.18s; }
+  .footer-bar-right a:hover { color: #fff; }
+
+  @media (max-width: 1100px) {
+    .footer-main { grid-template-columns: repeat(3, 1fr); }
+    .fc-right { grid-column: 1 / -1; }
+  }
+  @media (max-width: 680px) {
+    .footer-main { grid-template-columns: repeat(2, 1fr); padding: 36px 24px 28px; }
+    .footer-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; }
+    .fc-right { grid-column: 1 / -1; }
+    .email-row { border-radius: 12px; flex-direction: column; }
+    .email-row input { border-radius: 12px 12px 0 0; }
+    .email-row button { border-radius: 0 0 12px 12px; }
+  }
+</style>
+
+<div class="footer-wave">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z" fill="#166534"/>
+  </svg>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-main">
+
+    <div class="fc">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="#domains">All Domains</a></li>
+        <li><a href="#domains">Web Development</a></li>
+        <li><a href="#domains">AI &amp; Machine Learning</a></li>
+        <li><a href="#domains">Data Analytics</a></li>
+        <li><a href="#domains">Cyber Security</a></li>
+        <li><a href="#domains">Digital Marketing</a></li>
+      </ul>
+    </div>
+
+    <div class="fc">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="#perks">How It Works</a></li>
+        <li><a href="#domains">Choose a Domain</a></li>
+        <li><a href="#">Project Phase</a></li>
+        <li><a href="#">Live Doubt-Clearing</a></li>
+        <li><a href="#">Certification</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+
+    <div class="fc">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="https://wa.me/6372105534">Contact Us</a></li>
+        <li><a href="term-and-conditions-3skill.html">Refund Policy</a></li>
+        <li><a href="dashbord.html">Student Login</a></li>
+        <li><a href="https://wa.me/6372105534">Help Center</a></li>
+      </ul>
+    </div>
+
+    <div class="fc">
+      <h4>3Skill</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Our Team</a></li>
+        <li><a href="Certificate-Based Course.html">Careers <span style="color:#4ade80">We're Hiring!</span></a></li>
+        <li><a href="about.html">Press</a></li>
+        <li><a href="term-and-conditions-3skill.html">Partner With Us</a></li>
+        <li><a href="https://3skill.in/startupindia.png">DPIIT #startupindia</a></li>
+        <li><a href="https://3skill.in/isoveri.png">ISO Certified</a></li>
+        <li><a href="https://3skill.in/msmeveri.png">MSME Registered</a></li>
+        <li><a href="term-and-conditions-3skill.html">Privacy Policy</a></li>
+        <li><a href="term-and-conditions-3skill.html">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <div class="fc fc-right">
+      <div class="signup-label">Sign up to get internship updates &amp; batch announcements</div>
+      <div class="email-row">
+        <input type="email" placeholder="Your Email Address" />
+        <button>Subscribe</button>
+      </div>
+
+      <div class="f-socials-row">
+        <a class="f-soc" href="https://instagram.com/3skillofficial" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="f-soc" href="https://www.linkedin.com/company/3-skill/" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a class="f-soc" href="https://www.youtube.com/@threeskill" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a class="f-soc" href="https://twitter.com/3skillindia" title="X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+
+      <div class="f-contact-info">
+        <a href="mailto:support@3skill.in" class="f-contact-item">
+          <span class="fci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          support@3skill.in
+        </a>
+        <a href="tel:+919114799765" class="f-contact-item">
+          <span class="fci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          +91 91147 99765
+        </a>
+        <div class="f-contact-item">
+          <span class="fci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Koel Campus Patia, Bhubaneswar, Khorda, Odisha, India, 751031.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-bar-left">© 2026 3Skill. All Rights Reserved.</div>
+    <div class="footer-bar-right">
+      <a href="term-and-conditions-3skill.html">Terms of Service</a>
+      <a href="term-and-conditions-3skill.html">Privacy Policy</a>
+      <a href="term-and-conditions-3skill.html">Refund Policy</a>
+      <a href="term-and-conditions-3skill.html">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- DURATION MODAL -->
+<div class="overlay" id="durationOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('durationOverlay')"><i data-lucide="x"></i></button>
+    <div class="modal-icon" id="modalIcon"><i data-lucide="code"></i></div>
+    <h3 id="modalTitle">Web Development</h3>
+    <p class="modal-desc" id="modalDesc"></p>
+    <label class="field-label">Select Duration</label>
+    <div class="duration-grid" id="durationGrid"></div>
+    <div class="modal-info">
+      <div><i data-lucide="award"></i> Official 3Skill Certificate on completion</div>
+      <div><i data-lucide="file-check-2"></i> Internship Offer Letter included</div>
+      <div><i data-lucide="list-checks"></i> 1000+ Free DSA Qs + Company-Wise Qs</div>
+      <div><i data-lucide="book-open"></i> Free E-Books &amp; Study Resources</div>
+      <div><i data-lucide="briefcase"></i> Chance at a Paid Internship Opportunity</div>
+    </div>
+    <button class="apply-btn" onclick="openBatchModal()">Continue</button>
+  </div>
+</div>
+
+<!-- BATCH MODAL -->
+<div class="overlay" id="batchOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('batchOverlay')"><i data-lucide="x"></i></button>
+    <div class="modal-icon" id="batchModalIcon"><i data-lucide="calendar-days"></i></div>
+    <h3 id="batchModalTitle">Choose Your Batch</h3>
+    <p class="modal-desc" id="batchModalDesc">Pick the upcoming batch start date that works for you.</p>
+    <label class="field-label">Upcoming Batches</label>
+    <div class="batch-grid" id="batchGrid"></div>
+    <div class="modal-info">
+      <div><i data-lucide="info"></i> New batches start every month on the 1st, 8th, 15th &amp; 23rd</div>
+      <div id="batchPaySummary"><i data-lucide="credit-card"></i> <span id="batchPaySummaryText"></span></div>
+    </div>
+    <button class="apply-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+  </div>
+</div>
+
+<!-- YouTube Script -->
+<script>
+function loadVideo() {
+  document.getElementById("videoBox").innerHTML = `
+    <iframe width="100%" height="100%"
+    src="https://www.youtube.com/embed/ikjeB6VaxjE?autoplay=1"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    style="border-radius:18px;">
+    </iframe>
+  `;
+}
+</script>
+
+<script>
+const domains = [
+  {name:"Web Development", icon:"code-2", color:"#2563eb", desc:"Build real-world websites & web apps from scratch."},
+  {name:"C++ Programming", icon:"braces", color:"#7c3aed", desc:"Master core programming logic with hands-on C++ projects."},
+  {name:"JAVA Programming", icon:"coffee", color:"#ea580c", desc:"Learn OOP concepts and build Java-based applications."},
+  {name:"Python Programming", icon:"terminal-square", color:"#ca8a04", desc:"Automate tasks and build projects using Python."},
+  {name:"Data Structures & Algorithms (DSA) in C++", icon:"git-branch", color:"#0891b2", desc:"Build strong DSA fundamentals to crack coding interviews."},
+  {name:"AI & Machine Learning + Data Science & Analytics", icon:"brain-circuit", color:"#9333ea", desc:"Work on real AI/ML and data science projects."},
+  {name:"UI/UX", icon:"pen-tool", color:"#db2777", desc:"Design real, user-first interfaces and experiences.", project:true},
+  {name:"Digital Marketing", icon:"megaphone", color:"#d97706", desc:"Run real campaigns across SEO, ads and social media."},
+  {name:"HR Management", icon:"users", color:"#0d9488", desc:"Learn recruitment, onboarding and people operations."},
+  {name:"Embedded Systems", icon:"cpu", color:"#4f46e5", desc:"Build hardware-software projects on real boards.", project:true},
+  {name:"VLSI", icon:"circuit-board", color:"#0284c7", desc:"Work through real VLSI and chip design project cycles.", project:true},
+  {name:"AutoCAD", icon:"compass", color:"#b45309", desc:"Design real drafting and engineering projects.", project:true},
+  {name:"Cyber Security", icon:"shield", color:"#dc2626", desc:"Learn ethical hacking and security fundamentals hands-on."},
+  {name:"Finance", icon:"line-chart", color:"#059669", desc:"Work on real financial modeling and analysis projects."},
+  {name:"Business Analytics", icon:"bar-chart-3", color:"#6d28d9", desc:"Solve real business problems using data."}
+];
+
+const features = [
+  {icon:"award", title:"Certificate & Offer Letter", desc:"Get an official 3Skill certificate along with an internship offer letter on completion."},
+  {icon:"list-checks", title:"1000+ Free DSA Questions", desc:"A curated practice sheet to help you crack coding interviews."},
+  {icon:"building-2", title:"Company-Wise Interview Qs", desc:"Real interview questions asked by top hiring companies."},
+  {icon:"book-open", title:"Free E-Books & Resources", desc:"Curated study material for every domain, at no extra cost."},
+  {icon:"briefcase", title:"Paid Internship Opportunity", desc:"Top performers get a shot at a paid internship role."},
+  {icon:"calendar-range", title:"Flexible Duration", desc:"Choose anywhere from 1 month to 6 months, at your own pace."},
+  {icon:"message-circle-question", title:"Live Doubt-Clearing Sessions", desc:"Get your questions resolved in live sessions while you build your project."},
+  {icon:"folder-check", title:"Real Projects, Real Portfolio", desc:"Build projects you can genuinely showcase to employers."}
+];
+
+const domainGrid = document.getElementById('domainGrid');
+domains.forEach((d,i)=>{
+  const card = document.createElement('div');
+  card.className='domain-card';
+  card.style.setProperty('--dcolor', d.color);
+  card.onclick=()=>openDurationModal(i);
+  card.innerHTML = `
+    <div class="domain-icon" style="background:linear-gradient(135deg, ${d.color}, ${d.color}cc)"><i data-lucide="${d.icon}"></i></div>
+    ${d.project ? '<span class="project-pill">Project-Based</span><br>' : ''}
+    <h3>${d.name}</h3>
+    <p>${d.desc}</p>
+    <div class="card-cta" style="color:${d.color}">View Details <i data-lucide="arrow-right"></i></div>`;
+  domainGrid.appendChild(card);
+});
+
+const featureGrid = document.getElementById('featureGrid');
+features.forEach(f=>{
+  const card = document.createElement('div');
+  card.className='feature-card';
+  card.innerHTML = `
+    <div class="f-top">
+      <div class="f-icon"><i data-lucide="${f.icon}"></i></div>
+      <h3>${f.title}</h3>
+    </div>
+    <p>${f.desc}</p>`;
+  featureGrid.appendChild(card);
+});
+
+let currentDomain=null, currentDuration=3, currentBatch=null;
+
+/* Batches run every month on the 1st, 8th, 15th & 23rd.
+   This returns the next `count` batch dates from today, skipping dates
+   that have already passed, and rolling automatically into future months. */
+function getUpcomingBatches(count = 4){
+  const batchDays = [1, 8, 15, 23];
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const list = [];
+  const y = today.getFullYear();
+  const m = today.getMonth();
+  // Generate this month + enough future months to always have `count` left after filtering
+  for(let i=0; i<6; i++){
+    batchDays.forEach(day=>{
+      list.push(new Date(y, m+i, day));
+    });
+  }
+  return list.filter(d=>d>=today).sort((a,b)=>a-b).slice(0, count);
+}
+
+function openDurationModal(i){
+  currentDomain = domains[i];
+  currentDuration = 3;
+  document.getElementById('modalTitle').innerText = currentDomain.name;
+  document.getElementById('modalDesc').innerText = currentDomain.desc;
+  document.getElementById('modalIcon').style.background = currentDomain.color;
+  document.getElementById('modalIcon').innerHTML = `<i data-lucide="${currentDomain.icon}"></i>`;
+  const dGrid = document.getElementById('durationGrid');
+  dGrid.innerHTML='';
+  for(let m=1;m<=6;m++){
+    const opt=document.createElement('div');
+    opt.className='duration-opt'+(m===currentDuration?' active':'');
+    opt.innerText = m===1?'1 Month':m+' Months';
+    opt.onclick=()=>{
+      currentDuration=m;
+      document.querySelectorAll('.duration-opt').forEach(o=>o.classList.remove('active'));
+      opt.classList.add('active');
+    };
+    dGrid.appendChild(opt);
+  }
+  document.getElementById('durationOverlay').classList.add('active');
+  lucide.createIcons();
+}
+
+function durationLabel(m){ return m===1 ? '1 Month' : m+' Months'; }
+
+function updateBatchPaySummary(){
+  document.getElementById('batchPaySummaryText').innerText =
+    `${durationLabel(currentDuration)} plan — you'll be taken to the payment page for this duration.`;
+}
+
+function openBatchModal(){
+  document.getElementById('durationOverlay').classList.remove('active');
+  document.getElementById('batchModalTitle').innerText = currentDomain.name + ' — Choose Your Batch';
+  document.getElementById('batchModalIcon').style.background = currentDomain.color;
+  document.getElementById('batchModalIcon').innerHTML = `<i data-lucide="calendar-days"></i>`;
+
+  const batches = getUpcomingBatches(4);
+  currentBatch = batches[0];
+  const bGrid = document.getElementById('batchGrid');
+  bGrid.innerHTML='';
+  batches.forEach((d,idx)=>{
+    const opt=document.createElement('div');
+    opt.className='batch-opt'+(idx===0?' active':'');
+    const dayNum = d.getDate();
+    const monthStr = d.toLocaleDateString('en-US',{month:'short'});
+    const weekday = d.toLocaleDateString('en-US',{weekday:'short'});
+    opt.innerHTML = `<div class="b-date">${dayNum}</div><div class="b-month">${monthStr}</div><div class="b-day">${weekday}</div>`;
+    opt.onclick=()=>{
+      currentBatch=d;
+      document.querySelectorAll('.batch-opt').forEach(o=>o.classList.remove('active'));
+      opt.classList.add('active');
+    };
+    bGrid.appendChild(opt);
+  });
+
+  updateBatchPaySummary();
+  document.getElementById('batchOverlay').classList.add('active');
+  lucide.createIcons();
+}
+
+function formatBatch(d){
+  return d.toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
+}
+
+/* Payment link depends ONLY on the duration (month) selected — same link
+   for every domain. Domain and batch date are not part of the link. */
+const paymentLinks = {
+  1: "https://smartpay.easebuzz.in/179742/788f5302923848339473ed7b9457652c",
+  2: "https://smartpay.easebuzz.in/179742/4a0110c41f53469496ac00de3c1f4f2d",
+  3: "https://smartpay.easebuzz.in/179742/4f7c43f3106442d38ec01e1c5f9be496",
+  4: "https://smartpay.easebuzz.in/179742/4f7c43f3106442d38ec01e1c5f9be496_clone",
+  5: "https://smartpay.easebuzz.in/179742/4f7c43f3106442d38ec01e1c5f9be496_clone_clone",
+  6: "https://smartpay.easebuzz.in/179742/4f7c43f3106442d38ec01e1c5f9be496_clone_clone_clone"
+};
+
+function proceedToPayment(){
+  const link = paymentLinks[currentDuration];
+  if(link){
+    window.location.href = link;
+  }
+}
+
+function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('active'); });
+});
+
+lucide.createIcons();
+</script>
+
+<!-- MOBILE STICKY ENROLL -->
+<div class="mobile-sticky">
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a href="#domains" class="btn-enroll" style="flex:1;" onclick="event.preventDefault(); document.getElementById('domains').scrollIntoView({behavior:'smooth'});">Book Your Slot Now</a>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF POPUP -->
+<style>
+  .sp-popup {
+    position: fixed;
+    bottom: 28px;
+    left: 20px;
+    background: #2d2d2d;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    padding: 14px 40px 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    max-width: 280px;
+    animation: sp-slidein 0.4s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .sp-popup.hide {
+    animation: sp-slideout 0.3s ease forwards;
+  }
+  @keyframes sp-slidein {
+    from { transform: translateX(-110%); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+  @keyframes sp-slideout {
+    from { transform: translateX(0);     opacity: 1; }
+    to   { transform: translateX(-110%); opacity: 0; }
+  }
+
+  .sp-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #5b8dee;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+
+  .sp-text { flex: 1; min-width: 0; }
+
+  .sp-action {
+    font-size: 13px; color: #ccc;
+    line-height: 1.45; margin-bottom: 5px;
+  }
+  .sp-action strong {
+    color: #fff; font-weight: 700;
+  }
+
+  .sp-time {
+    font-size: 11px; color: #888;
+  }
+
+  .sp-close {
+    position: absolute; top: 10px; right: 12px;
+    font-size: 13px; color: #777; cursor: pointer;
+    transition: color 0.2s; line-height: 1;
+  }
+  .sp-close:hover { color: #ccc; }
+
+  @media (max-width: 480px) {
+    .sp-popup { bottom: 85px; left: 10px; max-width: 250px; }
+  }
+</style>
+
+<div class="sp-popup" id="spPopup" style="display:none;">
+  <div class="sp-avatar" id="spAvatar">A</div>
+  <div class="sp-text">
+    <div class="sp-action">
+      <span id="spName">Aditya</span> enrolled in the internship <strong id="spDomain">'Web Development'</strong>
+    </div>
+    <div class="sp-time" id="spTime">2 minutes ago</div>
+  </div>
+  <div class="sp-close" onclick="spClose()">✕</div>
+</div>
+
+<script>
+  var spStudents = [
+    { name: "Nandini", domain: "Web Development" },
+    { name: "Sarthak", domain: "Digital Marketing" },
+    { name: "Aditya", domain: "HR Management" },
+    { name: "Ruchi", domain: "Embedded Systems" },
+    { name: "Aryan", domain: "Web Development" },
+    { name: "Trisha", domain: "JAVA Programming" },
+    { name: "Shivansh", domain: "Finance" },
+    { name: "Rajeev", domain: "AutoCAD" },
+    { name: "Gautam", domain: "Data Science & Analytics" },
+    { name: "Saurabh", domain: "Finance" },
+    { name: "Sameer", domain: "Data Science & Analytics" },
+    { name: "Advika", domain: "Cyber Security" },
+    { name: "Varun", domain: "Finance" },
+    { name: "Rekha", domain: "Python Programming" },
+    { name: "Chirag", domain: "Embedded Systems" },
+    { name: "Sanjay", domain: "AI & Machine Learning" },
+    { name: "Aman", domain: "Data Science & Analytics" },
+    { name: "Vishal", domain: "Python Programming" },
+    { name: "Kiaan", domain: "Embedded Systems" },
+    { name: "Riyansh", domain: "VLSI" },
+    { name: "Girija", domain: "AI & Machine Learning" },
+    { name: "Anvi", domain: "VLSI" },
+    { name: "Farhan", domain: "Data Science & Analytics" },
+    { name: "Sunita", domain: "JAVA Programming" },
+    { name: "Suraj", domain: "Finance" },
+    { name: "Meenakshi", domain: "AutoCAD" },
+    { name: "Sunil", domain: "HR Management" },
+    { name: "Divyansh", domain: "Python Programming" },
+    { name: "Zara", domain: "UI/UX" },
+    { name: "Bhavya", domain: "Finance" },
+    { name: "Rachit", domain: "AutoCAD" },
+    { name: "Tarun", domain: "C++ Programming" },
+    { name: "Ramesh", domain: "Cyber Security" },
+    { name: "Indira", domain: "Digital Marketing" },
+    { name: "Pooja", domain: "AutoCAD" },
+    { name: "Kiyansh", domain: "Finance" },
+    { name: "Parth", domain: "Embedded Systems" },
+    { name: "Deepak", domain: "AutoCAD" },
+    { name: "Ranveer", domain: "Data Science & Analytics" },
+    { name: "Yuvraj", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Naresh", domain: "Python Programming" },
+    { name: "Ishita", domain: "Embedded Systems" },
+    { name: "Deepthi", domain: "Digital Marketing" },
+    { name: "Kavya", domain: "Web Development" },
+    { name: "Ankit", domain: "AutoCAD" },
+    { name: "Yashvi", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Rudra", domain: "Cyber Security" },
+    { name: "Girish", domain: "Finance" },
+    { name: "Sneha", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Navya", domain: "JAVA Programming" },
+    { name: "Anjali", domain: "Web Development" },
+    { name: "Ayesha", domain: "UI/UX" },
+    { name: "Vikram", domain: "AI & Machine Learning" },
+    { name: "Poonam", domain: "VLSI" },
+    { name: "Preeti", domain: "Web Development" },
+    { name: "Rohan", domain: "Python Programming" },
+    { name: "Tanvi", domain: "Web Development" },
+    { name: "Lalit", domain: "AutoCAD" },
+    { name: "Rajesh", domain: "C++ Programming" },
+    { name: "Radha", domain: "UI/UX" },
+    { name: "Meenal", domain: "VLSI" },
+    { name: "Amaira", domain: "AutoCAD" },
+    { name: "Dhruv", domain: "HR Management" },
+    { name: "Daksh", domain: "Digital Marketing" },
+    { name: "Priya", domain: "JAVA Programming" },
+    { name: "Rita", domain: "JAVA Programming" },
+    { name: "Arvind", domain: "Web Development" },
+    { name: "Deepika", domain: "Data Science & Analytics" },
+    { name: "Amanpreet", domain: "Digital Marketing" },
+    { name: "Kavita", domain: "Cyber Security" },
+    { name: "Vinod", domain: "Embedded Systems" },
+    { name: "Komal", domain: "JAVA Programming" },
+    { name: "Pranav", domain: "UI/UX" },
+    { name: "Reyansh", domain: "Web Development" },
+    { name: "Kapil", domain: "JAVA Programming" },
+    { name: "Tanya", domain: "Digital Marketing" },
+    { name: "Siddharth", domain: "Cyber Security" },
+    { name: "Amit", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Bhavani", domain: "C++ Programming" },
+    { name: "Suresh", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Rajat", domain: "Python Programming" },
+    { name: "Riya", domain: "Web Development" },
+    { name: "Manav", domain: "AI & Machine Learning" },
+    { name: "Avni", domain: "AI & Machine Learning" },
+    { name: "Arnav", domain: "C++ Programming" },
+    { name: "Gaurav", domain: "UI/UX" },
+    { name: "Anushka", domain: "VLSI" },
+    { name: "Om", domain: "UI/UX" },
+    { name: "Naveen", domain: "UI/UX" },
+    { name: "Palak", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Kashvi", domain: "Web Development" },
+    { name: "Archana", domain: "HR Management" },
+    { name: "Darshan", domain: "Data Science & Analytics" },
+    { name: "Krishna", domain: "Embedded Systems" },
+    { name: "Vedant", domain: "C++ Programming" },
+    { name: "Ahana", domain: "HR Management" },
+    { name: "Kalyani", domain: "Embedded Systems" },
+    { name: "Muskan", domain: "JAVA Programming" },
+    { name: "Sandeep", domain: "Finance" },
+    { name: "Aarna", domain: "JAVA Programming" },
+    { name: "Lakshya", domain: "Finance" },
+    { name: "Akash", domain: "Python Programming" },
+    { name: "Esha", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Zoya", domain: "HR Management" },
+    { name: "Sonali", domain: "C++ Programming" },
+    { name: "Kajal", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Mihika", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Kiran", domain: "Cyber Security" },
+    { name: "Myra", domain: "JAVA Programming" },
+    { name: "Ashwin", domain: "Python Programming" },
+    { name: "Shreya", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Sarita", domain: "HR Management" },
+    { name: "Tanmay", domain: "AI & Machine Learning" },
+    { name: "Sristi", domain: "Data Science & Analytics" },
+    { name: "Ayaan", domain: "C++ Programming" },
+    { name: "Diya", domain: "Data Science & Analytics" },
+    { name: "Vikas", domain: "Digital Marketing" },
+    { name: "Jyoti", domain: "AI & Machine Learning" },
+    { name: "Vihaan", domain: "UI/UX" },
+    { name: "Ojas", domain: "Cyber Security" },
+    { name: "Ravi", domain: "C++ Programming" },
+    { name: "Kunal", domain: "Data Science & Analytics" },
+    { name: "Rohini", domain: "AI & Machine Learning" },
+    { name: "Aarush", domain: "AutoCAD" },
+    { name: "Renu", domain: "Web Development" },
+    { name: "Vivaan", domain: "Python Programming" },
+    { name: "Nitin", domain: "AI & Machine Learning" },
+    { name: "Anil", domain: "Embedded Systems" },
+    { name: "Shruti", domain: "Python Programming" },
+    { name: "Hardik", domain: "UI/UX" },
+    { name: "Saanvi", domain: "Data Science & Analytics" },
+    { name: "Nisha", domain: "Data Science & Analytics" },
+    { name: "Aadhya", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Keshav", domain: "VLSI" },
+    { name: "Nidhi", domain: "UI/UX" },
+    { name: "Reyna", domain: "Python Programming" },
+    { name: "Devansh", domain: "C++ Programming" },
+    { name: "Nikita", domain: "HR Management" },
+    { name: "Harsh", domain: "C++ Programming" },
+    { name: "Prabhat", domain: "Data Science & Analytics" },
+    { name: "Mayank", domain: "AutoCAD" },
+    { name: "Swati", domain: "AI & Machine Learning" },
+    { name: "Ganesh", domain: "Cyber Security" },
+    { name: "Aarav", domain: "AI & Machine Learning" },
+    { name: "Meera", domain: "Finance" },
+    { name: "Prakash", domain: "Digital Marketing" },
+    { name: "Anaisha", domain: "Cyber Security" },
+    { name: "Deepa", domain: "UI/UX" },
+    { name: "Manoj", domain: "HR Management" },
+    { name: "Kiara", domain: "Finance" },
+    { name: "Siddhi", domain: "Cyber Security" },
+    { name: "Atharv", domain: "AutoCAD" },
+    { name: "Jagdish", domain: "HR Management" },
+    { name: "Ashok", domain: "C++ Programming" },
+    { name: "Payal", domain: "Cyber Security" },
+    { name: "Yash", domain: "Python Programming" },
+    { name: "Aarti", domain: "Digital Marketing" },
+    { name: "Rohit", domain: "Digital Marketing" },
+    { name: "Anurag", domain: "Web Development" },
+    { name: "Samar", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Rakesh", domain: "VLSI" },
+    { name: "Vansh", domain: "Python Programming" },
+    { name: "Kartik", domain: "VLSI" },
+    { name: "Naitik", domain: "Python Programming" },
+    { name: "Veer", domain: "VLSI" },
+    { name: "Manish", domain: "Embedded Systems" },
+    { name: "Sundar", domain: "HR Management" },
+    { name: "Ira", domain: "Web Development" },
+    { name: "Pallavi", domain: "Finance" },
+    { name: "Aakash", domain: "Cyber Security" },
+    { name: "Anaya", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Yatin", domain: "AI & Machine Learning" },
+    { name: "Neha", domain: "JAVA Programming" },
+    { name: "Bhavna", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Rajendra", domain: "AutoCAD" },
+    { name: "Dev", domain: "JAVA Programming" },
+    { name: "Nilesh", domain: "Digital Marketing" },
+    { name: "Devendra", domain: "Embedded Systems" },
+    { name: "Dinesh", domain: "Web Development" },
+    { name: "Usha", domain: "Data Science & Analytics" },
+    { name: "Rahul", domain: "AI & Machine Learning" },
+    { name: "Utkarsh", domain: "Data Science & Analytics" },
+    { name: "Abhishek", domain: "C++ Programming" },
+    { name: "Madhavi", domain: "JAVA Programming" },
+    { name: "Naman", domain: "AutoCAD" },
+    { name: "Nikhil", domain: "VLSI" },
+    { name: "Chandan", domain: "UI/UX" },
+    { name: "Karthik", domain: "UI/UX" },
+    { name: "Shivam", domain: "Cyber Security" },
+    { name: "Pritam", domain: "C++ Programming" },
+    { name: "Aditi", domain: "HR Management" },
+    { name: "Rishabh", domain: "UI/UX" },
+    { name: "Vijay", domain: "VLSI" },
+    { name: "Falguni", domain: "AI & Machine Learning" },
+    { name: "Tejas", domain: "VLSI" },
+    { name: "Anika", domain: "Web Development" },
+    { name: "Lakshmi", domain: "Embedded Systems" },
+    { name: "Mohit", domain: "HR Management" },
+    { name: "Ivaan", domain: "Embedded Systems" },
+    { name: "Lokesh", domain: "AutoCAD" },
+    { name: "Kaveri", domain: "Finance" },
+    { name: "Riddhi", domain: "Cyber Security" },
+    { name: "Kritika", domain: "Embedded Systems" },
+    { name: "Tejasvi", domain: "Finance" },
+    { name: "Arjun", domain: "C++ Programming" },
+    { name: "Hemant", domain: "VLSI" },
+    { name: "Vandana", domain: "Web Development" },
+    { name: "Aaryan", domain: "HR Management" },
+    { name: "Pankaj", domain: "VLSI" },
+    { name: "Adarsh", domain: "JAVA Programming" },
+    { name: "Chetan", domain: "JAVA Programming" },
+    { name: "Shaurya", domain: "Finance" },
+    { name: "Advait", domain: "C++ Programming" },
+    { name: "Yuvaan", domain: "Python Programming" },
+    { name: "Ritu", domain: "AI & Machine Learning" },
+    { name: "Ajay", domain: "Digital Marketing" },
+    { name: "Tanish", domain: "AutoCAD" },
+    { name: "Namrata", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Sonam", domain: "HR Management" },
+    { name: "Irfan", domain: "Finance" },
+    { name: "Vivek", domain: "Embedded Systems" },
+    { name: "Kabir", domain: "Digital Marketing" },
+    { name: "Karan", domain: "UI/UX" },
+    { name: "Divya", domain: "Digital Marketing" },
+    { name: "Harshit", domain: "Python Programming" },
+    { name: "Sachin", domain: "C++ Programming" },
+    { name: "Simran", domain: "UI/UX" },
+    { name: "Anita", domain: "Data Structures & Algorithms (DSA)" },
+    { name: "Laxman", domain: "VLSI" },
+    { name: "Aarohi", domain: "Digital Marketing" },
+    { name: "Ritika", domain: "VLSI" },
+    { name: "Prisha", domain: "Digital Marketing" },
+    { name: "Ayush", domain: "AI & Machine Learning" },
+    { name: "Sakshi", domain: "AutoCAD" },
+    { name: "Alok", domain: "JAVA Programming" },
+    { name: "Seema", domain: "Embedded Systems" },
+    { name: "Rehan", domain: "HR Management" },
+    { name: "Ananya", domain: "Data Science & Analytics" },
+    { name: "Sanya", domain: "Cyber Security" },
+    { name: "Ishaan", domain: "Cyber Security" },
+  ];
+
+  var spTimes = [
+    "24 seconds ago",
+    "47 seconds ago",
+    "1 minute ago",
+    "2 minutes ago",
+    "3 minutes ago",
+    "4 minutes ago",
+    "5 minutes ago",
+    "1 minute ago",
+    "32 seconds ago",
+    "2 minutes ago",
+  ];
+
+  function spShuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  var spShuffled = spShuffle(spStudents);
+  var spIndex = Math.floor(Math.random() * spShuffled.length);
+  var spHideTimer;
+
+  function spShow() {
+    if (spIndex >= spShuffled.length) {
+      spShuffled = spShuffle(spStudents);
+      spIndex = 0;
+    }
+    var s = spShuffled[spIndex++];
+    var t = spTimes[Math.floor(Math.random() * spTimes.length)];
+
+    document.getElementById("spAvatar").textContent = s.name.charAt(0);
+    document.getElementById("spName").textContent   = s.name;
+    document.getElementById("spDomain").textContent = "'" + s.domain + "'";
+    document.getElementById("spTime").textContent   = t;
+
+    var popup = document.getElementById("spPopup");
+    popup.style.display = "flex";
+    popup.classList.remove("hide");
+
+    clearTimeout(spHideTimer);
+    spHideTimer = setTimeout(spClose, 4500);
+  }
+
+  function spClose() {
+    clearTimeout(spHideTimer);
+    var popup = document.getElementById("spPopup");
+    popup.classList.add("hide");
+    setTimeout(function() { popup.style.display = "none"; }, 350);
+  }
+
+  // Pehla popup 2-4 sec baad, phir har 3-5 sec pe
+  setTimeout(function() {
+    spShow();
+    setInterval(spShow, Math.floor(Math.random() * 5000) + 9000);
+  }, Math.floor(Math.random() * 3000) + 3000);
+</script>
+
+
+<script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+    </script>
+
+
+</body>
+</html>
