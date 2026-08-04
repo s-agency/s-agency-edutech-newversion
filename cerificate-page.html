@@ -544,10 +544,13 @@
 
 <script>
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyw7T-Nn_YzxIBnCvRGbqC6LFhsJT-B_4xGx-yf1ZkPixlV6gje4GkjXmT-RNUwl27I/exec";
+    "https://script.google.com/macros/s/AKfycbysdFBGD_n8jXlWIBe66O06nVK022GzMbkEwkaiONya7UaHoJz4bEYYwLkhDcaWkI3Y/exec";
 
   async function verifyEmail() {
-    const email       = document.getElementById("email").value;
+    // FIX: trim whitespace and normalize to lowercase so "Satya@gmail.com",
+    // "satya@gmail.com", "SATYA@GMAIL.COM" etc. are all treated the same.
+    const rawEmail    = document.getElementById("email").value;
+    const email       = rawEmail.trim().toLowerCase();
     const result      = document.getElementById("result");
     const sidebarName = document.getElementById("sidebarName");
 
@@ -559,7 +562,7 @@
     result.innerHTML = `<div class="msg loading">⏳ Verifying your certificate, please wait…</div>`;
 
     try {
-      const response = await fetch(`${SCRIPT_URL}?email=${email}`);
+      const response = await fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}`);
       const data     = await response.json();
 
       if (data.success) {
