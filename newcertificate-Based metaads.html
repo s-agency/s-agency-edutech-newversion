@@ -1,0 +1,4065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KYMHYKRD9W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KYMHYKRD9W');
+</script>
+
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1788595878478616');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+  <!-- Favicon -->
+  <link rel="icon" href="download.png" type="image/x-icon">
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3Skill – Summer Internship 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-light: #22c55e;
+      --green-pale: #dcfce7;
+      --green-border: #bbf7d0;
+      --white: #ffffff;
+      --gray-100: #f3f4f6;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* === GLOBAL BRUSH STROKE === */
+    .ps-brush {
+      position: relative;
+      display: inline;
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+    .brush-svg {
+      position: absolute;
+      left: -4px;
+      bottom: -6px;
+      width: calc(100% + 8px);
+      height: 18px;
+      pointer-events: none;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 60px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green-dark);
+      text-decoration: none;
+    }
+    .btn-signin {
+      padding: 10px 28px;
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-signin:hover { background: var(--green-pale); }
+
+    /* HERO */
+    .hero-wrapper {
+      background: linear-gradient(160deg, #f0fdf4 0%, #ffffff 40%, #f9fafb 100%);
+      border-bottom: 1px solid var(--green-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22,163,74,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22,163,74,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 50px;
+      padding: 60px 60px 60px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-left { flex: 1 1 0; min-width: 0; }
+    .hero-right { flex: 1 1 0; min-width: 0; }
+
+    /* BADGE */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px;
+      border: 1.5px solid var(--green-border);
+      border-radius: 20px;
+      background: var(--green-pale);
+      font-size: 13px; font-weight: 700; color: var(--gray-700);
+      margin-bottom: 24px;
+    }
+    .badge span { color: var(--green-dark); font-weight: 900; }
+
+    /* HEADING */
+    .hero-title {
+      font-size: 50px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--gray-900);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-title .highlight { color: var(--green); }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .hero-subtitle strong { color: var(--gray-900); font-weight: 800; }
+
+    /* PRICING BLOCK */
+    .pricing-block { margin-bottom: 30px; }
+    .pricing-top-row {
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 16px;
+      background: var(--green-pale);
+      border: 1.5px solid var(--green-border);
+      border-radius: 14px; padding: 16px 20px;
+    }
+    .pricing-label {
+      font-size: 12px; font-weight: 800; color: var(--gray-600);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      display: block; margin-bottom: 4px;
+    }
+    .pricing-amount-row { display: flex; align-items: baseline; gap: 12px; }
+    .price-now { font-size: 52px; font-weight: 900; color: var(--green-dark); line-height: 1; }
+    .price-original {
+      font-size: 22px; font-weight: 700; color: var(--gray-600);
+      text-decoration: line-through; opacity: 0.7;
+    }
+    .pricing-divider { width: 1.5px; height: 50px; background: var(--green-border); flex-shrink: 0; }
+    .pricing-rest { display: flex; flex-direction: column; gap: 4px; }
+    .pricing-rest-label { font-size: 18px; font-weight: 900; color: var(--gray-900); }
+    .pricing-rest-sub { font-size: 13px; font-weight: 700; color: var(--green-dark); }
+
+    /* STEPS */
+    .pricing-steps {
+      display: flex; align-items: center; margin-bottom: 16px;
+      background: #fff; border: 1.5px solid #e5e7eb;
+      border-radius: 12px; padding: 16px 18px;
+      justify-content: space-between;
+    }
+    .pricing-step { display: flex; align-items: center; gap: 10px; flex: 1; }
+    .pstep-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gray-100); color: var(--gray-600);
+      font-size: 14px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 2px solid #e5e7eb;
+      position: relative;
+    }
+    .pstep-circle::before {
+      content: '';
+      position: absolute; inset: -4px; border-radius: 50%;
+      border: 2.5px solid transparent;
+      animation: pstep-spin 2.4s linear infinite;
+      opacity: 0.6;
+    }
+    .pricing-step--active .pstep-circle {
+      background: var(--green); color: #fff; border-color: var(--green-dark);
+      box-shadow: 0 0 0 4px var(--green-pale);
+    }
+    .pricing-step--active .pstep-circle::before { border-top-color: var(--green); border-right-color: var(--green); }
+    .pstep-circle--mid { background: var(--green-pale); color: var(--green-dark); border-color: var(--green-border); }
+    .pstep-circle--mid::before { border-top-color: var(--green-dark); border-right-color: var(--green-dark); animation-delay: 0.8s; }
+    .pstep-circle--last { background: #fef9c3; color: #854d0e; border-color: #fde68a; }
+    .pstep-circle--last::before { border-top-color: #d97706; border-right-color: #d97706; animation-delay: 1.6s; }
+    @keyframes pstep-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .pstep-info { display: flex; flex-direction: column; gap: 2px; }
+    .pstep-info strong { font-size: 13px; font-weight: 900; color: var(--gray-900); line-height: 1.2; }
+    .pstep-info span { font-size: 11px; font-weight: 600; color: var(--gray-600); }
+    .pstep-connector { width: 24px; height: 2px; background: var(--green-border); flex-shrink: 0; margin: 0 4px; }
+
+    .pricing-seats-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fef3c7; border: 1.5px solid #fde68a;
+      color: #92400e; font-size: 13px; font-weight: 700;
+      padding: 8px 16px; border-radius: 20px; margin-bottom: 4px;
+    }
+
+    /* MOBILE PILL */
+    .mob-pricing-block { display: none; }
+    .mob-hero-pill { display: none; }
+    .pricing-block { display: block; }
+    .prove-it-card { display: flex; }
+
+    @media (max-width: 768px) {
+      .pricing-block { display: none !important; }
+      .prove-it-card { display: none !important; }
+      .mob-pricing-block { display: none !important; }
+      .mob-hero-pill {
+        display: flex;
+        align-items: center;
+        background: var(--green-pale);
+        border: 1.5px solid var(--green-border);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 22px;
+      }
+      .mob-pill-tag { font-size: 14px; font-weight: 700; color: var(--green-dark); line-height: 1.5; }
+    }
+
+    /* CTA BUTTONS */
+    .cta-buttons {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .cta-buttons .btn-cta { flex: 1 1 auto; }
+    .cta-buttons .btn-download { flex: 0 0 auto; }
+
+    .btn-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 18px 48px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: #fff; font-size: 18px; font-weight: 900;
+      font-family: 'Nunito', sans-serif;
+      border: none; border-radius: 14px; cursor: pointer;
+      transition: all 0.25s; text-decoration: none;
+      box-shadow: 0 6px 24px rgba(22,163,74,0.45);
+      letter-spacing: 0.01em; position: relative; overflow: hidden;
+    }
+    .btn-cta::before {
+      content: '';
+      position: absolute; top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      transform: skewX(-20deg);
+      animation: btn-shine 2.4s ease-in-out infinite;
+    }
+    @keyframes btn-shine { 0% { left: -75%; } 60%,100% { left: 130%; } }
+    .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(22,163,74,0.55); }
+
+    .btn-download {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 18px 28px;
+      border: 2px solid var(--green); border-radius: 14px;
+      background: transparent; color: var(--green-dark);
+      font-size: 16px; font-weight: 800;
+      font-family: 'Nunito', sans-serif;
+      text-decoration: none; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-download:hover { background: var(--green-pale); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(22,163,74,0.15); }
+
+    /* VIDEO */
+    .video-wrapper {
+      background: var(--green-pale);
+      border-radius: 20px; padding: 14px;
+      box-shadow: 0 8px 40px rgba(22,163,74,0.13);
+    }
+    .video-thumb {
+      position: relative; border-radius: 12px; overflow: hidden;
+      aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; background: #064e3b;
+    }
+    .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* PROVE IT CARD */
+    .prove-it-card {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: #fff; border: 1.5px solid var(--green-border);
+      border-left: 4px solid var(--green);
+      border-radius: 14px; padding: 16px 18px; margin-top: 12px;
+    }
+    .prove-it-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .prove-it-text { display: flex; flex-direction: column; gap: 6px; }
+    .prove-it-text strong:first-child { font-size: 15px; font-weight: 900; color: var(--gray-900); }
+    .prove-it-text span { font-size: 13px; font-weight: 600; color: var(--gray-600); line-height: 1.6; }
+    .prove-it-text em { font-style: normal; color: var(--green-dark); font-weight: 800; }
+
+    /* PERK CARDS */
+    .hero-perk-card {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1.5px solid #e5e7eb;
+      border-left: 4px solid #6366f1;
+      border-radius: 14px; padding: 14px 16px; margin-top: 10px;
+    }
+    .hero-perk-card--kit { border-left-color: #f59e0b; }
+    .hero-perk-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .hero-perk-text { display: flex; flex-direction: column; gap: 4px; }
+    .hero-perk-text strong { font-size: 14px; font-weight: 900; color: var(--gray-900); }
+    .hero-perk-text span { font-size: 12px; font-weight: 600; color: var(--gray-600); line-height: 1.5; }
+    .hero-perk-text em { font-style: normal; color: var(--green-dark); font-weight: 800; }
+
+    /* STATS */
+    .stats-row { display: flex; gap: 12px; margin-top: 12px; }
+    .stat-card {
+      flex: 1; background: var(--white); border-radius: 12px;
+      padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .stat-avatars { display: flex; }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #fff; background: var(--green-pale);
+      margin-left: -8px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; color: var(--green-dark);
+    }
+    .avatar:first-child { margin-left: 0; }
+    .stat-text small { display: block; font-size: 11px; color: var(--gray-600); font-weight: 600; }
+    .stat-text strong { font-size: 15px; font-weight: 900; color: var(--gray-900); }
+    .community-card {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+      border: 1.5px solid #86efac;
+    }
+    .community-count { font-size: 15px !important; font-weight: 900 !important; color: var(--green-dark) !important; display: block; }
+    .community-dots { display: flex; gap: 4px; margin-top: 4px; }
+    .community-dots span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green-light);
+      animation: pulse-dot 1.4s ease-in-out infinite;
+    }
+    .community-dots span:nth-child(2) { animation-delay: .2s; background: var(--green); }
+    .community-dots span:nth-child(3) { animation-delay: .4s; background: var(--green-dark); }
+    @keyframes pulse-dot {
+      0%,100% { transform: scale(1); opacity: .7; }
+      50%      { transform: scale(1.4); opacity: 1; }
+    }
+
+    /* MOB BELOW STATS */
+    .mob-below-stats { display: none; }
+    @media (max-width: 768px) {
+      .mob-below-stats { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+      .mob-price-card {
+        display: flex; align-items: center;
+        background: var(--green-pale); border: 1.5px solid var(--green-border);
+        border-radius: 14px; overflow: hidden;
+      }
+      .mob-price-main { padding: 14px 18px; }
+      .mob-label { display: block; font-size: 11px; font-weight: 800; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+      .mob-price-row { display: flex; align-items: baseline; gap: 10px; }
+      .mob-price { font-size: 42px; font-weight: 900; color: var(--green-dark); line-height: 1; }
+      .mob-strike { font-size: 18px; font-weight: 700; color: var(--gray-600); text-decoration: line-through; opacity: 0.65; }
+      .mob-price-divider { width: 1.5px; height: 50px; background: var(--green-border); flex-shrink: 0; }
+      .mob-price-right { padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+      .mob-remaining { font-size: 15px; font-weight: 900; color: var(--gray-900); }
+      .mob-remaining-sub { font-size: 12px; font-weight: 700; color: var(--green-dark); }
+      .mob-seats-badge {
+        background: #fef3c7; border: 1.5px solid #fde68a;
+        color: #92400e; font-size: 13px; font-weight: 700;
+        padding: 10px 16px; border-radius: 50px; text-align: center; display: block;
+      }
+      .mob-steps {
+        background: #fff; border: 1.5px solid #e5e7eb;
+        border-radius: 14px; padding: 4px 16px;
+        display: flex; flex-direction: column;
+      }
+      .mob-step { display: flex; align-items: center; gap: 14px; padding: 14px 0; }
+      .mob-step:not(:last-child) { border-bottom: 1px solid #f3f4f6; }
+      .mob-step-num {
+        width: 36px; height: 36px; border-radius: 50%;
+        font-size: 14px; font-weight: 900;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; position: relative;
+      }
+      .mob-step-num::before {
+        content: ''; position: absolute; inset: -4px; border-radius: 50%;
+        border: 2.5px solid transparent;
+        animation: mob-spin 2.4s linear infinite; opacity: 0.6;
+      }
+      .mob-step--1 .mob-step-num { background: var(--green); color: #fff; box-shadow: 0 0 0 3px var(--green-pale); }
+      .mob-step--1 .mob-step-num::before { border-top-color: var(--green); border-right-color: var(--green); }
+      .mob-step--2 .mob-step-num { background: var(--green-pale); color: var(--green-dark); border: 2px solid var(--green-border); }
+      .mob-step--2 .mob-step-num::before { border-top-color: var(--green-dark); border-right-color: var(--green-dark); animation-delay: 0.8s; }
+      .mob-step--3 .mob-step-num { background: #fef9c3; color: #854d0e; border: 2px solid #fde68a; }
+      .mob-step--3 .mob-step-num::before { border-top-color: #d97706; border-right-color: #d97706; animation-delay: 1.6s; }
+      @keyframes mob-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .mob-step-info { display: flex; flex-direction: column; gap: 2px; }
+      .mob-step-info strong { font-size: 14px; font-weight: 900; color: var(--gray-900); }
+      .mob-step-info span { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+      .mob-prove-card {
+        display: flex; align-items: flex-start; gap: 12px;
+        background: #fff; border: 1.5px solid #e5e7eb;
+        border-left: 4px solid var(--green);
+        border-radius: 12px; padding: 14px 16px;
+      }
+      .mob-prove-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+      .mob-prove-text { display: flex; flex-direction: column; gap: 4px; }
+      .mob-prove-text strong:first-child { font-size: 14px; font-weight: 900; color: var(--gray-900); }
+      .mob-prove-text span { font-size: 13px; font-weight: 600; color: var(--gray-600); line-height: 1.6; }
+      .mob-prove-text em { font-style: normal; color: var(--green-dark); font-weight: 800; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 14px 24px; }
+      .hero { flex-direction: column; padding: 40px 24px 90px; gap: 40px; }
+      .hero-wrapper::before, .hero-wrapper::after { display: none; }
+      .hero-left, .hero-right { width: 100%; }
+      .hero-title { font-size: 36px; }
+      .stats-row { flex-direction: column; gap: 10px; }
+      .pricing-top-row { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .pricing-divider { width: 100%; height: 1.5px; }
+      .price-now { font-size: 42px; }
+      .pricing-steps { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .pstep-connector { width: 2px; height: 16px; margin: 0 17px; }
+      .cta-buttons { flex-direction: column; gap: 10px; width: 100%; align-items: stretch; }
+      .cta-buttons .btn-cta, .cta-buttons .btn-download { width: 100%; text-align: center; padding: 15px; font-size: 16px; border-radius: 12px; flex: unset; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- Domain Popup -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap');
+
+  .popup-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+
+  .popup-box {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 460px;
+    width: 90%;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(34,197,94,0.1);
+    animation: popIn 0.4s cubic-bezier(.22,1,.36,1) forwards;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+  }
+  .popup-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #16a34a, #22c55e, #86efac);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.88) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .popup-header {
+    padding: 32px 32px 20px;
+    text-align: center;
+    background: linear-gradient(160deg, #f0fdf4 0%, #fff 60%);
+  }
+  .popup-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #dcfce7; border: 1px solid #bbf7d0;
+    color: #16a34a; font-size: 11px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .popup-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 900;
+    color: #111; margin: 0 0 8px;
+    letter-spacing: -0.5px; line-height: 1.2;
+  }
+  .popup-header h2 span { color: #16a34a; }
+  .popup-header p {
+    font-size: 13px; color: #6b7280;
+    margin: 0; line-height: 1.6;
+  }
+
+  .popup-divider { height: 1px; background: #f0fdf4; margin: 0 28px; }
+  .popup-body { padding: 22px 26px 28px; }
+
+  .domain-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .domain-card {
+    position: relative;
+    border: 1.5px solid #e5e7eb;
+    padding: 16px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    transition: all 0.22s ease;
+    background: #fafafa;
+    overflow: hidden;
+  }
+  .domain-card input[type="radio"] {
+    position: absolute; opacity: 0; width: 0; height: 0;
+  }
+  .domain-card:hover {
+    border-color: #22c55e;
+    background: #f0fdf4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34,197,94,0.12);
+  }
+  .domain-card:has(input:checked) {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+  }
+  .domain-card:has(input:checked) .d-label { color: #15803d; }
+  .domain-card:has(input:checked)::after {
+    content: '✓';
+    position: absolute; top: 10px; right: 10px;
+    width: 20px; height: 20px;
+    background: #16a34a; color: #fff;
+    font-weight: 900; font-size: 11px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 20px; text-align: center;
+  }
+
+  .d-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .d-label {
+    font-size: 13px; font-weight: 700;
+    color: #374151; line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .d-duration {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  /* Highlighted card (AI/ML - 3 Month) */
+  .domain-card.highlight-card {
+    border-color: #3b82f6;
+    background: #eff6ff;
+  }
+  .domain-card.highlight-card:hover {
+    border-color: #2563eb;
+    background: #dbeafe;
+  }
+  .domain-card.highlight-card .d-duration {
+    color: #2563eb;
+    font-weight: 800;
+  }
+
+  /* Icon box */
+  .d-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .d-icon svg { width: 26px; height: 26px; }
+
+  .d-icon.aiml     { background: #eff6ff; }
+  .d-icon.webdev   { background: #f0fdf4; }
+  .d-icon.frontend { background: #faf5ff; }
+  .d-icon.data     { background: #fff7ed; }
+
+  /* Button */
+  .continue-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: #fff; border: none;
+    padding: 15px; border-radius: 14px;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 800;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+  }
+  .continue-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(34,197,94,0.4);
+  }
+
+  .popup-close {
+    display: block; text-align: center;
+    margin-top: 14px; font-size: 12px;
+    color: #9ca3af; cursor: pointer; transition: color 0.2s;
+  }
+  .popup-close:hover { color: #6b7280; }
+
+  @media (max-width: 400px) {
+    .popup-header { padding: 24px 18px 16px; }
+    .popup-header h2 { font-size: 21px; }
+    .popup-body { padding: 18px 14px 22px; }
+  }
+</style>
+
+<div id="domainPopup" class="popup-overlay">
+  <div class="popup-box">
+
+    <div class="popup-header">
+      <div class="popup-tag">🎓 Summer Internship 2026</div>
+      <h2>Pick Your <span>Domain</span></h2>
+      <p>Choose what you want to master this summer.<br>Real projects. Real mentorship. IIT Kharagpur.</p>
+    </div>
+
+    <div class="popup-divider"></div>
+
+    <div class="popup-body">
+      <div class="domain-options">
+
+        <!-- AI / ML - 2 Month -->
+        <label class="domain-card">
+          <input type="radio" name="domain" value="aiml-internship-meta.html">
+          <div class="d-icon aiml">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6C10 4.9 10.9 4 12 4C13.1 4 14 4.9 14 6" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 8.5C6.6 8.5 5.5 9.6 5.5 11C5.5 11.8 5.9 12.5 6.5 13C5.6 13.4 5 14.3 5 15.5C5 17.2 6.3 18.5 8 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18 8.5C19.4 8.5 20.5 9.6 20.5 11C20.5 11.8 20.1 12.5 19.5 13C20.4 13.4 21 14.3 21 15.5C21 17.2 19.7 18.5 18 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 18.5C8 19.9 9.1 21 10.5 21H15.5C16.9 21 18 19.9 18 18.5V8C18 6.9 17.1 6 16 6H10C8.9 6 8 6.9 8 8V18.5Z" stroke="#3b82f6" stroke-width="1.5"/>
+              <line x1="11" y1="10" x2="15" y2="10" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="13" x2="15" y2="13" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="16" x2="15" y2="16" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <circle cx="13" cy="10" r="1" fill="#2563eb"/>
+              <circle cx="13" cy="13" r="1" fill="#2563eb"/>
+              <circle cx="13" cy="16" r="1" fill="#2563eb"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">AI / ML</span>
+            <span class="d-duration">2 Month</span>
+          </div>
+        </label>
+
+        <!-- AI / ML - 3 Month (highlighted) -->
+        <label class="domain-card highlight-card">
+          <input type="radio" name="domain" value="3month-cerificate-based course.html">
+          <div class="d-icon aiml">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6C10 4.9 10.9 4 12 4C13.1 4 14 4.9 14 6" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 8.5C6.6 8.5 5.5 9.6 5.5 11C5.5 11.8 5.9 12.5 6.5 13C5.6 13.4 5 14.3 5 15.5C5 17.2 6.3 18.5 8 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18 8.5C19.4 8.5 20.5 9.6 20.5 11C20.5 11.8 20.1 12.5 19.5 13C20.4 13.4 21 14.3 21 15.5C21 17.2 19.7 18.5 18 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 18.5C8 19.9 9.1 21 10.5 21H15.5C16.9 21 18 19.9 18 18.5V8C18 6.9 17.1 6 16 6H10C8.9 6 8 6.9 8 8V18.5Z" stroke="#3b82f6" stroke-width="1.5"/>
+              <line x1="11" y1="10" x2="15" y2="10" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="13" x2="15" y2="13" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="16" x2="15" y2="16" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+              <circle cx="13" cy="10" r="1" fill="#2563eb"/>
+              <circle cx="13" cy="13" r="1" fill="#2563eb"/>
+              <circle cx="13" cy="16" r="1" fill="#2563eb"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">AI / ML</span>
+            <span class="d-duration">3 Month</span>
+          </div>
+        </label>
+
+        <!-- Web Development -->
+        <label class="domain-card">
+          <input type="radio" name="domain" value="webdev-internship-meta.html">
+          <div class="d-icon webdev">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="20" height="18" rx="3" stroke="#16a34a" stroke-width="1.5"/>
+              <line x1="3" y1="9" x2="23" y2="9" stroke="#16a34a" stroke-width="1.5"/>
+              <circle cx="6.5" cy="6.5" r="1" fill="#22c55e"/>
+              <circle cx="9.5" cy="6.5" r="1" fill="#86efac"/>
+              <path d="M9 14l-2.5 2 2.5 2" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 14l2.5 2-2.5 2" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="14.5" y1="13" x2="11.5" y2="19" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">Web Development</span>
+            <span class="d-duration">2 Month</span>
+          </div>
+        </label>
+
+       
+
+        <!-- Data Analytics -->
+        <label class="domain-card">
+          <input type="radio" name="domain" value="dataanalysis-internship-meta.html">
+          <div class="d-icon data">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="21" x2="22" y2="21" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="5" y1="5"  x2="5"  y2="21" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="7"  y="15" width="4" height="6" rx="1" fill="#fed7aa"/>
+              <rect x="13" y="10" width="4" height="11" rx="1" fill="#fb923c"/>
+              <rect x="19" y="13" width="4" height="8"  rx="1" fill="#ea580c"/>
+              <path d="M9 14 L15 9 L21 11" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 1"/>
+              <circle cx="9"  cy="14" r="1.5" fill="#ea580c"/>
+              <circle cx="15" cy="9"  r="1.5" fill="#ea580c"/>
+              <circle cx="21" cy="11" r="1.5" fill="#ea580c"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">Data Analytics</span>
+            <span class="d-duration">2 Month</span>
+          </div>
+        </label>
+
+
+
+         <!-- Frontend -->
+        <label class="domain-card">
+          <input type="radio" name="domain" value="webdev-internship-meta.html">
+          <div class="d-icon frontend">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="20" height="20" rx="3" stroke="#9333ea" stroke-width="1.5"/>
+              <rect x="6" y="7" width="6" height="5" rx="1.5" fill="#e9d5ff" stroke="#a855f7" stroke-width="1"/>
+              <rect x="14" y="7" width="6" height="2" rx="1" fill="#d8b4fe"/>
+              <rect x="14" y="11" width="4" height="2" rx="1" fill="#ede9fe"/>
+              <rect x="6" y="14" width="14" height="2" rx="1" fill="#f3e8ff"/>
+              <rect x="6" y="18" width="9" height="2" rx="1" fill="#faf5ff" stroke="#c084fc" stroke-width="0.8"/>
+              <path d="M19 17l1.5 4-1.5-1-1 1.5L16.5 18z" fill="#9333ea" stroke="#7e22ce" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">Frontend Dev</span>
+            <span class="d-duration">2 Month</span>
+          </div>
+        </label>
+
+
+      </div>
+
+      <button class="continue-btn" onclick="continueDomain()">
+        Continue &rarr;
+      </button>
+
+      <span class="popup-close" onclick="document.getElementById('domainPopup').style.display='none'">
+        ✕ Cancel
+      </span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openDomainPopup() {
+    document.getElementById("domainPopup").style.display = "flex";
+  }
+  function continueDomain() {
+    let selected = document.querySelector('input[name="domain"]:checked');
+    if (!selected) { alert("Please select a domain first!"); return; }
+    window.location.href = selected.value;
+  }
+</script>
+
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <svg class="logo-icon" viewBox="0 0 38 38" fill="none">
+      <rect width="38" height="38" rx="10" fill="#dcfce7"/>
+      <text x="19" y="26" text-anchor="middle" font-size="16" font-weight="900" font-family="Nunito,sans-serif" fill="#15803d">3S</text>
+    </svg>
+    3Skill
+  </a>
+ <button class="btn-signin" onclick="window.location.href='dashbord.html'">
+  Dashboard
+</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrapper">
+  <div class="hero">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+
+      <div class="badge">🏛️ Registered Under <span>DPIIT</span>, Govt. of India</div>
+
+      <h1 class="hero-title">
+        India's #1
+        <span class="highlight">
+          <span class="ps-brush">Live Internship
+            <svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none">
+              <path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10"
+                stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13"
+                stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </span><br>Training Program
+        </span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Join our <strong>Aug 2 Month  Internship</strong> and work on real industry projects with expert mentorship and certification.
+        Top performing students will get a chance to visit the <strong>IIT Kharagpur campus.</strong>
+      </p>
+
+      <!-- MOBILE PILL -->
+      <div class="mob-hero-pill">
+        <span class="mob-pill-tag">🛡️ Secure your slot in our live Summer Internship Program and start building real industry skills with expert mentors.</span>
+      </div>
+
+      <!-- DESKTOP PRICING BLOCK -->
+      <div class="pricing-block">
+        <div class="pricing-top-row">
+          <div class="pricing-main">
+            <span class="pricing-label">Start Today For Just</span>
+            <div class="pricing-amount-row">
+              <span class="price-now">₹499</span>
+              <span class="price-original">₹2,499</span>
+            </div>
+          </div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-rest">
+            <span class="pricing-rest-label">100% Refundable</span>
+            <span class="pricing-rest-sub">No Hidden Charges ✅</span>
+          </div>
+        </div>
+
+        <div class="pricing-steps">
+          <div class="pricing-step pricing-step--active">
+            <div class="pstep-circle">1</div>
+            <div class="pstep-info"><strong>Book Slot</strong><span>Pay ₹499 – Refundable</span></div>
+          </div>
+          <div class="pstep-connector"></div>
+          <div class="pricing-step">
+            <div class="pstep-circle pstep-circle--mid">2</div>
+            <div class="pstep-info"><strong>Live Classes</strong><span>Month 1 – Expert mentors</span></div>
+          </div>
+          <div class="pstep-connector"></div>
+          <div class="pricing-step">
+            <div class="pstep-circle pstep-circle--last">3</div>
+            <div class="pstep-info"><strong>Build Projects</strong><span>Month 2 – Real projects 🎉</span></div>
+          </div>
+        </div>
+
+        <div class="pricing-seats-badge">
+         <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
+
+<script>
+  var seats = [50, 45, 40, 30, 35, 20, 10];
+  
+  // Date ko seed ki tarah use karo - har din ek fixed number aayega
+  var today = new Date();
+  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  var index = seed % seats.length;
+  
+  document.getElementById("seatCount").textContent = seats[index];
+</script>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+  <a href="javascript:void(0)" class="btn-cta" onclick="openDomainPopup()">
+    Book Your Slot Now
+  </a>
+
+  <a href="3skill-allprogrampdf.pdf" class="btn-download">
+    Download Brochure
+  </a>
+</div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-right">
+
+      <!-- IIT IMAGE -->
+      <div class="video-wrapper">
+        <div class="video-thumb">
+          <img
+            src="https://images.unsplash.com/photo-1620496009285-ac853df7b9b6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="IIT Kharagpur Campus"
+            onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#d1fae5,#6ee7b7)'; this.style.display='none';"
+          />
+        </div>
+      </div>
+
+     <!-- PROVE IT CARD -->
+<div class="prove-it-card">
+  <div class="prove-it-icon">🛡️</div>
+  <div class="prove-it-text">
+    <strong>Simple & Transparent Pricing</strong>
+    <span>Pay only a <em>₹499 slot booking fee</em>. This amount is <em>100% refundable</em> and there are <strong>no hidden charges</strong> for the entire internship program.</span>
+  </div>
+</div>
+
+     <!-- CERTIFICATE CARD -->
+<div class="hero-perk-card">
+  <div class="hero-perk-icon">🎓</div>
+  <div class="hero-perk-text">
+    <strong>Certificate & Offer Letter</strong>
+    <span>After completing the program, receive an <em>official 3Skill certificate</em> along with an <em>internship offer letter</em> from 3Skill.</span>
+  </div>
+</div>
+
+     <!-- KIT CARD -->
+<div class="hero-perk-card hero-perk-card--kit">
+  <div class="hero-perk-icon">🎥</div>
+  <div class="hero-perk-text">
+    <strong>100% Live Interactive Classes</strong>
+    <span>Learn through <em>live classes, real-time doubt clearing, and hands-on live projects</em> guided by expert mentors.</span>
+  </div>
+</div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-avatars">
+            <div class="avatar"><img src="https://i.pravatar.cc/32?img=47" alt="s" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="avatar"><img src="https://i.pravatar.cc/32?img=12" alt="s" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="avatar"><img src="https://i.pravatar.cc/32?img=33" alt="s" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="avatar"><img src="https://i.pravatar.cc/32?img=68" alt="s" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+          </div>
+          <div class="stat-text">
+            <small>Total</small>
+            <strong>20,000+ Learners</strong>
+          </div>
+        </div>
+        <div class="stat-card community-card">
+          <div class="community-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
+              <circle cx="22" cy="22" r="22" fill="#16a34a" opacity="0.1"/>
+              <circle cx="15" cy="18" r="4.5" fill="#16a34a"/>
+              <circle cx="29" cy="18" r="4.5" fill="#16a34a"/>
+              <circle cx="22" cy="15" r="5.5" fill="#15803d"/>
+              <path d="M5 34c0-5 4.5-8 10-8h14c5.5 0 10 3 10 8" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="stat-text">
+            <small>Growing Community</small>
+            <strong class="community-count">100k+ Students</strong>
+            <div class="community-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE BELOW STATS -->
+      <div class="mob-below-stats">
+        <div class="mob-price-card">
+          <div class="mob-price-main">
+            <span class="mob-label">Start Today For Just</span>
+            <div class="mob-price-row">
+              <span class="mob-price">₹499</span>
+              <span class="mob-strike">₹2,499</span>
+            </div>
+          </div>
+          <div class="mob-price-divider"></div>
+          <div class="mob-price-right">
+            <span class="mob-remaining">100% Refundable</span>
+            <span class="mob-remaining-sub">No Hidden Charges ✅</span>
+          </div>
+        </div>
+       <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
+
+<script>
+  var seats = [50, 45, 40, 30, 35, 20, 10];
+  
+  // Date ko seed ki tarah use karo - har din ek fixed number aayega
+  var today = new Date();
+  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  var index = seed % seats.length;
+  
+  document.getElementById("seatCount").textContent = seats[index];
+</script>
+        <div class="mob-steps">
+          <div class="mob-step mob-step--1">
+            <div class="mob-step-num">1</div>
+            <div class="mob-step-info"><strong>Book Slot</strong><span>Pay ₹499 – Refundable</span></div>
+          </div>
+          <div class="mob-step mob-step--2">
+            <div class="mob-step-num">2</div>
+            <div class="mob-step-info"><strong>Live Classes</strong><span>Month 1 – Live training</span></div>
+          </div>
+          <div class="mob-step mob-step--3">
+            <div class="mob-step-num">3</div>
+            <div class="mob-step-info"><strong>Build Projects</strong><span>Month 2 – Real projects 🎉</span></div>
+          </div>
+        </div>
+        <div class="mob-prove-card">
+          <span class="mob-prove-icon">🛡️</span>
+          <div class="mob-prove-text">
+            <strong>Zero Risk Guarantee</strong>
+    <span>Pay only a <em>₹499 slot booking fee</em>. This amount is <em>100% refundable</em> and there are <strong>no hidden charges</strong> for the entire internship program.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- MOBILE STICKY ENROLL -->
+<div class="mobile-sticky">
+  <div class="mob-seats-badge" style="text-align:center; margin-bottom:8px; font-size:12px;">
+    🔥 <strong><span id="seatCountMobile"></span> seats left</strong> at this price — batch filling fast!
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a href="javascript:void(0)" class="btn-enroll" onclick="openDomainPopup()" style="flex:1;">Book Your Slot Now</a>
+  </div>
+</div>
+
+<script>
+  var seats = [50, 45, 40, 30, 35, 20, 10];
+
+  var today = new Date();
+  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  var index = seed % seats.length;
+  var seatNum = seats[index];
+
+  // Dono jagah same number aayega
+  document.getElementById("seatCount").textContent = seatNum;
+  document.getElementById("seatCountMobile").textContent = seatNum;
+</script>
+<style>
+   /* MOBILE STICKY ENROLL */
+  .mobile-sticky {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    padding: 14px 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+    z-index: 998;
+    border-top: 1px solid var(--green-border);
+  }
+  .btn-enroll {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+    box-shadow: 0 4px 16px rgba(22,163,74,0.35);
+    animation: enroll-pop 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-enroll::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    animation: btn-shine 2.4s ease-in-out infinite;
+  }
+  .btn-enroll:hover { background: var(--green-dark); }
+  @keyframes enroll-pop {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+   /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 14px 24px; }
+    .hero { flex-direction: column; padding: 40px 24px 90px; gap: 40px; }
+    .hero-wrapper::before, .hero-wrapper::after { display: none; }
+    .hero-left, .hero-right { width: 100%; }
+    .hero-title { font-size: 36px; }
+    .mobile-sticky { display: block; }
+
+    /* Stack stat cards on mobile */
+    .stats-row { flex-direction: column; gap: 10px; }
+
+    /* Make community card look rich on mobile */
+    .community-card {
+      flex-direction: row;
+      align-items: center;
+      padding: 14px 18px;
+      gap: 16px;
+    }
+    .community-card .stat-text { flex: 1; }
+    .community-count { font-size: 18px !important; }
+
+    /* Learners card on mobile */
+    .stat-card:not(.community-card) {
+      padding: 14px 18px;
+    }
+    .stat-text strong { font-size: 17px; }
+    .stat-text small { font-size: 12px; }
+    .avatar { width: 36px; height: 36px; }
+  }
+</style>
+
+
+<!-- ===== VERIFIED SECTION START ===== -->
+<div class="verified-wrapper">
+    <div class="verified-inner">
+
+        <h3 class="verified-heading">
+            <span></span>
+            VERIFIED BY
+            <span></span>
+        </h3>
+
+        <div class="verified-logos">
+
+            <div class="logo-item">
+                <img src="startupindia.png" alt="Startup India">
+            </div>
+
+            <div class="logo-item iso-logo">
+                <img src="isoveri.png" alt="ISO Verified">
+            </div>
+
+            <div class="logo-item">
+                <img src="msmeveri.png" alt="MSME Registered">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- ===== VERIFIED SECTION END ===== -->
+
+<style>
+/* Wrapper */
+.verified-wrapper{
+    background:#ffffff;
+    padding:60px 0;
+}
+
+/* Container */
+.verified-inner{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+}
+
+/* Heading */
+.verified-heading{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    letter-spacing:4px;
+    font-weight:600;
+    color:#7b818a;
+    margin-bottom:45px;
+}
+
+.verified-heading span{
+    flex:1;
+    height:1px;
+    background:#d9dde3;
+    margin:0 15px;
+    max-width:120px;
+}
+
+/* Logos Row */
+.verified-logos{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    flex-wrap:nowrap;
+}
+
+/* Equal Column Distribution */
+.logo-item{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Default Logo Style */
+.logo-item img{
+    max-height:60px;
+    width:auto;
+    max-width:90%;
+    object-fit:contain;
+    transition:0.3s ease;
+    opacity:0.9;
+}
+
+/* 🔥 ISO BIGGER */
+.iso-logo img{
+    max-height:80px;
+}
+
+/* Hover */
+.logo-item img:hover{
+    transform:scale(1.05);
+    opacity:1;
+}
+
+/* ===== RESPONSIVE (Mobile + Tablet) ===== */
+@media (max-width: 768px){
+
+    .verified-wrapper{
+        padding:40px 0;
+    }
+
+    .verified-heading{
+        font-size:12px;
+        letter-spacing:3px;
+        margin-bottom:30px;
+    }
+
+    .verified-heading span{
+        max-width:70px;
+    }
+
+    .verified-logos{
+        gap:10px;
+    }
+
+    .logo-item img{
+        max-height:38px;
+        max-width:85%;
+    }
+
+    /* ISO Bigger on Mobile */
+    .iso-logo img{
+        max-height:50px;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+<!-- ========== LIVE CLASS SECTION ========== -->
+<style>
+.live-section {
+  background: #fff;
+  padding: 80px 60px;
+}
+.live-wrap {
+  max-width: 1000px; margin: 0 auto;
+}
+.live-header {
+  text-align: center; margin-bottom: 48px;
+}
+.live-header h2 {
+  font-size: 36px; font-weight: 900; color: var(--gray-900);
+  line-height: 1.25; margin-bottom: 10px;
+}
+.live-header h2 .sec-brush {
+  color: var(--green-dark); position: relative; display: inline-block;
+}
+.live-header h2 .sec-brush-svg {
+  position: absolute; left: -4px; bottom: -6px;
+  width: calc(100% + 8px); height: 18px; pointer-events: none;
+}
+.live-header p {
+  font-size: 15px; color: var(--gray-600); font-weight: 600; line-height: 1.7;
+}
+
+/* MAIN CARD */
+.live-main-card {
+  background: linear-gradient(135deg, #14532d 0%, #166534 50%, #16a34a 100%);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative; overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  align-items: center;
+}
+.live-main-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,222,128,0.12) 0%, transparent 70%);
+}
+.live-main-card::after {
+  content: '';
+  position: absolute; bottom: -60px; left: 30%;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+}
+
+/* DIVIDER */
+.lmc-divider {
+  width: 1px; height: 80px;
+  background: rgba(255,255,255,0.12);
+  margin: 0 auto;
+}
+
+/* EACH FEATURE */
+.lmc-feat {
+  padding: 12px 36px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 14px;
+  position: relative; z-index: 1;
+}
+.lmc-feat-icon {
+  width: 60px; height: 60px; border-radius: 18px;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+.lmc-feat-title {
+  font-size: 16px; font-weight: 900; color: #fff; line-height: 1.3;
+}
+.lmc-feat-desc {
+  font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 600; line-height: 1.65;
+}
+
+/* LIVE BADGE on first feat */
+.live-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #dc2626; border-radius: 20px;
+  padding: 4px 12px; font-size: 11px; font-weight: 900; color: #fff;
+  margin-bottom: 4px; width: fit-content; margin: 0 auto;
+}
+.live-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #fff;
+  animation: lbPulse 1.2s infinite;
+}
+@keyframes lbPulse {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:0.3; transform:scale(0.6); }
+}
+
+/* BOTTOM PILLS ROW */
+.live-pills-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-top: 20px; flex-wrap: wrap;
+}
+.live-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: #f0fdf4; border: 1.5px solid var(--green-border);
+  border-radius: 50px; padding: 9px 18px;
+  font-size: 13px; font-weight: 800; color: var(--green-dark);
+}
+
+@media(max-width: 768px){
+  .live-section { padding: 52px 20px; }
+  .live-header h2 { font-size: 26px; }
+  .live-main-card {
+    grid-template-columns: 1fr;
+    padding: 32px 24px; gap: 28px;
+  }
+  .lmc-divider { width: 80px; height: 1px; }
+  .lmc-feat { padding: 0; }
+}
+</style>
+
+<section class="live-section">
+  <div class="live-wrap">
+
+    <div class="live-header">
+      <div class="section-tag">📡 Class Experience</div>
+      <h2>100% <span class="sec-brush">Live Classes<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span> — All 2 Months</h2>
+      <p>No boring pre-recorded content. Every session, every day — always live with your mentor.</p>
+    </div>
+
+    <!-- MAIN DARK CARD -->
+    <div class="live-main-card">
+
+      <!-- FEAT 1 — LIVE -->
+      <div class="lmc-feat">
+        <div class="live-badge"><div class="live-badge-dot"></div> LIVE</div>
+        <div class="lmc-feat-icon">📡</div>
+        <div class="lmc-feat-title">100% Live Sessions<br>Entire 2 Months</div>
+        <div class="lmc-feat-desc">Month 1 live. Month 2 live.<br>Not a single pre-recorded video.</div>
+      </div>
+
+      <div class="lmc-divider"></div>
+
+      <!-- FEAT 2 — RECORDING -->
+      <div class="lmc-feat">
+        <div class="lmc-feat-icon">🎬</div>
+        <div class="lmc-feat-title">Recording Shared<br>After Every Class</div>
+        <div class="lmc-feat-desc">Missed a session? No worries.<br>Full recording sent right after.</div>
+      </div>
+
+      <div class="lmc-divider"></div>
+
+      <!-- FEAT 3 — EVENING -->
+      <div class="lmc-feat">
+        <div class="lmc-feat-icon">🌙</div>
+        <div class="lmc-feat-title">All Classes<br>in the Evening</div>
+        <div class="lmc-feat-desc">No clashes with college hours.<br>Study comfortably after college.</div>
+      </div>
+
+    </div>
+
+    
+  </div>
+</section>
+
+<!-- ========== DOMAINS SECTION ========== -->
+<style>
+  .domains-section {
+    background: #f9fafb;
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--green-border);
+  }
+  .domains-header {
+    max-width: 1100px; margin: 0 auto 52px; text-align: center;
+  }
+  .domains-header h2 {
+    font-size: 38px; font-weight: 900; color: var(--gray-900);
+    line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px;
+  }
+  .domains-header h2 .sec-brush {
+    color: var(--green-dark);
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .sec-brush-svg {
+    position: absolute;
+    left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px;
+    pointer-events: none;
+  }
+  .domains-header p {
+    font-size: 16px; color: var(--gray-600); font-weight: 600; line-height: 1.65;
+  }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--green-pale); border: 1.5px solid var(--green-border);
+    border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 700; color: var(--green-dark);
+    margin-bottom: 16px;
+  }
+
+  /* GRID */
+  .domains-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    max-width: 1200px;
+    margin: 0 auto 36px;
+  }
+
+  /* CARD */
+  .dcard {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1.5px solid #e5e7eb;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex; flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+  }
+  .dcard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
+  /* Full card clickable overlay */
+  .dcard-link-overlay {
+    position: absolute; inset: 0; z-index: 1;
+  }
+  .dcard-footer { position: relative; z-index: 2; }
+
+  /* DARK GREEN HEADER */
+  .dcard-head {
+    background: #0f4c25;
+    padding: 22px 20px 18px;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    min-height: 140px; justify-content: center;
+  }
+  .dcard-head::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  @keyframes blink { 0%,100%{opacity:0.8} 50%{opacity:0.2} }
+
+  /* TECH ICONS ROW */
+  .dcard-icons {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .dcard-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900;
+    flex-shrink: 0;
+  }
+  .dcard-domain-label {
+    font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.7);
+    text-transform: uppercase; letter-spacing: 1.2px; text-align: center;
+  }
+
+  /* CARD BODY */
+  .dcard-body {
+    padding: 18px 18px 20px;
+    display: flex; flex-direction: column; flex: 1;
+  }
+  .dcard-domain-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.8px; padding: 4px 10px;
+    border-radius: 20px; margin-bottom: 10px; width: fit-content;
+  }
+  .dcard h3 {
+    font-size: 18px; font-weight: 900; color: var(--gray-900);
+    line-height: 1.2; margin-bottom: 8px;
+  }
+  .dcard p {
+    font-size: 13px; color: var(--gray-600); font-weight: 600;
+    line-height: 1.6; margin-bottom: 14px;
+  }
+
+  /* PERKS PILLS */
+  .dcard-perks {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+  }
+  .perk-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; padding: 4px 10px;
+    border-radius: 20px; border: 1.5px solid #e5e7eb;
+    background: #f9fafb; color: var(--gray-700);
+  }
+
+  /* TECH PILLS */
+  .dcard-techs {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
+  }
+  .tech-pill {
+    font-size: 11px; font-weight: 700; padding: 4px 10px;
+    border-radius: 8px; background: var(--gray-100); color: var(--gray-700);
+    border: 1.5px solid #e5e7eb;
+  }
+
+  /* CARD FOOTER */
+  .dcard-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 1.5px solid #f3f4f6;
+    margin-top: auto; gap: 8px;
+  }
+  .refund-note strong { display: block; font-size: 13px; font-weight: 900; color: var(--green-dark); }
+  .refund-note span { font-size: 11px; font-weight: 600; color: var(--gray-600); }
+  .dcard-apply {
+    background: #16a34a; color: #fff;
+    border: none; border-radius: 10px;
+    padding: 10px 18px; font-size: 13px; font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .dcard-apply:hover { background: #15803d; transform: translateY(-1px); }
+
+  /* INDIVIDUAL CARD COLORS */
+  /* AIML */
+  .dcard.aiml .dcard-domain-tag { background: #f5f3ff; color: #6d28d9; }
+  .dcard.aiml .dcard-apply { background: #7c3aed; }
+  .dcard.aiml .dcard-apply:hover { background: #6d28d9; }
+
+  /* WEBDEV */
+  .dcard.webdev .dcard-domain-tag { background: #dcfce7; color: #15803d; }
+
+  /* ANALYTICS */
+  .dcard.analytics .dcard-domain-tag { background: #fef3c7; color: #92400e; }
+  .dcard.analytics .dcard-apply { background: #d97706; }
+  .dcard.analytics .dcard-apply:hover { background: #b45309; }
+
+  /* FRONTEND */
+  .dcard.frontend .dcard-domain-tag { background: #e0f2fe; color: #0369a1; }
+  .dcard.frontend .dcard-apply { background: #0ea5e9; }
+  .dcard.frontend .dcard-apply:hover { background: #0284c7; }
+
+  /* AIML 3-MONTH (FEATURED / MOST PURCHASED) - additive only, no existing rules touched */
+  .dcard.featured {
+    border-color: #f59e0b;
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.25);
+    overflow: visible;
+  }
+  .dcard.featured .dcard-head { border-radius: 20px 20px 0 0; }
+  .dcard.featured .dcard-body { border-radius: 0 0 20px 20px; }
+  .dcard.featured .dcard-domain-tag { background: #fef3c7; color: #92400e; }
+  .dcard.featured .dcard-apply { background: #f59e0b; }
+  .dcard.featured .dcard-apply:hover { background: #d97706; }
+  .most-purchased-badge {
+    position: absolute;
+    top: -16px; left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #fbbf24, #ea580c);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 8px 8px 8px 2px;
+    box-shadow: 0 6px 14px rgba(234, 88, 12, 0.4), 0 0 0 2px #fff;
+    z-index: 6;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .most-purchased-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .duration-chip {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  /* BOTTOM BANNER */
+  .domains-banner {
+    max-width: 1200px; margin: 0 auto;
+    background: linear-gradient(135deg, #0f4c25, #166534);
+    border-radius: 20px; padding: 32px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    color: #fff;
+  }
+  .domains-banner-left h4 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+  .domains-banner-left p { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.75); line-height: 1.6; }
+  .domains-banner-right { display: flex; gap: 0; flex-shrink: 0; }
+  .bstat { text-align: center; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.2); }
+  .bstat:last-child { border-right: none; }
+  .bstat strong { display: block; font-size: 24px; font-weight: 900; color: #4ade80; }
+  .bstat span { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.7); }
+
+  @media (max-width: 1024px) {
+    .domains-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .domains-section { padding: 48px 20px; }
+    .domains-grid { grid-template-columns: 1fr; }
+    .domains-header h2 { font-size: 28px; }
+    .domains-banner { flex-direction: column; }
+    .domains-banner-right { flex-wrap: wrap; justify-content: center; }
+    .bstat { padding: 8px 16px; border-right: none; }
+  }
+</style>
+
+<section id="domains-section" class="domains-section">
+
+  <div class="domains-header">
+   
+    <h2>Pick Your <span class="sec-brush">Internship Domain<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <p>5 domains available. Pick one and get your offer letter, certificate &amp; report card.</p>
+  </div>
+
+  <div class="domains-grid">
+
+    <!-- AIML -->
+    <div class="dcard aiml" onclick="window.open('aiml-internship-meta.html', '_blank')">
+      <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
+
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+          <div class="dcard-icon" style="background:#1e293b;font-size:20px;">🤖</div>
+          <div class="dcard-icon" style="background:#0f172a;font-size:20px;">🧠</div>
+          <div class="dcard-icon" style="background:#ede9fe;font-size:20px;">📊</div>
+        </div>
+        <div class="dcard-domain-label">AI & Machine Learning</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">🤖 AIML</div>
+        <h3>AI / ML<br> 2 Months Internship</h3>
+        <p>Build real ML models under mentor guidance and complete an industry project in 2 months.</p>
+        <div class="dcard-techs">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Scikit-learn</span>
+          <span class="tech-pill">Deep Learning</span>
+          <span class="tech-pill">NLP</span>
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>499 (100% Refundable)</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="aiml-internship-meta.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIML 3-MONTH DEDICATED PROGRAM (FEATURED / MOST PURCHASED) - 2ND POSITION -->
+    <div class="dcard aiml featured" onclick="window.open('3month-cerificate-based course.html', '_blank')">
+      <div class="most-purchased-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.4 7 .8-5.2 4.8 1.5 6.9L12 17.6 5.8 21l1.5-6.9L2.1 9.3l7-.9L12 2z"/></svg>Most Purchased</div>
+      <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+          <div class="dcard-icon" style="background:#1e293b;font-size:20px;">🤖</div>
+          <div class="dcard-icon" style="background:#0f172a;font-size:20px;">🧠</div>
+          <div class="dcard-icon" style="background:#ede9fe;font-size:20px;">📊</div>
+        </div>
+        <div class="dcard-domain-label">AI & Machine Learning — Dedicated Track</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">⭐ AIML DEDICATED</div>
+        <h3>AI / ML<br>3-Month Dedicated Internship</h3>
+        <p> Deeper mentorship, more live projects and extra weeks to truly master ML under expert guidance.</p>
+        <div class="dcard-perks">
+         
+          
+        </div>
+        <div class="dcard-techs">
+          <span class="tech-pill">📁 6 Live Projects</span>
+          <span class="tech-pill">Priority Certificate</span>
+          
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>699 (100% Refundable)</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="3month-cerificate-based course.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEB DEVELOPMENT -->
+    <div class="dcard webdev" onclick="window.open('webdev-internship-meta.html', '_blank')">
+      <div class="dcard-head">
+
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
+          <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
+          <div class="dcard-icon" style="background:#3c873a;font-size:20px;">🟢</div>
+          <div class="dcard-icon" style="background:#4db33d;font-size:20px;">🍃</div>
+        </div>
+        <div class="dcard-domain-label">Full Stack Web Development</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">💻 WEB DEVELOPMENT</div>
+        <h3>Web Dev<br>Internship</h3>
+        <p>Build real full-stack web apps under mentor guidance and complete an industry project in 2 months.</p>
+        <div class="dcard-techs">
+          <span class="tech-pill">React.js</span>
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">Express</span>
+          <span class="tech-pill">MongoDB</span>
+          <span class="tech-pill">JavaScript</span>
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>499 (100% Refundable)</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="webdev-internship-meta.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA ANALYTICS -->
+    <div class="dcard analytics" onclick="window.open('dataanalysis-internship-meta.html', '_blank')">
+      <div class="dcard-head" style="background: linear-gradient(145deg,#451a03,#92400e);">
+
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+          <div class="dcard-icon" style="background:#fff;font-size:20px;">📊</div>
+          <div class="dcard-icon" style="background:#217346;font-size:20px;">📗</div>
+          <div class="dcard-icon" style="background:#f2c811;font-size:20px;">⚡</div>
+        </div>
+        <div class="dcard-domain-label">Data Analytics</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">📊 DATA ANALYTICS</div>
+        <h3>Data Analytics<br>Internship</h3>
+        <p>Analyze real datasets, build dashboards and deliver actionable insights for industry projects in 2 months.</p>
+        <div class="dcard-techs">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">SQL</span>
+          <span class="tech-pill">Power BI</span>
+          <span class="tech-pill">Excel</span>
+          <span class="tech-pill">Matplotlib</span>
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>499 (100% Refundable)</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="dataanalysis-internship-meta.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRONTEND -->
+    <div class="dcard frontend" onclick="window.open('webdev-internship-meta.html', '_blank')">
+      <div class="dcard-head" style="background: linear-gradient(145deg,#0c2a4a,#0c4a6e);">
+
+        <div class="dcard-icons">
+          <div class="dcard-icon" style="background:#e34f26;font-size:18px;font-weight:900;color:#fff;">H</div>
+          <div class="dcard-icon" style="background:#1572b6;font-size:18px;font-weight:900;color:#fff;">C</div>
+          <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
+          <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
+        </div>
+        <div class="dcard-domain-label">Frontend Development</div>
+      </div>
+      <div class="dcard-body">
+        <div class="dcard-domain-tag">🎨 FRONTEND DEV</div>
+        <h3>Frontend Dev<br>Internship</h3>
+        <p>Build stunning UIs and pixel-perfect responsive websites under mentor guidance in 2 months.</p>
+        <div class="dcard-techs">
+          <span class="tech-pill">HTML5</span>
+          <span class="tech-pill">CSS3</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">React.js</span>
+          <span class="tech-pill">Tailwind</span>
+        </div>
+        <div class="dcard-footer">
+          <div class="refund-note">
+            <strong>499 (100% Refundable)</strong>
+            <span>Returned after completion</span>
+          </div>
+          <a href="webdev-internship-meta.html" class="dcard-apply">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+
+</section>
+
+
+
+
+
+
+
+<!-- ========== CERTIFICATE SECTION ========== -->
+<style>
+  .cert-section {
+    background: #f0fdf4;
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--green-border);
+  }
+  .cert-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .cert-header h2 {
+    font-size: 38px; font-weight: 900; color: var(--gray-900);
+    letter-spacing: -0.5px; line-height: 1.2;
+  }
+  .cert-header h2 .sec-brush {
+    color: var(--green-dark);
+    position: relative; display: inline-block; white-space: nowrap;
+  }
+  .cert-header h2 .sec-brush-svg {
+    position: absolute; left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px; pointer-events: none;
+  }
+
+  .cert-card {
+    max-width: 1000px; margin: 0 auto;
+    background: #fff;
+    border-radius: 24px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  /* LEFT - Certificate Preview */
+  .cert-preview {
+    flex: 0 0 420px;
+    background: #f8fafc;
+    border-right: 1.5px solid #e5e7eb;
+    padding: 32px 28px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .cert-img-wrap {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+  /* Fake certificate design matching screenshot */
+  .cert-fake {
+    width: 100%;
+    padding: 22px 20px 18px;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    border: 3px solid #1e3a8a;
+    border-radius: 12px;
+    background: #fff;
+  }
+  .cert-fake-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .cert-logo-area { display: flex; flex-direction: column; }
+  .cert-logo-name {
+    font-size: 13px; font-weight: 900; color: #1e3a8a; letter-spacing: 1px;
+  }
+  .cert-logo-sub { font-size: 8px; color: #64748b; letter-spacing: 1.5px; text-transform: uppercase; }
+  /* Geometric shapes top right */
+  .cert-shapes {
+    display: grid; grid-template-columns: repeat(3, 20px); gap: 3px;
+  }
+  .cs { width: 20px; height: 20px; border-radius: 3px; }
+  .cs.blue { background: #1e3a8a; }
+  .cs.purple { background: #7c3aed; }
+  .cs.circle { border-radius: 50%; }
+  .cs.half { border-radius: 50% 0 0 50%; }
+
+  .cert-title-line {
+    font-size: 11px; font-weight: 900; color: #1e3a8a;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .cert-subtitle-line {
+    font-size: 13px; font-weight: 900; color: #1e3a8a;
+    margin-bottom: 6px;
+  }
+  .cert-id-line { font-size: 8px; color: #64748b; margin-bottom: 8px; }
+  .cert-awarded { font-size: 8px; color: #64748b; margin-bottom: 3px; }
+  .cert-name {
+    font-size: 26px; font-weight: 900; color: #111827;
+    line-height: 1.1; margin-bottom: 8px;
+  }
+  .cert-dots-row {
+    display: flex; gap: 3px; margin-bottom: 10px;
+  }
+  .cert-dot { width: 4px; height: 4px; border-radius: 50%; background: #cbd5e1; }
+  .cert-body-text {
+    font-size: 7px; color: #64748b; line-height: 1.6; margin-bottom: 12px;
+  }
+  .cert-sigs {
+    display: flex; gap: 24px; margin-bottom: 10px;
+  }
+  .cert-sig { display: flex; flex-direction: column; }
+  .cert-sig-line {
+    font-size: 14px; color: #374151; font-style: italic;
+    font-family: Georgia, serif; margin-bottom: 2px;
+  }
+  .cert-sig-name { font-size: 7px; font-weight: 800; color: #111; }
+  .cert-sig-role { font-size: 6.5px; color: #64748b; }
+  .cert-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid #e5e7eb; padding-top: 8px;
+  }
+  .cert-qr {
+    width: 28px; height: 28px; background: #111;
+    border-radius: 3px; display: grid;
+    grid-template-columns: repeat(5,1fr); gap: 1px; padding: 3px;
+  }
+  .qr-dot { background: #111; border-radius: 1px; }
+  .qr-dot.w { background: #fff; }
+  .cert-badges { display: flex; gap: 6px; align-items: center; }
+  .cert-badge-item {
+    font-size: 6px; font-weight: 800; color: #1e3a8a;
+    border: 1px solid #1e3a8a; border-radius: 3px;
+    padding: 2px 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .cert-id-bottom { font-size: 6px; color: #94a3b8; text-align: right; }
+
+  /* RIGHT - Info */
+  .cert-info {
+    flex: 1; padding: 48px 48px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .cert-info h3 {
+    font-size: 26px; font-weight: 900; color: var(--green-dark);
+    margin-bottom: 16px; line-height: 1.2;
+  }
+  .cert-info p {
+    font-size: 15px; color: var(--gray-600); font-weight: 600;
+    line-height: 1.75; margin-bottom: 20px;
+  }
+  .cert-info p b { color: var(--gray-900); }
+  .cert-id-box {
+    background: #f9fafb; border: 1.5px solid #e5e7eb;
+    border-radius: 10px; padding: 12px 18px;
+    font-size: 14px; font-weight: 700; color: var(--gray-700);
+    margin-bottom: 28px; display: inline-block;
+  }
+  .cert-id-box span { color: var(--gray-900); font-weight: 900; }
+  .btn-view-cert {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-dark); color: #fff;
+    border: none; border-radius: 50px;
+    padding: 14px 32px; font-size: 15px; font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s; width: fit-content;
+    box-shadow: 0 4px 16px rgba(21,128,61,0.3);
+  }
+  .btn-view-cert:hover { background: #166534; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(21,128,61,0.4); }
+
+  @media (max-width: 860px) {
+    .cert-section { padding: 48px 20px; }
+    .cert-card { flex-direction: column; }
+    .cert-preview { flex: none; width: 100%; border-right: none; border-bottom: 1.5px solid #e5e7eb; }
+    .cert-info { padding: 28px 24px; }
+    .cert-header h2 { font-size: 28px; }
+  }
+</style>
+
+<section class="cert-section">
+  <div class="cert-header">
+    <h2>Professional <span class="sec-brush">Certificates<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+  </div>
+
+  <div class="cert-card">
+
+    <!-- LEFT: Certificate Preview -->
+    <div class="cert-preview">
+      <div class="cert-img-wrap">
+        <!-- Yahan apni certificate ki image ka path/URL daalo -->
+        <img src="internshipcomplete-certificate.png" alt="3Skill Internship Certificate" style="width:100%;height:auto;display:block;border-radius:12px;" />
+      </div>
+    </div>
+
+    <!-- RIGHT: Info -->
+    <div class="cert-info">
+      <h3>Internship Completion Certificate</h3>
+      <p>
+        Successfully completed an internship program under <b>3Skill</b>, gaining hands-on
+        experience in real-world projects and professional development training.
+      </p>
+      <div class="cert-id-box">
+        <b>Certificate ID:</b> <span>3SK-INT-2026-XXX</span>
+      </div>
+      <a href="internshipcomplete-certificate.png" class="btn-view-cert">View Certificate</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== STORIES / REVIEW SECTION ========== -->
+<style>
+  .stories-section {
+    background: #f8fafc;
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--green-border);
+  }
+  .stories-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .stories-header h2 {
+    font-size: 38px; font-weight: 900; color: var(--gray-900);
+    letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 10px;
+  }
+  .stories-header h2 .sec-brush {
+    color: var(--green-dark);
+    position: relative; display: inline-block; white-space: nowrap;
+  }
+  .stories-header h2 .sec-brush-svg {
+    position: absolute; left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px; pointer-events: none;
+  }
+  .stories-header .sub {
+    font-size: 15px; font-weight: 700; color: var(--gray-600);
+    letter-spacing: 1px;
+  }
+
+  /* GRID */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* CARD */
+  .story-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .story-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+  }
+
+  /* VIDEO THUMB */
+  .story-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #e2e8f0;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .story-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.3s;
+  }
+  .story-card:hover .story-thumb img { transform: scale(1.04); }
+
+  /* PLAY BTN */
+  .story-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; height: 56px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    z-index: 2;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .story-card:hover .story-play {
+    transform: translate(-50%, -50%) scale(1.12);
+    background: #fff;
+  }
+  .story-play svg {
+    width: 20px; height: 20px;
+    fill: #16a34a; margin-left: 3px;
+  }
+
+  /* QUOTE BODY */
+  .story-body {
+    padding: 20px 22px 24px;
+  }
+  .quote-open {
+    font-size: 32px; font-weight: 900; color: #7c3aed;
+    line-height: 0.5; display: block; margin-bottom: 10px;
+  }
+  .story-body h4 {
+    font-size: 15px; font-weight: 900; color: var(--gray-900);
+    line-height: 1.4; margin-bottom: 12px;
+  }
+  .quote-close {
+    text-align: right; font-size: 32px; font-weight: 900;
+    color: #7c3aed; line-height: 0.5; display: block;
+    margin-bottom: 10px;
+  }
+  .story-divider {
+    width: 100%; height: 1.5px; background: #f1f5f9; margin-bottom: 12px;
+  }
+  .story-body p {
+    font-size: 13px; color: var(--gray-600); font-weight: 600;
+    line-height: 1.7;
+  }
+
+  /* iframe overlay */
+  .story-iframe-wrap {
+    display: none;
+    position: absolute; inset: 0; z-index: 10;
+  }
+  .story-iframe-wrap iframe {
+    width: 100%; height: 100%; border: none;
+  }
+  .story-iframe-wrap.active { display: block; }
+
+  @media (max-width: 900px) {
+    .stories-section { padding: 48px 20px; }
+    .stories-grid { grid-template-columns: 1fr; gap: 20px; }
+    .stories-header h2 { font-size: 22px; }
+  }
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="stories-section">
+
+  <div class="stories-header">
+    
+    <h2>From Free Intern to <span class="sec-brush">Paid Intern<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <div class="sub">Real growth stories from our interns 🚀</div>
+  </div>
+
+  <div class="stories-grid">
+
+    <!-- CARD 1 -->
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb1" onclick="loadStory(1)">
+        <img src="janvireviewposter.png" alt="Story 1" onerror="this.style.display='none'" />
+        <div class="story-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="story-iframe-wrap" id="sFrame1">
+          <iframe id="sIframe1" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Learn project planning, lead teams, and turn ideas into real outcomes</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I started my journey as a free project management intern and, through consistent performance and learning, earned the opportunity to convert into a paid intern. Managing real projects, coordinating with teams, and delivering results helped me grow professionally.</p>
+      </div>
+    </div>
+
+
+     <!-- CARD 3 -->
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb3" onclick="loadStory(3)">
+        <img src="aarya-review-3skill.png" alt="Story 3" onerror="this.style.display='none'" /> 
+        <div class="story-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="story-iframe-wrap" id="sFrame3">
+          <iframe id="sIframe3" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Start as a free intern, grow your skills, and step into a paid internship</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I started as a free intern and ended up getting a paid internship! 3Skill guided me step-by-step into Data Science and helped me land real projects.</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="story-card">
+      <div class="story-thumb" id="sThumb2" onclick="loadStory(2)">
+        <img src="payelreview poster.png" alt="Story 2" onerror="this.style.display='none'" />
+        <div class="story-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="story-iframe-wrap" id="sFrame2">
+          <iframe id="sIframe2" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="quote-open">"</span>
+        <h4>Started as a free intern, grew into a paid web development role</h4>
+        <span class="quote-close">"</span>
+        <div class="story-divider"></div>
+        <p>I began as a free intern and gradually earned a paid web development internship by delivering tasks on time and improving my coding skills. This experience gave me hands-on exposure to real projects and professional workflows.</p>
+      </div>
+    </div>
+
+   
+
+  </div>
+</section>
+
+<script>
+  // ✅ Yahan apne 3 YouTube video IDs daalo
+  var storyVideos = {
+    1: "5Ja2UtYjtWk",
+    2: "hLEKzRY2wvw",
+    3: "kLimNAe5ivg"
+  };
+  function loadStory(n) {
+    var iframe = document.getElementById("sIframe" + n);
+    var frame  = document.getElementById("sFrame" + n);
+    var thumb  = document.getElementById("sThumb" + n);
+    iframe.src = "https://www.youtube.com/embed/" + storyVideos[n] + "?autoplay=1&rel=0";
+    frame.classList.add("active");
+    // hide play btn and other overlays
+    thumb.querySelectorAll('.story-play, .story-tag, .story-name, img').forEach(function(el){ el.style.display='none'; });
+  }
+</script>
+
+
+
+
+
+
+
+ 
+
+
+<!-- WHY CHOOSE US COMPARISON -->
+<section class="compare-section">
+  <div class="compare-inner">
+   <div class="stories-header">
+    
+    <h2>Why <span class="sec-brush">3Skill Training?<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <div class="sub">See how we stack up against other platforms.</div>
+  </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="col-feature">Features</th>
+            <th class="col-us">
+              <div class="us-header">
+                3Skill Training
+              </div>
+            </th>
+            <th class="col-other">Other Platforms</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Affordable Price</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>100% Live Classes</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Live Doubt Solving</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Group-Based Learning</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Dedicated Projects</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Industry Certificate</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Placement Assistance</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+          <tr>
+            <td>Internship Support</td>
+            <td><span class="chk yes"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td><span class="chk no"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare-section {
+    padding: 70px 60px;
+    background: var(--gray-100);
+  }
+  .compare-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .compare-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1.5px solid #e5e7eb;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    text-align: center;
+  }
+
+  /* HEADER */
+  .compare-table thead tr {
+    border-bottom: 1.5px solid #e5e7eb;
+  }
+  .compare-table th {
+    padding: 22px 20px;
+    font-size: 15px; font-weight: 800;
+    color: var(--gray-700);
+  }
+  .compare-table th.col-feature {
+    text-align: left;
+    padding-left: 32px;
+    width: 50%;
+    color: var(--gray-600);
+    font-size: 14px; font-weight: 700;
+  }
+  .compare-table th.col-us {
+    background: #f0fdf4;
+    color: var(--green-dark);
+    font-size: 16px; font-weight: 900;
+    border-left: 1.5px solid var(--green-border);
+    border-right: 1.5px solid var(--green-border);
+  }
+  .compare-table th.col-other {
+    color: var(--gray-600);
+    font-size: 14px; font-weight: 700;
+  }
+  .us-header {
+    display: flex; align-items: center;
+    justify-content: center; gap: 8px;
+  }
+
+  /* ROWS */
+  .compare-table tbody tr {
+    border-bottom: 1.5px solid #f3f4f6;
+    transition: background 0.15s;
+  }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table tbody tr:hover { background: #f9fafb; }
+
+  .compare-table td {
+    padding: 22px 20px;
+    font-size: 15px; font-weight: 700;
+    color: var(--gray-900);
+  }
+  .compare-table td:first-child {
+    text-align: left;
+    padding-left: 32px;
+  }
+
+  /* Green middle column */
+  .compare-table td:nth-child(2) {
+    background: rgba(240,253,244,0.5);
+    border-left: 1.5px solid var(--green-border);
+    border-right: 1.5px solid var(--green-border);
+  }
+
+  /* ICONS */
+  .chk {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+  }
+  .chk.yes {
+    background: #22c55e;
+    box-shadow: 0 4px 12px rgba(34,197,94,0.35);
+  }
+  .chk.no {
+    background: #f87171;
+    box-shadow: 0 4px 12px rgba(248,113,113,0.3);
+  }
+
+  @media (max-width: 960px) {
+    .compare-section { padding: 50px 20px; }
+    .compare-table th,
+    .compare-table td { padding: 16px 12px; font-size: 13px; }
+    .compare-table th.col-feature,
+    .compare-table td:first-child { padding-left: 16px; }
+    .chk { width: 30px; height: 30px; }
+    .chk svg { width: 13px; height: 13px; }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== VIDEO SECTION ========== -->
+<style>
+  .video-section {
+    background: #fff;
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--green-border);
+  }
+  .video-section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .video-section-header h2 {
+    font-size: 38px; font-weight: 900; color: var(--gray-900);
+    letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 12px;
+  }
+  .video-section-header h2 .sec-brush {
+    color: var(--green-dark);
+    position: relative; display: inline-block; white-space: nowrap;
+  }
+  .video-section-header h2 .sec-brush-svg {
+    position: absolute; left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px; pointer-events: none;
+  }
+  .video-section-header p {
+    font-size: 16px; color: var(--gray-600); font-weight: 600; line-height: 1.65;
+  }
+
+  /* VIDEO WRAPPER */
+  .yt-outer {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    aspect-ratio: 16/9;   /* ✅ FIX 1 */
+  }
+
+  /* THUMBNAIL + PLAY */
+  .yt-thumb-wrap {
+    position: absolute; inset: 0;   /* ✅ FIX 2 */
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    cursor: pointer;
+    background: #000;
+  }
+  .yt-thumb-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s, opacity 0.3s;
+  }
+  .yt-thumb-wrap:hover img {
+    transform: scale(1.03);
+    opacity: 0.85;
+  }
+
+  /* dark overlay */
+  .yt-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    border-radius: 22px;
+  }
+
+  /* PLAY BUTTON */
+  .yt-play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    background: #ff0000;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(255,0,0,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+    z-index: 2;
+    animation: pulse-play 2s ease-in-out infinite;
+  }
+  .yt-thumb-wrap:hover .yt-play-btn {
+    transform: translate(-50%, -50%) scale(1.12);
+    box-shadow: 0 12px 48px rgba(255,0,0,0.7);
+    animation: none;
+  }
+  .yt-play-btn svg {
+    width: 30px; height: 30px;
+    fill: #fff;
+    margin-left: 5px;
+  }
+  .yt-play-btn::before,
+  .yt-play-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0; border-radius: 50%;
+    background: rgba(255,0,0,0.4);
+    animation: ripple-play 2s ease-out infinite;
+  }
+  .yt-play-btn::after { animation-delay: 1s; }
+  @keyframes pulse-play {
+    0%,100% { box-shadow: 0 8px 32px rgba(255,0,0,0.5); transform: translate(-50%,-50%) scale(1); }
+    50%      { box-shadow: 0 8px 48px rgba(255,0,0,0.8); transform: translate(-50%,-50%) scale(1.07); }
+  }
+  @keyframes ripple-play {
+    0%   { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  /* LIVE BADGE */
+  .yt-live-badge {
+    position: absolute; top: 18px; left: 18px;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+    color: #fff; font-size: 12px; font-weight: 800;
+    padding: 5px 12px; border-radius: 20px;
+    display: flex; align-items: center; gap: 6px;
+    z-index: 2;
+  }
+  .yt-live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #ff0000;
+    animation: blink-red 1.2s ease-in-out infinite;
+  }
+  @keyframes blink-red { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* BOTTOM LABEL */
+  .yt-bottom-label {
+    position: absolute; bottom: 20px; left: 24px; right: 24px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    z-index: 2;
+  }
+  .yt-title-text {
+    color: #fff; font-size: 15px; font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    line-height: 1.3;
+  }
+  .yt-duration {
+    background: rgba(0,0,0,0.7); color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* YOUTUBE IFRAME */
+  .yt-iframe-wrap {
+    display: none;
+    position: absolute; inset: 0;   /* ✅ FIX 3 */
+    border-radius: 22px; overflow: hidden;
+    z-index: 10;
+  }
+  .yt-iframe-wrap iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .yt-iframe-wrap.active { display: block; }
+
+  /* INFO ROW BELOW VIDEO */
+  .yt-info-row {
+    max-width: 860px; margin: 24px auto 0;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .yt-info-left { display: flex; align-items: center; gap: 14px; }
+  .yt-channel-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #f0fdf4; border: 2px solid var(--green-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900; color: var(--green-dark);
+    flex-shrink: 0; overflow: hidden;
+  }
+  .yt-channel-text strong { display: block; font-size: 14px; font-weight: 900; color: var(--gray-900); }
+  .yt-channel-text span { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+  .yt-info-right { display: flex; gap: 10px; }
+  .yt-stat-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #f3f4f6; border-radius: 20px;
+    padding: 7px 14px; font-size: 12px; font-weight: 700; color: var(--gray-700);
+  }
+
+  @media (max-width: 768px) {
+    .video-section { padding: 48px 20px; }
+    .video-section-header h2 { font-size: 26px; }
+    .yt-play-btn { width: 60px; height: 60px; }
+    .yt-play-btn svg { width: 22px; height: 22px; }
+    .yt-info-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<section class="video-section">
+
+  <div class="video-section-header">
+    
+    <h2>See What Awaits <span class="sec-brush">Top Performers<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <p>Top performing interns get exclusive access to IIT Kharagpur campus. Watch and get inspired!</p>
+  </div>
+
+  <div class="yt-outer">
+
+    <!-- THUMBNAIL + PLAY -->
+    <div class="yt-thumb-wrap" id="ytThumb" onclick="loadYT()">
+
+      <img src="iitkgpimage2.png" alt="IIT Kharagpur Campus Tour" />
+
+      <div class="yt-overlay"></div>
+
+      <div class="yt-live-badge">
+        <div class="yt-live-dot"></div>
+        IIT Kharagpur Campus
+      </div>
+
+      <div class="yt-play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+
+      <div class="yt-bottom-label">
+        <div class="yt-title-text">IIT Kharagpur – India's Premier<br>Engineering Institution</div>
+        <div class="yt-duration">4:32</div>
+      </div>
+
+    </div>
+
+    <!-- YOUTUBE IFRAME -->
+    <div class="yt-iframe-wrap" id="ytFrame">
+      <iframe
+        id="ytIframe"
+        src=""
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+  </div>
+
+  <div class="yt-info-row">
+    <div class="yt-info-left">
+      <div class="yt-channel-icon">
+        <img src="download.png" alt="3Skill" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.innerHTML='3S';" />
+      </div>
+      <div class="yt-channel-text">
+        <strong>3Skill Official</strong>
+        <span>Summer Internship 2026 · IIT Kharagpur</span>
+      </div>
+    </div>
+    <div class="yt-info-right">
+      <div class="yt-stat-pill">👁️ 2.4M Views</div>
+      <div class="yt-stat-pill">👍 98K Likes</div>
+      <div class="yt-stat-pill">🎓 Top Performers Only</div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  function loadYT() {
+    var videoId = "fmgvaosNwCw";
+    var thumb = document.getElementById("ytThumb");
+    var frame = document.getElementById("ytFrame");
+    var iframe = document.getElementById("ytIframe");
+
+    iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+    thumb.style.display = "none";
+    frame.classList.add("active");
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== TESTIMONIAL SECTION ========== -->
+<style>
+  .testi-section {
+    background: #f0fdf4;
+    padding: 80px 0 80px;
+    overflow: hidden;
+    border-top: 1px solid var(--green-border);
+    border-bottom: 1px solid var(--green-border);
+  }
+  .testi-header {
+    text-align: center; margin-bottom: 48px; padding: 0 60px;
+  }
+  .testi-header h2 {
+    font-size: 36px; font-weight: 900; color: var(--gray-900);
+    line-height: 1.25; margin-bottom: 10px;
+  }
+  .testi-header h2 .sec-brush {
+    color: var(--green-dark); position: relative; display: inline-block;
+  }
+  .testi-header h2 .sec-brush-svg {
+    position: absolute; left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px; pointer-events: none;
+  }
+  .testi-header p {
+    font-size: 15px; color: var(--gray-600); font-weight: 600;
+  }
+
+  /* MARQUEE TRACK */
+  .testi-track-wrap {
+    position: relative;
+  }
+  .testi-track-wrap::before,
+  .testi-track-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+  }
+  .testi-track-wrap::before { left: 0; background: linear-gradient(to right, #f0fdf4, transparent); }
+  .testi-track-wrap::after  { right: 0; background: linear-gradient(to left, #f0fdf4, transparent); }
+
+  .testi-track {
+    display: flex; gap: 20px;
+    width: max-content;
+    animation: testiScroll 35s linear infinite;
+  }
+  .testi-track:hover { animation-play-state: paused; }
+
+  @keyframes testiScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* CARD */
+  .testi-card {
+    width: 320px; flex-shrink: 0;
+    background: #fff;
+    border: 1.5px solid var(--green-border);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 2px 12px rgba(22,163,74,0.06);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .testi-card:hover {
+    box-shadow: 0 8px 28px rgba(22,163,74,0.13);
+    transform: translateY(-3px);
+  }
+
+  /* TOP ROW */
+  .testi-top {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .testi-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    object-fit: cover; border: 2.5px solid var(--green-border);
+    flex-shrink: 0; background: #dcfce7;
+  }
+  .testi-avatar-fallback {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, #16a34a, #4ade80);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; color: #fff;
+    flex-shrink: 0; border: 2.5px solid var(--green-border);
+  }
+  .testi-name {
+    font-size: 15px; font-weight: 900; color: var(--gray-900);
+  }
+  .testi-role {
+    font-size: 12px; font-weight: 700; color: var(--green-dark);
+    background: var(--green-pale); border-radius: 20px;
+    padding: 2px 10px; display: inline-block; margin-top: 3px;
+  }
+
+  /* STARS */
+  .testi-stars { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+
+  /* DIVIDER */
+  .testi-card hr { border: none; border-top: 1.5px solid #dcfce7; margin: 0; }
+
+  /* TEXT */
+  .testi-text {
+    font-size: 13.5px; color: var(--gray-600); font-weight: 600;
+    line-height: 1.75;
+    display: -webkit-box; -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  /* QUOTE MARK */
+  .testi-quote { font-size: 40px; color: var(--green-border); line-height: 0.5; font-family: Georgia, serif; }
+
+  @media(max-width: 600px){
+    .testi-section { padding: 48px 0; }
+    .testi-header { padding: 0 20px; }
+    .testi-header h2 { font-size: 26px; }
+    .testi-card { width: 280px; }
+  }
+</style>
+
+<section class="testi-section">
+  <div class="testi-header">
+    <div class="section-tag">⭐ Student Reviews</div>
+    <h2>Hear What Our <span class="sec-brush">Interns<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span> Have to Say</h2>
+    <p>Hear directly from our students about their learning experiences and achievements.</p>
+  </div>
+
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testiTrack">
+
+      <!-- CARD 1 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Udit Rathore.jpeg" alt="Udit Rathore" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">U</div>
+          <div><div class="testi-name">Udit Rathore</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My web development internship at 3Skill was an amazing hands-on learning experience. The mentors explained each concept clearly, from HTML and CSS to APIs and hosting. Working on real projects gave me confidence, and every live class felt like building something new.</div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250627-WA0003 - Renee Chettiar.jpg" alt="Renee Chettiar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">R</div>
+          <div><div class="testi-name">Renee Chettiar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship at 3Skill helped me gain practical exposure to real-world data. I learned how to clean, analyze, and visualize data using Python and Excel. The live classes were very interactive, and mentors guided us patiently.</div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_8763 - Garima kaushik.jpeg" alt="Garima Kaushik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Garima Kaushik</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Digital Marketing internship gave me real experience in running campaigns, creating content, and understanding analytics. The mentors were friendly and helped me understand how marketing actually works in the industry.</div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_20250905_174610 - puja Vermaa.jpg" alt="Puja Vermaa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Puja Vermaa</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship taught me how to turn raw data into meaningful insights. The mentors helped us step-by-step during live classes, and I worked on multiple mini projects that improved my analytical skills.</div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1637 Neha - Neha Mirajkar.jpg" alt="Neha Mirajkar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Neha Mirajkar</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AI/ML internship gave me the perfect balance of theory and practice. I worked on live machine learning models and learned to use libraries like TensorFlow and Scikit-learn. Mentors made sure we understood each topic deeply.</div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Snigdh Kumar.jpeg" alt="Snigdh Kumar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Snigdh Kumar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Learning data analytics at 3Skill was an eye-opening experience. We worked on live datasets, learned visualization tools, and got real feedback from mentors. Collaborating with other interns helped me learn teamwork and communication.</div>
+      </div>
+
+      <!-- CARD 7 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250901-WA0013 - Lavanya rastogi.jpg" alt="Lavanya Rastogi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">L</div>
+          <div><div class="testi-name">Lavanya Rastogi</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship helped me understand the full cycle of digital marketing — from content creation to running ad campaigns. The live classes were engaging, mentors were very friendly, and every project improved my creativity.</div>
+      </div>
+
+      <!-- CARD 8 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Photo - Prerna Deshmukh.jpg" alt="Prerna Deshmukh" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Prerna Deshmukh</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AIML internship at 3Skill helped me gain confidence in working with real-world data and machine learning models. The sessions were clear, and mentors guided us patiently. The environment was positive and motivating every day.</div>
+      </div>
+
+      <!-- CARD 9 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="SHE PHOTO - Shekhar Jha.jpg" alt="Shekhar Jha" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Shekhar Jha</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship not only improved my technical knowledge but also prepared me professionally. Resume sessions, feedback calls, and live projects helped me build confidence for any analytics-related interview.</div>
+      </div>
+
+      <!-- CARD 10 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250715-WA0035 - Samyak Jain.jpg" alt="Samyak Jain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Samyak Jain</div><div class="testi-role">Fullstack Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Fullstack Development internship at 3Skill was super practical. I worked on both frontend and backend projects, learned about APIs, and deployed real apps. Every task gave me new problem-solving challenges.</div>
+      </div>
+
+      <!-- CARD 11 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG20250906120911 - Geetanjali Nakhate.jpg" alt="Geetanjali Nakhate" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Geetanjali Nakhate</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">At 3Skill, I got to build real websites from scratch using HTML, CSS, and JavaScript. The live sessions were easy to follow, and mentors cleared every doubt with patience. The internship gave me confidence to work on freelance projects.</div>
+      </div>
+
+      <!-- CARD 12 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG20250215133641 - Nikita Zade.jpg" alt="Nikita Zade" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Nikita Zade</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship helped me explore the real power of data. I worked on multiple analysis projects using Python and Excel. The mentors explained everything clearly in live sessions and encouraged us to think critically.</div>
+      </div>
+
+      <!-- CARD 13 -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1000088212 - SOHAIL AHMED.png" alt="Sohail Ahmed" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Sohail Ahmed</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My digital marketing internship was full of creativity and learning. We ran ad campaigns, studied audience behavior, and learned content strategy. The live classes were fun, and mentors always gave honest feedback.</div>
+      </div>
+
+      <!-- DUPLICATE SET FOR INFINITE SCROLL -->
+      <!-- CARD 1 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Udit Rathore.jpeg" alt="Udit Rathore" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">U</div>
+          <div><div class="testi-name">Udit Rathore</div><div class="testi-role">Web Development Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My web development internship at 3Skill was an amazing hands-on learning experience. The mentors explained each concept clearly, from HTML and CSS to APIs and hosting. Working on real projects gave me confidence, and every live class felt like building something new.</div>
+      </div>
+      <!-- CARD 2 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG-20250627-WA0003 - Renee Chettiar.jpg" alt="Renee Chettiar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">R</div>
+          <div><div class="testi-name">Renee Chettiar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The Data Analytics internship at 3Skill helped me gain practical exposure to real-world data. I learned how to clean, analyze, and visualize data using Python and Excel. The live classes were very interactive.</div>
+      </div>
+      <!-- CARD 3 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_8763 - Garima kaushik.jpeg" alt="Garima Kaushik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">G</div>
+          <div><div class="testi-name">Garima Kaushik</div><div class="testi-role">Digital Marketing Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My Digital Marketing internship gave me real experience in running campaigns, creating content, and understanding analytics. Every week we learned something new and applied it practically.</div>
+      </div>
+      <!-- CARD 4 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="IMG_20250905_174610 - puja Vermaa.jpg" alt="Puja Vermaa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">P</div>
+          <div><div class="testi-name">Puja Vermaa</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">This internship taught me how to turn raw data into meaningful insights. The mentors helped us step-by-step during live classes, and I worked on multiple mini projects that improved my analytical skills.</div>
+      </div>
+      <!-- CARD 5 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="1637 Neha - Neha Mirajkar.jpg" alt="Neha Mirajkar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">N</div>
+          <div><div class="testi-name">Neha Mirajkar</div><div class="testi-role">AIML Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The AI/ML internship gave me the perfect balance of theory and practice. I worked on live machine learning models and learned to use libraries like TensorFlow and Scikit-learn.</div>
+      </div>
+      <!-- CARD 6 dup -->
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="Snigdh Kumar.jpeg" alt="Snigdh Kumar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="testi-avatar-fallback" style="display:none">S</div>
+          <div><div class="testi-name">Snigdh Kumar</div><div class="testi-role">Data Analytics Intern</div></div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <hr/>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Learning data analytics at 3Skill was an eye-opening experience. We worked on live datasets, learned visualization tools, and got real feedback from mentors.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- ========== FAQ SECTION ========== -->
+<style>
+  .faq-section {
+    background: #f0fdf4;
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--green-border);
+  }
+  .faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .faq-header h2 {
+    font-size: 38px; font-weight: 900; color: var(--gray-900);
+    margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.2;
+  }
+  .faq-header h2 .sec-brush {
+    color: var(--green-dark);
+    position: relative; display: inline-block; white-space: nowrap;
+  }
+  .faq-header h2 .sec-brush-svg {
+    position: absolute; left: -4px; bottom: -6px;
+    width: calc(100% + 8px); height: 18px; pointer-events: none;
+  }
+  .faq-header p {
+    font-size: 15px; color: var(--gray-600); font-weight: 600;
+  }
+
+  .faq-list {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .faq-item {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+  }
+  .faq-item.open {
+    border-color: #bbf7d0;
+    box-shadow: 0 4px 16px rgba(22,163,74,0.08);
+  }
+
+  .faq-q {
+    width: 100%; background: none; border: none;
+    padding: 18px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; cursor: pointer; text-align: left;
+    font-family: 'Nunito', sans-serif;
+  }
+  .faq-q-left {
+    display: flex; align-items: center; gap: 12px;
+    flex: 1;
+  }
+  .faq-emoji { font-size: 18px; flex-shrink: 0; }
+  .faq-q-text {
+    font-size: 15px; font-weight: 700; color: var(--gray-900);
+    line-height: 1.4;
+  }
+  .faq-item.open .faq-q-text { color: var(--green-dark); }
+
+  .faq-chevron {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #f3f4f6; border: 1.5px solid #e5e7eb;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.25s;
+    color: var(--gray-600);
+  }
+  .faq-chevron svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; stroke-width: 2.5;
+    fill: none; transition: transform 0.25s;
+  }
+  .faq-item.open .faq-chevron {
+    background: var(--green-pale); border-color: var(--green-border);
+    color: var(--green-dark);
+  }
+  .faq-item.open .faq-chevron svg { transform: rotate(180deg); }
+
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+    padding: 0 20px 0 50px;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding: 0 20px 18px 50px;
+  }
+  .faq-a p {
+    font-size: 14px; color: var(--gray-600); font-weight: 600;
+    line-height: 1.75; border-top: 1.5px solid #f3f4f6; padding-top: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .faq-section { padding: 52px 20px; }
+    .faq-header h2 { font-size: 24px; }
+    .faq-a { padding: 0 16px 0 16px; }
+    .faq-item.open .faq-a { padding: 0 16px 16px 16px; }
+  }
+</style>
+
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="section-tag">❓ Got Questions?</div>
+    <h2>3Skill 2-Month Internship – <span class="sec-brush">FAQs<svg class="sec-brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none"><path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/><path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13" stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/></svg></span></h2>
+    <p>All you need to know about our internship, projects, benefits &amp; certification.</p>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">💡</span><span class="faq-q-text">What is the 2-Month Internship Program?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Our 2-Month Summer Internship is divided into two phases — Month 1 is live classes with expert mentors, and Month 2 is a hands-on project phase where you build real industry projects. You also get a certificate and a chance to visit IIT Kharagpur campus.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🧑</span><span class="faq-q-text">Who can join this internship?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Any student from any college or university can join — 1st year to final year. Whether you're from CSE, IT, or any other branch, as long as you're eager to learn and build, you're welcome!</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🌐</span><span class="faq-q-text">Which domains are available right now?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>We currently offer 4 domains: AI & Machine Learning, Web Development, Data Analytics, and Frontend Development. Each domain has dedicated mentors, live sessions, and project work.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🗓️</span><span class="faq-q-text">How is the internship structured?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Month 1: Live online classes, doubt sessions, assignments and learning resources. Month 2: Project building phase where you work on a real industry problem independently with mentor guidance.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">💼</span><span class="faq-q-text">Will I get job or paid internship opportunities after completion?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Top performers are considered for paid internship roles at 3Skill and our partner companies. We actively help students grow from free interns to paid interns based on their project performance.</p></div>
+    </div>
+
+   
+
+   <div class="faq-item">
+  <button class="faq-q" onclick="toggleFaq(this)">
+    <div class="faq-q-left">
+      <span class="faq-emoji">💰</span>
+      <span class="faq-q-text">Is the internship free or paid?</span>
+    </div>
+    <div class="faq-chevron">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </button>
+
+  <div class="faq-a">
+    <p>
+      You only pay <strong>₹499 as a slot booking fee</strong> to reserve your seat in the internship batch.  
+      The amount is <strong>100% refundable with simple terms & conditions</strong>.  
+      There are no hidden charges — the fee is just to confirm serious applicants and secure your slot.
+    </p>
+  </div>
+</div>
+   <div class="faq-item">
+  <button class="faq-q" onclick="toggleFaq(this)">
+    <div class="faq-q-left">
+      <span class="faq-emoji">📚</span>
+      <span class="faq-q-text">Will I get learning materials and resources?</span>
+    </div>
+    <div class="faq-chevron">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </button>
+
+  <div class="faq-a">
+    <p>
+      Yes! Along with the internship training, you will receive learning materials, project resources, and 
+      <strong>1000+ DSA practice questions and interview preparation questions completely free of cost</strong>. 
+      These resources will help you improve problem-solving skills and prepare for technical interviews.
+    </p>
+  </div>
+</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🏛️</span><span class="faq-q-text">Will I get access to IIT Kharagpur campus and fest?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Top performers from each batch are selected for an exclusive IIT Kharagpur campus visit. This is based on your project quality, consistency, and overall performance during the internship.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🎓</span><span class="faq-q-text">Will I get a certificate after completion?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Yes! Every student who completes the 2-month program receives an official 3Skill Internship Completion Certificate — recognized by companies and useful for your resume and LinkedIn profile.</p></div>
+    </div>
+
+   <div class="faq-item">
+  <button class="faq-q" onclick="toggleFaq(this)">
+    <div class="faq-q-left">
+      <span class="faq-emoji">🎥</span>
+      <span class="faq-q-text">Are sessions live or recorded?</span>
+    </div>
+    <div class="faq-chevron">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </button>
+
+  <div class="faq-a">
+    <p>
+      Our entire <strong>2-month internship program is conducted through live classes</strong>. 
+      There are <strong>no pre-recorded videos</strong> — every session is taken live by mentors 
+      where you can ask questions and clear doubts in real time.  
+      You will also receive the <strong>recordings of the live sessions</strong> so you can 
+      revise the concepts anytime.
+    </p>
+  </div>
+</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-left"><span class="faq-emoji">🚀</span><span class="faq-q-text">How do I apply for the internship?</span></div>
+        <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </button>
+      <div class="faq-a"><p>Simply click the "Book My Slot – ₹499" button, choose your domain, and complete the slot booking. Our team will reach out to you with onboarding details before the batch starts.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+    // open clicked if was closed
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+<!-- ========== FOOTER ========== -->
+<style>
+  /* WAVE TOP */
+  .footer-wave {
+    display: block; width: 100%;
+    background: #f8fafc;
+    line-height: 0;
+    margin-bottom: -2px;
+  }
+  .footer-wave svg { width: 100%; height: 80px; display: block; }
+
+  /* MAIN FOOTER */
+  .site-footer {
+    background: #166534;
+    font-family: 'Nunito', sans-serif;
+    color: #d1d5db;
+  }
+
+  /* MAIN GRID */
+  .footer-main {
+    max-width: 1280px; margin: 0 auto;
+    padding: 60px 60px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.8fr;
+    gap: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* EACH COLUMN */
+  .fc h4 {
+    font-size: 16px; font-weight: 900; color: #fff;
+    margin-bottom: 22px;
+  }
+  .fc ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .fc ul li a {
+    text-decoration: none; color: #a5b4a8;
+    font-size: 14.5px; font-weight: 600;
+    transition: color 0.18s;
+  }
+  .fc ul li a:hover { color: #fff; }
+  .fc ul li a.green { color: #4ade80; }
+
+  /* RIGHT COL - EMAIL + SOCIALS */
+  .fc-right { display: flex; flex-direction: column; gap: 0; }
+  .fc-right .signup-label {
+    font-size: 14px; font-weight: 700; color: #fff;
+    margin-bottom: 14px; line-height: 1.4;
+  }
+  .email-row {
+    display: flex; gap: 0; margin-bottom: 28px;
+    border-radius: 50px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .email-row input {
+    flex: 1; padding: 13px 20px;
+    background: #fff; border: none; outline: none;
+    font-size: 13.5px; font-weight: 600;
+    font-family: 'Nunito', sans-serif; color: #111;
+    border-radius: 50px 0 0 50px;
+  }
+  .email-row input::placeholder { color: #9ca3af; }
+  .email-row button {
+    background: #f59e0b; color: #fff;
+    border: none; padding: 13px 22px;
+    font-size: 14px; font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer; white-space: nowrap;
+    border-radius: 0 50px 50px 0;
+    transition: background 0.18s;
+  }
+  .email-row button:hover { background: #d97706; }
+
+  /* SOCIAL ICONS */
+  .f-socials-row {
+    display: flex; align-items: center; gap: 18px;
+    flex-wrap: wrap;
+  }
+  .f-soc {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    color: #d1d5db; text-decoration: none;
+    transition: color 0.18s, transform 0.18s;
+    font-size: 22px;
+  }
+  .f-soc:hover { color: #fff; transform: translateY(-2px); }
+  .f-soc svg { width: 22px; height: 22px; fill: currentColor; }
+
+  .f-contact-info {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-top: 20px; margin-bottom: 20px;
+  }
+  .f-contact-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13.5px; font-weight: 600; color: #a5b4a8;
+    text-decoration: none; transition: color 0.18s;
+  }
+  .f-contact-item:hover { color: #fff; }
+  .fci-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .fci-icon svg { width: 15px; height: 15px; stroke: #4ade80; }
+
+  /* CERT BADGE */
+  .fc-cert {
+    display: flex; align-items: center; justify-content: flex-end;
+    margin-top: 12px;
+  }
+  .cert-circle {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .cert-circle .cc-top { font-size: 8px; font-weight: 800; color: #9ca3af; letter-spacing: 0.5px; }
+  .cert-circle .cc-b { font-size: 22px; font-weight: 900; color: #fff; line-height: 1; }
+  .cert-circle .cc-bot { font-size: 7px; color: #9ca3af; font-weight: 700; letter-spacing: 0.5px; }
+
+  /* BOTTOM BAR */
+  .footer-bar {
+    max-width: 1280px; margin: 0 auto;
+    padding: 18px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .footer-bar-left {
+    font-size: 13px; color: #6b7280; font-weight: 600;
+  }
+  .footer-bar-right { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-bar-right a {
+    font-size: 13px; color: #6b7280; font-weight: 600;
+    text-decoration: none; transition: color 0.18s;
+  }
+  .footer-bar-right a:hover { color: #fff; }
+
+  @media (max-width: 1100px) {
+    .footer-main { grid-template-columns: repeat(3, 1fr); }
+    .fc-right { grid-column: 1 / -1; }
+  }
+  @media (max-width: 680px) {
+    .footer-main { grid-template-columns: repeat(2, 1fr); padding: 36px 24px 28px; }
+    .footer-bar { padding: 16px 24px; flex-direction: column; align-items: flex-start; }
+    .fc-right { grid-column: 1 / -1; }
+    .email-row { border-radius: 12px; flex-direction: column; }
+    .email-row input { border-radius: 12px 12px 0 0; }
+    .email-row button { border-radius: 0 0 12px 12px; }
+  }
+</style>
+
+<!-- WAVE -->
+<div class="footer-wave">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1380,20 1440,40 L1440,80 L0,80 Z" fill="#166534"/>
+  </svg>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-main">
+
+    <!-- COL 1: Programs -->
+    <div class="fc">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="project-based internship.html">project Internship</a></li>
+        <li><a href="intern-aiml.html">AI & Machine Learning</a></li>
+        <li><a href="internship-web-development.html">Web Development</a></li>
+        <li><a href="Internship-Data-Analytics.html">Data Analytics</a></li>
+        <li><a href="internship-frontend-development.html">Frontend Development</a></li>
+        <li><a href="https://youtu.be/fmgvaosNwCw?si=dJs_CQFcV3yMs7qV">IIT Kharagpur Visit</a></li>
+      </ul>
+    </div>
+
+    <!-- COL 2: Learn -->
+    <div class="fc">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Live Classes</a></li>
+        <li><a href="#">Project Phase</a></li>
+        <li><a href="#">Mentorship</a></li>
+        <li><a href="#">Certification</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+
+    <!-- COL 3: Help -->
+    <div class="fc">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="https://wa.me/6372105534">Contact Us</a></li>
+        <li><a href="term-and-conditions-3skill.html">Refund Policy</a></li>
+        <li><a href="dashbord.html">Student Login</a></li>
+        <li><a href="https://wa.me/6372105534">Help Center</a></li>
+      </ul>
+    </div>
+
+    <!-- COL 4: 3Skill -->
+    <div class="fc">
+      <h4>3Skill</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Our Team</a></li>
+        <li><a href="Certificate-Based Course.html">Careers <span style="color:#4ade80">We're Hiring!</span></a></li>
+        <li><a href="about.html">Press</a></li>
+        <li><a href="term-and-conditions-3skill.html">Partner With Us</a></li>
+        <li><a href="#">Become a Mentor</a></li>
+      </ul>
+    </div>
+
+    <!-- COL 5: Trust -->
+    <div class="fc">
+      <h4>Registered</h4>
+      <ul>
+        <li><a href="https://3skill.in/startupindia.png">DPIIT #startupindia</a></li>
+        <li><a href="https://3skill.in/isoveri.png">ISO Certified</a></li>
+        <li><a href="https://3skill.in/msmeveri.png">MSME Registered</a></li>
+        <li><a href="https://3skill.in/msmeveri.png">Govt. of India</a></li>
+        <li><a href="term-and-conditions-3skill.html">Privacy Policy</a></li>
+        <li><a href="term-and-conditions-3skill.html">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- COL 6: Email + Socials -->
+    <div class="fc fc-right">
+      <div class="signup-label">Sign up to get internship updates &amp; batch announcements</div>
+      <div class="email-row">
+        <input type="email" placeholder="Your Email Address" />
+        <button>Subscribe</button>
+      </div>
+
+      <!-- SOCIAL ICONS -->
+      <div class="f-socials-row">
+        <!-- Instagram -->
+        <a class="f-soc" href="https://instagram.com/3skillofficial" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        
+        
+        <!-- LinkedIn -->
+        <a class="f-soc" href="https://www.linkedin.com/company/3-skill/" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        
+        <!-- YouTube -->
+        <a class="f-soc" href="https://www.youtube.com/@threeskill" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <!-- X/Twitter -->
+        <a class="f-soc" href="https://twitter.com/3skillindia" title="X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+       
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div class="f-contact-info">
+        <a href="/cdn-cgi/l/email-protection#e68e838a8a89a6d5958d8f8a8ac88f88" class="f-contact-item">
+          <span class="fci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </span>
+          <span class="__cf_email__" data-cfemail="640c0108080b2457170f0d08084a0d0a">support@3skill.in</span>
+        </a>
+        <a href="tel:+91XXXXXXXXXX" class="f-contact-item">
+          <span class="fci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          +91 91147 99765
+        </a>
+        <div class="f-contact-item">
+          <span class="fci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          Koel Campus Patia, Bhubaneswar, Khorda, Odisha, India, 751031.
+        </div>
+      </div>
+
+      <!-- CERT BADGE -->
+      <div class="fc-cert">
+       
+      </div>
+    </div>
+
+  </div>
+
+ 
+      <!-- BOTTOM BAR -->
+  <div class="footer-bar">
+    <div class="footer-bar-left">© 2026 3Skill. All Rights Reserved.</div>
+    <div class="footer-bar-right">
+      <a href="term-and-conditions-3skill.html">Terms of Service</a>
+      <a href="term-and-conditions-3skill.html">Privacy Policy</a>
+      <a href="term-and-conditions-3skill.html">Refund Policy</a>
+      <a href="term-and-conditions-3skill.html">Cookie Policy</a>
+    </div>
+  </div>
+
+</footer>
+
+
+
+
+
+<!-- SOCIAL PROOF POPUP -->
+<style>
+  .sp-popup {
+    position: fixed;
+    bottom: 28px;
+    left: 20px;
+    background: #2d2d2d;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    padding: 14px 40px 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    max-width: 280px;
+    animation: sp-slidein 0.4s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .sp-popup.hide {
+    animation: sp-slideout 0.3s ease forwards;
+  }
+  @keyframes sp-slidein {
+    from { transform: translateX(-110%); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+  @keyframes sp-slideout {
+    from { transform: translateX(0);     opacity: 1; }
+    to   { transform: translateX(-110%); opacity: 0; }
+  }
+
+  .sp-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #5b8dee;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+
+  .sp-text { flex: 1; min-width: 0; }
+
+  .sp-action {
+    font-size: 13px; color: #ccc;
+    line-height: 1.45; margin-bottom: 5px;
+  }
+  .sp-action strong {
+    color: #fff; font-weight: 700;
+  }
+
+  .sp-time {
+    font-size: 11px; color: #888;
+  }
+
+  .sp-close {
+    position: absolute; top: 10px; right: 12px;
+    font-size: 13px; color: #777; cursor: pointer;
+    transition: color 0.2s; line-height: 1;
+  }
+  .sp-close:hover { color: #ccc; }
+
+  @media (max-width: 480px) {
+    .sp-popup { bottom: 85px; left: 10px; max-width: 250px; }
+  }
+</style>
+
+<div class="sp-popup" id="spPopup" style="display:none;">
+  <div class="sp-avatar" id="spAvatar">A</div>
+  <div class="sp-text">
+    <div class="sp-action">
+      <span id="spName">Aditya</span> enrolled in the internship <strong id="spDomain">'Web Development'</strong>
+    </div>
+    <div class="sp-time" id="spTime">2 minutes ago</div>
+  </div>
+  <div class="sp-close" onclick="spClose()">✕</div>
+</div>
+
+<script>
+  var spStudents = [
+   { name: "Riya", domain: "AI / ML" },
+{ name: "Arjun", domain: "Web Development" },
+{ name: "Priya", domain: "Data Analytics" },
+{ name: "Rohan", domain: "Frontend Development" },
+{ name: "Sneha", domain: "AI / ML" },
+{ name: "Vikram", domain: "Web Development" },
+{ name: "Ananya", domain: "Data Analytics" },
+{ name: "Karan", domain: "Frontend Development" },
+{ name: "Divya", domain: "AI / ML" },
+{ name: "Aditya", domain: "Web Development" },
+
+{ name: "Ishita", domain: "Data Analytics" },
+{ name: "Nikhil", domain: "Frontend Development" },
+{ name: "Pooja", domain: "AI / ML" },
+{ name: "Siddharth", domain: "Web Development" },
+{ name: "Meera", domain: "Data Analytics" },
+{ name: "Tanvi", domain: "Frontend Development" },
+{ name: "Harsh", domain: "AI / ML" },
+{ name: "Neha", domain: "Web Development" },
+{ name: "Yash", domain: "Data Analytics" },
+{ name: "Shreya", domain: "Frontend Development" },
+
+{ name: "Rahul", domain: "AI / ML" },
+{ name: "Aman", domain: "Web Development" },
+{ name: "Simran", domain: "Data Analytics" },
+{ name: "Kabir", domain: "Frontend Development" },
+{ name: "Aditi", domain: "AI / ML" },
+{ name: "Manish", domain: "Web Development" },
+{ name: "Ritika", domain: "Data Analytics" },
+{ name: "Deepak", domain: "Frontend Development" },
+{ name: "Sanya", domain: "AI / ML" },
+{ name: "Varun", domain: "Web Development" },
+
+{ name: "Kavya", domain: "Data Analytics" },
+{ name: "Abhishek", domain: "Frontend Development" },
+{ name: "Muskan", domain: "AI / ML" },
+{ name: "Rajat", domain: "Web Development" },
+{ name: "Palak", domain: "Data Analytics" },
+{ name: "Ayush", domain: "Frontend Development" },
+{ name: "Nisha", domain: "AI / ML" },
+{ name: "Gaurav", domain: "Web Development" },
+{ name: "Tanya", domain: "Data Analytics" },
+{ name: "Mohit", domain: "Frontend Development" },
+
+{ name: "Kritika", domain: "AI / ML" },
+{ name: "Rakesh", domain: "Web Development" },
+{ name: "Ankit", domain: "Data Analytics" },
+{ name: "Payal", domain: "Frontend Development" },
+{ name: "Saurabh", domain: "AI / ML" },
+{ name: "Nandini", domain: "Web Development" },
+{ name: "Ravi", domain: "Data Analytics" },
+{ name: "Komal", domain: "Frontend Development" },
+{ name: "Akash", domain: "AI / ML" },
+{ name: "Bhavna", domain: "Web Development" },
+
+{ name: "Ritu", domain: "Data Analytics" },
+{ name: "Kunal", domain: "Frontend Development" },
+{ name: "Ayesha", domain: "AI / ML" },
+{ name: "Rohit", domain: "Web Development" },
+{ name: "Nikita", domain: "Data Analytics" },
+{ name: "Vivek", domain: "Frontend Development" },
+{ name: "Pankaj", domain: "AI / ML" },
+{ name: "Sakshi", domain: "Web Development" },
+{ name: "Aakash", domain: "Data Analytics" },
+{ name: "Irfan", domain: "Frontend Development" },
+
+{ name: "Preeti", domain: "AI / ML" },
+{ name: "Tarun", domain: "Web Development" },
+{ name: "Alok", domain: "Data Analytics" },
+{ name: "Shruti", domain: "Frontend Development" },
+{ name: "Suresh", domain: "AI / ML" },
+{ name: "Jyoti", domain: "Web Development" },
+{ name: "Farhan", domain: "Data Analytics" },
+{ name: "Chandan", domain: "Frontend Development" },
+{ name: "Aarti", domain: "AI / ML" },
+{ name: "Manoj", domain: "Web Development" },
+
+{ name: "Seema", domain: "Data Analytics" },
+{ name: "Hemant", domain: "Frontend Development" },
+{ name: "Lalit", domain: "AI / ML" },
+{ name: "Ramesh", domain: "Web Development" },
+{ name: "Pallavi", domain: "Data Analytics" },
+{ name: "Dinesh", domain: "Frontend Development" },
+{ name: "Sonali", domain: "AI / ML" },
+{ name: "Kapil", domain: "Web Development" },
+{ name: "Rekha", domain: "Data Analytics" },
+{ name: "Amit", domain: "Frontend Development" },
+
+{ name: "Swati", domain: "AI / ML" },
+{ name: "Deepika", domain: "Web Development" },
+{ name: "Naveen", domain: "Data Analytics" },
+{ name: "Prakash", domain: "Frontend Development" },
+{ name: "Sunil", domain: "AI / ML" },
+{ name: "Ruchi", domain: "Web Development" },
+{ name: "Tejas", domain: "Data Analytics" },
+{ name: "Lokesh", domain: "Frontend Development" },
+{ name: "Shivam", domain: "AI / ML" },
+{ name: "Girish", domain: "Web Development" },
+
+{ name: "Anurag", domain: "Data Analytics" },
+{ name: "Pritam", domain: "Frontend Development" },
+{ name: "Dev", domain: "AI / ML" },
+{ name: "Vansh", domain: "Web Development" },
+{ name: "Samar", domain: "Data Analytics" },
+{ name: "Nitin", domain: "Frontend Development" },
+{ name: "Utkarsh", domain: "AI / ML" },
+{ name: "Rishabh", domain: "Web Development" },
+{ name: "Amanpreet", domain: "Data Analytics" },
+{ name: "Dhruv", domain: "Frontend Development" },
+
+{ name: "Parth", domain: "AI / ML" },
+{ name: "Keshav", domain: "Web Development" },
+{ name: "Mayank", domain: "Data Analytics" },
+{ name: "Rudra", domain: "Frontend Development" },
+{ name: "Lakshya", domain: "AI / ML" },
+{ name: "Aryan", domain: "Web Development" },
+{ name: "Vedant", domain: "Data Analytics" },
+{ name: "Adarsh", domain: "Frontend Development" },
+{ name: "Harshit", domain: "AI / ML" },
+{ name: "Yuvraj", domain: "Web Development" },
+
+{ name: "Tanmay", domain: "Data Analytics" },
+{ name: "Darshan", domain: "Frontend Development" },
+{ name: "Pranav", domain: "AI / ML" },
+{ name: "Sarthak", domain: "Web Development" },
+{ name: "Aaryan", domain: "Data Analytics" },
+{ name: "Chirag", domain: "Frontend Development" },
+{ name: "Kartik", domain: "AI / ML" },
+{ name: "Naman", domain: "Web Development" },
+{ name: "Siddhi", domain: "Data Analytics" },
+{ name: "Bhavya", domain: "Frontend Development" },
+  ];
+
+  var spTimes = [
+    "24 seconds ago",
+    "47 seconds ago",
+    "1 minute ago",
+    "2 minutes ago",
+    "3 minutes ago",
+    "4 minutes ago",
+    "5 minutes ago",
+    "1 minute ago",
+    "32 seconds ago",
+    "2 minutes ago",
+  ];
+
+  function spShuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  var spShuffled = spShuffle(spStudents);
+  var spIndex = Math.floor(Math.random() * spShuffled.length);
+  var spHideTimer;
+
+  function spShow() {
+    if (spIndex >= spShuffled.length) {
+      spShuffled = spShuffle(spStudents);
+      spIndex = 0;
+    }
+    var s = spShuffled[spIndex++];
+    var t = spTimes[Math.floor(Math.random() * spTimes.length)];
+
+    document.getElementById("spAvatar").textContent = s.name.charAt(0);
+    document.getElementById("spName").textContent   = s.name;
+    document.getElementById("spDomain").textContent = "'" + s.domain + "'";
+    document.getElementById("spTime").textContent   = t;
+
+    var popup = document.getElementById("spPopup");
+    popup.style.display = "flex";
+    popup.classList.remove("hide");
+
+    clearTimeout(spHideTimer);
+    spHideTimer = setTimeout(spClose, 4500);
+  }
+
+  function spClose() {
+    clearTimeout(spHideTimer);
+    var popup = document.getElementById("spPopup");
+    popup.classList.add("hide");
+    setTimeout(function() { popup.style.display = "none"; }, 350);
+  }
+
+  // ✅ Pehla popup 2-4 sec baad, phir har 3-5 sec pe
+  setTimeout(function() {
+    spShow();
+    setInterval(spShow, Math.floor(Math.random() * 5000) + 9000);
+  }, Math.floor(Math.random() * 3000) + 3000);
+</script>
+
+
+
+<script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+    </script>
+
+
+
+</body>
+</html>
