@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Failed — 3 Skill</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --red-900: #450a0a;
+    --red-700: #b91c1c;
+    --red-600: #dc2626;
+    --red-500: #ef4444;
+    --red-100: #fee2e2;
+    --red-50:  #fef2f2;
+    --green-600: #16a34a;
+    --green-50:  #f0fdf4;
+    --ink: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-tap-highlight-color: transparent; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1200px 600px at 50% -10%, var(--red-50) 0%, #ffffff 55%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .brandbar {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brandbar .wordmark {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 17px;
+    letter-spacing: -0.3px; color: var(--ink);
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 18px 60px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 26px;
+    box-shadow: 0 30px 70px rgba(69,10,10,0.10), 0 0 0 1px rgba(239,68,68,0.08);
+    overflow: hidden;
+    animation: riseIn 0.5s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-top {
+    background: linear-gradient(160deg, var(--red-50) 0%, #fff 65%);
+    padding: 40px 32px 26px;
+    text-align: center;
+  }
+
+  /* Animated failure ring */
+  .x-wrap {
+    width: 86px; height: 86px;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+  .x-ring {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red-600), var(--red-500));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 26px rgba(239,68,68,0.35);
+    animation: ringPop 0.5s 0.15s cubic-bezier(.22,1.4,.4,1) both;
+  }
+  @keyframes ringPop {
+    from { transform: scale(0.4); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .x-ring svg { width: 38px; height: 38px; }
+  .x-ring path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+    animation: drawX 0.4s 0.55s ease forwards;
+  }
+  @keyframes drawX {
+    to { stroke-dashoffset: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card, .x-ring, .x-ring path { animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--red-100); border: 1px solid #fecaca;
+    color: var(--red-600); font-size: 11px; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px;
+    letter-spacing: 0.6px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 25px; font-weight: 900;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .card-top p {
+    margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.6;
+  }
+  .card-top p b { color: var(--ink); }
+
+  .divider { height: 1px; background: var(--red-50); margin: 0 28px; }
+
+  /* Order summary */
+  .summary {
+    padding: 22px 28px;
+    display: none;
+  }
+  .summary.show { display: block; }
+  .summary-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0;
+    font-size: 12.5px;
+  }
+  .summary-row + .summary-row { border-top: 1px dashed var(--border); }
+  .summary-row .label { color: var(--muted); font-weight: 600; }
+  .summary-row .value { font-weight: 700; color: var(--ink); text-align: right; max-width: 60%; word-break: break-word; }
+  .summary-row .value.mono { font-family: monospace; font-size: 11.5px; }
+  .summary-row .value.reason { color: var(--red-600); }
+
+  /* What to do */
+  .steps { padding: 4px 28px 6px; }
+  .steps h2 {
+    font-size: 11px; font-weight: 800; color: #9ca3af;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin: 14px 0 12px;
+  }
+  .step { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--red-50); color: var(--red-600);
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11.5px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 13px; line-height: 1.5; }
+  .step-text b { display: block; color: var(--ink); font-weight: 700; margin-bottom: 1px; }
+  .step-text span { color: var(--muted); font-size: 12px; }
+
+  /* CTAs */
+  .ctas { padding: 18px 28px 8px; display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14.5px; font-weight: 800;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--red-600), var(--red-500));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(239,68,68,0.32);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(239,68,68,0.4); }
+  .btn-secondary {
+    background: var(--green-50);
+    color: #15803d;
+    border: 1.5px solid #dcfce7;
+  }
+  .btn-secondary:hover { background: #e6fbee; border-color: #a7f3d0; }
+
+  footer { padding: 20px 28px 30px; text-align: center; }
+  footer .support { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+  footer .support a { color: var(--red-600); font-weight: 700; text-decoration: none; }
+  footer .tag { font-size: 10.5px; color: #b8c2c9; letter-spacing: 0.3px; }
+
+  @media (max-width: 400px) {
+    .card-top { padding: 32px 22px 22px; }
+    h1 { font-size: 21px; }
+    .summary, .steps, .ctas { padding-left: 20px; padding-right: 20px; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--red-600);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="brandbar">
+    <div class="wordmark">3 Skill</div>
+  </div>
+
+  <main>
+    <div class="card">
+
+      <div class="card-top">
+        <div class="x-wrap">
+          <div class="x-ring">
+            <svg viewBox="0 0 24 24"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+          </div>
+        </div>
+        <div class="eyebrow">⚠️ Payment Failed</div>
+        <h1>Payment didn't go through</h1>
+        <p>Don't worry — your enrollment is <b>not confirmed</b> and no seat was booked.<br>If any amount was deducted, it will be auto-refunded by your bank.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Auto-fills from the payment gateway's failure redirect URL, if params are present -->
+      <div class="summary" id="summary">
+        <div class="summary-row" id="row-name" style="display:none;">
+          <span class="label">Name</span><span class="value" id="val-name"></span>
+        </div>
+        <div class="summary-row" id="row-amount" style="display:none;">
+          <span class="label">Amount</span><span class="value" id="val-amount"></span>
+        </div>
+        <div class="summary-row" id="row-txn" style="display:none;">
+          <span class="label">Transaction ID</span><span class="value mono" id="val-txn"></span>
+        </div>
+        <div class="summary-row" id="row-reason" style="display:none;">
+          <span class="label">Reason</span><span class="value reason" id="val-reason"></span>
+        </div>
+      </div>
+
+      <div class="steps">
+        <h2>What you can do</h2>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><b>Try the payment again</b><span>Most failures are temporary — a retry usually works.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><b>Check with your bank</b><span>If money was deducted, it reflects back in 3–5 business days.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><b>Still stuck?</b><span>Message us on WhatsApp and we'll help you complete it.</span></div>
+        </div>
+      </div>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="javascript:history.back()">
+          ↻ Try Again
+        </a>
+        <a class="btn btn-secondary" href="https://whatsapp.com/channel/0029Vb76cuu84OmEgqfIRH45" target="_blank" rel="noopener">
+          💬 Get Help on WhatsApp
+        </a>
+      </div>
+
+      <footer>
+        <p class="support">Need help? Reach us at <a href="mailto:support@3skill.in">support@3skill.in</a></p>
+        <p class="tag">🎓 Summer Internship 2026</p>
+      </footer>
+
+    </div>
+  </main>
+
+<script>
+  // Picks up common Easebuzz failure-redirect params if present.
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+
+    const map = {
+      name:   params.get('firstname') || params.get('name'),
+      amount: params.get('amount'),
+      txn:    params.get('txnid') || params.get('easepayid'),
+      reason: params.get('error_Message') || params.get('error') || params.get('reason')
+    };
+
+    let anyShown = false;
+
+    if (map.name) {
+      document.getElementById('row-name').style.display = 'flex';
+      document.getElementById('val-name').textContent = map.name;
+      anyShown = true;
+    }
+    if (map.amount) {
+      document.getElementById('row-amount').style.display = 'flex';
+      document.getElementById('val-amount').textContent = '₹' + map.amount;
+      anyShown = true;
+    }
+    if (map.txn) {
+      document.getElementById('row-txn').style.display = 'flex';
+      document.getElementById('val-txn').textContent = map.txn;
+      anyShown = true;
+    }
+    if (map.reason) {
+      document.getElementById('row-reason').style.display = 'flex';
+      document.getElementById('val-reason').textContent = map.reason;
+      anyShown = true;
+    }
+
+    if (anyShown) {
+      document.getElementById('summary').classList.add('show');
+    }
+  })();
+</script>
+
+</body>
+</html>
