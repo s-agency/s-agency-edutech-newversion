@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3Skill — Mentor Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#1DA64A;
+  --brand-dark:#128038;
+  --brand-bright:#22C55E;
+  --brand-light:#EAFBF0;
+  --ink:#0F172A;
+  --ink-soft:#5B6472;
+  --card:#FFFFFF;
+  --line:#E4EFE8;
+  --page-bg:#F6FBF7;
+  --success:#1DA64A;
+  --success-bg:#EAFBF0;
+  --danger:#D64545;
+  --danger-bg:#FDEBEA;
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--page-bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:16px 24px;display:flex;align-items:center;}
+.topbar .logo{font-family:'Poppins';font-weight:800;font-size:22px;color:var(--brand-dark);letter-spacing:-.5px;}
+.topbar .logo span{color:var(--ink);}
+
+#app{max-width:900px;margin:0 auto;padding:28px 20px 64px;}
+.screen{display:none;}
+.screen.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.btn{appearance:none;border:none;cursor:pointer;border-radius:999px;font-family:'Poppins';font-weight:700;font-size:15px;padding:13px 20px;width:100%;transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;position:relative;overflow:hidden;text-decoration:none;display:inline-block;text-align:center;}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn-brand{background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);color:#fff;box-shadow:0 8px 18px -4px rgba(18,128,56,.45), inset 0 1px 0 rgba(255,255,255,.35);}
+.btn-brand::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0));pointer-events:none;border-radius:999px 999px 0 0;}
+.btn-brand:hover{filter:brightness(1.04);}
+.btn-brand:disabled{opacity:.45;cursor:not-allowed;filter:none;box-shadow:none;}
+.hidden{display:none !important;}
+
+/* ---------- Gate ---------- */
+#gate.screen.active{display:flex;min-height:80vh;align-items:center;justify-content:center;}
+.gate-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:44px 36px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 48px -24px rgba(15,23,42,.18);}
+.brand-badge{width:56px;height:56px;border-radius:16px;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:19px;margin:0 auto 18px;box-shadow:0 10px 20px -8px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.4);}
+.gate-card h1{font-size:23px;margin-bottom:6px;}
+.gate-card p{color:var(--ink-soft);font-size:14px;margin:0 0 22px;}
+.gate-card input{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);font-size:15px;font-family:'Inter';margin-bottom:14px;outline:none;transition:border-color .15s ease;}
+.gate-card input:focus{border-color:var(--brand);}
+.gate-message{font-size:13px;margin-top:14px;line-height:1.55;}
+.gate-message.is-error{color:var(--danger);}
+.gate-message.is-info{color:var(--brand-dark);background:var(--brand-light);padding:12px 14px;border-radius:12px;}
+
+/* ---------- Loading ---------- */
+#loading.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:14px;}
+.loader{width:36px;height:36px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--brand);animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#loading p{color:var(--ink-soft);font-size:14px;}
+
+/* ---------- Dashboard shell ---------- */
+.idcard{background:linear-gradient(135deg,var(--brand-light) 0%,#fff 70%);border:1.5px solid var(--line);color:var(--ink);border-radius:var(--radius);padding:26px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:16px;}
+.idcard-left{display:flex;align-items:center;gap:16px;}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:18px;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
+.idcard-name{font-family:'Poppins';font-size:19px;font-weight:700;}
+.idcard-email{font-size:13px;color:var(--ink-soft);}
+.switch-email{background:none;border:none;color:var(--ink-soft);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;margin-top:6px;}
+.refresh-btn{background:#fff;border:1.5px solid var(--brand);color:var(--brand-dark);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:transform .3s ease;}
+.refresh-btn.spinning{animation:spin-once .6s linear;}
+@keyframes spin-once{to{transform:rotate(360deg);}}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 2px 8px rgba(15,23,42,.03);margin-bottom:16px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;align-items:start;}
+.grid2 .panel{margin-bottom:0;}
+.stack-col{display:flex;flex-direction:column;gap:16px;}
+.stack-col .notice-panel{flex:1;}
+.panel-small h3{margin-bottom:10px;}
+@media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+.panel h3{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-family:'Poppins';}
+.panel h3::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--brand);display:inline-block;}
+.empty-state{color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+/* ---------- Notice board ---------- */
+.notice-item{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4;word-break:break-word;overflow-wrap:anywhere;}
+
+/* ---------- Mobile polish ---------- */
+@media(max-width:480px){
+  .topbar{padding:14px 18px;}
+  .topbar .logo{font-size:19px;}
+  #app{padding:18px 14px 48px;}
+  .idcard{padding:18px 18px;gap:12px;border-radius:16px;}
+  .avatar{width:46px;height:46px;font-size:16px;}
+  .idcard-name{font-size:17px;}
+  .idcard-email{font-size:12px;}
+  .refresh-btn{width:32px;height:32px;}
+  .panel{padding:16px 16px;border-radius:14px;margin-bottom:12px;}
+  .panel h3{font-size:14px;margin-bottom:10px;}
+  .grid2{gap:12px;margin-bottom:12px;}
+  .btn{padding:11px 16px;font-size:14px;}
+  .class-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+  .class-card{padding:12px 14px;}
+  .code-chip-value{font-size:15px;}
+  .gate-card{padding:32px 24px;border-radius:20px;}
+  .field-group input{padding:10px 12px;}
+}
+.notice-item:last-child{border-bottom:none;}
+
+/* ---------- Class cards (today + upcoming), same style throughout ---------- */
+.class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+.class-card{background:var(--brand-light);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:transform .12s ease, box-shadow .12s ease;}
+.class-card.today-card{border:2px solid var(--brand);box-shadow:0 6px 16px -6px rgba(18,128,56,.3);}
+.class-card:hover{transform:translateY(-2px);box-shadow:0 8px 16px -8px rgba(18,128,56,.25);}
+.class-card .ctitle{font-family:'Poppins';font-weight:600;font-size:13.5px;line-height:1.35;}
+.class-card .cmeta{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-soft);}
+.class-card .class-link{align-self:flex-start;margin-top:2px;font-family:'Poppins';font-weight:700;font-size:12px;color:#fff;text-decoration:none;background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));padding:7px 14px;border-radius:999px;box-shadow:0 4px 10px -3px rgba(18,128,56,.4);}
+.class-card .class-link:hover{filter:brightness(1.05);}
+.code-chip-row{display:flex;align-items:center;gap:6px;background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));border-radius:8px;padding:6px 10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3);}
+.copy-btn-sm{flex:none;background:#fff;color:var(--brand-dark);border:none;border-radius:6px;padding:4px 8px;font-family:'Poppins';font-weight:700;font-size:10.5px;cursor:pointer;transition:filter .15s ease;}
+.copy-btn-sm.copied{background:var(--brand-dark);color:#fff;}
+
+.card-code-row{display:flex;align-items:center;gap:6px;background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));border-radius:7px;padding:5px 9px;margin:2px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.3);}
+.card-code-value{font-family:'IBM Plex Mono';font-weight:700;font-size:13px;color:#fff;letter-spacing:.05em;flex:1;}
+.card-copy-btn{flex:none;background:#fff;color:var(--brand-dark);border:none;border-radius:5px;padding:3px 8px;font-family:'Poppins';font-weight:700;font-size:10px;cursor:pointer;transition:filter .15s ease;}
+.card-copy-btn:hover{filter:brightness(0.97);}
+.code-chip-value{font-family:'IBM Plex Mono';font-weight:700;font-size:14px;color:#fff;letter-spacing:.05em;flex:1;}
+.copy-btn-sm{flex:none;background:#fff;color:var(--brand-dark);border:none;border-radius:6px;padding:4px 8px;font-family:'Poppins';font-weight:700;font-size:10.5px;cursor:pointer;transition:filter .15s ease;}
+.copy-btn-sm:hover{filter:brightness(1.08);}
+.copy-btn-sm.copied{background:var(--brand-dark);}
+.today-badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-family:'Poppins';font-weight:700;background:var(--success-bg);color:var(--success);align-self:flex-start;}
+
+/* ---------- Bank details card ---------- */
+.field-group{margin-bottom:14px;}
+.field-group label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.field-group input{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid var(--line);font-size:14px;font-family:'Inter';outline:none;transition:border-color .15s ease;}
+.field-group input:focus{border-color:var(--brand);}
+.bank-saved-note{font-size:12px;color:var(--success);background:var(--success-bg);padding:8px 12px;border-radius:8px;margin-top:10px;display:none;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="logo">3<span>Skill</span> Mentor</div></div>
+
+<div id="app">
+
+  <section id="gate" class="screen active">
+    <div class="gate-card">
+      <div class="brand-badge">3S</div>
+      <h1>Mentor Dashboard</h1>
+      <p>Put your registered email</p>
+      <input id="emailInput" type="email" placeholder="Put your registered email" autocomplete="email">
+      <button class="btn btn-brand" id="gateBtn">View dashboard</button>
+      <p class="gate-message hidden" id="gateError"></p>
+    </div>
+  </section>
+
+  <section id="loading" class="screen">
+    <div class="loader"></div>
+    <p id="loadingText">Loading your dashboard…</p>
+  </section>
+
+  <section id="dashboard" class="screen">
+    <div class="idcard">
+      <div class="idcard-left">
+        <div class="avatar" id="avatarInitials">—</div>
+        <div>
+          <div class="idcard-name" id="dashName">—</div>
+          <div class="idcard-email" id="dashEmail">—</div>
+          <button class="switch-email" id="switchEmailBtn">Not you? Switch email</button>
+        </div>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" title="Refresh dashboard">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      </button>
+    </div>
+
+    <div class="grid2">
+      <div class="stack-col">
+        <div class="panel notice-panel">
+          <h3>Notice board</h3>
+          <div id="noticeBox"></div>
+        </div>
+        <div class="panel panel-small">
+          <h3>Class schedule</h3>
+          <div id="scheduleBox"></div>
+        </div>
+      </div>
+      <div class="panel upcoming-panel">
+        <h3>Classes</h3>
+        <div id="upcomingBox"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Bank details</h3>
+      <div class="field-group">
+        <label>Account Holder Name</label>
+        <input type="text" id="holderNameInput" placeholder="Name as per bank records">
+      </div>
+      <div class="field-group">
+        <label>Bank Account Number</label>
+        <input type="text" id="accountNumberInput" placeholder="Enter account number" inputmode="numeric">
+      </div>
+      <div class="field-group">
+        <label>IFSC Code</label>
+        <input type="text" id="ifscInput" placeholder="e.g. SBIN0001234" style="text-transform:uppercase;">
+      </div>
+      <button class="btn btn-brand" id="saveBankBtn" style="width:auto;">Save details</button>
+      <p class="gate-message hidden" id="bankError"></p>
+      <p class="bank-saved-note" id="bankSavedNote">✓ Saved to your record.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbyA7TgCIrv3YSG5MeIW3Eq_KlVBOtv_8SFWfVUBxMoUxYYc1xSs2Y5tc_Pg7EytyI9pCw/exec';
+
+var STATE = { email: null };
+
+function apiCall(action, params){
+  params = params || {};
+  params.action = action;
+  var query = Object.keys(params)
+    .map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); })
+    .join('&');
+  return fetch(API_URL + '?' + query)
+    .then(function(res){
+      if(!res.ok) throw new Error('Server returned ' + res.status);
+      return res.json();
+    })
+    .then(function(data){
+      if(data && data.error) throw new Error(data.error);
+      return data;
+    });
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+
+function initials(name){
+  if(!name) return '—';
+  var parts = String(name).trim().split(/\s+/);
+  return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+// ---------- Gate ----------
+document.getElementById('gateBtn').addEventListener('click', function(){ startLogin(); });
+document.getElementById('emailInput').addEventListener('keydown', function(e){ if(e.key === 'Enter') startLogin(); });
+
+function setGateMessage(text, type){
+  var el = document.getElementById('gateError');
+  el.textContent = text;
+  el.className = 'gate-message ' + (type === 'info' ? 'is-info' : 'is-error');
+  el.classList.remove('hidden');
+}
+
+function startLogin(){
+  var email = document.getElementById('emailInput').value.trim();
+  document.getElementById('gateError').classList.add('hidden');
+  if(!email || email.indexOf('@') === -1){
+    setGateMessage('Enter a valid email address.', 'error');
+    return;
+  }
+  STATE.email = email;
+  document.getElementById('loadingText').textContent = 'Loading your dashboard…';
+  showScreen('loading');
+  apiCall('getDashboardData', { email: email }).then(onDashboardData).catch(onServerError);
+}
+
+function onServerError(err){
+  showScreen('gate');
+  setGateMessage('Something went wrong: ' + (err && err.message ? err.message : err), 'error');
+}
+
+function onDashboardData(data){
+  if(!data.found){
+    showScreen('gate');
+    setGateMessage("Your dashboard isn't active yet — it will be ready within 24 hours. No need to worry, just check back soon!", 'info');
+    return;
+  }
+  localStorage.setItem('mentorEmail', STATE.email);
+  renderDashboard(data);
+  showScreen('dashboard');
+}
+
+// ---------- Dashboard ----------
+function renderDashboard(data){
+  var m = data.mentor;
+  document.getElementById('avatarInitials').textContent = initials(m.name);
+  document.getElementById('dashName').textContent = m.name || '—';
+  document.getElementById('dashEmail').textContent = m.email || '—';
+
+  renderNotices(data.notices || []);
+  renderSchedule(m.scheduleLink);
+  renderUpcoming(data.upcomingClasses || []);
+  renderBankForm(m);
+  matchColumnHeights();
+}
+
+// Makes the left column (Notice + Schedule) and right column (Upcoming
+// classes) always end up the same height, whichever is naturally taller —
+// works no matter how much content is in either one, no guessed pixel values.
+function matchColumnHeights(){
+  var left = document.querySelector('.grid2 .stack-col');
+  var right = document.querySelector('.grid2 .upcoming-panel');
+  if(!left || !right) return;
+
+  left.style.minHeight = '';
+  right.style.minHeight = '';
+
+  requestAnimationFrame(function(){
+    if(window.innerWidth <= 680) return; // single column on mobile, no matching needed
+    var tallest = Math.max(left.offsetHeight, right.offsetHeight);
+    left.style.minHeight = tallest + 'px';
+    right.style.minHeight = tallest + 'px';
+  });
+}
+
+var resizeTimer;
+window.addEventListener('resize', function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(matchColumnHeights, 150);
+});
+
+function renderNotices(notices){
+  var box = document.getElementById('noticeBox');
+  if(notices.length){
+    box.innerHTML = notices.map(function(n){ return '<div class="notice-item">' + escapeHtml(n) + '</div>'; }).join('');
+  } else {
+    box.innerHTML = '<p class="empty-state">No notices right now.</p>';
+  }
+}
+
+function renderSchedule(link){
+  var box = document.getElementById('scheduleBox');
+  if(link){
+    box.innerHTML = '<a class="btn btn-brand" style="width:auto;display:inline-block;" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Download Schedule</a>';
+  } else {
+    box.innerHTML = '<p class="empty-state">Schedule not available yet.</p>';
+  }
+}
+
+function fallbackCopy(text, done){
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); } catch(e){}
+  document.body.removeChild(ta);
+  done();
+}
+
+function copyCode(code, btn){
+  var done = function(){
+    var original = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(function(){ btn.textContent = original; }, 1500);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(done).catch(function(){ fallbackCopy(code, done); });
+  } else {
+    fallbackCopy(code, done);
+  }
+}
+
+function renderUpcoming(classes){
+  var box = document.getElementById('upcomingBox');
+  if(classes.length){
+    box.innerHTML = '<div class="class-grid">' + classes.map(function(c, i){
+      var codeHtml = c.code
+        ? '<div class="card-code-row"><span class="card-code-value">' + escapeHtml(c.code) + '</span>' +
+          '<button class="card-copy-btn" data-idx="' + i + '">Copy</button></div>'
+        : '';
+      return '<div class="class-card"><div class="ctitle">' + escapeHtml(c.title) + '</div>' +
+        '<div class="cmeta">' + escapeHtml(c.date) + ' · ' + escapeHtml(c.time || '—') + '</div>' +
+        codeHtml +
+        (c.link ? '<a class="class-link" href="' + escapeHtml(c.link) + '" target="_blank" rel="noopener">Join</a>' : '') +
+        '</div>';
+    }).join('') + '</div>';
+
+    box.querySelectorAll('.card-copy-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = parseInt(btn.getAttribute('data-idx'), 10);
+        copyCode(classes[idx].code, btn);
+      });
+    });
+  } else {
+    box.innerHTML = '<p class="empty-state">No classes scheduled.</p>';
+  }
+}
+
+function renderBankForm(mentor){
+  document.getElementById('holderNameInput').value = mentor.accountHolderName || '';
+  document.getElementById('accountNumberInput').value = mentor.bankAccountNumber || '';
+  document.getElementById('ifscInput').value = mentor.ifscCode || '';
+}
+
+document.getElementById('saveBankBtn').addEventListener('click', function(){
+  var holderName = document.getElementById('holderNameInput').value.trim();
+  var accountNumber = document.getElementById('accountNumberInput').value.trim();
+  var ifsc = document.getElementById('ifscInput').value.trim();
+  var errEl = document.getElementById('bankError');
+  var savedNote = document.getElementById('bankSavedNote');
+  errEl.classList.add('hidden');
+  savedNote.style.display = 'none';
+
+  if(!holderName || !accountNumber || !ifsc){
+    errEl.textContent = 'Please fill in all three fields.';
+    errEl.className = 'gate-message is-error';
+    errEl.classList.remove('hidden');
+    return;
+  }
+
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  apiCall('saveBankDetails', {
+    email: STATE.email,
+    accountNumber: accountNumber,
+    ifsc: ifsc,
+    holderName: holderName
+  }).then(function(res){
+    btn.disabled = false;
+    btn.textContent = 'Save details';
+    if(!res.success){
+      errEl.textContent = res.message || 'Could not save. Try again.';
+      errEl.className = 'gate-message is-error';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    savedNote.style.display = 'block';
+    setTimeout(function(){ savedNote.style.display = 'none'; }, 2500);
+  }).catch(function(err){
+    btn.disabled = false;
+    btn.textContent = 'Save details';
+    errEl.textContent = err && err.message ? err.message : String(err);
+    errEl.className = 'gate-message is-error';
+    errEl.classList.remove('hidden');
+  });
+});
+
+document.getElementById('switchEmailBtn').addEventListener('click', function(){
+  localStorage.removeItem('mentorEmail');
+  STATE = { email: null };
+  document.getElementById('emailInput').value = '';
+  showScreen('gate');
+});
+
+document.getElementById('refreshBtn').addEventListener('click', function(){
+  var btn = this;
+  btn.disabled = true;
+  btn.classList.add('spinning');
+  apiCall('getDashboardData', { email: STATE.email })
+    .then(function(data){
+      btn.disabled = false;
+      btn.classList.remove('spinning');
+      if(!data.found){ onDashboardData(data); return; }
+      renderDashboard(data);
+    })
+    .catch(function(err){
+      btn.disabled = false;
+      btn.classList.remove('spinning');
+      onServerError(err);
+    });
+});
+
+// ---------- Auto-login if we remember this browser's email, or arrived from the login hub ----------
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var emailFromUrl = params.get('email');
+  var saved = emailFromUrl || localStorage.getItem('mentorEmail');
+  if(saved){
+    document.getElementById('emailInput').value = saved;
+    STATE.email = saved;
+    document.getElementById('loadingText').textContent = 'Welcome back — loading your dashboard…';
+    showScreen('loading');
+    apiCall('getDashboardData', { email: saved }).then(onDashboardData).catch(onServerError);
+  }
+})();
+</script>
+</body>
+</html>

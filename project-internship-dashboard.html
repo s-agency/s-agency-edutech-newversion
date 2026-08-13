@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3Skill — Student Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#1DA64A;
+  --brand-dark:#128038;
+  --brand-bright:#22C55E;
+  --brand-light:#EAFBF0;
+  --ink:#0F172A;
+  --ink-soft:#5B6472;
+  --card:#FFFFFF;
+  --line:#E4EFE8;
+  --page-bg:#F6FBF7;
+  --accent-blue:#4F8FF7;
+  --accent-purple:#7C6FF0;
+  --success:#1DA64A;
+  --success-bg:#EAFBF0;
+  --danger:#D64545;
+  --danger-bg:#FDEBEA;
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--page-bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- Top bar ---------- */
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:16px 24px;display:flex;align-items:center;}
+.topbar .logo{font-family:'Poppins';font-weight:800;font-size:22px;color:var(--brand-dark);letter-spacing:-.5px;}
+.topbar .logo span{color:var(--ink);}
+
+#app{max-width:960px;margin:0 auto;padding:28px 20px 64px;}
+.screen{display:none;}
+.screen.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- Buttons (glossy / tactile) ---------- */
+.btn{appearance:none;border:none;cursor:pointer;border-radius:999px;font-family:'Poppins';font-weight:700;font-size:15px;padding:13px 20px;width:100%;transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;position:relative;overflow:hidden;}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn-brand{background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);color:#fff;box-shadow:0 8px 18px -4px rgba(18,128,56,.45), inset 0 1px 0 rgba(255,255,255,.35);}
+.btn-brand::after{content:'';position:absolute;top:0;left:0;right:0;height:48%;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0));pointer-events:none;}
+.btn-brand:hover{filter:brightness(1.04);}
+.btn-brand:disabled{opacity:.45;cursor:not-allowed;filter:none;box-shadow:none;}
+.btn-outline{background:#fff;color:var(--brand-dark);border:2px solid var(--brand);box-shadow:0 2px 6px rgba(15,23,42,.04);}
+.btn-outline:hover{background:var(--brand-light);}
+.hidden{display:none !important;}
+
+/* ---------- Gate ---------- */
+#gate.screen.active{display:flex;min-height:80vh;align-items:center;justify-content:center;}
+.gate-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:44px 36px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 48px -24px rgba(15,23,42,.18);}
+.brand-badge{width:56px;height:56px;border-radius:16px;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:19px;margin:0 auto 18px;box-shadow:0 10px 20px -8px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.4);}
+.gate-card h1{font-size:23px;margin-bottom:6px;}
+.gate-card p{color:var(--ink-soft);font-size:14px;margin:0 0 22px;}
+.gate-card input{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);font-size:15px;font-family:'Inter';margin-bottom:14px;outline:none;transition:border-color .15s ease;}
+.gate-card input:focus{border-color:var(--brand);}
+.gate-message{font-size:13px;margin-top:14px;line-height:1.55;}
+.gate-message.is-error{color:var(--danger);}
+.gate-message.is-info{color:var(--brand-dark);background:var(--brand-light);padding:12px 14px;border-radius:12px;}
+
+/* ---------- Loading ---------- */
+#loading.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:14px;}
+.loader{width:36px;height:36px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--brand);animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#loading p{color:var(--ink-soft);font-size:14px;}
+
+/* ---------- Domain / batch selection ---------- */
+.step-badge{width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:14px;margin-right:8px;vertical-align:middle;}
+.step-eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;color:var(--brand-dark);text-transform:uppercase;margin-bottom:10px;}
+.step-title{font-size:27px;margin-bottom:26px;}
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.domain-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:22px 18px;cursor:pointer;transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;font-family:'Poppins';font-weight:600;font-size:16px;}
+.domain-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 10px 20px -12px rgba(29,166,74,.35);}
+
+.sub{color:var(--ink-soft);font-size:14px;margin:-16px 0 26px;}
+.flap-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:26px;}
+.flap-card{background:var(--ink);color:#fff;border-radius:14px;overflow:hidden;cursor:pointer;border:2px solid var(--ink);transition:transform .15s ease, border-color .15s ease;}
+.flap-card:hover{transform:translateY(-3px);}
+.flap-card.selected{border-color:var(--brand-bright);}
+.flap-day{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-bright);text-align:center;padding:10px 0 6px;}
+.flap-date{font-family:'IBM Plex Mono';font-weight:600;font-size:30px;text-align:center;padding:6px 0;border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);}
+.flap-month{font-family:'IBM Plex Mono';font-size:12px;text-align:center;padding:8px 0;color:#C7D2C9;}
+.flap-card.selected .flap-date{color:var(--brand-bright);}
+#confirmBtn{max-width:280px;}
+
+/* ---------- Dashboard ---------- */
+.idcard{background:linear-gradient(135deg,var(--brand-light) 0%,#fff 70%);border:1.5px solid var(--line);color:var(--ink);border-radius:var(--radius);padding:26px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
+.idcard-left{display:flex;align-items:center;gap:16px;}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:18px;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
+.idcard-name{font-family:'Poppins';font-size:19px;font-weight:700;}
+.idcard-email{font-size:13px;color:var(--ink-soft);}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{background:#fff;border:1.5px solid var(--brand);color:var(--brand-dark);padding:7px 14px;border-radius:999px;font-size:13px;font-family:'IBM Plex Mono';font-weight:600;}
+.switch-email{background:none;border:none;color:var(--ink-soft);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;margin-top:10px;}
+
+.grid2{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 2px 8px rgba(15,23,42,.03);}
+.panel h3{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-family:'Poppins';}
+.panel h3::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--brand);display:inline-block;}
+
+.notice-item{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4;}
+.notice-item:last-child{border-bottom:none;}
+.empty-state{color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+.doubt-title{font-family:'Poppins';font-weight:700;font-size:16px;margin-bottom:10px;}
+.meta-row{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+.meta-row div{font-family:'IBM Plex Mono';font-size:13px;}
+.meta-row span{display:block;font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-family:'Inter';margin-bottom:3px;}
+.join-btn{display:inline-block;text-decoration:none;width:auto;}
+
+/* ---------- Project panel ---------- */
+.project-panel{margin-bottom:16px;}
+.status-badge{display:inline-block;padding:5px 13px;border-radius:999px;font-size:12px;font-family:'Poppins';font-weight:700;margin-bottom:14px;}
+.status-open{background:var(--success-bg);color:var(--success);}
+.status-closed{background:var(--danger-bg);color:var(--danger);}
+.project-brief-text{font-size:13.5px;color:var(--ink);line-height:1.6;background:var(--brand-light);padding:14px 16px;border-radius:12px;margin:12px 0;}
+.submit-instructions{font-size:12.5px;color:var(--ink-soft);margin:14px 0 4px;line-height:1.55;background:var(--brand-light);padding:10px 12px;border-radius:10px;}
+.submit-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+.submit-row input{flex:1;min-width:220px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);font-size:14px;font-family:'Inter';outline:none;transition:border-color .15s ease;}
+.submit-row input:focus{border-color:var(--brand);}
+.submit-row button{width:auto;padding:12px 22px;flex:none;}
+.submitted-list{margin-top:16px;}
+.submitted-item{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-family:'IBM Plex Mono';border-bottom:1px solid var(--line);}
+.submitted-item:last-child{border-bottom:none;}
+.submitted-item span{background:var(--brand-light);color:var(--brand-dark);border-radius:6px;padding:2px 7px;font-size:11px;flex:none;}
+.submitted-item a{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.submission-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);}
+.submission-card:last-child{border-bottom:none;}
+.submission-title{font-family:'Poppins';font-weight:600;font-size:13.5px;}
+.submission-date{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.submission-link{flex:none;font-family:'Poppins';font-weight:700;font-size:13px;color:var(--brand-dark);text-decoration:none;}
+.submission-link:hover{text-decoration:underline;}
+.project-error{color:var(--danger);font-size:13px;margin-top:10px;}
+.project-success{color:var(--success);font-size:13px;margin-top:10px;}
+
+/* ---------- Resources panel ---------- */
+.resources-panel{margin-bottom:16px;}
+.actions-row{display:flex;gap:12px;flex-wrap:wrap;}
+.pill-btn{padding:11px 18px;border-radius:999px;font-size:13px;font-family:'Poppins';font-weight:700;text-decoration:none;display:inline-block;transition:transform .12s ease, filter .12s ease;}
+.pill-ready{background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));color:#fff;box-shadow:0 6px 14px -4px rgba(18,128,56,.4), inset 0 1px 0 rgba(255,255,255,.35);}
+.pill-ready:hover{filter:brightness(1.05);transform:translateY(-1px);}
+.pill-pending{background:#F3F6F4;color:var(--ink-soft);border:1.5px dashed var(--line);cursor:default;}
+.pill-locked{background:#F3F6F4;color:#A6ADBB;border:1.5px dashed var(--line);cursor:default;}
+
+/* ---------- Project roadmap badges ---------- */
+.mini-badge{padding:3px 11px;border-radius:999px;font-size:11px;font-family:'Poppins';font-weight:700;}
+.mini-badge-current{background:var(--success-bg);color:var(--success);}
+.mini-badge-done{background:#F3F6F4;color:var(--ink-soft);}
+.mini-badge-locked{background:#F3F6F4;color:#A6ADBB;}
+.roadmap-item{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.roadmap-item:last-child{border-bottom:none;}
+.roadmap-item span:first-child{background:var(--brand-light);color:var(--brand-dark);border-radius:6px;padding:2px 7px;font-size:11px;flex:none;font-family:'IBM Plex Mono';}
+.roadmap-item .roadmap-title{flex:1;}
+
+/* ---------- Success modal ---------- */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:#fff;border-radius:20px;padding:34px 28px;max-width:340px;width:100%;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.35);}
+.modal-icon{width:50px;height:50px;border-radius:50%;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
+.modal-box h3{font-size:17px;margin-bottom:8px;}
+.modal-box p{color:var(--ink-soft);font-size:13px;margin:0 0 22px;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="logo">3<span>Skill</span></div></div>
+
+<div id="app">
+
+  <section id="gate" class="screen active">
+    <div class="gate-card">
+      <div class="brand-badge">3S</div>
+      <h1>Student Dashboard</h1>
+      <p>Enter your registered email to continue</p>
+      <input id="emailInput" type="email" placeholder="Put your registered email" autocomplete="email">
+      <button class="btn btn-brand" id="gateBtn">View dashboard</button>
+      <p class="gate-message hidden" id="gateError"></p>
+    </div>
+  </section>
+
+  <section id="loading" class="screen">
+    <div class="loader"></div>
+    <p id="loadingText">Loading your dashboard…</p>
+  </section>
+
+  <section id="selectDomain" class="screen">
+    <div class="step-eyebrow"><span class="step-badge">1</span>STEP 1 OF 2</div>
+    <h2 class="step-title">Choose your domain</h2>
+    <div class="domain-grid" id="domainGrid"></div>
+  </section>
+
+  <section id="selectBatch" class="screen">
+    <div class="step-eyebrow"><span class="step-badge">2</span>STEP 2 OF 2</div>
+    <h2 class="step-title">Choose your upcoming batch</h2>
+    <p class="sub">New batches start on the 1st, 8th, 15th &amp; 23rd of every month — shown below from today's date.</p>
+    <div class="flap-board" id="batchBoard"></div>
+    <button class="btn btn-brand" id="confirmBtn" disabled>Confirm selection</button>
+    <p class="gate-message is-error hidden" id="selectError"></p>
+  </section>
+
+  <section id="dashboard" class="screen">
+    <div class="idcard">
+      <div class="idcard-left">
+        <div class="avatar" id="avatarInitials">—</div>
+        <div>
+          <div class="idcard-name" id="dashName">—</div>
+          <div class="idcard-email" id="dashEmail">—</div>
+          <button class="switch-email" id="switchEmailBtn">Not you? Switch email</button>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" id="dashDomain">Domain</span>
+        <span class="chip" id="dashBatch">Batch</span>
+      </div>
+    </div>
+
+    <div class="panel resources-panel">
+      <h3>Downloads &amp; resources</h3>
+      <div class="actions-row" id="resourceButtons"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <h3>Notice board</h3>
+        <div id="noticeList"></div>
+      </div>
+      <div class="panel">
+        <h3>Upcoming live class</h3>
+        <div id="doubtClassBox"></div>
+      </div>
+    </div>
+
+    <div class="panel project-panel">
+      <h3>Project</h3>
+      <div id="projectBox"></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="successModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-icon">✓</div>
+    <h3>Project submitted successfully!</h3>
+    <p>Your Google Drive link has been recorded.</p>
+    <button class="btn btn-brand" id="modalCloseBtn" style="width:auto;padding:10px 24px;">OK</button>
+  </div>
+</div>
+
+<div id="notifyModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-icon">🔔</div>
+    <h3 id="notifyModalTitle">New project unlocked!</h3>
+    <p id="notifyModalBody">Aapka project aa gaya hai — submit kariye.</p>
+    <button class="btn btn-brand" id="notifyModalCloseBtn" style="width:auto;padding:10px 24px;">OK</button>
+  </div>
+</div>
+
+<script>
+/**
+ * IMPORTANT: paste your deployed Apps Script Web App URL here.
+ * Apps Script editor -> Deploy -> New deployment -> Web app -> copy the URL
+ * that ends in /exec
+ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbx_a5Y3-tj1-HNpk0TBPvxqM1AuSefX4TSQiwLR7zrmfoi3g6VqIcz3ahHSbSUrIVKz1w/exec';
+
+/**
+ * Link for the "Free ebooks & DSA" button — same for every student.
+ * Leave empty to show it as "Not available yet".
+ */
+const FREE_RESOURCES_LINK = 'https://drive.google.com/drive/folders/1LrFTqkXN-bAkHZLJHhutxVGARlBFgBEp';
+
+/**
+ * Where the "Extend deadline — ₹50" button points to. Point this at your
+ * payment page once it's ready. Leave empty and students will instead see
+ * a note to contact admin for the payment link.
+ */
+const EXTENSION_PAYMENT_LINK = 'https://smartpay.easebuzz.in/179742/a3da3647919641e885c11e3fedcbaf6a';
+
+/**
+ * How many projects a student gets, based on their Month value.
+ * Edit this table freely — it does NOT have to be a clean formula.
+ */
+const MONTH_PROJECT_COUNTS = { 1: 2, 2: 4, 3: 6, 4: 7, 5: 8, 6: 10 };
+
+function getProjectCountForMonth(monthCell){
+  var m = parseInt(monthCell, 10);
+  if (!m || m < 1) return 0;
+  if (MONTH_PROJECT_COUNTS[m] !== undefined) return MONTH_PROJECT_COUNTS[m];
+  return m * 2;
+}
+
+/**
+ * PROJECT BANK — edit this freely. One array of projects per domain.
+ * Domain names here MUST match the DOMAINS list in Code.gs exactly.
+ * "brief" is optional — a plain description of the project, shown as text
+ * on the project card. Leave it '' if you don't want a description shown.
+ */
+const PROJECT_BANK = {
+  'AI & Machine Learning': [
+  { title: 'Student Performance Prediction', brief: 'Build a simple machine learning model that predicts student performance based on factors such as attendance, study hours, and previous scores. Use basic data preprocessing and regression or classification techniques.' },
+  { title: 'House Price Prediction', brief: 'Create a machine learning model that predicts house prices using features such as location, size, number of rooms, and age of the property. Train a regression model and display the predicted price for new data.' },
+  { title: 'Spam Email Classifier', brief: 'Develop a simple machine learning system that identifies whether an email is spam or legitimate. Use basic text preprocessing and a classification algorithm to train and test the model.' },
+  { title: 'Iris Flower Classification', brief: 'Create a classification model that identifies different types of iris flowers based on their measurements. Train a simple machine learning algorithm and allow users to enter measurements for prediction.' },
+  { title: 'Customer Churn Prediction', brief: 'Build a model that predicts whether a customer is likely to leave a service. Use customer information such as usage, subscription type, and payment history to train a classification model.' },
+  { title: 'Movie Rating Prediction', brief: 'Develop a basic machine learning model that predicts movie ratings based on information such as genre, popularity, and previous ratings. Display the predicted rating for a selected movie.' },
+  { title: 'Student Attendance Prediction', brief: 'Create a machine learning model that predicts whether a student is likely to attend a class based on previous attendance, schedule, and academic information. Visualize the prediction results using simple charts.' },
+  { title: 'Simple Sentiment Analyzer', brief: 'Build an NLP application that determines whether a given sentence or review is positive or negative. Use basic text preprocessing and a simple machine learning classification algorithm.' },
+  { title: 'Diabetes Prediction System', brief: 'Develop a machine learning model that predicts whether a person may have diabetes based on basic health-related input data. Train and evaluate a classification model and provide a simple prediction interface.' },
+  { title: 'Weather Prediction Model', brief: 'Create a simple machine learning model that predicts weather conditions such as temperature or rainfall using previous weather data. Display the predicted results along with basic data visualizations.' }
+  ],
+  'Web Development (Full Stack)': [
+  { title: 'Student Management System', brief: 'Build a web application to manage student records, including registration, profiles, courses, and academic details. Add search, filtering, and basic CRUD operations for managing student information.' },
+  { title: 'Online Book Store', brief: 'Create a full-stack online bookstore where users can browse books, view details, and add items to a cart. Include user authentication, order management, and a simple admin panel.' },
+  { title: 'Task Management System', brief: 'Develop a task management application where users can create, update, delete, and track their tasks. Add features such as task status, priorities, deadlines, and basic user authentication.' },
+  { title: 'Online Food Ordering System', brief: 'Build a web application where users can browse food items, add them to a cart, and place orders. Include restaurant or admin management for adding food items and updating order status.' },
+  { title: 'Library Management System', brief: 'Create a system for managing books, members, and borrowing records. Users can search for books and view availability, while administrators can manage books, issue records, and returns.' },
+  { title: 'Event Management System', brief: 'Develop a platform for creating and managing events where users can view event details and register for events. Include an admin section for managing events, participants, and registration information.' },
+  { title: 'Online Job Portal', brief: 'Build a job portal where companies can post job openings and users can browse and apply for available positions. Include user profiles, job search, application tracking, and basic admin management.' },
+  { title: 'Expense Tracker Application', brief: 'Create a full-stack application that allows users to record and manage their daily income and expenses. Add categories, monthly summaries, search, and simple charts to help users understand their spending.' },
+  { title: 'Doctor Appointment System', brief: 'Develop a web application where patients can view doctors, check available appointment slots, and book appointments. Doctors or administrators can manage schedules, appointments, and patient information.' },
+  { title: 'Simple E-Commerce Website', brief: 'Build a basic e-commerce platform with product listings, product details, user registration, shopping cart, and order placement. Include an admin panel for managing products, users, and orders.' }
+  ],
+  'JAVA Programming': [
+  { title: 'Student Management System', brief: 'Build a Java application to manage student records such as name, course, marks, and contact details. Implement basic CRUD operations, searching, and simple result calculations.' },
+  { title: 'Library Management System', brief: 'Create a Java-based system for managing books and library members. Add features for issuing books, returning books, checking availability, and maintaining borrowing records.' },
+  { title: 'Bank Account Management System', brief: 'Develop an application to manage customer bank accounts and basic transactions. Users can create accounts, deposit and withdraw money, check balances, and view transaction details.' },
+  { title: 'Employee Management System', brief: 'Create a system for storing and managing employee information such as department, salary, and contact details. Include employee registration, searching, updating, and salary calculation features.' },
+  { title: 'Online Quiz Application', brief: 'Build a Java application where users can answer multiple-choice questions and receive their scores at the end. Include question management, automatic evaluation, and a simple result summary.' },
+  { title: 'Expense Tracker', brief: 'Develop a Java application that allows users to record their daily income and expenses. Add expense categories, total calculations, transaction history, and monthly spending summaries.' },
+  { title: 'Hotel Reservation System', brief: 'Create a system for managing hotel rooms and customer reservations. Users can check room availability, book rooms, cancel reservations, and view their booking details.' },
+  { title: 'Inventory Management System', brief: 'Build an application to manage products, stock quantities, prices, and suppliers. Include features for adding products, updating stock, searching items, and viewing low-stock products.' },
+  { title: 'Contact Management System', brief: 'Develop a Java application for storing and managing personal or business contacts. Users can add, edit, delete, search, and organize contacts using simple categories.' },
+  { title: 'Simple Billing System', brief: 'Create a Java-based billing application for generating customer bills from selected products. Implement product management, quantity and price calculations, discounts, taxes, and printable bill details.' }
+  ],
+  'Python Programming': [
+  { title: 'Student Grade Calculator', brief: 'Build a Python application that accepts student marks and calculates total marks, percentage, grade, and pass or fail status. Store and display the results in a simple and organized format.' },
+  { title: 'Personal Expense Tracker', brief: 'Create a Python application for recording daily income and expenses. Add categories, transaction history, total calculations, and a simple monthly expense summary.' },
+  { title: 'Library Book Manager', brief: 'Develop a Python program to manage books and library members. Include features for adding, searching, issuing, returning, and checking the availability of books.' },
+  { title: 'Quiz Application', brief: 'Build an interactive quiz application with multiple-choice questions and automatic score calculation. Include different categories and display the final score and correct answers.' },
+  { title: 'Contact Management System', brief: 'Create a Python application for managing personal contacts such as names, phone numbers, and email addresses. Users can add, update, delete, search, and view contacts.' },
+  { title: 'Number Guessing Game', brief: 'Develop an interactive game where the computer generates a random number and the user tries to guess it. Provide hints for higher or lower guesses and track the number of attempts.' },
+  { title: 'Weather Information App', brief: 'Build a Python application that retrieves weather information for a selected city using a weather API. Display details such as temperature, humidity, weather condition, and wind speed.' },
+  { title: 'File Organizer', brief: 'Create a Python utility that automatically organizes files into folders based on their extensions. Allow users to select a directory and safely sort documents, images, videos, and other files.' },
+  { title: 'Password Generator', brief: 'Develop a Python application that generates random and secure passwords based on user-selected length and character types. Include options for numbers, symbols, uppercase, and lowercase characters.' },
+  { title: 'Simple Chat Application', brief: 'Build a basic client-server chat application using Python sockets. Allow multiple users to connect and exchange messages through a simple text-based interface.' }
+  ],
+  'Data Structures & Algorithms (DSA) in C++': [
+  { title: 'Student Record Management', brief: 'Build a C++ program to store and manage student records using arrays, structures, or linked lists. Add features for inserting, searching, updating, deleting, and displaying student information.' },
+  { title: 'Contact Management Using Linked List', brief: 'Create a contact management program using a linked list to store names, phone numbers, and email addresses. Implement operations such as insertion, deletion, searching, and updating contacts.' },
+  { title: 'Stack-Based Expression Checker', brief: 'Develop a C++ program that uses a stack to check whether brackets in an expression are properly balanced. Extend the project to handle parentheses, square brackets, and curly brackets.' },
+  { title: 'Queue-Based Customer Service System', brief: 'Build a customer service simulation using a queue data structure. Customers should be added to the queue and served in the correct order while displaying the current queue status.' },
+  { title: 'Sorting Algorithm Visualizer', brief: 'Create a simple C++ program that demonstrates sorting algorithms such as Bubble Sort, Selection Sort, and Insertion Sort. Display the array before and after sorting and compare the number of operations.' },
+  { title: 'Binary Search Tree Manager', brief: 'Develop a program for creating and managing a Binary Search Tree. Implement insertion, searching, deletion, and different tree traversals such as inorder, preorder, and postorder.' },
+  { title: 'Shortest Path Finder', brief: 'Create a graph-based program that finds the shortest path between two locations. Use a simple graph representation and implement an algorithm such as Dijkstra\u2019s algorithm to calculate the path.' },
+  { title: 'Priority Queue Task Manager', brief: 'Build a task management system using a priority queue where tasks are assigned different priority levels. The system should process high-priority tasks first and allow users to add and remove tasks.' },
+  { title: 'Maze Solver Using BFS and DFS', brief: 'Develop a C++ program that represents a maze using a grid and finds a path from the starting point to the destination. Implement BFS and DFS to demonstrate different path-searching approaches.' },
+  { title: 'Simple Graph Traversal System', brief: 'Create a program that represents a network of connected nodes using a graph. Implement Breadth-First Search and Depth-First Search and display the order in which the nodes are visited.' }
+  ],
+  'UI/UX': [
+  { title: 'Student Learning Dashboard', brief: 'Design a clean and user-friendly dashboard for students to track courses, assignments, attendance, and progress. Focus on clear navigation, readable layouts, and simple data visualization.' },
+  { title: 'Food Delivery App UI', brief: 'Design a mobile-friendly food delivery interface where users can browse restaurants, search for food, view item details, and manage their cart. Focus on intuitive navigation and a smooth ordering experience.' },
+  { title: 'Travel Booking Website UI', brief: 'Create a modern travel booking interface for searching destinations, hotels, and travel packages. Design easy-to-use search filters, booking screens, destination cards, and confirmation pages.' },
+  { title: 'Online Course Platform UI', brief: 'Design a learning platform interface where users can explore courses, watch lessons, track progress, and view certificates. Create a consistent layout for course pages, dashboards, and learning activities.' },
+  { title: 'Healthcare Appointment App UI', brief: 'Design a simple healthcare application that allows users to find doctors, view profiles, and book appointments. Focus on accessibility, clear information hierarchy, and an easy appointment flow.' },
+  { title: 'Personal Finance Dashboard', brief: 'Create a dashboard for users to track income, expenses, savings, and financial goals. Use cards, charts, filters, and visual indicators to make financial information easy to understand.' },
+  { title: 'E-Commerce Shopping App UI', brief: 'Design a modern shopping interface with product listings, categories, search, product details, cart, and checkout screens. Focus on a consistent visual style and a simple purchasing journey.' },
+  { title: 'Event Booking Platform UI', brief: 'Design an interface for discovering and booking events such as concerts, workshops, and conferences. Include event cards, search filters, event details, ticket selection, and booking confirmation screens.' },
+  { title: 'Job Search Portal UI', brief: 'Create a user-friendly job portal interface for searching and applying for jobs. Design job listings, filters, company profiles, application screens, and a dashboard for tracking applications.' },
+  { title: 'Fitness Tracking App UI', brief: 'Design a fitness application that helps users track workouts, daily activity, goals, and progress. Create simple dashboards, workout screens, progress charts, and an engaging mobile user experience.' }
+  ],
+  'Digital Marketing': [
+  { title: 'Social Media Campaign Manager', brief: 'Design a digital marketing project for planning and managing social media campaigns across different platforms. Include campaign goals, content scheduling, audience targeting, and basic performance tracking.' },
+  { title: 'SEO Performance Dashboard', brief: 'Create a dashboard that helps businesses monitor basic SEO performance such as keywords, search rankings, traffic, and backlinks. Present the information using simple charts and performance indicators.' },
+  { title: 'Email Marketing Campaign System', brief: 'Build a system for creating and managing email marketing campaigns. Include contact lists, email templates, campaign scheduling, and basic metrics such as opens and clicks.' },
+  { title: 'Digital Marketing Analytics Dashboard', brief: 'Create a dashboard that combines important marketing metrics such as website visits, conversions, social engagement, and campaign performance. Use charts and summary cards to make the data easy to understand.' },
+  { title: 'Content Marketing Planner', brief: 'Develop a tool for planning and organizing digital content such as blogs, social media posts, and promotional content. Include content calendars, categories, publishing status, and basic performance tracking.' },
+  { title: 'Social Media Engagement Analyzer', brief: 'Create a project that analyzes social media engagement data such as likes, comments, shares, and followers. Display trends and identify which types of content receive better engagement.' },
+  { title: 'Online Ad Campaign Tracker', brief: 'Build a simple system for tracking online advertising campaigns and their results. Manage campaign budgets, clicks, impressions, conversions, and calculate basic performance metrics.' },
+  { title: 'Influencer Marketing Management System', brief: 'Design a platform for managing influencer marketing campaigns and collaborations. Include influencer profiles, campaign details, budgets, deliverables, and basic engagement performance.' },
+  { title: 'Customer Feedback & Review Analyzer', brief: 'Create a digital marketing tool that collects customer reviews and feedback for a business. Organize feedback by rating and category to help identify customer satisfaction and common issues.' },
+  { title: 'Marketing Campaign Planner', brief: 'Develop a simple application for planning complete digital marketing campaigns. Users can define campaign objectives, target audiences, budgets, channels, schedules, and track campaign progress.' }
+  ],
+  'HR Management': [
+  { title: 'Employee Recruitment Planning', brief: 'Create a project for planning and managing the recruitment process for different job positions. Include job requirements, candidate shortlisting, interview stages, and final selection analysis.' },
+  { title: 'Employee Attendance Analysis', brief: 'Analyze employee attendance data to identify attendance patterns, frequent absences, and overall attendance performance. Present the findings using simple tables, charts, and monthly summaries.' },
+  { title: 'Employee Performance Evaluation', brief: 'Develop a project for evaluating employee performance based on goals, productivity, teamwork, and other workplace criteria. Generate performance summaries to help managers identify strengths and improvement areas.' },
+  { title: 'Employee Training Needs Analysis', brief: 'Analyze employee skills and performance to identify areas where additional training may be required. Recommend suitable training programs based on employee roles and identified skill gaps.' },
+  { title: 'Employee Satisfaction Survey', brief: 'Conduct and analyze an employee satisfaction survey covering areas such as workplace environment, management, compensation, and job satisfaction. Summarize the results and identify areas that need improvement.' },
+  { title: 'Leave Management Analysis', brief: 'Analyze employee leave records to understand leave patterns across departments and months. Identify common leave trends and prepare reports that can support better workforce planning.' },
+  { title: 'Employee Turnover Analysis', brief: 'Study employee records to understand why employees leave an organization and identify turnover patterns. Analyze factors such as department, experience, job role, and satisfaction levels.' },
+  { title: 'Salary & Compensation Analysis', brief: 'Analyze employee salary information across different departments and job roles. Compare salary ranges, experience levels, and compensation differences to understand overall pay patterns.' },
+  { title: 'Employee Onboarding Plan', brief: 'Create a structured onboarding plan for newly hired employees. Include orientation activities, required documents, training sessions, role introduction, and a timeline for completing onboarding activities.' },
+  { title: 'HR Dashboard & Workforce Analysis', brief: 'Create a simple HR dashboard showing important workforce information such as employee count, departments, attendance, turnover, and performance. Use charts and summaries to support HR decision-making.' }
+  ],
+  'Cloud Computing': [
+  { title: 'Cloud File Storage System', brief: 'Build a simple cloud-based application where users can upload, download, and manage their files. Include user authentication, file organization, and basic storage information.' },
+  { title: 'Cloud-Based Student Management System', brief: 'Create a student management application hosted on a cloud platform. Allow users to manage student records, courses, and academic information through a centralized online system.' },
+  { title: 'Cloud Backup System', brief: 'Develop a basic application that allows users to upload important files and create backups in cloud storage. Include file listing, upload, download, and basic backup history features.' },
+  { title: 'Cloud-Based Attendance System', brief: 'Build an online attendance system where teachers can record and manage student attendance from anywhere. Store attendance records in a cloud database and provide simple monthly reports.' },
+  { title: 'Cloud Image Gallery', brief: 'Create a cloud-based image management application where users can upload, view, organize, and delete images. Include albums or categories and basic user access control.' },
+  { title: 'Cloud-Based Task Manager', brief: 'Develop an online task management system where users can create, update, and track tasks from different devices. Store tasks in a cloud database and include status, priority, and deadline features.' },
+  { title: 'Cloud Monitoring Dashboard', brief: 'Create a simple dashboard for displaying information about cloud resources such as server status, storage usage, and basic performance metrics. Use charts and status indicators for easy monitoring.' },
+  { title: 'Cloud-Based Online Quiz System', brief: 'Build an online quiz platform where questions and results are stored in the cloud. Users can take quizzes and view scores, while administrators can manage questions and quiz categories.' },
+  { title: 'Cloud-Based E-Commerce Application', brief: 'Develop a basic e-commerce application hosted on a cloud platform. Include product management, user accounts, shopping cart, orders, and a simple admin panel.' },
+  { title: 'Cloud-Based Document Management System', brief: 'Create a centralized system for storing and managing documents online. Users can upload, search, download, organize, and delete documents while applying basic access permissions.' }
+  ],
+  'Cyber Security': [
+  { title: 'Password Strength Checker', brief: 'Build a simple security tool that checks the strength of user passwords based on length, character types, and common password patterns. Provide suggestions to help users create stronger passwords.' },
+  { title: 'Secure Login System', brief: 'Create a secure authentication system with user registration and login functionality. Implement password hashing, input validation, session management, and basic account security features.' },
+  { title: 'File Encryption & Decryption Tool', brief: 'Develop an application that allows users to protect files using encryption and restore them through decryption. Provide a simple interface for selecting files and managing encryption keys securely.' },
+  { title: 'Phishing URL Detector', brief: 'Build a basic application that analyzes website URLs and identifies potentially suspicious links. Check simple indicators such as unusual domains, excessive special characters, and suspicious URL patterns.' },
+  { title: 'Network Port Scanner', brief: 'Create a basic network security tool that scans a specified host for commonly used open ports. Display detected ports and their associated services to help users understand network exposure.' },
+  { title: 'Secure File Sharing System', brief: 'Develop a web application that allows users to securely upload and share files with selected users. Include authentication, access permissions, and basic file management features.' },
+  { title: 'Cyber Security Awareness Quiz', brief: 'Build an interactive quiz application that tests users on common cybersecurity topics such as phishing, passwords, malware, and safe browsing. Display scores and explanations after each quiz.' },
+  { title: 'Login Attempt Monitoring System', brief: 'Create a system that records and monitors user login attempts. Detect repeated failed attempts and display basic alerts or account protection measures when suspicious activity is detected.' },
+  { title: 'Malware File Scanner', brief: 'Develop a basic file scanning application that checks files against predefined suspicious patterns or signatures. Display scan results and identify files that require further security investigation.' },
+  { title: 'Cyber Security Dashboard', brief: 'Create a dashboard that displays basic security information such as login attempts, suspicious activities, password status, and system alerts. Use charts and status indicators to make security information easy to understand.' }
+  ],
+  'Finance': [
+  { title: 'Personal Budget Planner', brief: 'Create a simple tool for planning monthly income, expenses, and savings. Users can set spending limits for different categories and review their monthly financial position.' },
+  { title: 'Monthly Expense Analysis', brief: 'Analyze a person\u2019s monthly expenses across categories such as food, travel, shopping, and bills. Present the findings using simple tables and charts to identify major spending areas.' },
+  { title: 'Loan Comparison Analysis', brief: 'Create a project that compares different loan options based on interest rates, repayment periods, and total payable amounts. Help users understand which option is more suitable for their needs.' },
+  { title: 'Investment Planning Tool', brief: 'Develop a simple tool for planning investments based on available funds, expected returns, and investment duration. Compare different investment options and summarize the potential outcomes.' },
+  { title: 'Sales & Revenue Analysis', brief: 'Analyze sales data to understand monthly revenue, best-selling products, and overall business performance. Use charts and summaries to identify important sales trends.' },
+  { title: 'Personal Savings Planner', brief: 'Create a savings planning project where users set financial goals and calculate how much they need to save regularly. Track progress toward goals such as education, travel, or a major purchase.' },
+  { title: 'Business Profit Analysis', brief: 'Analyze business revenue and expenses to calculate profit and loss. Compare different months or products to identify areas that contribute most to business profitability.' },
+  { title: 'Financial Goal Tracker', brief: 'Build a simple system for setting and monitoring financial goals. Users can define target amounts, deadlines, and regular contributions while tracking their progress.' },
+  { title: 'Household Expense Manager', brief: 'Create a project for managing and analyzing household expenses such as groceries, utilities, transportation, and rent. Generate monthly summaries to help identify unnecessary spending.' },
+  { title: 'Basic Financial Dashboard', brief: 'Design a simple dashboard that presents income, expenses, savings, and financial goals in an easy-to-understand format. Use visual charts and summaries to support better financial decision-making.' }
+  ],
+  'Business Analytics': [
+  { title: 'Sales Performance Analysis', brief: 'Analyze sales data to understand monthly revenue, top-performing products, and sales trends. Use simple charts and summaries to identify areas of strong and weak performance.' },
+  { title: 'Customer Purchase Analysis', brief: 'Study customer purchase data to understand buying patterns, popular products, and customer spending behavior. Use basic analysis to identify important customer trends.' },
+  { title: 'Business Expense Analysis', brief: 'Analyze business expenses across different categories such as salaries, marketing, operations, and supplies. Identify major expenses and areas where the business can reduce costs.' },
+  { title: 'Customer Satisfaction Analysis', brief: 'Analyze customer feedback and survey data to understand satisfaction levels and common customer concerns. Present the results using ratings, charts, and simple business insights.' },
+  { title: 'Product Performance Analysis', brief: 'Evaluate product sales to identify the best and worst-performing products. Compare sales, revenue, and demand to help businesses make better product decisions.' },
+  { title: 'Marketing Campaign Analysis', brief: 'Analyze marketing campaign data to compare performance across different channels. Study metrics such as reach, engagement, leads, and conversions to identify effective campaigns.' },
+  { title: 'Employee Performance Analysis', brief: 'Analyze employee-related data such as attendance, productivity, performance ratings, and department information. Identify performance patterns and areas that may require improvement.' },
+  { title: 'Inventory & Stock Analysis', brief: 'Analyze inventory data to identify fast-moving, slow-moving, and low-stock products. Use simple reports to help businesses understand stock requirements and avoid overstocking.' },
+  { title: 'Business Profitability Analysis', brief: 'Analyze revenue and expense data to understand business profit and loss. Compare profitability across products, departments, or time periods to identify the most profitable areas.' },
+  { title: 'Business Analytics Dashboard', brief: 'Create a simple dashboard that combines important business metrics such as sales, revenue, expenses, customers, and profit. Use charts and summary indicators to support business decision-making.' }
+  ],
+  'Frontend Development': [
+   { title: 'Personal Portfolio Website', brief: 'Create a responsive portfolio website to showcase a person\u2019s skills, projects, education, and achievements. Focus on clean layouts, attractive sections, smooth navigation, and mobile-friendly design.' },
+  { title: 'Restaurant Website', brief: 'Design a modern website for a restaurant with sections for menu, about, services, gallery, location, and contact information. Add responsive layouts and interactive elements to improve the user experience.' },
+  { title: 'Travel Destination Website', brief: 'Build an attractive website for exploring travel destinations, attractions, and travel packages. Include destination cards, image galleries, search or filtering, and responsive page layouts.' },
+  { title: 'Online Course Website', brief: 'Create a frontend interface for an online learning platform where users can explore courses, instructors, categories, and course details. Design clear navigation and engaging course layouts.' },
+  { title: 'E-Commerce Product Website', brief: 'Develop a responsive shopping interface for displaying products, categories, prices, and product details. Include search, filtering, shopping cart UI, and a simple checkout interface.' },
+  { title: 'Event Booking Website', brief: 'Build a website for discovering and booking events such as workshops, concerts, and conferences. Include event cards, details pages, search filters, and a simple booking interface.' },
+  { title: 'Fitness & Wellness Website', brief: 'Create a modern frontend for a fitness and wellness platform featuring workout programs, trainers, schedules, and health-related content. Focus on attractive visuals and easy navigation.' },
+  { title: 'Job Search Website', brief: 'Design a frontend interface where users can browse and search for job opportunities. Include job cards, filters, company information, job details, and a simple application interface.' },
+  { title: 'News & Magazine Website', brief: 'Build a responsive news website with sections for different categories, featured stories, articles, and trending topics. Create a clean layout that makes reading and navigation easy.' },
+  { title: 'Weather Information Website', brief: 'Create a user-friendly weather website that displays current weather conditions and forecasts for selected locations. Include search, weather cards, icons, and responsive layouts for different devices.' }
+  ],
+  'Backend Development': [
+  { title: 'Student Management API', brief: 'Build a backend system for managing student records such as names, courses, grades, and contact details. Provide APIs for adding, updating, searching, and deleting student information.' },
+  { title: 'Library Management Backend', brief: 'Create a backend system for managing books, members, and borrowing records. Handle book availability, issue and return operations, and maintain basic borrowing history.' },
+  { title: 'Employee Management Backend', brief: 'Develop a backend application for storing and managing employee information. Include APIs for employee records, departments, roles, and basic search and filtering operations.' },
+  { title: 'Task Management API', brief: 'Build a backend service that allows users to create, update, delete, and manage tasks. Include task status, priority, deadlines, and basic user authentication.' },
+  { title: 'Online Book Store Backend', brief: 'Create a backend for an online bookstore that manages books, users, carts, and orders. Provide APIs for browsing products, managing carts, and placing basic orders.' },
+  { title: 'Event Management Backend', brief: 'Develop a backend system for managing events and participant registrations. Include APIs for creating events, viewing event details, registering users, and managing participants.' },
+  { title: 'Expense Tracker API', brief: 'Build a backend service for recording and managing personal income and expenses. Include categories, transaction history, monthly summaries, and APIs for adding and retrieving financial records.' },
+  { title: 'Simple Authentication System', brief: 'Create a backend authentication system with user registration and login functionality. Implement password protection, user sessions or tokens, validation, and basic access control.' },
+  { title: 'Food Ordering Backend', brief: 'Develop a backend system for managing food items, customers, carts, and orders. Provide APIs for browsing menu items, placing orders, and updating order status.' },
+  { title: 'Appointment Management API', brief: 'Build a backend service for managing appointments between users and service providers. Include scheduling, availability, booking, cancellation, and appointment history features.' }
+  ],
+  'Database Management': [
+  { title: 'Student Database Management System', brief: 'Create a database for storing and managing student information such as personal details, courses, marks, and attendance. Use tables, relationships, queries, and simple reports to organize the data.' },
+  { title: 'Library Database System', brief: 'Design a database for managing books, members, authors, and borrowing records. Create relationships between tables and use queries to track available books, issued books, and return information.' },
+  { title: 'Employee Database Management', brief: 'Build a database for storing employee, department, salary, and job information. Use SQL queries to retrieve employee details, compare departments, and generate basic HR reports.' },
+  { title: 'Hospital Database System', brief: 'Create a database to manage patients, doctors, appointments, and medical records. Establish appropriate relationships and use queries to retrieve appointment and patient information.' },
+  { title: 'Inventory Database Management', brief: 'Design a database for managing products, suppliers, stock levels, and purchases. Use queries and reports to identify available products, low-stock items, and supplier information.' },
+  { title: 'Sales & Customer Database', brief: 'Build a database for storing customer, product, order, and sales information. Use SQL queries to analyze sales records, customer purchases, and product performance.' },
+  { title: 'Banking Database System', brief: 'Create a database for managing customers, bank accounts, and transactions. Organize account information and use queries to retrieve balances, transaction history, and customer details.' },
+  { title: 'Hotel Reservation Database', brief: 'Design a database for managing rooms, customers, bookings, and payments. Use table relationships and SQL queries to check room availability and retrieve reservation information.' },
+  { title: 'Online Store Database', brief: 'Create a database for an online store containing products, customers, orders, and payment records. Use relationships and queries to manage products and analyze customer orders.' },
+  { title: 'Database Reporting System', brief: 'Build a simple database system that collects business-related data and generates useful reports. Practice data filtering, sorting, aggregation, joins, and summary queries to support decision-making.' }
+  ]
+};
+
+function getAssignedProjects(domain, monthCell){
+  var count = getProjectCountForMonth(monthCell);
+  var bank = PROJECT_BANK[domain] || [];
+  return bank.slice(0, count);
+}
+
+function computeProjectSegments(opensISO, deadlineISO, count){
+  if(!opensISO || !deadlineISO || !count) return [];
+  var start = new Date(opensISO + 'T00:00:00');
+  var end = new Date(deadlineISO + 'T23:59:59');
+  var totalMs = end.getTime() - start.getTime();
+  if(totalMs <= 0) return [];
+  var segMs = totalMs / count;
+  var segments = [];
+  for(var i = 0; i < count; i++){
+    var segStart = new Date(start.getTime() + i * segMs);
+    var segEnd = (i === count - 1) ? end : new Date(start.getTime() + (i + 1) * segMs);
+    segments.push({ index: i, start: segStart, end: segEnd });
+  }
+  return segments;
+}
+
+function formatDateDisplay(d){
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var day = String(d.getDate()).padStart(2, '0');
+  return day + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+// "14 Aug 2026" + month=2 -> "2 Month · Aug 14 Batch"
+function formatBatchChip(batchDisplay, monthCell){
+  if(!batchDisplay) return 'Batch: —';
+  var parts = String(batchDisplay).trim().split(/\s+/); // ["14","Aug","2026"]
+  var shortDate = parts.length >= 2 ? (parts[1] + ' ' + parts[0]) : batchDisplay;
+  var m = parseInt(monthCell, 10);
+  var monthLabel = m ? (m + ' Month · ') : '';
+  return monthLabel + shortDate + ' Batch';
+}
+
+var STATE = { email: null, upcomingBatches: [], selectedDomain: null, selectedBatch: null };
+
+function apiCall(action, params){
+  params = params || {};
+  params.action = action;
+  var query = Object.keys(params)
+    .map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); })
+    .join('&');
+  return fetch(API_URL + '?' + query)
+    .then(function(res){
+      if(!res.ok) throw new Error('Server returned ' + res.status);
+      return res.json();
+    })
+    .then(function(data){
+      if(data && data.error) throw new Error(data.error);
+      return data;
+    });
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+
+function initials(name){
+  if(!name) return '—';
+  var parts = String(name).trim().split(/\s+/);
+  return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+// ---------- Gate ----------
+document.getElementById('gateBtn').addEventListener('click', function(){ startLogin(); });
+document.getElementById('emailInput').addEventListener('keydown', function(e){ if(e.key === 'Enter') startLogin(); });
+
+function setGateMessage(text, type){
+  var el = document.getElementById('gateError');
+  el.textContent = text;
+  el.className = 'gate-message ' + (type === 'info' ? 'is-info' : 'is-error');
+  el.classList.remove('hidden');
+}
+
+function startLogin(){
+  var email = document.getElementById('emailInput').value.trim();
+  document.getElementById('gateError').classList.add('hidden');
+  if(!email || email.indexOf('@') === -1){
+    setGateMessage('Enter a valid email address.', 'error');
+    return;
+  }
+  STATE.email = email;
+  document.getElementById('loadingText').textContent = 'Loading your dashboard…';
+  showScreen('loading');
+  apiCall('getDashboardData', { email: email })
+    .then(onDashboardData)
+    .catch(onServerError);
+}
+
+function onServerError(err){
+  showScreen('gate');
+  setGateMessage('Something went wrong: ' + (err && err.message ? err.message : err), 'error');
+}
+
+function onDashboardData(data){
+  if(!data.found){
+    showScreen('gate');
+    setGateMessage("Your dashboard isn't active yet — it will be ready within 24 hours of enrollment. No need to worry, just check back soon!", 'info');
+    return;
+  }
+
+  if(data.needsSelection){
+    STATE.upcomingBatches = data.upcomingBatches;
+    renderDomainGrid(data.domains);
+    showScreen('selectDomain');
+  } else {
+    renderDashboard(data);
+    showScreen('dashboard');
+  }
+}
+
+// ---------- Domain step ----------
+function renderDomainGrid(domains){
+  var grid = document.getElementById('domainGrid');
+  grid.innerHTML = '';
+  domains.forEach(function(domain){
+    var card = document.createElement('div');
+    card.className = 'domain-card';
+    card.textContent = domain;
+    card.addEventListener('click', function(){
+      STATE.selectedDomain = domain;
+      renderBatchBoard();
+      showScreen('selectBatch');
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ---------- Batch step ----------
+function renderBatchBoard(){
+  var board = document.getElementById('batchBoard');
+  board.innerHTML = '';
+  STATE.selectedBatch = null;
+  document.getElementById('confirmBtn').disabled = true;
+
+  STATE.upcomingBatches.forEach(function(b){
+    var card = document.createElement('div');
+    card.className = 'flap-card';
+    var parts = b.display.split(' ');
+    card.innerHTML =
+      '<div class="flap-day">' + b.day + '</div>' +
+      '<div class="flap-date">' + parts[0] + '</div>' +
+      '<div class="flap-month">' + parts[1] + ' ' + parts[2] + '</div>';
+    card.addEventListener('click', function(){
+      document.querySelectorAll('.flap-card').forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      STATE.selectedBatch = b;
+      document.getElementById('confirmBtn').disabled = false;
+    });
+    board.appendChild(card);
+  });
+}
+
+document.getElementById('confirmBtn').addEventListener('click', function(){
+  if(!STATE.selectedDomain || !STATE.selectedBatch) return;
+  this.disabled = true;
+  this.textContent = 'Saving…';
+  var self = this;
+  apiCall('saveSelection', {
+    email: STATE.email,
+    domain: STATE.selectedDomain,
+    batch: STATE.selectedBatch.display
+  }).then(function(res){
+    if(!res.success){
+      self.disabled = false;
+      self.textContent = 'Confirm selection';
+      var errEl = document.getElementById('selectError');
+      errEl.textContent = res.message || 'Could not save. Try again.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+    document.getElementById('loadingText').textContent = 'Setting up your dashboard…';
+    showScreen('loading');
+    apiCall('getDashboardData', { email: STATE.email }).then(onDashboardData).catch(onServerError);
+  }).catch(function(err){
+    self.disabled = false;
+    self.textContent = 'Confirm selection';
+    onServerError(err);
+  });
+});
+
+// ---------- Dashboard ----------
+function renderDashboard(data){
+  var s = data.student;
+  document.getElementById('avatarInitials').textContent = initials(s.name);
+  document.getElementById('dashName').textContent = s.name || '—';
+  document.getElementById('dashEmail').textContent = s.email || '—';
+  document.getElementById('dashDomain').textContent = s.domain || '—';
+  document.getElementById('dashBatch').textContent = formatBatchChip(s.batch, s.month);
+
+  renderResourceButtons(s, certificateEligibility(data));
+
+  var noticeList = document.getElementById('noticeList');
+  if(data.notices && data.notices.length){
+    noticeList.innerHTML = data.notices.map(function(n){
+      return '<div class="notice-item">' + escapeHtml(n) + '</div>';
+    }).join('');
+  } else {
+    noticeList.innerHTML = '<p class="empty-state">No notices right now.</p>';
+  }
+
+  var box = document.getElementById('doubtClassBox');
+  if(data.doubtClass){
+    var dc = data.doubtClass;
+    box.innerHTML =
+      '<div class="doubt-title">' + escapeHtml(dc.title) + '</div>' +
+      '<div class="meta-row">' +
+        '<div><span>Date</span>' + escapeHtml(dc.date) + '</div>' +
+        '<div><span>Time</span>' + escapeHtml(dc.time || '—') + '</div>' +
+      '</div>' +
+      (dc.link ? '<a class="btn btn-brand join-btn" href="' + escapeHtml(dc.link) + '" target="_blank" rel="noopener">Join link</a>' : '');
+  } else {
+    box.innerHTML = '<p class="empty-state">No upcoming live class scheduled right now.</p>';
+  }
+
+  var projects = getAssignedProjects(s.domain, s.month);
+  var penaltyGranted = String(s.penaltyProject || '').trim().toLowerCase() === 'yes';
+  var projectResult = renderProject(projects, data.projectWindow, data.submittedLinks || [], penaltyGranted);
+  checkProjectNotification(projectResult.activeLabel);
+}
+
+// Certificate only appears once the internship's overall deadline has arrived
+// AND the student submitted at least one project by then.
+function certificateEligibility(data){
+  var deadlineISO = data.projectWindow && data.projectWindow.deadlineISO;
+  if(!deadlineISO) return false;
+  var deadlinePassed = new Date() > new Date(deadlineISO + 'T23:59:59');
+  var hasSubmitted = (data.submittedLinks || []).length > 0;
+  return deadlinePassed && hasSubmitted;
+}
+
+function renderResourceButtons(student, certificateEligible){
+  var box = document.getElementById('resourceButtons');
+  var parts = [];
+  parts.push(certificateButtonHtml(student.certificateLink, certificateEligible));
+  parts.push(resourceButtonHtml('📄 Offer letter', student.offerLetterLink));
+  parts.push(resourceButtonHtml('📚 Free ebooks & DSA', FREE_RESOURCES_LINK));
+  box.innerHTML = parts.join('');
+}
+
+function certificateButtonHtml(link, eligible){
+  if(!eligible){
+    return '<span class="pill-btn pill-locked">🔒 Certificate — Locked until deadline</span>';
+  }
+  return resourceButtonHtml('🎓 Certificate', link);
+}
+
+function resourceButtonHtml(label, link){
+  if(link){
+    return '<a class="pill-btn pill-ready" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">' + label + ' — Download</a>';
+  }
+  return '<span class="pill-btn pill-pending">' + label + ' — Not available yet</span>';
+}
+
+function renderProject(projects, windowInfo, submittedLinks, penaltyGranted){
+  var box = document.getElementById('projectBox');
+
+  if(!projects.length){
+    box.innerHTML = '<p class="empty-state">No projects available for your domain/month yet.</p>';
+    return;
+  }
+
+  var opensISO = windowInfo && windowInfo.opensISO;
+  var deadlineISO = windowInfo && windowInfo.deadlineISO;
+  var extendedDeadlineISO = windowInfo && windowInfo.extendedDeadlineISO;
+  var segments = computeProjectSegments(opensISO, deadlineISO, projects.length);
+  var now = new Date();
+
+  var notStarted = segments.length > 0 && now < segments[0].start;
+  var pastNormalDeadline = deadlineISO ? now > new Date(deadlineISO + 'T23:59:59') : false;
+  var hasSubmitted = submittedLinks.length > 0;
+
+  var mainHtml = '';
+  var currentLabel = '';
+  var activeProject = null;
+  var activeSeg = null;
+  var isExtension = false;
+  var showSubmitForm = false;
+
+  if(notStarted){
+    mainHtml = '<p class="empty-state">Your project track starts on ' + escapeHtml(formatDateDisplay(segments[0].start)) + '. Check back then.</p>';
+
+  } else if(!pastNormalDeadline){
+    // normal in-window sequential flow — one project at a time
+    var currentIndex = 0;
+    for(var i = 0; i < segments.length; i++){
+      if(now <= segments[i].end){ currentIndex = i; break; }
+      currentIndex = i;
+    }
+    activeProject = projects[currentIndex];
+    activeSeg = segments[currentIndex] || {};
+    currentLabel = 'Project ' + (currentIndex + 1) + ' - ' + activeProject.title;
+    showSubmitForm = true;
+
+  } else if(hasSubmitted){
+    // deadline passed but they submitted at least once — done, certificate unlocks
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p class="empty-state" style="margin-top:10px;">Your project submission window has closed. Thanks for submitting!</p>';
+
+  } else if(penaltyGranted && extendedDeadlineISO && now <= new Date(extendedDeadlineISO + 'T23:59:59')){
+    // paid extension active — one shot, project #1 only
+    activeProject = projects[0];
+    currentLabel = 'Project 1 (Extended) - ' + activeProject.title;
+    activeSeg = { start: null, end: new Date(extendedDeadlineISO + 'T00:00:00') };
+    isExtension = true;
+    showSubmitForm = true;
+
+  } else if(penaltyGranted){
+    // extension was granted but the 10 days are also over now
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p class="empty-state" style="margin-top:10px;">Your extended deadline has also passed. Contact admin for help.</p>';
+
+  } else {
+    // locked — nothing submitted, deadline over, no extension granted yet
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p style="margin:12px 0 16px;font-size:14px;">Your project submission deadline has ended. Extend your deadline to still receive your certificate.</p>' +
+      (EXTENSION_PAYMENT_LINK
+        ? '<a class="btn btn-brand" style="width:auto;display:inline-block;" href="' + escapeHtml(EXTENSION_PAYMENT_LINK) + '" target="_blank" rel="noopener">Extend deadline — ₹50</a>'
+        : '<p class="empty-state">Contact admin for the extension payment link.</p>') +
+      '<p class="submit-instructions" style="margin-top:16px;">Already paid? You will get access to submit your project within 24 hours of payment confirmation.</p>';
+  }
+
+  if(showSubmitForm && activeProject){
+    var briefHtml = activeProject.brief
+      ? '<p class="project-brief-text">' + escapeHtml(activeProject.brief) + '</p>'
+      : '';
+    var statusLabel = isExtension ? 'Extended — open for submission' : 'Open for submission';
+    mainHtml =
+      '<div class="doubt-title">' + escapeHtml(currentLabel) + '</div>' +
+      '<span class="status-badge status-open">' + statusLabel + '</span>' +
+      briefHtml +
+      '<div class="meta-row">' +
+        '<div><span>Opens</span>' + escapeHtml(activeSeg && activeSeg.start ? formatDateDisplay(activeSeg.start) : '—') + '</div>' +
+        '<div><span>Deadline</span>' + escapeHtml(activeSeg && activeSeg.end ? formatDateDisplay(activeSeg.end) : '—') + '</div>' +
+      '</div>' +
+      '<p class="submit-instructions">How to submit: upload all your project files to Google Drive, set sharing to "Anyone with the link can view", then paste that public link below.</p>' +
+      '<div class="submit-row">' +
+        '<input type="url" id="driveLinkInput" placeholder="Paste your Google Drive link here">' +
+        '<button class="btn btn-brand" id="submitProjectBtn" style="width:auto;">Submit</button>' +
+      '</div>' +
+      '<div id="projectMsg"></div>';
+  }
+
+  var submittedHtml = '';
+  if(submittedLinks.length){
+    submittedHtml = '<h3 style="margin-top:20px;">Your submissions</h3><div class="submitted-list">' + submittedLinks.map(function(raw, i){
+      var parts = String(raw).split('|').map(function(s){ return s.trim(); });
+      var label = parts.length >= 3 ? parts[0] : ('Submission #' + (i+1));
+      var submittedText = parts.length >= 3 ? parts[1] : '';
+      var link = parts.length >= 3 ? parts[2] : parts[parts.length - 1];
+      return '<div class="submission-card">' +
+        '<div class="submission-info">' +
+          '<div class="submission-title">' + escapeHtml(label) + '</div>' +
+          (submittedText ? '<div class="submission-date">' + escapeHtml(submittedText) + '</div>' : '') +
+        '</div>' +
+        '<a class="submission-link" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Open ↗</a>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  box.innerHTML = mainHtml + submittedHtml;
+
+  var submitBtn = document.getElementById('submitProjectBtn');
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var input = document.getElementById('driveLinkInput');
+      var link = input.value.trim();
+      var msg = document.getElementById('projectMsg');
+      msg.innerHTML = '';
+      if(!link){
+        msg.innerHTML = '<p class="project-error">Paste a link first.</p>';
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      apiCall('submitProject', { email: STATE.email, link: link, projectLabel: currentLabel })
+        .then(function(res){
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          if(!res.success){
+            msg.innerHTML = '<p class="project-error">' + escapeHtml(res.message) + '</p>';
+            return;
+          }
+          input.value = '';
+          showSuccessModal();
+          // re-fetch the whole dashboard so certificate eligibility + project
+          // state both refresh together (submitting can unlock the certificate).
+          apiCall('getDashboardData', { email: STATE.email }).then(renderDashboard).catch(onServerError);
+        })
+        .catch(function(err){
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          msg.innerHTML = '<p class="project-error">' + escapeHtml(err && err.message ? err.message : err) + '</p>';
+        });
+    });
+  }
+
+  return { activeLabel: (showSubmitForm && activeProject) ? currentLabel : null };
+}
+
+function showSuccessModal(){ document.getElementById('successModal').classList.remove('hidden'); }
+function hideSuccessModal(){ document.getElementById('successModal').classList.add('hidden'); }
+document.getElementById('modalCloseBtn').addEventListener('click', hideSuccessModal);
+
+// Shows a popup the moment a NEW project becomes available for submission —
+// compares against the last project we told this student about (stored per
+// email in localStorage), so it only fires once per newly-unlocked project,
+// not on every page load.
+function checkProjectNotification(activeLabel){
+  if(!activeLabel || !STATE.email) return;
+  var storageKey = 'project_notify_' + STATE.email;
+  var lastSeen = localStorage.getItem(storageKey);
+  if(lastSeen === activeLabel) return;
+
+  localStorage.setItem(storageKey, activeLabel);
+  if(lastSeen === null) return; // first-ever visit — don't notify, just remember it
+
+  document.getElementById('notifyModalTitle').textContent = 'New project unlocked!';
+  document.getElementById('notifyModalBody').textContent = activeLabel + ' is ready — aapka project aa gaya hai, submit kariye.';
+  document.getElementById('notifyModal').classList.remove('hidden');
+}
+function hideNotifyModal(){ document.getElementById('notifyModal').classList.add('hidden'); }
+document.getElementById('notifyModalCloseBtn').addEventListener('click', hideNotifyModal);
+
+document.getElementById('switchEmailBtn').addEventListener('click', function(){
+  STATE = { email: null, upcomingBatches: [], selectedDomain: null, selectedBatch: null };
+  document.getElementById('emailInput').value = '';
+  showScreen('gate');
+});
+
+// ---------- Auto-login if arriving from the master login hub (?email=...) ----------
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var emailFromUrl = params.get('email');
+  if(!emailFromUrl) return;
+  document.getElementById('emailInput').value = emailFromUrl;
+  STATE.email = emailFromUrl;
+  document.getElementById('loadingText').textContent = 'Loading your dashboard…';
+  showScreen('loading');
+  apiCall('getDashboardData', { email: emailFromUrl }).then(onDashboardData).catch(onServerError);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3Skill — Training Internship Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#1DA64A;
+  --brand-dark:#128038;
+  --brand-bright:#22C55E;
+  --brand-light:#EAFBF0;
+  --ink:#0F172A;
+  --ink-soft:#5B6472;
+  --card:#FFFFFF;
+  --line:#E4EFE8;
+  --page-bg:#F6FBF7;
+  --accent-blue:#4F8FF7;
+  --accent-purple:#7C6FF0;
+  --success:#1DA64A;
+  --success-bg:#EAFBF0;
+  --danger:#D64545;
+  --danger-bg:#FDEBEA;
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--page-bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:16px 24px;display:flex;align-items:center;}
+.topbar .logo{font-family:'Poppins';font-weight:800;font-size:22px;color:var(--brand-dark);letter-spacing:-.5px;}
+.topbar .logo span{color:var(--ink);}
+
+#app{max-width:960px;margin:0 auto;padding:28px 20px 64px;}
+.screen{display:none;}
+.screen.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.btn{appearance:none;border:none;cursor:pointer;border-radius:999px;font-family:'Poppins';font-weight:700;font-size:15px;padding:13px 20px;width:100%;transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;position:relative;overflow:hidden;text-decoration:none;display:inline-block;text-align:center;}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn-brand{background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);color:#fff;box-shadow:0 8px 18px -4px rgba(18,128,56,.45), inset 0 1px 0 rgba(255,255,255,.35);}
+.btn-brand::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0));pointer-events:none;border-radius:999px 999px 0 0;}
+.btn-brand:hover{filter:brightness(1.04);}
+.btn-brand:disabled{opacity:.45;cursor:not-allowed;filter:none;box-shadow:none;}
+.hidden{display:none !important;}
+
+/* ---------- Gate ---------- */
+#gate.screen.active{display:flex;min-height:80vh;align-items:center;justify-content:center;}
+.gate-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:44px 36px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 48px -24px rgba(15,23,42,.18);}
+.brand-badge{width:56px;height:56px;border-radius:16px;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:19px;margin:0 auto 18px;box-shadow:0 10px 20px -8px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.4);}
+.gate-card h1{font-size:23px;margin-bottom:6px;}
+.gate-card p{color:var(--ink-soft);font-size:14px;margin:0 0 22px;}
+.gate-card input{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);font-size:15px;font-family:'Inter';margin-bottom:14px;outline:none;transition:border-color .15s ease;}
+.gate-card input:focus{border-color:var(--brand);}
+.gate-message{font-size:13px;margin-top:14px;line-height:1.55;}
+.gate-message.is-error{color:var(--danger);}
+.gate-message.is-info{color:var(--brand-dark);background:var(--brand-light);padding:12px 14px;border-radius:12px;}
+
+/* ---------- Loading ---------- */
+#loading.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:14px;}
+.loader{width:36px;height:36px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--brand);animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#loading p{color:var(--ink-soft);font-size:14px;}
+
+/* ---------- Dashboard shell ---------- */
+.idcard{background:linear-gradient(135deg,var(--brand-light) 0%,#fff 70%);border:1.5px solid var(--line);color:var(--ink);border-radius:var(--radius);padding:26px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
+.idcard-left{display:flex;align-items:center;gap:16px;}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:18px;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
+.idcard-name{font-family:'Poppins';font-size:19px;font-weight:700;}
+.idcard-email{font-size:13px;color:var(--ink-soft);}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{background:#fff;border:1.5px solid var(--brand);color:var(--brand-dark);padding:7px 14px;border-radius:999px;font-size:13px;font-family:'IBM Plex Mono';font-weight:600;}
+.refresh-btn{background:#fff;border:1.5px solid var(--brand);color:var(--brand-dark);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:transform .3s ease, filter .15s ease;}
+.refresh-btn:hover{filter:brightness(0.97);}
+.refresh-btn.spinning{animation:spin-once .6s linear;}
+@keyframes spin-once{to{transform:rotate(360deg);}}
+.refresh-btn:disabled{opacity:.5;cursor:not-allowed;}
+.switch-email{background:none;border:none;color:var(--ink-soft);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;margin-top:10px;}
+
+.grid2{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-bottom:16px;align-items:start;}
+.stack-col{display:flex;flex-direction:column;gap:16px;}
+@media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 2px 8px rgba(15,23,42,.03);margin-bottom:16px;}
+.panel h3{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-family:'Poppins';}
+.panel h3::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--brand);display:inline-block;}
+
+.notice-item{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4;}
+.notice-item:last-child{border-bottom:none;}
+.empty-state{color:var(--ink-soft);font-size:13px;font-style:italic;}
+
+/* ---------- Live classes / recordings (card grid) ---------- */
+.class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;}
+.class-card{background:var(--brand-light);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:transform .12s ease, box-shadow .12s ease;}
+.class-card:hover{transform:translateY(-2px);box-shadow:0 8px 16px -8px rgba(18,128,56,.25);}
+.class-card .class-title{font-family:'Poppins';font-weight:600;font-size:13.5px;line-height:1.35;}
+.class-card .class-meta{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-soft);}
+.class-card .class-link{align-self:flex-start;margin-top:2px;font-family:'Poppins';font-weight:700;font-size:12px;color:#fff;text-decoration:none;background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));padding:7px 14px;border-radius:999px;box-shadow:0 4px 10px -3px rgba(18,128,56,.4);}
+.class-card .class-link:hover{filter:brightness(1.05);}
+.subheading{font-family:'Poppins';font-weight:600;font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px;}
+.subheading:first-child{margin-top:0;}
+
+.doubt-title{font-family:'Poppins';font-weight:700;font-size:16px;margin-bottom:10px;}
+.meta-row{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+.meta-row div{font-family:'IBM Plex Mono';font-size:13px;}
+.meta-row span{display:block;font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-family:'Inter';margin-bottom:3px;}
+
+/* ---------- Project panel ---------- */
+.status-badge{display:inline-block;padding:5px 13px;border-radius:999px;font-size:12px;font-family:'Poppins';font-weight:700;margin-bottom:14px;}
+.status-open{background:var(--success-bg);color:var(--success);}
+.status-closed{background:var(--danger-bg);color:var(--danger);}
+.details-btn{display:inline-block;text-decoration:none;background:var(--brand-light);color:var(--brand-dark);font-family:'Poppins';font-weight:700;font-size:13px;padding:8px 16px;border-radius:999px;margin-bottom:14px;}
+.details-btn:hover{filter:brightness(0.97);}
+.submit-instructions{font-size:12.5px;color:var(--ink-soft);margin:14px 0 4px;line-height:1.55;background:var(--brand-light);padding:10px 12px;border-radius:10px;}
+.submit-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+.submit-row input{flex:1;min-width:220px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);font-size:14px;font-family:'Inter';outline:none;transition:border-color .15s ease;}
+.submit-row input:focus{border-color:var(--brand);}
+.submit-row button{width:auto;padding:12px 22px;flex:none;}
+.project-error{color:var(--danger);font-size:13px;margin-top:10px;}
+.submission-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);}
+.submission-card:last-child{border-bottom:none;}
+.submission-title{font-family:'Poppins';font-weight:600;font-size:13.5px;}
+.submission-date{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.submission-link{flex:none;font-family:'Poppins';font-weight:700;font-size:13px;color:var(--brand-dark);text-decoration:none;}
+.submission-link:hover{text-decoration:underline;}
+
+/* ---------- Resources ---------- */
+.actions-row{display:flex;gap:12px;flex-wrap:wrap;}
+.pill-btn{padding:11px 18px;border-radius:999px;font-size:13px;font-family:'Poppins';font-weight:700;text-decoration:none;display:inline-block;transition:transform .12s ease, filter .12s ease;}
+.pill-ready{background:linear-gradient(180deg,var(--brand-bright),var(--brand-dark));color:#fff;box-shadow:0 6px 14px -4px rgba(18,128,56,.4), inset 0 1px 0 rgba(255,255,255,.35);}
+.pill-ready:hover{filter:brightness(1.05);transform:translateY(-1px);}
+.pill-pending{background:#F3F6F4;color:var(--ink-soft);border:1.5px dashed var(--line);cursor:default;}
+.pill-locked{background:#F3F6F4;color:#A6ADBB;border:1.5px dashed var(--line);cursor:default;}
+
+/* ---------- Marking section ---------- */
+.mark-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.mark-row:last-child{border-bottom:none;}
+.mark-value{font-family:'IBM Plex Mono';font-weight:600;}
+.mark-tick{font-size:18px;}
+
+/* ---------- Attendance (compact) ---------- */
+.attendance-panel{display:flex;flex-direction:column;}
+.attendance-top{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.attendance-ring-wrap{position:relative;width:72px;height:72px;flex:none;}
+.attendance-ring{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--line);stroke-width:9;}
+.ring-fg{fill:none;stroke:var(--brand);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
+.attendance-percent-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:15px;color:var(--ink);}
+.attendance-sub{color:var(--ink-soft);font-size:12.5px;margin:0;}
+.attendance-form .submit-row{margin-top:0;}
+.attendance-form input{padding:9px 12px;font-size:13px;}
+.attendance-form button{padding:9px 16px;font-size:13px;}
+.attendance-today-msg{background:var(--brand-light);color:var(--brand-dark);font-family:'Poppins';font-weight:600;font-size:12.5px;padding:9px 12px;border-radius:10px;margin:0 0 12px;}
+
+/* ---------- Success / notify modal ---------- */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:#fff;border-radius:20px;padding:34px 28px;max-width:340px;width:100%;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.35);}
+.modal-icon{width:50px;height:50px;border-radius:50%;background:linear-gradient(160deg,var(--brand-bright),var(--brand-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
+.modal-box h3{font-size:16px;margin-bottom:8px;line-height:1.4;}
+.modal-box p{color:var(--ink-soft);font-size:13px;margin:0 0 22px;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="logo">3<span>Skill</span></div></div>
+
+<div id="app">
+
+  <section id="gate" class="screen active">
+    <div class="gate-card">
+      <div class="brand-badge">3S</div>
+      <h1>Training Internship Dashboard</h1>
+      <p>Enter your registered email to continue</p>
+      <input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email">
+      <button class="btn btn-brand" id="gateBtn">View dashboard</button>
+      <p class="gate-message hidden" id="gateError"></p>
+    </div>
+  </section>
+
+  <section id="loading" class="screen">
+    <div class="loader"></div>
+    <p id="loadingText">Loading your dashboard…</p>
+  </section>
+
+  <section id="dashboard" class="screen">
+    <div class="idcard">
+      <div class="idcard-left">
+        <div class="avatar" id="avatarInitials">—</div>
+        <div>
+          <div class="idcard-name" id="dashName">—</div>
+          <div class="idcard-email" id="dashEmail">—</div>
+          <button class="switch-email" id="switchEmailBtn">Not you? Switch email</button>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" id="dashDomain">Domain</span>
+        <span class="chip" id="dashBatch">Batch</span>
+        <button class="refresh-btn" id="refreshBtn" title="Refresh dashboard">🔄</button>
+      </div>
+    </div>
+
+    <div class="panel resources-panel">
+      <h3>Downloads &amp; resources</h3>
+      <div class="actions-row" id="resourceButtons"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="stack-col">
+        <div class="panel">
+          <h3>Notice board</h3>
+          <div id="noticeList"></div>
+        </div>
+        <div class="panel attendance-panel">
+          <h3>Attendance</h3>
+          <div id="attendanceBox"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Live classes</h3>
+        <div id="liveClassBox"></div>
+      </div>
+    </div>
+
+    <div class="panel recordings-panel">
+      <h3>Recordings</h3>
+      <div id="recordingsBox"></div>
+    </div>
+
+    <div class="panel project-panel">
+      <h3>Project</h3>
+      <div id="projectBox"></div>
+    </div>
+
+    <div class="panel exam-panel">
+      <h3>Final exam</h3>
+      <div id="examBox"></div>
+    </div>
+
+    <div class="panel marking-panel">
+      <h3>Marking &amp; eligibility</h3>
+      <div id="markingBox"></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="notifyModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-icon" id="notifyModalIcon">✓</div>
+    <h3 id="notifyModalTitle">Update</h3>
+    <p id="notifyModalBody"></p>
+    <button class="btn btn-brand" id="notifyModalCloseBtn" style="width:auto;padding:10px 24px;">OK</button>
+  </div>
+</div>
+
+<script>
+/**
+ * IMPORTANT: paste your deployed Apps Script Web App URL here (from
+ * TrainingCode.gs's deployment — this is a SEPARATE Apps Script project
+ * from the other dashboard).
+ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbz4nFViAn02VjCPyHQ3cf3aTBktE7ND4JV5jLXqo6lMjdfxzVOx0e6T7TZc7J7AdFGM/exec';
+
+
+/**
+ * Where the "Extend deadline — ₹50" button points to.
+ */
+const EXTENSION_PAYMENT_LINK = 'https://smartpay.easebuzz.in/179742/a3da3647919641e885c11e3fedcbaf6a';
+
+/**
+ * PROJECT BANK — one array of projects per domain. Domain names here MUST
+ * match exactly what you type into the Domain column on the sheet.
+ * "brief" is the Drive link for the project's file — students see a direct
+ * "Download your project details here" button, fill it in for every project.
+ * Keep at least 4 entries per domain (current schedules need up to 4).
+ */
+
+const PROJECT_BANK = {
+  'Web Development': [
+    { title: 'Clone Website ', brief: 'https://drive.google.com/drive/folders/1O7lEdO6zUOYDWgOgO_Aaf4Zrx6K3Bdn_?usp=sharing' },
+    { title: 'Personal Portfolio Website', brief: 'https://drive.google.com/drive/folders/1gq90v1DMcXJ7ppdiSDJco6dJ3flczZWQ?usp=sharing' },
+    { title: 'Travelling Website ', brief: 'https://drive.google.com/drive/folders/1hzHg9zQ5pfmEtJPmyDL0nE3RufDecxzm?usp=sharing' },
+    { title: 'Real Estate Website ', brief: 'https://drive.google.com/drive/folders/1ESyL0_RqE4qV5z1al7_p8yO8g_c2ekNM?usp=sharing' }
+  ],
+  'Data Analytics': [
+    { title: 'Retail Sales & Profit Analysis', brief: 'https://drive.google.com/drive/folders/1T1WvYONoE54P8D6jm_n-NuBaRUwRjooF?usp=sharing' },
+    { title: 'Ecommerce Data Analysis', brief: 'https://drive.google.com/drive/folders/17jvtjuSLVKRH_fREpbX9cx4ScuKCs1yn?usp=sharing' },
+    { title: 'Supply Chain & Inventory Analysis', brief: 'https://drive.google.com/drive/folders/1ImPPNjssfLV8Ou13VbUnVzUSgG5Xi9zS?usp=sharing' },
+    { title: 'Sales Forecasting & Demand Analysis', brief: 'https://drive.google.com/drive/folders/1g9Bdyxzc2wyT49RiFG42itihBgMFbs5w?usp=sharing' }
+  ],
+  'AIML': [
+    { title: 'Wine Quality Prediction System', brief: 'https://drive.google.com/drive/folders/1xFdJrx7yvIAERLUVYytsDw_UArgwZg6v?usp=sharing' },
+    { title: 'Student Placement Prediction System', brief: 'https://drive.google.com/drive/folders/10u555ZJAhGG5dutxNYDeZB3eSz1XiA1S?usp=sharing' },
+    { title: 'Customer Churn Prediction System', brief: 'https://drive.google.com/drive/folders/1S-mnGevv6T1IOKLPMk3PfqZwwAcaEXuD?usp=sharing' },
+    { title: 'Fake Job Posting Detection', brief: 'https://drive.google.com/drive/folders/1kJksBC8z95U7OSMjJEUsuGh2mbC-W-WH?usp=sharing' }
+  ]
+};
+
+
+function getDomainProjects(domain){
+  return PROJECT_BANK[domain] || [];
+}
+
+// ---------- date helpers ----------
+function addMonths(date, n){ return new Date(date.getFullYear(), date.getMonth() + n, date.getDate()); }
+function addDays(date, n){ var d = new Date(date.getTime()); d.setDate(d.getDate() + n); return d; }
+function todayISODate(){
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function formatDateDisplay(d){
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return String(d.getDate()).padStart(2,'0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+}
+function formatBatchChip(batchDisplay, monthCell){
+  if(!batchDisplay) return 'Batch: —';
+  var parts = String(batchDisplay).trim().split(/\s+/);
+  var shortDate = parts.length >= 2 ? (parts[1] + ' ' + parts[0]) : batchDisplay;
+  var m = parseInt(monthCell, 10);
+  var monthLabel = m ? (m + ' Month · ') : '';
+  return monthLabel + shortDate + ' Batch';
+}
+
+/**
+ * CUSTOM PROJECT SCHEDULES — one builder per Month value. Each returns an
+ * array of {open, close} Date windows, one per project, in order. Edit or
+ * add more month profiles here as new programs launch.
+ */
+const PROJECT_SCHEDULE_BUILDERS = {
+  // Month = 2: nothing in month 1. Month 2: 4 projects, 7 days apart.
+  2: function(batchDate, months){
+    var month2Start = addMonths(batchDate, 1);
+    var finalDeadline = addMonths(batchDate, months);
+    var segs = [];
+    for(var i = 0; i < 4; i++){
+      var open = addDays(month2Start, i * 7);
+      var close = (i === 3) ? finalDeadline : addDays(month2Start, (i+1) * 7);
+      segs.push({ open: open, close: close });
+    }
+    return segs;
+  },
+  // Month = 3 (AIML): P1 end of month1, P2 end of month2, P3 +10d, P4 rest of month3.
+  3: function(batchDate, months){
+    var m1End = addMonths(batchDate, 1);
+    var m2End = addMonths(batchDate, 2);
+    var p3Close = addDays(m2End, 10);
+    var finalDeadline = addMonths(batchDate, months);
+    return [
+      { open: batchDate, close: m1End },
+      { open: m1End, close: m2End },
+      { open: m2End, close: p3Close },
+      { open: p3Close, close: finalDeadline }
+    ];
+  }
+};
+
+// Fallback for any Month value without a custom profile above:
+// skip month 1, then (months x 2) projects, 7 days apart.
+function genericFallbackSchedule(batchDate, months){
+  var count = Math.max(months * 2, 1);
+  var start = addMonths(batchDate, 1);
+  var finalDeadline = addMonths(batchDate, months);
+  var segs = [];
+  for(var i = 0; i < count; i++){
+    var open = addDays(start, i * 7);
+    if(open >= finalDeadline) break;
+    var close = (i === count - 1) ? finalDeadline : addDays(start, (i+1) * 7);
+    segs.push({ open: open, close: close > finalDeadline ? finalDeadline : close });
+  }
+  return segs;
+}
+
+function getProjectSchedule(batchDate, months){
+  var builder = PROJECT_SCHEDULE_BUILDERS[months];
+  if(builder) return builder(batchDate, months);
+  return genericFallbackSchedule(batchDate, months);
+}
+
+function findCurrentSegment(segments, now){
+  for(var i = 0; i < segments.length; i++){
+    if(now >= segments[i].open && now <= segments[i].close) return { index: i, segment: segments[i] };
+  }
+  return null;
+}
+
+var STATE = { email: null };
+
+function apiCall(action, params){
+  params = params || {};
+  params.action = action;
+  var query = Object.keys(params)
+    .map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); })
+    .join('&');
+  return fetch(API_URL + '?' + query)
+    .then(function(res){
+      if(!res.ok) throw new Error('Server returned ' + res.status);
+      return res.json();
+    })
+    .then(function(data){
+      if(data && data.error) throw new Error(data.error);
+      return data;
+    });
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+
+function initials(name){
+  if(!name) return '—';
+  var parts = String(name).trim().split(/\s+/);
+  return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+// ---------- Gate ----------
+document.getElementById('gateBtn').addEventListener('click', function(){ startLogin(); });
+document.getElementById('emailInput').addEventListener('keydown', function(e){ if(e.key === 'Enter') startLogin(); });
+
+function setGateMessage(text, type){
+  var el = document.getElementById('gateError');
+  el.textContent = text;
+  el.className = 'gate-message ' + (type === 'info' ? 'is-info' : 'is-error');
+  el.classList.remove('hidden');
+}
+
+function startLogin(){
+  var email = document.getElementById('emailInput').value.trim();
+  document.getElementById('gateError').classList.add('hidden');
+  if(!email || email.indexOf('@') === -1){
+    setGateMessage('Enter a valid email address.', 'error');
+    return;
+  }
+  STATE.email = email;
+  document.getElementById('loadingText').textContent = 'Loading your dashboard…';
+  showScreen('loading');
+  apiCall('getDashboardData', { email: email }).then(onDashboardData).catch(onServerError);
+}
+
+function onServerError(err){
+  showScreen('gate');
+  setGateMessage('Something went wrong: ' + (err && err.message ? err.message : err), 'error');
+}
+
+function onDashboardData(data){
+  if(!data.found){
+    showScreen('gate');
+    setGateMessage("Your dashboard isn't active yet — it will be ready within 24 hours of enrollment. No need to worry, just check back soon!", 'info');
+    return;
+  }
+  localStorage.setItem('trainingStudentEmail', STATE.email);
+  renderDashboard(data);
+  showScreen('dashboard');
+}
+
+// ---------- Dashboard ----------
+function renderDashboard(data){
+  var s = data.student;
+  document.getElementById('avatarInitials').textContent = initials(s.name);
+  document.getElementById('dashName').textContent = s.name || '—';
+  document.getElementById('dashEmail').textContent = s.email || '—';
+  document.getElementById('dashDomain').textContent = s.domain || '—';
+  document.getElementById('dashBatch').textContent = formatBatchChip(s.batch, s.month);
+
+  var certEligible = certificateEligibility(data);
+  renderResourceButtons(s, certEligible);
+  renderNotices(data.notices || []);
+  renderLiveClasses(data.liveClasses || []);
+  renderRecordings(data.recordings || []);
+
+  var projects = getDomainProjects(s.domain);
+  var penaltyGranted = String(s.penaltyProject || '').trim().toLowerCase() === 'yes';
+  var projInfo = renderProject(projects, data, penaltyGranted, s);
+
+  var examInfo = renderExamSection(data.examWindow);
+  renderAttendance(data.attendance || {});
+  renderMarkingSection(s, certEligible, data);
+
+  checkAndNotify(s.email, {
+    certificateEligible: certEligible,
+    examUnlocked: examInfo.unlocked,
+    currentProjectKey: projInfo.currentProjectKey
+  });
+}
+
+function certificateEligibility(data){
+  var deadlineISO = data.projectWindow && data.projectWindow.deadlineISO;
+  if(!deadlineISO) return false;
+  var deadlinePassed = new Date() > new Date(deadlineISO + 'T23:59:59');
+  var hasSubmitted = (data.submittedLinks || []).length > 0;
+  return deadlinePassed && hasSubmitted;
+}
+
+function renderResourceButtons(student, certificateEligible){
+  var box = document.getElementById('resourceButtons');
+  var parts = [];
+  parts.push(certificateEligible
+    ? resourceButtonHtml('🎓 Certificate', student.certificateLink)
+    : '<span class="pill-btn pill-locked">🔒 Certificate — Locked until deadline</span>');
+  parts.push(resourceButtonHtml('📄 Offer letter', student.offerLetterLink));
+  parts.push('<span class="pill-btn pill-pending">📚 Free ebooks &amp; DSA — Coming soon</span>');
+  box.innerHTML = parts.join('');
+}
+
+function resourceButtonHtml(label, link){
+  if(link) return '<a class="pill-btn pill-ready" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">' + label + ' — Download</a>';
+  return '<span class="pill-btn pill-pending">' + label + ' — Not available yet</span>';
+}
+
+function renderNotices(notices){
+  var el = document.getElementById('noticeList');
+  if(notices.length){
+    el.innerHTML = notices.map(function(n){ return '<div class="notice-item">' + escapeHtml(n) + '</div>'; }).join('');
+  } else {
+    el.innerHTML = '<p class="empty-state">No notices right now.</p>';
+  }
+}
+
+function renderLiveClasses(classes){
+  var box = document.getElementById('liveClassBox');
+  if(classes && classes.length){
+    box.innerHTML = '<div class="class-grid">' + classes.map(function(c){
+      return '<div class="class-card"><div class="class-title">' + escapeHtml(c.title) + '</div>' +
+        '<div class="class-meta">' + escapeHtml(c.date) + ' · ' + escapeHtml(c.time || '—') + '</div>' +
+        (c.link ? '<a class="class-link" href="' + escapeHtml(c.link) + '" target="_blank" rel="noopener">Join</a>' : '') + '</div>';
+    }).join('') + '</div>';
+  } else {
+    box.innerHTML = '<p class="empty-state">No upcoming classes scheduled.</p>';
+  }
+}
+
+function renderRecordings(recordings){
+  var box = document.getElementById('recordingsBox');
+  if(recordings && recordings.length){
+    box.innerHTML = '<div class="class-grid">' + recordings.map(function(c){
+      return '<div class="class-card"><div class="class-title">' + escapeHtml(c.title) + '</div>' +
+        '<div class="class-meta">' + escapeHtml(c.date) + '</div>' +
+        (c.link ? '<a class="class-link" href="' + escapeHtml(c.link) + '" target="_blank" rel="noopener">Watch</a>' : '') + '</div>';
+    }).join('') + '</div>';
+  } else {
+    box.innerHTML = '<p class="empty-state">No recordings available yet.</p>';
+  }
+}
+
+function renderProject(projects, data, penaltyGranted, student){
+  var box = document.getElementById('projectBox');
+  var windowInfo = data.projectWindow || {};
+  var submittedLinks = data.submittedLinks || [];
+
+  if(!projects.length || !student.batch || !student.month){
+    box.innerHTML = '<p class="empty-state">No projects available yet — check back once your domain/batch details are added.</p>';
+    return { currentProjectKey: null };
+  }
+
+  var batchDate = new Date(windowInfo.opensISO + 'T00:00:00');
+  var months = parseInt(student.month, 10);
+  var segments = getProjectSchedule(batchDate, months).slice(0, projects.length);
+  var now = new Date();
+
+  var deadlineISO = windowInfo.deadlineISO;
+  var extendedDeadlineISO = windowInfo.extendedDeadlineISO;
+  var pastNormalDeadline = deadlineISO ? now > new Date(deadlineISO + 'T23:59:59') : false;
+  var hasSubmitted = submittedLinks.length > 0;
+
+  var mainHtml = '';
+  var currentLabel = '';
+  var activeProject = null;
+  var activeSeg = null;
+  var isExtension = false;
+  var showSubmitForm = false;
+  var currentProjectKey = null;
+
+  if(now < batchDate){
+    mainHtml = '<p class="empty-state">Your program starts on ' + escapeHtml(formatDateDisplay(batchDate)) + '. Check back then.</p>';
+
+  } else if(segments.length && now < segments[0].open){
+    mainHtml = '<p class="empty-state">No projects yet — your first project unlocks on ' + escapeHtml(formatDateDisplay(segments[0].open)) + '.</p>';
+
+  } else if(!pastNormalDeadline){
+    var found = findCurrentSegment(segments, now);
+    if(found){
+      activeProject = projects[found.index];
+      activeSeg = found.segment;
+      currentLabel = 'Project ' + (found.index + 1) + ' - ' + activeProject.title;
+      currentProjectKey = student.domain + ':' + found.index;
+      showSubmitForm = true;
+    } else {
+      mainHtml = '<p class="empty-state">No project active right now. Check back soon.</p>';
+    }
+
+  } else if(hasSubmitted){
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p class="empty-state" style="margin-top:10px;">Your project submission window has closed. Thanks for submitting!</p>';
+
+  } else if(penaltyGranted && extendedDeadlineISO && now <= new Date(extendedDeadlineISO + 'T23:59:59')){
+    activeProject = projects[0];
+    currentLabel = 'Project 1 (Extended) - ' + activeProject.title;
+    activeSeg = { open: null, close: new Date(extendedDeadlineISO + 'T00:00:00') };
+    isExtension = true;
+    showSubmitForm = true;
+    currentProjectKey = student.domain + ':extended';
+
+  } else if(penaltyGranted){
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p class="empty-state" style="margin-top:10px;">Your extended deadline has also passed. Contact admin for help.</p>';
+
+  } else {
+    mainHtml =
+      '<span class="status-badge status-closed">Deadline over</span>' +
+      '<p style="margin:12px 0 16px;font-size:14px;">Your project submission deadline has ended. Extend your deadline to still receive your certificate.</p>' +
+      (EXTENSION_PAYMENT_LINK
+        ? '<a class="btn btn-brand" style="width:auto;display:inline-block;" href="' + escapeHtml(EXTENSION_PAYMENT_LINK) + '" target="_blank" rel="noopener">Extend deadline — ₹50</a>'
+        : '<p class="empty-state">Contact admin for the extension payment link.</p>') +
+      '<p class="submit-instructions" style="margin-top:16px;">Already paid? You will get access to submit your project within 24 hours of payment confirmation.</p>';
+  }
+
+  if(showSubmitForm && activeProject){
+    var detailsHtml = activeProject.brief
+      ? '<a class="btn btn-brand" style="width:auto;display:inline-block;margin-bottom:14px;" href="' + escapeHtml(activeProject.brief) + '" target="_blank" rel="noopener">Download your project details here</a><br>'
+      : '';
+    var statusLabel = isExtension ? 'Extended — open for submission' : 'Open for submission';
+    mainHtml =
+      '<div class="doubt-title">' + escapeHtml(currentLabel) + '</div>' +
+      '<span class="status-badge status-open">' + statusLabel + '</span><br>' +
+      detailsHtml +
+      '<div class="meta-row">' +
+        '<div><span>Opens</span>' + escapeHtml(activeSeg && activeSeg.open ? formatDateDisplay(activeSeg.open) : '—') + '</div>' +
+        '<div><span>Deadline</span>' + escapeHtml(activeSeg && activeSeg.close ? formatDateDisplay(activeSeg.close) : '—') + '</div>' +
+      '</div>' +
+      '<p class="submit-instructions">How to submit: upload all your project files to Google Drive, set sharing to "Anyone with the link can view", then paste that public link below.</p>' +
+      '<div class="submit-row">' +
+        '<input type="url" id="driveLinkInput" placeholder="Paste your Google Drive link here">' +
+        '<button class="btn btn-brand" id="submitProjectBtn" style="width:auto;">Submit</button>' +
+      '</div>' +
+      '<div id="projectMsg"></div>';
+  }
+
+  var submittedHtml = '';
+  if(submittedLinks.length){
+    submittedHtml = '<h3 style="margin-top:20px;">Your submissions</h3><div>' + submittedLinks.map(function(raw, i){
+      var parts = String(raw).split('|').map(function(s){ return s.trim(); });
+      var label = parts.length >= 3 ? parts[0] : ('Submission #' + (i+1));
+      var submittedText = parts.length >= 3 ? parts[1] : '';
+      var link = parts.length >= 3 ? parts[2] : parts[parts.length - 1];
+      return '<div class="submission-card">' +
+        '<div><div class="submission-title">' + escapeHtml(label) + '</div>' +
+        (submittedText ? '<div class="submission-date">' + escapeHtml(submittedText) + '</div>' : '') + '</div>' +
+        '<a class="submission-link" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Open ↗</a>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  box.innerHTML = mainHtml + submittedHtml;
+
+  var submitBtn = document.getElementById('submitProjectBtn');
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var input = document.getElementById('driveLinkInput');
+      var link = input.value.trim();
+      var msg = document.getElementById('projectMsg');
+      msg.innerHTML = '';
+      if(!link){
+        msg.innerHTML = '<p class="project-error">Paste a link first.</p>';
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      apiCall('submitProject', { email: STATE.email, link: link, projectLabel: currentLabel })
+        .then(function(res){
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          if(!res.success){
+            msg.innerHTML = '<p class="project-error">' + escapeHtml(res.message) + '</p>';
+            return;
+          }
+          input.value = '';
+          showModal('✓', 'Project submitted successfully!', 'Your Google Drive link has been recorded.');
+          apiCall('getDashboardData', { email: STATE.email }).then(renderDashboard).catch(onServerError);
+        })
+        .catch(function(err){
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          msg.innerHTML = '<p class="project-error">' + escapeHtml(err && err.message ? err.message : err) + '</p>';
+        });
+    });
+  }
+
+  return { currentProjectKey: currentProjectKey };
+}
+
+/**
+ * The exam is always the SAME file for every student — not sheet-driven
+ * per-student anymore. Point this at wherever you host finalexam.html.
+ */
+const EXAM_URL = 'finalexam.html';
+
+function renderExamSection(examWindow){
+  var box = document.getElementById('examBox');
+  if(!examWindow || !examWindow.openDateTimeISO || !examWindow.closeDateTimeISO){
+    box.innerHTML = '<p class="empty-state">Exam schedule not available yet.</p>';
+    return { unlocked: false };
+  }
+
+  var now = new Date();
+  var opensAt = new Date(examWindow.openDateTimeISO);
+  var closesAt = new Date(examWindow.closeDateTimeISO);
+
+  if(now < opensAt){
+    box.innerHTML =
+      '<span class="status-badge status-closed">🔒 Locked</span>' +
+      '<p class="empty-state" style="margin-top:10px;">Your final exam opens on ' + escapeHtml(examWindow.examDateDisplay) +
+      (examWindow.openTimeDisplay ? ' at ' + escapeHtml(examWindow.openTimeDisplay) : '') + '.</p>';
+    return { unlocked: false };
+  }
+
+  if(now <= closesAt){
+    box.innerHTML =
+      '<span class="status-badge status-open">Open now</span>' +
+      '<p style="margin:12px 0;font-size:14px;">Your final exam is open — it closes' +
+      (examWindow.closeTimeDisplay ? ' at ' + escapeHtml(examWindow.closeTimeDisplay) : ' soon') + ', so don\'t wait.</p>' +
+      '<a class="btn btn-brand" style="width:auto;display:inline-block;" href="' + escapeHtml(EXAM_URL) + '" target="_blank" rel="noopener">Start Exam</a>';
+    return { unlocked: true };
+  }
+
+  box.innerHTML =
+    '<span class="status-badge status-closed">🔒 Locked</span>' +
+    '<p class="empty-state" style="margin-top:10px;">Exam is no longer open — it has already ended.</p>';
+  return { unlocked: false };
+}
+
+function renderAttendance(attendance){
+  var box = document.getElementById('attendanceBox');
+  var percent = attendance.percent || 0;
+  var attended = attendance.attended || 0;
+  var totalSoFar = attendance.totalSoFar || 0;
+  var circumference = 2 * Math.PI * 32;
+  var offset = circumference * (1 - percent / 100);
+
+  var topHtml =
+    '<div class="attendance-top">' +
+      '<div class="attendance-ring-wrap">' +
+        '<svg viewBox="0 0 72 72" class="attendance-ring">' +
+          '<circle cx="36" cy="36" r="32" class="ring-bg"></circle>' +
+          '<circle cx="36" cy="36" r="32" class="ring-fg" style="stroke-dasharray:' + circumference.toFixed(1) + ';stroke-dashoffset:' + offset.toFixed(1) + ';"></circle>' +
+        '</svg>' +
+        '<div class="attendance-percent-label">' + percent + '%</div>' +
+      '</div>' +
+      '<p class="attendance-sub">' + attended + ' of ' + totalSoFar + ' classes<br>attended so far</p>' +
+    '</div>';
+
+  var formHtml;
+  if(attendance.alreadyMarkedToday){
+    formHtml = '<p class="empty-state">✅ Attendance already marked for today!</p>';
+
+  } else if(attendance.todayStatus === 'open'){
+    formHtml =
+      '<p class="attendance-today-msg">📢 Today is your class day' + (attendance.todayTimeRangeDisplay ? ' (' + escapeHtml(attendance.todayTimeRangeDisplay) + ')' : '') + ' — enter the code below!</p>' +
+      '<div class="attendance-form">' +
+        '<div class="submit-row">' +
+          '<input type="text" id="attendanceCodeInput" placeholder="Today\'s class code">' +
+          '<button class="btn btn-brand" id="attendanceSubmitBtn" style="width:auto;">Submit</button>' +
+        '</div>' +
+        '<div id="attendanceMsg"></div>' +
+      '</div>';
+
+  } else if(attendance.todayStatus === 'not_yet_open'){
+    formHtml = '<p class="empty-state">🔒 Locked — today\'s class code opens at ' + escapeHtml(attendance.todayTimeRangeDisplay || 'the scheduled time') + '.</p>';
+
+  } else if(attendance.todayStatus === 'closed'){
+    var nextMsg1 = attendance.nextCodeDateDisplay
+      ? ' Your next class is on ' + escapeHtml(attendance.nextCodeDateDisplay) + (attendance.nextCodeTimeDisplay ? ' (' + escapeHtml(attendance.nextCodeTimeDisplay) + ')' : '') + '.'
+      : '';
+    formHtml = '<p class="empty-state">🔒 Locked — today\'s attendance window has already closed.' + nextMsg1 + '</p>';
+
+  } else {
+    var nextMsg2 = attendance.nextCodeDateDisplay
+      ? 'Your next class is on ' + escapeHtml(attendance.nextCodeDateDisplay) + (attendance.nextCodeTimeDisplay ? ' (' + escapeHtml(attendance.nextCodeTimeDisplay) + ')' : '') + '.'
+      : 'No upcoming class scheduled yet.';
+    formHtml = '<p class="empty-state">🔒 No class scheduled for attendance today. ' + nextMsg2 + '</p>';
+  }
+
+  box.innerHTML = topHtml + formHtml;
+
+  var btn = document.getElementById('attendanceSubmitBtn');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var input = document.getElementById('attendanceCodeInput');
+      var code = input.value.trim();
+      var msg = document.getElementById('attendanceMsg');
+      msg.innerHTML = '';
+      if(!code){
+        msg.innerHTML = '<p class="project-error">Enter the code first.</p>';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      apiCall('submitAttendance', { email: STATE.email, code: code })
+        .then(function(res){
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+          if(!res.success){
+            msg.innerHTML = '<p class="project-error">' + escapeHtml(res.message) + '</p>';
+            return;
+          }
+          showModal('✅', 'Attendance marked!', "Today's attendance has been recorded.");
+          renderAttendance(res.stats || attendance);
+        })
+        .catch(function(err){
+          btn.disabled = false;
+          btn.textContent = 'Submit';
+          msg.innerHTML = '<p class="project-error">' + escapeHtml(err && err.message ? err.message : err) + '</p>';
+        });
+    });
+  }
+}
+function renderMarkingSection(student, certEligible, data){
+  var box = document.getElementById('markingBox');
+  var refundRaw = String(student.refundEligibility || '').trim().toLowerCase();
+  var refundState = refundRaw === 'yes' ? 'yes' : (refundRaw === 'no' ? 'no' : 'pending');
+
+  var deadlineISO = data && data.projectWindow && data.projectWindow.deadlineISO;
+  var deadlinePassed = deadlineISO ? new Date() > new Date(deadlineISO + 'T23:59:59') : false;
+  var certState = !deadlinePassed ? 'pending' : (certEligible ? 'yes' : 'no');
+
+  box.innerHTML =
+    markRow('Project Mark', student.projectMark) +
+    markRow('Interview Mark', student.interviewMark) +
+    markRow('Exam Mark', student.examMark) +
+    tickRow('Refund Eligibility', refundState) +
+    tickRow('Certificate Eligibility', certState);
+}
+function markRow(label, value){
+  var display = (value === '' || value === undefined || value === null) ? '—' : escapeHtml(String(value));
+  return '<div class="mark-row"><span>' + escapeHtml(label) + '</span><span class="mark-value">' + display + '</span></div>';
+}
+function tickRow(label, state){
+  var symbol = state === 'yes' ? '✅' : (state === 'no' ? '❌' : '—');
+  return '<div class="mark-row"><span>' + escapeHtml(label) + '</span><span class="mark-tick">' + symbol + '</span></div>';
+}
+
+// ---------- Notifications (popup once per new event) ----------
+function checkAndNotify(email, state){
+  var storageKey = 'training_notify_' + email;
+  var prevRaw = localStorage.getItem(storageKey);
+  var prev = prevRaw ? JSON.parse(prevRaw) : {};
+  var messages = [];
+
+  if(state.certificateEligible && !prev.certificateEligible) messages.push('🎓 Your certificate is now ready!');
+  if(state.examUnlocked && !prev.examUnlocked) messages.push('📝 Your final exam is open today — 24 hours only!');
+  if(state.currentProjectKey && state.currentProjectKey !== prev.currentProjectKey) messages.push('🚀 A new project has unlocked — check the Project section!');
+
+  localStorage.setItem(storageKey, JSON.stringify(state));
+
+  if(messages.length){
+    showModal('🔔', 'Something new!', messages.join(' '));
+  }
+}
+
+function showModal(icon, title, body){
+  document.getElementById('notifyModalIcon').textContent = icon;
+  document.getElementById('notifyModalTitle').textContent = title;
+  document.getElementById('notifyModalBody').textContent = body;
+  document.getElementById('notifyModal').classList.remove('hidden');
+}
+document.getElementById('notifyModalCloseBtn').addEventListener('click', function(){
+  document.getElementById('notifyModal').classList.add('hidden');
+});
+
+document.getElementById('switchEmailBtn').addEventListener('click', function(){
+  localStorage.removeItem('trainingStudentEmail');
+  STATE = { email: null };
+  document.getElementById('emailInput').value = '';
+  showScreen('gate');
+});
+
+document.getElementById('refreshBtn').addEventListener('click', function(){
+  var btn = this;
+  btn.disabled = true;
+  btn.classList.add('spinning');
+  apiCall('getDashboardData', { email: STATE.email })
+    .then(function(data){
+      btn.disabled = false;
+      btn.classList.remove('spinning');
+      if(!data.found){ onDashboardData(data); return; }
+      renderDashboard(data);
+    })
+    .catch(function(err){
+      btn.disabled = false;
+      btn.classList.remove('spinning');
+      onServerError(err);
+    });
+});
+
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var emailFromUrl = params.get('email');
+  var saved = emailFromUrl || localStorage.getItem('trainingStudentEmail');
+  if(saved){
+    document.getElementById('emailInput').value = saved;
+    STATE.email = saved;
+    document.getElementById('loadingText').textContent = 'Welcome back — loading your dashboard…';
+    showScreen('loading');
+    apiCall('getDashboardData', { email: saved }).then(onDashboardData).catch(onServerError);
+  }
+})();
+</script>
+</body>
+</html>

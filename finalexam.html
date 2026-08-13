@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Examination Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="alert-strip" id="warningIndicator">
+    <span class="alert-strip-label">SECURITY ALERT</span>
+    <span class="alert-strip-msg" id="warningMsg">Suspicious activity detected</span>
+    <span class="alert-strip-count" id="warningCount">1</span>
+</div>
+
+<div class="page">
+
+    <!-- CHECK-IN SCREEN -->
+    <section class="screen checkin-screen">
+        <div class="ticket" id="checkinTicket">
+            <div class="ticket-top">
+                <div class="eyebrow">Secure Examination Portal</div>
+                <h1 class="serif-headline">Candidate Check-In</h1>
+                <p class="lede">Enter the email address you were registered with. We'll pull up your candidate record automatically.</p>
+
+                <form id="emailForm" class="checkin-form">
+                    <label for="email">Registered Email Address</label>
+                    <input type="email" id="email" required placeholder="you@example.com" autocomplete="email">
+                    <button type="submit" class="btn btn-primary">Verify Identity →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confirmed candidate panel (hidden until email verifies) -->
+        <div class="ticket ticket-confirmed" id="confirmedTicket" style="display:none;">
+            <div class="ticket-top">
+                <div class="seal seal-teal">
+                    <svg viewBox="0 0 100 100" width="56" height="56"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><path d="M30 52 L44 66 L72 34" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="eyebrow">Identity Verified</div>
+                <h1 class="serif-headline" id="candidateName">—</h1>
+                <div class="domain-pill" id="candidateDomain">—</div>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-bottom">
+                <button class="btn btn-primary btn-block" id="reviewInstructionsBtn">Review Instructions &amp; Begin →</button>
+            </div>
+        </div>
+
+        <!-- Exam-ended panel (hidden until portal is OFF and email is submitted) -->
+        <div class="ticket" id="examEndedTicket" style="display:none;">
+            <div class="ticket-top">
+                <div class="seal seal-red">
+                    <svg viewBox="0 0 100 100" width="56" height="56"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><line x1="50" y1="28" x2="50" y2="56" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="70" r="4" fill="currentColor"/></svg>
+                </div>
+                <div class="eyebrow">Exam Window Closed</div>
+                <h1 class="serif-headline">Time's Up</h1>
+                <p class="lede" id="examEndedMessage">This exam has already ended.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXAM SCREEN -->
+    <section class="screen exam-screen">
+        <header class="exam-bar">
+            <div class="exam-bar-item">
+                <span class="exam-bar-label">Ticket</span>
+                <span class="exam-bar-value mono" id="examTicketId">—</span>
+            </div>
+            <div class="exam-bar-item exam-bar-timer">
+                <span class="exam-bar-label">Time Remaining</span>
+                <span class="exam-bar-value mono timer" id="timer">30:00</span>
+            </div>
+            <div class="exam-bar-item">
+                <span class="exam-bar-label">Question</span>
+                <span class="exam-bar-value mono"><span id="currentQ">1</span> / <span id="totalQ">50</span></span>
+            </div>
+        </header>
+        <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+
+        <div class="exam-layout">
+            <div class="question-panel">
+                <div class="question-card">
+                    <div class="question-text" id="questionText"></div>
+                    <div id="optionsContainer"></div>
+                </div>
+            </div>
+
+            <aside class="monitor-panel">
+                <div class="monitor-frame">
+                    <div class="monitor-label"><span class="rec-dot"></span> AI PROCTORING — LIVE</div>
+                    <video id="cameraBox" autoplay muted playsinline></video>
+                    <div class="monitor-status" id="detectionStatus">Initializing…</div>
+                </div>
+                <div class="monitor-note">Face must stay visible. Fullscreen must stay active. 3 warnings ends the exam.</div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- COMPLETION SCREEN ("hall pass" receipt) -->
+    <section class="screen complete-screen">
+        <div class="ticket" id="hallTicket">
+            <div class="ticket-top">
+                <div class="seal" id="completionSeal">
+                    <svg viewBox="0 0 100 100" width="64" height="64" id="sealIcon"></svg>
+                </div>
+                <div class="eyebrow" id="completionEyebrow">Examination Complete</div>
+                <h1 class="serif-headline" id="completeName">—</h1>
+                <div class="mono muted" id="completeEmail">—</div>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-bottom">
+                <div class="detail-row"><span>Ended At</span><span class="mono" id="completeTime">—</span></div>
+                <div class="detail-row"><span>Status</span><span class="mono" id="completeStatus">—</span></div>
+            </div>
+        </div>
+        <button class="btn btn-outline" id="screenshotBtn">📸 Download Screenshot (Proof of Submission)</button>
+        <p class="fine-print">Your results have been recorded. You will be notified separately with next steps.</p>
+    </section>
+
+</div>
+
+<!-- Instructions Modal -->
+<div class="modal" id="instructionsModal">
+    <div class="modal-card">
+        <div class="eyebrow">Before You Begin</div>
+        <h2 class="serif-headline modal-title">Exam Rules</h2>
+        <ul class="rules-list">
+            <li>Duration: 30 minutes, 50 multiple-choice questions</li>
+            <li>Your camera stays on and is actively monitored</li>
+            <li>Stay in fullscreen — exiting ends the exam immediately</li>
+            <li>Don't switch tabs or minimize — it ends the exam immediately</li>
+            <li>Copying, right-click, and dev tools are disabled</li>
+            <li>3 warnings (no face / multiple faces / blocked action) auto-submits your exam</li>
+        </ul>
+        <div class="modal-actions">
+            <button class="btn btn-ghost" id="cancelInstructionsBtn">Cancel</button>
+            <button class="btn btn-primary" id="startExamBtn">I Understand, Start Exam</button>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal" id="loadingModal">
+    <div class="modal-card modal-card-narrow">
+        <div class="loader"></div>
+        <p class="mono" id="loadingMessage">Loading…</p>
+    </div>
+</div>
+
+<!-- Already Submitted Modal -->
+<div class="modal" id="alreadySubmittedModal">
+    <div class="modal-card modal-card-narrow">
+        <div class="seal seal-red" style="margin:0 auto 16px;">
+            <svg viewBox="0 0 100 100" width="48" height="48"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><line x1="34" y1="34" x2="66" y2="66" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><line x1="66" y1="34" x2="34" y2="66" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg>
+        </div>
+        <h2 class="serif-headline" style="text-align:center; font-size:1.4em;">Already Submitted</h2>
+        <p style="text-align:center; opacity:0.75; margin-top:8px;">You have already submitted this exam. You cannot attempt it again.</p>
+        <button class="btn btn-primary btn-block" id="closeAlreadySubmittedBtn" style="margin-top:20px;">OK</button>
+    </div>
+</div>
+
+<video id="camera" autoplay muted playsinline style="display:none;"></video>
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#143C2B;
+  --ink-soft:rgba(20,60,43,0.62);
+  --paper:#F4FAF6;
+  --card:#FFFFFF;
+  --seal-red:#A32638;
+  --teal:#1E8F4E;
+  --brass:#4C7A5C;
+  --border:rgba(20,60,43,0.14);
+  --font-display:'Source Serif 4', Georgia, serif;
+  --font-mono:'IBM Plex Mono','Courier New',monospace;
+  --font-body:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(20,60,43,0.06) 1px, transparent 0);
+  background-size:22px 22px;
+  color:var(--ink);
+  font-family:var(--font-body);
+  min-height:100vh;
+}
+.mono{font-family:var(--font-mono);}
+.muted{color:var(--ink-soft);}
+.serif-headline{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--brass);
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.page{max-width:920px;margin:0 auto;padding:40px 20px;}
+.screen{display:none;}
+.screen.active{display:block;animation:riseIn 0.45s ease;}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============ TICKET CARD (signature element) ============ */
+.ticket{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 24px 60px rgba(20,60,43,0.14), 0 2px 8px rgba(20,60,43,0.06);
+  max-width:520px;
+  margin:0 auto;
+  position:relative;
+}
+.ticket-top{padding:44px 40px 30px;}
+.ticket-divider{
+  position:relative;
+  border-top:2px dashed var(--brass);
+  margin:0 32px;
+}
+.ticket-divider::before,.ticket-divider::after{
+  content:'';
+  position:absolute;
+  width:26px;height:26px;
+  background:var(--paper);
+  border-radius:50%;
+  top:-13px;
+  border:1px solid var(--border);
+}
+.ticket-divider::before{left:-45px;}
+.ticket-divider::after{right:-45px;}
+.ticket-bottom{padding:26px 40px 40px;}
+
+.lede{color:var(--ink-soft);line-height:1.6;margin:10px 0 26px;font-size:15px;}
+
+/* ============ SEAL ============ */
+.seal{
+  width:64px;height:64px;
+  color:var(--teal);
+  margin-bottom:18px;
+  transform:rotate(-6deg);
+}
+.seal-teal{color:var(--teal);}
+.seal-red{color:var(--seal-red);}
+
+/* ============ FORM ============ */
+.checkin-form label{
+  display:block;font-size:12px;font-weight:600;
+  letter-spacing:0.04em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:8px;
+}
+.checkin-form input{
+  width:100%;padding:15px 16px;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-family:var(--font-mono);
+  font-size:15px;
+  background:var(--paper);
+  color:var(--ink);
+  margin-bottom:18px;
+}
+.checkin-form input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(30,143,78,0.14);}
+
+.domain-pill{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.03em;
+  padding:6px 14px;
+  border-radius:20px;
+  background:rgba(76,122,92,0.14);
+  color:var(--brass);
+  border:1px solid rgba(76,122,92,0.35);
+}
+
+/* ============ BUTTONS ============ */
+.btn{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:15px;
+  border:none;
+  border-radius:8px;
+  padding:15px 22px;
+  cursor:pointer;
+  transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-block{width:100%;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,60,43,0.28);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink);display:block;margin:28px auto 0;}
+.btn-outline:hover{background:var(--ink);color:#fff;}
+.btn-ghost{background:transparent;color:var(--ink-soft);}
+
+/* ============ ALERT STRIP ============ */
+.alert-strip{
+  position:fixed;top:0;left:0;right:0;
+  background:var(--seal-red);color:#fff;
+  display:none;
+  align-items:center;gap:10px;
+  padding:10px 20px;
+  font-family:var(--font-mono);
+  font-size:13px;
+  z-index:1200;
+  box-shadow:0 4px 14px rgba(163,38,56,0.4);
+}
+.alert-strip-label{font-weight:700;letter-spacing:0.08em;}
+.alert-strip-count{
+  margin-left:auto;
+  background:#fff;color:var(--seal-red);
+  border-radius:50%;width:22px;height:22px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:700;
+}
+
+/* ============ EXAM SCREEN ============ */
+.exam-bar{
+  background:var(--ink);color:#fff;
+  border-radius:12px;
+  padding:18px 26px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+  margin-bottom:4px;
+}
+.exam-bar-item{display:flex;flex-direction:column;gap:4px;}
+.exam-bar-timer{text-align:center;}
+.exam-bar-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;}
+.exam-bar-value{font-size:18px;font-weight:600;}
+.timer{font-size:26px;color:#A7E3B8;}
+
+.progress-track{height:5px;background:rgba(20,60,43,0.1);border-radius:10px;margin:14px 0 26px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--brass);transition:width 0.3s ease;}
+
+.exam-layout{display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:start;}
+@media (max-width:820px){.exam-layout{grid-template-columns:1fr;}}
+
+.question-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:36px;
+  box-shadow:0 10px 30px rgba(20,60,43,0.08);
+}
+.question-text{font-family:var(--font-display);font-size:20px;line-height:1.55;margin-bottom:26px;}
+
+.option{
+  display:flex;align-items:center;gap:14px;
+  background:var(--paper);
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:12px;
+  cursor:pointer;
+  transition:all 0.15s ease;
+}
+.option:hover{border-color:var(--teal);}
+.option.selected{border-color:var(--teal);background:rgba(30,143,78,0.08);}
+.option-letter{
+  font-family:var(--font-mono);font-weight:600;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;
+}
+.option.selected .option-letter{background:var(--teal);}
+
+.monitor-panel{position:sticky;top:20px;}
+.monitor-frame{
+  background:var(--ink);
+  border-radius:14px;
+  padding:12px;
+  position:relative;
+}
+.monitor-label{
+  color:#A7E3B8;font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.08em;margin-bottom:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.rec-dot{width:7px;height:7px;border-radius:50%;background:var(--seal-red);animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.monitor-frame video{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  border-radius:8px;display:block;background:#000;
+}
+.monitor-status{
+  color:#fff;font-family:var(--font-mono);font-size:11px;
+  text-align:center;margin-top:8px;opacity:0.85;
+}
+.monitor-note{
+  font-size:12px;color:var(--ink-soft);
+  margin-top:12px;line-height:1.5;
+}
+
+/* ============ COMPLETION SCREEN ============ */
+.complete-screen{text-align:center;}
+.detail-row{
+  display:flex;justify-content:space-between;
+  padding:10px 0;
+  font-size:14px;
+  border-bottom:1px dashed var(--border);
+}
+.detail-row:last-child{border-bottom:none;}
+.detail-row span:first-child{color:var(--ink-soft);}
+.fine-print{color:var(--ink-soft);font-size:13px;margin-top:18px;}
+
+/* ============ MODALS ============ */
+.modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(20,60,43,0.55);
+  align-items:center;justify-content:center;
+  z-index:1000;padding:20px;
+}
+.modal.active{display:flex;}
+.modal-card{
+  background:var(--card);
+  border-radius:14px;
+  padding:40px;
+  max-width:460px;width:100%;
+  box-shadow:0 30px 80px rgba(20,60,43,0.3);
+}
+.modal-card-narrow{max-width:320px;text-align:center;}
+.modal-title{font-size:1.5em;margin-bottom:18px;}
+.rules-list{list-style:none;margin:0 0 26px;}
+.rules-list li{
+  padding:10px 0 10px 22px;
+  position:relative;
+  font-size:14px;
+  line-height:1.5;
+  border-bottom:1px solid var(--border);
+}
+.rules-list li::before{
+  content:'—';position:absolute;left:0;color:var(--brass);
+}
+.modal-actions{display:flex;gap:12px;}
+.modal-actions .btn{flex:1;}
+
+.loader{
+  border:3px solid var(--border);border-top:3px solid var(--teal);
+  border-radius:50%;width:40px;height:40px;
+  animation:spin 1s linear infinite;margin:0 auto 16px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ============ CAMERA CONTAINER (legacy id, kept hidden/unused visually) ============ */
+.camera-container{display:none;}
+
+@media (max-width:600px){
+  .ticket-top{padding:32px 24px 22px;}
+  .ticket-bottom{padding:20px 24px 32px;}
+  .ticket-divider{margin:0 20px;}
+  .ticket-divider::before{left:-33px;}
+  .ticket-divider::after{right:-33px;}
+  .question-card{padding:24px;}
+}
+</style>
+
+<script>
+/* ============ CONFIGURATION ============ */
+const EXAM_DURATION = 30 * 60;
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzO11ckbUo3DjlffsKWnVYU7SdZuyQMiHI2t2ukGyJsSxrYE_yWYluW0N3YzE4Wg9k/exec';
+const FACE_MODEL_URL = './models/';
+
+/* ============ MOBILE DETECTION ============ */
+function isMobileDevice(){
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+}
+function checkDeviceCompatibility(){
+    if (isMobileDevice()){
+        document.body.innerHTML = `
+            <div class="page">
+              <div class="ticket"><div class="ticket-top" style="text-align:center;">
+                <div class="eyebrow">Device Not Supported</div>
+                <h1 class="serif-headline">Desktop Required</h1>
+                <p class="lede">This exam can only be taken on a desktop or laptop with a webcam. Please switch devices to continue.</p>
+              </div></div>
+            </div>`;
+        return false;
+    }
+    return true;
+}
+
+/* ============ QUESTION BANK ============ */
+const questionBank = {
+    "Fullstack Development":[
+  {q: "Which of the following correctly describes REST?", options: ["A stateful architecture", "A stateless web service style", "A session-based model", "A SOAP-based architecture"], correct: 1},
+  {q: "Which command initializes a Node.js project?", options: ["npm create", "npm init", "node start", "npx install"], correct: 1},
+  {q: "In React, the key prop in lists is used for:", options: ["Styling the list", "Identifying elements for efficient rendering", "Sorting data", "Triggering re-render manually"], correct: 1},
+  {q: "Which HTTP method is idempotent?", options: ["POST", "PUT", "PATCH", "CONNECT"], correct: 1},
+  {q: "In Express.js, app.use() is used to:", options: ["Create a database connection", "Register middleware", "Define a route", "Handle errors only"], correct: 1},
+  {q: "Which database is NoSQL?", options: ["PostgreSQL", "MySQL", "MongoDB", "MariaDB"], correct: 2},
+  {q: "Which of the following starts a Flask app?", options: ["flask start", "flask run", "python flask", "flask serve"], correct: 1},
+  {q: "CORS stands for:", options: ["Client-Origin Request Source", "Cross-Origin Resource Sharing", "Centralized Object Response Server", "Client-Origin Routing System"], correct: 1},
+  {q: "Which React hook is used for side effects?", options: ["useEffect()", "useState()", "useCallback()", "useRef()"], correct: 0},
+  {q: "In SQL, the HAVING clause is used to:", options: ["Filter individual rows", "Filter groups", "Sort results", "Join tables"], correct: 1},
+  {q: "What is the role of the event loop in Node.js?", options: ["Handles async callbacks in a single thread", "Runs multiple threads", "Executes synchronous code", "Schedules cron jobs"], correct: 0},
+  {q: "In microservices, a drawback of synchronous communication is:", options: ["Tight coupling", "Low latency", "Loose coupling", "Easier scaling"], correct: 0},
+  {q: "Which of these is NOT part of the MERN stack?", options: ["MongoDB", "Express", "React", "Django"], correct: 3},
+  {q: "GraphQL resolvers are used to:", options: ["Define API endpoints", "Fetch and return data for queries", "Create tables", "Handle authentication"], correct: 1},
+  {q: "Which pattern does Redux follow?", options: ["Observer", "Flux", "Singleton", "MVC"], correct: 1},
+  {q: "Default concurrency model in Node.js is:", options: ["Multi-threaded", "Single-threaded non-blocking", "Multi-core synchronous", "Event-based blocking"], correct: 1},
+  {q: "In Docker, a bind mount:", options: ["Copies files during build", "Mounts host directory to container", "Creates container snapshot", "Deletes temporary volumes"], correct: 1},
+  {q: "Middleware in Express.js is used to:", options: ["Process requests before reaching routes", "Configure the database", "Render HTML", "Encrypt data"], correct: 0},
+  {q: "Which HTTP code means 'Unprocessable Entity'?", options: ["400", "403", "422", "409"], correct: 2},
+  {q: "JWT (JSON Web Token) is:", options: ["A session-based token", "A stateless token format", "A cookie manager", "A REST API method"], correct: 1},
+  {q: "React Context API helps in:", options: ["Avoiding prop drilling", "Styling components", "Optimizing loops", "Handling side effects"], correct: 0},
+  {q: "Database sharding means:", options: ["Caching queries", "Splitting data horizontally", "Backing up databases", "Encrypting records"], correct: 1},
+  {q: "MongoDB high availability is achieved using:", options: ["Indexes", "Replica sets", "Views", "Aggregations"], correct: 1},
+  {q: "Node.js module for file I/O is:", options: ["path", "fs", "os", "net"], correct: 1},
+  {q: "Webpack is used to:", options: ["Compile backend code", "Bundle frontend assets", "Run servers", "Test code"], correct: 1},
+  {q: "Serverless architecture means:", options: ["No servers at all", "Cloud provider runs code on demand", "Manual deployment", "Using containers"], correct: 1},
+  {q: "React code splitting helps with:", options: ["UI animation", "Lazy loading components", "CSS styling", "Unit testing"], correct: 1},
+  {q: "In Node.js, clustering allows:", options: ["One process only", "Multiple instances to use multiple cores", "Async tasks", "Error handling"], correct: 1},
+  {q: "CAP theorem means:", options: ["Consistency, Accuracy, Performance", "Consistency, Availability, Partition tolerance", "Cache, API, Persistence", "Communication, Access, Parallelism"], correct: 1},
+  {q: "NGINX acts as:", options: ["Reverse proxy and load balancer", "Frontend compiler", "Testing framework", "Database manager"], correct: 0},
+  {q: "Docker Compose is used to:", options: ["Run single containers", "Define multi-container apps", "Build Docker images", "Update registries"], correct: 1},
+  {q: "The async/await syntax helps:", options: ["Handle asynchronous code sequentially", "Create threads", "Stop execution", "Parse JSON"], correct: 0},
+  {q: "CSRF protection prevents:", options: ["SQL injection", "Cross-site request forgery", "DDoS attacks", "Brute-force login"], correct: 1},
+  {q: "Load balancing vs clustering difference:", options: ["Same purpose", "Load balancing distributes traffic; clustering runs multiple servers", "Clustering distributes traffic", "Both are backend frameworks"], correct: 1},
+  {q: "GraphQL queries vs mutations:", options: ["Both modify data", "Queries fetch, mutations modify data", "Queries modify, mutations fetch", "Both delete data"], correct: 1},
+  {q: "Redis is mainly used for:", options: ["Storing images", "Caching and session storage", "File management", "Logging"], correct: 1},
+  {q: "WebSocket protocol uses:", options: ["http://", "ws:// or wss://", "ftp://", "ssh://"], correct: 1},
+  {q: "OAuth vs JWT:", options: ["OAuth is a token format", "JWT is an auth protocol", "OAuth is a protocol; JWT is a token format", "Both are the same"], correct: 2},
+  {q: "CI/CD in DevOps stands for:", options: ["Continuous Integration / Continuous Deployment", "Code Integration / Code Delivery", "Centralized Input / Centralized Data", "Continuous Infrastructure / Container Deployment"], correct: 0},
+  {q: "In React, Suspense is used for:", options: ["Lazy loading async components", "Error handling", "Styling", "Routing"], correct: 0},
+  {q: "TypeScript adds:", options: ["Dynamic typing", "Static typing", "Async utilities", "Compilation speed"], correct: 1},
+  {q: "Horizontal scaling means:", options: ["Adding more CPUs", "Adding more machines", "Upgrading RAM only", "Rewriting code"], correct: 1},
+  {q: "MVC architecture separates:", options: ["Database from logic only", "Model, View, Controller", "Server, Client, Router", "API and Database"], correct: 1},
+  {q: "Which HTTP code means 'Conflict'?", options: ["400", "404", "409", "410"], correct: 2},
+  {q: "Purpose of Babel in React is to:", options: ["Compile JSX to JavaScript", "Test components", "Manage state", "Handle routing"], correct: 0},
+  {q: "Redux uses a single:", options: ["Local storage", "Store for all state", "Component memory", "Hook"], correct: 1},
+  {q: "React Fiber is:", options: ["Rendering engine for React", "Testing library", "State manager", "Database"], correct: 0},
+  {q: "A reverse proxy:", options: ["Routes client requests to backend servers", "Connects directly to a database", "Encrypts client data", "Hosts front-end only"], correct: 0},
+  {q: "The useMemo hook in React is used to:", options: ["Cache computed values", "Manage state", "Trigger effects", "Handle forms"], correct: 0},
+  {q: "Webpack's tree shaking removes:", options: ["Unused CSS", "Unused JS code", "Redundant HTML", "Images"], correct: 1}
+],
+
+
+"AIML":[
+  {q:"A global bank serves over 15 million loan applications annually using a real-time credit risk model with a strict inference latency budget of 50 ms. During a quarterly retraining cycle, a newly engineered feature called 'Days Since Last Recovery Team Contact' becomes the highest-ranked predictor, improving offline ROC-AUC from 0.81 to 0.97. The feature store validation passes successfully, and even time-based cross-validation shows almost identical performance across all folds. Later, an audit reveals that recovery agents contact customers only after they begin missing loan repayments. What is the most defensible explanation for the unusually high performance?", options:["Severe multicollinearity between engineered features","Covariate shift between training and production populations","Target leakage hidden behind temporal dependency","Simpson's paradox caused by customer segmentation"], correct:2},
+
+  {q:"A payment platform processes over 80 million transactions per day using an ML-based fraud detection system. Offline evaluation reports ROC-AUC = 0.98, PR-AUC = 0.09, Fraud prevalence = 0.03%. Leadership wants immediate deployment because ROC-AUC significantly exceeds the previous model. However, every flagged transaction requires manual review by investigators with limited daily capacity. Which statement is the strongest technical assessment?", options:["The model is production-ready because ROC-AUC is extremely high.","ROC-AUC alone is sufficient for evaluating highly imbalanced fraud datasets.","ROC-AUC may be overly optimistic because of the extreme class imbalance.","Precision must exceed 90% before deployment."], correct:2},
+
+  {q:"A large-scale recommendation system undergoes an explainability review before deployment. SHAP analysis shows that one feature consistently contributes positively for specific high-value users. However, in the global SHAP summary, the same feature has almost zero overall importance. The feature pipeline is verified, and no leakage or preprocessing issues are detected. What is the most plausible explanation?", options:["The feature is leaking future information.","The feature has localized interactions affecting only subsets of the data.","The feature contains too many missing values.","The model is underfitting."], correct:1},
+
+  {q:"A video streaming platform deploys a new recommendation model after achieving an offline NDCG of 0.92, outperforming every previous model. During the first online A/B experiment, click-through rate decreases by 18%, while monitoring confirms that feature distributions, inference latency, and serving infrastructure remain unchanged. What should the ML team investigate first?", options:["Covariate drift","Concept drift","Offline metric-business metric mismatch","Missing value handling"], correct:2},
+
+  {q:"A healthcare startup trains a disease prediction model using 500 patient records and nearly 20,000 engineered genomic features. A Random Forest achieves 100% training accuracy, but repeatedly scores only 51% on an unseen test set despite extensive hyperparameter tuning. What is the strongest conclusion?", options:["More trees are needed.","Curse of dimensionality is likely dominating.","Feature scaling is missing.","The dataset is balanced."], correct:1},
+
+  {q:"An online advertising platform combines predictions from 50 independently trained models to improve click-through prediction. Despite increasing inference cost significantly, the ensemble performs only marginally better than a single model. Investigation shows that all models were trained on nearly identical data using almost identical features and hyperparameters. What is the most likely explanation?", options:["Bias reduction failed.","Lack of model diversity.","Class imbalance.","Data leakage."], correct:1},
+
+  {q:"A telecom company deploys a churn prediction model that scores customers every night to trigger retention campaigns. During a feature engineering review, the team introduces a new feature based on customer complaint records logged within 14 days after the customer's account closure date. Offline validation accuracy improves dramatically across every temporal validation split, and the model becomes the new production candidate. What is the most accurate assessment?", options:["Strong feature engineering","Leakage through post-event information","Better representation learning","Distribution correction"], correct:1},
+
+  {q:"A pricing model used by an online marketplace undergoes a quarterly monitoring review. Engineers observe that the model's ROC-AUC remains virtually unchanged, but the reliability diagram now deviates significantly from the ideal diagonal. Business teams relying on predicted probabilities for automated pricing decisions begin reporting inconsistent outcomes. What is the strongest interpretation?", options:["Ranking quality has deteriorated.","Probability estimates are unreliable.","Overfitting has disappeared.","Feature drift has occurred."], correct:1},
+
+  {q:"An ML team is building a fraud detection system using thousands of engineered features. During feature selection, two variables appear individually useless because each has almost zero correlation with the target. However, keeping both together consistently improves validation performance across multiple retraining cycles. What is the most likely explanation?", options:["Simpson's Paradox","Feature Interaction","Label Drift","Data Leakage"], correct:1},
+
+  {q:"An e-commerce ranking model undergoes an explainability audit before deployment. For one feature, SHAP analysis shows that its contribution is positive for many customers but negative for others with similar overall prediction scores. Data quality checks, preprocessing validation, and feature freshness monitoring reveal no anomalies. What is the strongest interpretation?", options:["The feature is corrupted.","The feature effect depends on context and interactions.","The feature is leaking target information.","The feature should be removed."], correct:1},
+
+  {q:"A global payment processor deploys a fraud detection model with Precision = 2%, Recall = 98%, Fraud Rate = 0.1%. Every transaction flagged by the model must be manually reviewed by an investigation team with limited daily capacity. What is the biggest operational concern?", options:["Missing fraud cases.","Operational overload.","Data leakage.","Bias."], correct:1},
+
+  {q:"While evaluating candidate features for a real-time recommendation system, an engineer observes that one feature has very high Mutual Information with the target but almost zero Pearson correlation. Data quality checks confirm that the feature is complete and correctly processed. What is the most plausible explanation?", options:["The feature has a non-linear relationship with the target.","The feature is leaking target information.","The feature contains excessive missing values.","The feature requires scaling."], correct:0},
+
+  {q:"A demand forecasting model performs consistently across every offline validation fold and significantly outperforms previous production models. Immediately after deployment, forecasting accuracy drops sharply despite identical serving infrastructure and successful pipeline validation. What should be the team's first hypothesis?", options:["Hyperparameter instability.","The data-generating process has changed.","PCA preprocessing failed.","Class weights were configured incorrectly."], correct:1},
+
+  {q:"A production ML monitoring dashboard reports that model performance has gradually declined over several weeks. Engineers verify that feature distributions remain stable, missing-value rates are unchanged, and the serving pipeline is functioning correctly. However, the relationship between historical inputs and business outcomes appears different from what the model learned during training. Which scenario best explains the observed behavior?", options:["Input feature distribution changed.","Missing value percentage changed.","Relationship between predictors and target changed.","Sample size changed."], correct:2},
+
+  {q:"A marketplace ranking model achieves both low training error and low validation error after extensive hyperparameter tuning. Despite excellent offline metrics, the online A/B experiment shows no improvement in revenue, customer retention, or conversion rate. What is the most likely explanation?", options:["Overfitting.","Underfitting.","Wrong optimization objective.","Target leakage."], correct:2},
+
+  {q:"A lending platform trains a credit approval model using records collected over the last five years. The training dataset contains only applicants who were historically approved under previous underwriting policies. Offline validation consistently shows excellent performance. After deployment, however, the model performs poorly on newly arriving applicants, even though monitoring confirms stable feature distributions and no serving issues. What is the most likely root cause?", options:["Concept Drift","Selection Bias caused by historical approval policy","Multicollinearity","Class Imbalance"], correct:1},
+
+  {q:"A payment company evaluates a new fraud detection model before deployment. The offline evaluation reports ROC-AUC = 0.96, PR-AUC = 0.11, Fraud prevalence = 0.05%. The engineering team has not yet selected an operating threshold or estimated the business cost of false positives and false negatives. Without additional information, which conclusion is the safest?", options:["The model is production ready.","The model separates classes well, but its usefulness for the positive class remains uncertain.","Precision must exceed 90%.","Recall must be below 50%."], correct:1},
+    {q:"A production recommendation model undergoes a feature audit before its quarterly release. One feature consistently ranks as the most influential according to the feature importance report. However, after retraining the model without this feature, offline and online performance remain nearly unchanged, and business KPIs show no measurable difference. What is the most plausible explanation?", options:["Data Leakage","Multicollinearity or redundant information","Underfitting","Scaling Error"], correct:1},
+
+  {q:"During a compliance review of a fraud detection system, engineers discover that one highly predictive feature was manually entered by investigators after they had already reviewed and finalized each fraud case. This feature contributed heavily to the model's outstanding offline performance. How should this feature be interpreted?", options:["High Signal","Target Leakage","Concept Drift","Feature Interaction"], correct:1},
+
+  {q:"Two credit-risk models achieve identical ROC-AUC on the same evaluation dataset. However, Model A produces probability estimates that closely match observed default rates, while Model B consistently overestimates and underestimates risk across different probability ranges. Loan approval decisions depend directly on predicted probabilities. Which statement is most accurate?", options:["Both models will always produce identical business outcomes.","Calibration only matters for regression models.","Probability-based decisions may favor Model A.","ROC-AUC guarantees good calibration."], correct:2},
+
+  {q:"A demand forecasting model is automatically retrained every week using the latest available production data. Although the amount of training data continues to grow, forecasting accuracy steadily declines over several months. No hardware failures or pipeline errors are detected. What should be investigated first?", options:["Data Drift","Hardware Failure","PCA Components","Train-Test Split Ratio"], correct:0},
+
+  {q:"A recommendation system contains two engineered features. Feature A strongly predicts Feature B, and Feature B strongly predicts user conversion. Feature A, however, shows almost no direct correlation with conversion when analyzed independently. Removing Feature A consistently reduces overall model performance. What is the most likely explanation?", options:["Feature Interaction Structure","Leakage","Underfitting","Noise"], correct:0},
+
+  {q:"A fraud detection team evaluates models using Accuracy as the only optimization metric. The production dataset contains only 0.2% fraudulent transactions, and leadership approves the highest-accuracy model without reviewing any additional metrics. What is the biggest risk of this evaluation strategy?", options:["Underfitting","False sense of model quality","Increased variance","Better calibration"], correct:1},
+
+  {q:"A large-scale video recommendation system is retrained every week using user interaction logs. After deployment, the new recommendations begin influencing what users watch, which in turn changes the data collected for future training cycles. Engineers notice that each successive model is increasingly shaped by the behavior induced by previous models. What phenomenon best describes this situation?", options:["Feedback Loop","PCA Drift","Multicollinearity","Stratification Bias"], correct:0},
+
+  {q:"A production credit-risk model has shown stable feature distributions for several weeks according to monitoring dashboards. However, engineers suddenly observe that the distribution of model predictions changes dramatically, while the actual target distribution remains essentially unchanged. Investigation confirms that the training dataset has not changed. What is the most likely explanation?", options:["Software Bug or Model Serving Issue","Concept Drift","Covariate Shift","Label Drift"], correct:0},
+
+  {q:"During feature engineering for a customer retention model, one variable exhibits zero Pearson correlation with the target but consistently ranks among the most informative features based on Mutual Information. The feature pipeline and data quality checks show no anomalies. Which statement is most likely true?", options:["A non-linear predictive relationship exists.","The feature is useless.","Target leakage exists.","Missing values dominate the feature."], correct:0},
+
+  {q:"A financial institution deploys an automated loan approval system for millions of customers. Regulatory authorities require that every rejected application include a clear, human-understandable justification explaining how the decision was made. Which model characteristic becomes most critical under these requirements?", options:["Interpretability","Accuracy","Training Speed","Number of Features"], correct:0},
+
+  {q:"An ML team removes approximately 30% of the training data after identifying inconsistencies in labeling and feature quality. Surprisingly, the retrained production model achieves higher validation performance and better online business metrics than the previous version trained on the full dataset. What is the most plausible explanation?", options:["Data Quality Issue","More Features","Higher Variance","Larger Search Space"], correct:0},
+
+  {q:"A fraud detection model is evaluated using five-fold cross-validation with validation scores of 95%, 58%, 92%, 61%, and 94%. The feature engineering pipeline, hyperparameters, and evaluation procedure remain identical across all folds, yet model performance fluctuates dramatically. What should be suspected first?", options:["Data Leakage","Distributional Instability","Scaling","PCA"], correct:1},
+
+  {q:"While developing a real-time recommendation engine, engineers identify two candidate features that individually provide almost no predictive power. Surprisingly, when both features are included together, the model consistently achieves significantly better validation and online performance. What does this most likely demonstrate?", options:["Interaction Effects","Data Leakage","Label Drift","Variance Inflation"], correct:0},
+
+  {q:"A deep learning model for ad ranking achieves the lowest validation loss among all candidate models during offline evaluation. However, after deployment, key business metrics such as revenue, click-through rate, and conversion rate consistently underperform compared to the previous production model. What is the most likely explanation?", options:["Objective Function Misalignment","Underfitting","Leakage","Missing Values"], correct:0},
+
+  {q:"A retail company develops a forecasting model to predict future monthly sales before the month begins. During feature engineering, a new variable named 'Actual End-of-Month Revenue' is introduced. After retraining, the model achieves nearly perfect validation performance across every evaluation fold. What is the most appropriate interpretation?", options:["Strong Feature Engineering","Target Leakage","Calibration Improvement","Dimensionality Reduction"], correct:1},
+
+  {q:"A production demand forecasting model demonstrates low bias and low variance across multiple retraining cycles. Despite stable evaluation metrics and no evidence of overfitting or underfitting, the model consistently fails to achieve acceptable forecasting accuracy in production. What is the most likely explanation?", options:["Wrong Features","Overfitting","Underfitting","Scaling"], correct:0},
+
+  {q:"A recommendation team performs an explainability audit before deployment. Based on feature attribution analysis, several highly ranked features are removed because they appear noisy and inconsistent across different user segments. After retraining, both offline metrics and online business KPIs improve unexpectedly. What is the most plausible explanation?", options:["Noise Reduction","Calibration Failure","Drift Elimination","Leakage Removal"], correct:0},
+  {q:"A subscription platform builds a churn prediction model using only customers who remained active for at least one year. Customers who canceled shortly after signing up are excluded from the training dataset because their historical records are incomplete. The resulting model performs well offline but generalizes poorly to new users. Which issue most likely explains this behavior?", options:["Training only on customers who remained active (Survivorship Bias)","Standardizing features","Removing duplicates","Cross-validation"], correct:0},
+
+  {q:"A production recommendation model is retrained every month using fresh user interaction data. Across multiple retraining cycles, the importance of one feature fluctuates significantly, sometimes ranking first and other times dropping outside the top ten. Despite this, validation metrics and online business KPIs remain stable. What is the most likely explanation?", options:["Correlated Features Competing for Importance","Leakage","PCA Failure","Label Noise"], correct:0},
+
+  {q:"A large-scale content recommendation platform optimizes its ranking model exclusively for Click-Through Rate (CTR). Initially, engagement improves, but after several months, user retention, session duration, and customer satisfaction steadily decline despite CTR remaining high. What is the most likely explanation?", options:["Metric Gaming","PCA Drift","Scaling Failure","Variance Collapse"], correct:0},
+
+  {q:"A fraud detection model deployed in production reports the following metrics: Precision = 99%, Recall = 3%. The model is designed to identify fraudulent transactions while minimizing unnecessary investigations. Which statement is most accurate?", options:["The model is highly conservative in predicting positive cases.","The model captures most fraudulent transactions.","The model is perfectly calibrated.","The model is underfitting."], correct:0},
+
+  {q:"A multilingual customer support classifier is deployed using the same architecture, hyperparameters, and infrastructure across two countries. The model performs exceptionally well in one region but experiences a significant drop in accuracy in the other, despite no software or hardware changes. What is the most likely explanation?", options:["Distribution Shift","GPU Difference","Random Seed","Batch Size"], correct:0},
+
+  {q:"A real-time fraud detection system depends heavily on a third-party feature generated by an external service. The feature contributes significantly to prediction quality but is unavailable for a noticeable fraction of live requests due to intermittent service failures. What is the biggest production concern?", options:["Feature Reliability Risk","Underfitting","Overfitting","PCA Sensitivity"], correct:0},
+
+  {q:"An organization develops an automated hiring model using historical recruitment decisions collected over the past decade. After deployment, an internal audit finds that the model consistently reproduces patterns of discrimination present in previous hiring decisions. This is best described as:", options:["Historical Bias Propagation","Label Drift","Covariate Shift","Ensemble Instability"], correct:0},
+
+  {q:"A payment platform deploys a fraud detection model where the estimated business cost of approving a fraudulent transaction is nearly 100 times greater than incorrectly flagging a legitimate one. The ML team must choose the optimal operating threshold before production rollout. Which factor should primarily guide threshold selection?", options:["Accuracy","Cost Function","ROC-AUC","Feature Importance"], correct:1},
+
+  {q:"A production recommendation model relies heavily on a user behavior feature that is unavailable for approximately 20% of live predictions because of upstream logging failures. Whenever this feature is missing, model quality drops significantly. What does this situation most strongly indicate?", options:["Feature Dependency Risk","Class Imbalance","Drift","Leakage"], correct:0},
+
+  {q:"A production ML pipeline successfully completes feature validation, preprocessing, model loading, and health checks after deployment. Despite all monitoring dashboards appearing normal, the model suddenly begins returning nearly identical predictions for every incoming request. What is the most likely explanation?", options:["Serving Pipeline Bug","Overfitting","Underfitting","Drift"], correct:0},
+
+  {q:"Two ranking models produce identical customer ordering on the evaluation dataset. However, one model's predicted probabilities closely match observed outcomes, while the other's confidence scores are consistently inaccurate. Which metric can still remain high for both models?", options:["ROC-AUC","Brier Score","Log Loss","Calibration Error"], correct:0},
+
+  {q:"During feature engineering, two variables individually show almost no predictive value and have virtually zero linear correlation with one another. However, their combination consistently improves model performance across multiple validation datasets. Which algorithm is most likely to capture this relationship naturally?", options:["Decision Tree Ensemble","Linear Regression","Naive Bayes","StandardScaler"], correct:0},
+
+  {q:"A customer risk model consistently outperforms every baseline during offline evaluation. Months later, engineers discover that the training pipeline accidentally included a unique customer identifier capable of distinguishing nearly every individual record. What is the most likely issue?", options:["Leakage through memorization","Underfitting","Calibration","Sampling"], correct:0},
+
+  {q:"A large-scale recommendation engine continuously retrains using user interactions generated by previous versions of the same model. Over time, recommendations increasingly shape future user behavior, which subsequently becomes the primary source of training data. This situation is best described as:", options:["Closed-Loop Learning Dynamics","PCA Drift","Feature Explosion","Variance Collapse"], correct:0},
+
+  {q:"A credit risk model maintains stable ranking performance across several months of production. However, monitoring reveals that predicted confidence scores become increasingly extreme, while observed event frequencies remain largely unchanged. What is the primary concern?", options:["Calibration Degradation","Underfitting","Multicollinearity","Label Encoding"], correct:0},
+
+  {q:"A state-of-the-art deep learning model achieves the best benchmark scores among all competing solutions during offline evaluation. After deployment, however, it repeatedly fails to improve revenue, customer retention, and other critical business objectives despite stable infrastructure and data pipelines. What is the strongest conclusion?", options:["Benchmark performance alone is insufficient evidence of real-world value.","More layers are needed.","More GPUs are needed.","More features are needed."], correct:0}
+],
+
+     "Data Analytics": [
+  {q:"A Data Analyst is validating a monthly sales report where some values have been entered directly into a formula instead of referencing worksheet cells. To identify how Excel treats text values that appear numeric, the analyst uses the following formula: =COUNT(\"10\",\"20\",\"ABC\"). Considering that all three values are supplied directly as text arguments inside the formula, what result will Excel return?", options:["2, because \"10\" and \"20\" represent numbers","3, because COUNT evaluates all supplied arguments","0, because COUNT ignores text values even when they look numeric if provided directly as text","#VALUE! Error because COUNT cannot process text arguments"], correct:2},
+
+  {q:"A company maintains a database containing over 50,000 customer records. An analyst needs a formula that can identify the relative position of a specific Customer ID within a selected range without actually returning the value itself. The result should represent the location of the match within the lookup range. Which function is most appropriate for this requirement?", options:["FIND","SEARCH","MATCH","INDEX"], correct:2},
+
+  {q:"A retail company stores product quantities in Column A and corresponding sales revenue in Column B. Management wants to calculate revenue generated only from products whose quantity sold exceeded 10 units. The analyst writes the formula =SUMPRODUCT((A1:A5>10)*(B1:B5)). What is the primary purpose of this formula?", options:["Sum all values from Column B regardless of any condition","Sum values from Column B only when the corresponding value in Column A is greater than 10","Count how many rows contain values greater than 10","Return all matching records as an array"], correct:1},
+
+  {q:"A financial forecasting workbook contains hundreds of thousands of formulas and takes several seconds to recalculate after every change. The analyst wants to replace volatile functions with a function that recalculates only when its dependent cells change. Which of the following functions is considered non-volatile?", options:["NOW()","RAND()","OFFSET()","INDEX()"], correct:3},
+
+  {q:"A data analyst receives daily CSV files containing duplicate records, inconsistent date formats, blank values, and unwanted columns. Before building dashboards, the analyst uses a tool to automate data cleaning and transformation steps so that the process can be refreshed whenever new files arrive. Which category best describes the primary purpose of Power Query?", options:["Data Cleaning and Transformation","Dashboard Visualization","VBA Automation","Goal Seek and Solver Analysis"], correct:0},
+
+  {q:"A company's employee database frequently changes structure. New columns are often inserted between existing fields, causing traditional lookup formulas to break. The analyst requires a lookup function that can search both left and right while remaining flexible when columns are added or removed. Which function is best suited for this scenario?", options:["VLOOKUP","HLOOKUP","XLOOKUP","LOOKUP"], correct:2},
+
+  {q:"A manufacturing company stores machine-level production logs in Excel. The analyst is considering whether Excel can handle a dataset containing more than one million records in a single worksheet. What is the maximum number of rows supported in modern Excel versions?", options:["65,536","1,048,576","2,097,152","Unlimited"], correct:1},
+
+  {q:"A reporting workbook receives fresh customer transaction data every day. The analyst wants a formula that automatically generates a list of distinct customer names and updates itself whenever new records are added, without requiring manual removal of duplicates. Which function should be used?", options:["UNIQUE()","DISTINCT()","FILTER()","REMOVE()"], correct:0},
+
+  {q:"A business analyst has received a dataset containing millions of sales transactions. Senior management wants a quick summary showing total sales by region, category, and month without writing formulas for each calculation. Which Excel feature is specifically designed for this type of aggregation and summarization?", options:["Data Validation","Pivot Table","Conditional Formatting","Name Manager"], correct:1},
+
+  {q:"A data analyst is using Excel's Dynamic Array functionality to extract only records that satisfy certain conditions. The analyst wants the results to automatically expand into neighboring cells whenever additional matching records are found. Which function naturally produces this spill behavior?", options:["SUM()","FILTER()","COUNTIF()","IF()"], correct:1},
+
+  {q:"An analyst is searching for the word \"Sales\" inside thousands of product descriptions. The search process must distinguish between uppercase and lowercase letters because \"Sales\" and \"SALES\" are treated differently by the business rules. Which statement correctly describes the difference between FIND and SEARCH?", options:["SEARCH is case-sensitive while FIND is not","FIND is case-sensitive while SEARCH is not","Both functions behave identically","FIND ignores wildcard characters completely"], correct:1},
+
+  {q:"A company wants to identify the small number of products responsible for the majority of revenue using the 80/20 principle. The analyst must display both individual product contribution and cumulative percentage contribution within the same visualization. Which chart type is most suitable for performing a Pareto Analysis?", options:["Pie Chart","Combination Chart","Scatter Plot","Radar Chart"], correct:1},
+
+  {q:"A workbook contains references stored as text strings such as \"A1\", \"B25\", and \"D100\". Instead of manually editing formulas every time a reference changes, the analyst wants Excel to interpret the text itself as a valid cell reference. Which function performs this task?", options:["INDIRECT()","TEXT()","CONCAT()","ADDRESS()"], correct:0},
+
+  {q:"A dynamic reporting solution needs to identify the current row number of formulas so that calculations automatically adjust when rows are inserted or deleted. The analyst wants a function that returns the row position of the cell in which the formula is located. Which function should be used?", options:["ROW()","COLUMN()","INDEX()","MATCH()"], correct:0},
+
+  {q:"While auditing a complex budgeting workbook, an analyst notices that a formula depends on its own result either directly or indirectly through other formulas. As a result, Excel generates a warning and cannot calculate the value correctly. What is this situation called?", options:["Circular Reference","Broken Link","Invalid Formula","Locked Reference"], correct:0},
+
+  {q:"A Data Analyst is importing sales data from multiple Excel files, cleaning column names, removing duplicates, splitting fields, and converting data types before loading it into the Power BI model. While reviewing the transformation steps, a junior analyst asks which language is actually used behind the scenes to perform these Power Query transformations. Which language powers Power Query transformations in Power BI?", options:["DAX","SQL","M Language","Python"], correct:2},
+
+  {q:"A report contains a measure that calculates Total Sales. The value changes dynamically depending on the filters applied by users, such as Region, Product Category, and Year. The analyst explains that DAX calculations do not simply work row by row but instead depend heavily on the current evaluation environment. Which concept is primarily responsible for this behavior?", options:["Row Storage","Column Aggregation","Context-Based Evaluation","Query Folding"], correct:2},
+    {q:"A sales dashboard contains a measure that must calculate revenue only for customers belonging to a specific region, regardless of the filters currently applied by the user. The analyst chooses a DAX function that can modify the existing filter context before performing the calculation. Which DAX function is specifically designed for modifying filter context?", options:["SUM()","CALCULATE()","COUNTROWS()","VALUES()"], correct:1},
+
+  {q:"A company is designing its data model for reporting. The architecture contains one central table holding transaction-level sales data, while surrounding tables contain information about products, customers, dates, and locations. What is this modeling approach commonly called?", options:["Snowflake Schema","Flat File Structure","Star Schema","Transaction Schema"], correct:2},
+
+  {q:"An analyst has two relationships between a Sales table and a Date table: Order Date → Active Relationship, Delivery Date → Inactive Relationship. Management wants a measure that calculates sales based on Delivery Date instead of Order Date without permanently changing the model. Which DAX function should be used?", options:["RELATED()","LOOKUPVALUE()","USERELATIONSHIP()","DISTINCT()"], correct:2},
+
+  {q:"A business dashboard contains a hierarchy: Country → State → City → Store. Management wants users to expand and collapse hierarchy levels interactively while analyzing performance. Which visual is most suitable?", options:["Card Visual","Matrix Visual","Gauge Visual","KPI Visual"], correct:1},
+
+  {q:"A Power BI report contains over 50 million rows and still performs efficiently because Power BI compresses the data in memory before executing calculations. What is the name of this storage engine?", options:["DirectQuery Engine","VertiPaq Engine","SQL Engine","Power Query Engine"], correct:1},
+
+  {q:"A calculated column contains the formula Sales[Profit] = Sales[Revenue] - Sales[Cost]. The calculation is performed separately for every row in the Sales table. Which type of context exists naturally while this calculated column is being evaluated?", options:["Filter Context","Visual Context","Row Context","Query Context"], correct:2},
+
+  {q:"A report user selects Region = North and Year = 2025. The Total Sales measure instantly recalculates based on only the visible data after these selections. Which concept is primarily affecting the result?", options:["Data Compression","Filter Context","Query Folding","Row Context"], correct:1},
+
+  {q:"A company wants to display each product's contribution as a percentage of overall company sales. Even when users filter the report, the denominator should always represent total company sales across all products. Which DAX function is most commonly used to remove filters from a calculation?", options:["REMOVEERRORS()","ALL()","VALUES()","DISTINCT()"], correct:1},
+
+  {q:"A dashboard displays the Top 10 Customers based on annual revenue. The analyst needs a measure that assigns ranking values such as 1st, 2nd, 3rd, and so on according to sales performance. Which DAX function is designed specifically for ranking?", options:["TOPN()","RANKX()","SORTBY()","ORDERBY()"], correct:1},
+
+  {q:"A Power BI solution connects to SQL Server using DirectQuery and Excel files using Import Mode. The analyst wants both sources to exist within the same report model. What is this architecture called?", options:["Import Model","DirectQuery Model","Composite Model","Live Connection"], correct:2},
+
+  {q:"After creating a dashboard in Power BI Desktop, the analyst wants executives across different departments to access the reports online, schedule refreshes, configure security, and share dashboards with stakeholders. Which platform is designed for these activities?", options:["Power Query","Power BI Desktop","Power BI Service","SQL Server Management Studio"], correct:2},
+
+  {q:"An analyst drags a numeric field called 'Sales Amount' into a visual. Without manually changing any settings, Power BI automatically aggregates the values. Which aggregation is typically applied by default?", options:["Average","Maximum","Count","Sum"], correct:3},
+
+  {q:"A Sales table contains a Product ID column linked to a Products table. The analyst wants to retrieve Product Category from the related Products table inside a calculated column without performing a merge operation. Which DAX function is specifically designed for this purpose?", options:["FILTER()","LOOKUPVALUE()","RELATED()","VALUES()"], correct:2},
+
+  {q:"An analyst creates the following measure: Total Sales = SUM(Sales[Amount]). He places the measure in a table visual containing Product Category and notices that the same measure returns different values for different categories, even though the DAX formula never references Product Category. Why does this happen?", options:["DAX automatically creates new measures","The measure is affected by Filter Context generated by the visual","SUM() behaves differently inside visuals","Power BI duplicates the measure for every category"], correct:1},
+
+  {q:"A junior analyst is reviewing a Python script that validates user inputs. While debugging the code, he notices that the string 'False' is being passed into the bool() function. What will be the output of print(bool('False'))?", options:["False, because the word 'False' represents a false value","True, because any non-empty string evaluates to True","Error, because bool() only accepts Boolean values","None"], correct:1},
+
+  {q:"A developer stores customer IDs inside a Python list and wants to retrieve the last element without knowing the exact length of the list. Consider: a=[1,2,3]; print(a[-1]). What will be displayed?", options:["1","2","3","IndexError"], correct:2},
+
+  {q:"A customer transaction dataset contains duplicate records because the same file was accidentally loaded twice into the reporting system. Before creating dashboards, the analyst needs to remove duplicate rows while keeping the first occurrence of each record. Which Pandas function is commonly used for this task?", options:["remove_duplicates()","unique()","drop_duplicates()","delete_duplicates()"], correct:2},
+    {q:"A retail company wants to calculate total sales for each product category. Instead of manually filtering every category one by one, the analyst wants to split the dataset into groups and apply aggregation functions such as SUM, AVG, and COUNT automatically. Which Pandas function is designed for this purpose?", options:["sort_values()","filter()","groupby()","merge()"], correct:2},
+
+  {q:"A data analyst encounters the following code while reviewing a machine learning project: print(type(lambda x: x)). What will be the output?", options:["class","function","lambda","method"], correct:1},
+
+  {q:"An analyst receives monthly sales data in Excel format (.xlsx). The file must be loaded into Python for cleaning and analysis. Which statement is most accurate?", options:["Only Pandas can read Excel files","Only OpenPyXL can read Excel files","Both Pandas and OpenPyXL can work with Excel files","NumPy is the preferred Excel-reading library"], correct:2},
+
+  {q:"A Pandas DataFrame contains customer information in rows and columns. The analyst wants to apply a function across each row horizontally rather than down each column. In Pandas, what does axis=1 generally represent?", options:["Rows","Columns","Index","Missing Values"], correct:1},
+
+  {q:"A junior analyst is learning NumPy and notices that mathematical operations can be applied directly to arrays without using loops. What will be the output of: import numpy as np; print(np.array([1,2])+10)?", options:["Error because arrays cannot be added to integers","[1, 2, 10]","[11 12]","[10 20]"], correct:2},
+
+  {q:"Before performing advanced analysis, a data scientist wants to quickly understand the distribution of numerical columns, including count, mean, standard deviation, minimum value, quartiles, and maximum value. Which Pandas method provides this summary?", options:["summary()","describe()","statistics()","info()"], correct:1},
+
+  {q:"A data analyst executes the following code: x=[1,2,3]; y=x; y.append(4); print(x). What will be the output?", options:["[1, 2, 3]","[4]","[1, 2, 3, 4]","Error"], correct:2},
+
+  {q:"Consider the following code: print(10 == 10.0). What will Python return?", options:["False","True","TypeError","None"], correct:1},
+
+  {q:"A DataFrame contains the values 100, NaN, and 200 in the Sales column. The analyst executes df['Sales'].sum(). What will Pandas return by default?", options:["NaN","300","Error","100"], correct:1},
+
+  {q:"What will be the output? a=[1,2,3]; print(a*2)", options:["[2, 4, 6]","[1, 2, 3, 1, 2, 3]","Error","[1, 4, 9]"], correct:1},
+
+  {q:"A Data Analyst creates the following code: import pandas as pd; df=pd.DataFrame({'A':[1,2,3],'B':[10,20,30]}); print(df.shape). What will be the output?", options:["(2, 3)","(3, 2)","(3, 3)","6"], correct:1},
+
+  {q:"A company maintains an employee database containing thousands of records. The HR team wants to generate a report showing departments whose average employee salary exceeds ₹75,000. An analyst initially writes a query using the WHERE clause after applying the AVG() function but receives an error. Which statement correctly explains why the query fails and what should be used instead?", options:["WHERE cannot be used with aggregate functions; HAVING should be used to filter grouped results","HAVING can only be used with COUNT()","WHERE executes after aggregation, so it cannot access row-level data","Both WHERE and HAVING work identically in this scenario"], correct:0},
+
+  {q:"A retail company has two tables: Customers and Orders. Management wants a report that includes customers who placed orders, customers who did not place orders, and orders that might not have matching customers. Which JOIN operation returns all matching and non-matching records from both tables?", options:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"], correct:3},
+
+  {q:"An employee salary table contains salaries: 100000, 90000, 90000, and 80000. Management asks for the second highest unique salary. Which query logic correctly solves this requirement?", options:["SELECT MAX(Salary) FROM Employee","SELECT Salary FROM Employee ORDER BY Salary DESC LIMIT 1","Use a subquery to exclude the highest salary and then find the maximum remaining salary","SELECT COUNT(*) FROM Employee"], correct:2},
+
+  {q:"A sales analyst wants to calculate a running rank of products based on revenue without collapsing rows into groups. Every product record should remain visible while an additional ranking column is calculated. Which SQL feature is specifically designed for this requirement?", options:["Aggregate Functions","Window Functions","GROUP BY","DISTINCT"], correct:1},
+
+  {q:"A database administrator explains that SQL statements follow a logical execution order, which is different from the order in which clauses are written. In the query SELECT ... FROM Employees WHERE Salary>50000 GROUP BY Department HAVING AVG(Salary)>70000 ORDER BY AVG(Salary) DESC;, which clause is logically executed first by the SQL engine?", options:["SELECT","WHERE","FROM","ORDER BY"], correct:2}
+],
+
+
+            "Frontend Development":[
+  {q: "Which of the following is not a valid HTML5 element?", options: ["<section>", "<article>", "<frame>", "<aside>"], correct: 2},
+  {q: "The box-sizing: border-box; property in CSS ensures that:", options: ["Padding is excluded from element size", "Margin is excluded from element size", "Border and padding are included in width and height", "Only border is included"], correct: 2},
+  {q: "What is the purpose of the key prop in React lists?", options: ["To uniquely identify list items for diffing", "To encrypt list items", "To style each element", "To trigger events"], correct: 0},
+  {q: "Which CSS property controls stacking order?", options: ["order", "position", "z-index", "display"], correct: 2},
+  {q: "The Virtual DOM in React helps to:", options: ["Directly modify the browser DOM", "Optimize updates by diffing changes before rendering", "Manage routing", "Cache API data"], correct: 1},
+  {q: "In React, useEffect() is equivalent to which lifecycle method?", options: ["componentDidMount", "componentWillUnmount", "componentWillReceiveProps", "shouldComponentUpdate"], correct: 0},
+  {q: "What is the default display property of a <div>?", options: ["inline", "inline-block", "block", "flex"], correct: 2},
+  {q: "What does the alt attribute in an <img> tag specify?", options: ["Image path", "Alternate text if the image cannot load", "Tooltip text", "Caption"], correct: 1},
+  {q: "Which HTTP status code means 'Resource Created'?", options: ["200", "201", "400", "404"], correct: 1},
+  {q: "Which CSS function supports transparency?", options: ["rgb()", "rgba()", "hex()", "hsl()"], correct: 1},
+  {q: "React's reconciliation algorithm compares:", options: ["Component props", "Virtual DOM trees and keys", "State and lifecycle methods", "Class and function components"], correct: 1},
+  {q: "Webpack 'loaders' are used to:", options: ["Load HTML files", "Convert non-JS assets like CSS or images into JS modules", "Optimize bundles", "Watch for file changes"], correct: 1},
+  {q: "The React 'Fiber' architecture improves:", options: ["DOM event handling", "Incremental rendering and task scheduling", "State management", "CSS optimization"], correct: 1},
+  {q: "Which function runs animations at optimal frame rate?", options: ["setTimeout()", "requestAnimationFrame()", "setInterval()", "animate()"], correct: 1},
+  {q: "Redux implements which design pattern?", options: ["MVC", "Flux", "Singleton", "Observer"], correct: 1},
+  {q: "In Next.js, getServerSideProps() executes:", options: ["At build time", "On every request (server-side)", "On the client after hydration", "Only on error pages"], correct: 1},
+  {q: "Critical rendering path optimization aims to:", options: ["Delay JS loading", "Reduce render-blocking CSS/JS for faster first paint", "Compress images", "Add transitions"], correct: 1},
+  {q: "React's Context API mainly avoids:", options: ["Prop drilling", "State duplication", "Re-renders", "Hook conflicts"], correct: 0},
+  {q: "What does 'hydration' mean in React SSR?", options: ["Rebuilding HTML", "Binding event handlers to static HTML from server", "Downloading static resources", "Preloading components"], correct: 1},
+  {q: "Which feature allows lazy module loading in JS?", options: ["async/await", "Dynamic import()", "Promises", "fetch()"], correct: 1},
+  {q: "Shadow DOM is mainly used for:", options: ["Performance optimization", "Encapsulated styles and DOM isolation", "Async rendering", "Virtual DOM updates"], correct: 1},
+  {q: "Tree-shaking in Webpack removes:", options: ["Duplicate files", "Unused exports during bundling", "Large images", "Inline scripts"], correct: 1},
+  {q: "useCallback() in React is used to:", options: ["Memoize function references between renders", "Cache state values", "Track dependencies", "Manage side effects"], correct: 0},
+  {q: "React.memo() helps by:", options: ["Preventing re-render when props are unchanged", "Reducing component size", "Cleaning up memory", "Skipping hook re-execution"], correct: 0},
+  {q: "Web Components are composed of:", options: ["Shadow DOM, Custom Elements, and Templates", "Redux store and hooks", "Node.js modules", "HTML preprocessors"], correct: 0},
+  {q: "CSS variables use which syntax?", options: ["$var", "--variable", "@var", "%variable"], correct: 1},
+  {q: "HTTP/2 multiplexing allows:", options: ["Multiple requests in one TCP connection", "Encrypted data only", "Header caching", "Asynchronous rendering"], correct: 0},
+  {q: "display: none vs visibility: hidden — difference?", options: ["Both hide but keep space", "None removes from layout; hidden keeps space", "Hidden removes from DOM", "None keeps space"], correct: 1},
+  {q: "For debouncing inputs in React, you use:", options: ["useMemo()", "useEffect() with timeout and cleanup", "useRef() only", "Redux"], correct: 1},
+  {q: "Relative CSS units like % and em are based on:", options: ["Parent element or font size", "Viewport", "Root element always", "Browser zoom"], correct: 0},
+  {q: "Which protocol adds header compression & multiplexing?", options: ["HTTP/2", "HTTP/3", "HTTPS", "TCP"], correct: 0},
+  {q: "React Suspense boundaries:", options: ["Pause rendering until data/component is ready", "Handle form validation", "Detect render errors", "Manage routing"], correct: 0},
+  {q: "'Critical CSS' refers to:", options: ["CSS used above the fold for fast load", "Unused CSS", "Responsive styles", "Lazy-loaded CSS"], correct: 0},
+  {q: "Service Workers enable:", options: ["Background sync & offline caching", "Database management", "DOM updates", "CSS compilation"], correct: 0},
+  {q: "Redux middleware like Thunk or Saga handles:", options: ["Asynchronous logic between actions and reducers", "Styling", "Logging", "Component testing"], correct: 0},
+  {q: "In Next.js, SSR vs SSG difference?", options: ["SSR = per request; SSG = pre-built at build time", "SSR = faster", "SSG = slower", "No difference"], correct: 0},
+  {q: "React Fiber's priority scheduling means:", options: ["Renders high-priority updates before others", "Loads all updates at once", "Defers rendering completely", "Removes blocking"], correct: 0},
+  {q: "CDNs improve performance by:", options: ["Serving cached assets from closest server", "Compressing data", "Removing images", "Managing scripts"], correct: 0},
+  {q: "Intersection Observer API is used for:", options: ["Lazy loading & tracking element visibility", "Form validation", "CSS optimization", "Scroll locking"], correct: 0},
+  {q: "Hydration mismatch occurs when:", options: ["Client and server DOM don't match", "JS is missing", "Browser fails hydration", "HTML has syntax errors"], correct: 0},
+  {q: "Webpack 'plugins' are used to:", options: ["Extend or modify Webpack's capabilities", "Only load CSS", "Optimize HTML", "Create maps"], correct: 0},
+  {q: "React.lazy() allows:", options: ["Code-splitting and dynamic component loading", "Memoization", "Context sharing", "State updates"], correct: 0},
+  {q: "CSS-in-JS downside is:", options: ["Runtime overhead and larger bundle size", "Lack of syntax support", "Limited selectors", "No theming"], correct: 0},
+  {q: "React Error Boundaries catch:", options: ["Runtime errors during rendering", "Syntax errors", "Hook errors", "Network errors"], correct: 0},
+  {q: "Progressive enhancement relies on:", options: ["Feature detection", "CSS resets", "JS frameworks", "Animations"], correct: 0},
+  {q: "React StrictMode is used to:", options: ["Detect unsafe lifecycle and side effects", "Optimize rendering", "Debug CSS", "Catch syntax errors"], correct: 0},
+  {q: "Isomorphic JS means:", options: ["Code runs on both client & server", "Hybrid native apps", "CSS-in-JS", "State-based rendering"], correct: 0},
+  {q: "Code-splitting helps by:", options: ["Loading only required bundles dynamically", "Removing duplicate code", "Inlining JS", "Caching data"], correct: 0},
+  {q: "ETag and Cache-Control headers are used to:", options: ["Reduce redundant requests and cache data", "Track sessions", "Prevent CORS", "Encrypt responses"], correct: 0},
+  {q: "Hybrid rendering combines:", options: ["SSR for first paint + Client hydration for interactivity", "SPA and PWA", "CSR and static hosting", "Lazy loading and caching"], correct: 0}
+]
+};
+
+/* ============ STATE ============ */
+let userData = {};
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let answers = [];
+let timeRemaining = EXAM_DURATION;
+let timerInterval;
+let cameraStream;
+let warningCount = 0;
+let isSubmitting = false;
+let closeReason = '';
+let examStartTime;
+let examTicketId = '';
+
+let faceModelsLoaded = false;
+let faceCheckInterval;
+let noFaceStreak = 0;
+
+/* ============ SECURITY ============ */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','C','J'].includes(e.key)) ||
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c'))){
+        e.preventDefault();
+        if (document.querySelector('.exam-screen').classList.contains('active')){
+            triggerWarning('Developer tools or copy shortcut attempt detected');
+        }
+    }
+});
+document.addEventListener('copy', e => {
+    e.preventDefault();
+    if (document.querySelector('.exam-screen').classList.contains('active')){
+        triggerWarning('Copy attempt detected');
+    }
+});
+document.addEventListener('cut', e => {
+    e.preventDefault();
+    if (document.querySelector('.exam-screen').classList.contains('active')){
+        triggerWarning('Cut attempt detected');
+    }
+});
+
+/* ============ PAGE LOAD ============ */
+window.addEventListener('load', function(){
+    if (!checkDeviceCompatibility()) return;
+    document.querySelector('.checkin-screen').classList.add('active');
+});
+
+function showLoading(msg){
+    document.getElementById('loadingMessage').textContent = msg;
+    document.getElementById('loadingModal').classList.add('active');
+}
+function hideLoading(){
+    document.getElementById('loadingModal').classList.remove('active');
+}
+
+/* ============ CHECK-IN (email only) ============ */
+document.getElementById('emailForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (isMobileDevice()){ alert('This exam is not supported on mobile devices.'); return; }
+
+    const email = document.getElementById('email').value.trim();
+    if (!email) return;
+
+    showLoading('Verifying your email…');
+    try{
+        const url = `${GOOGLE_SCRIPT_URL}?action=checkEmail&email=${encodeURIComponent(email)}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.json();
+        hideLoading();
+
+        if (result.success){
+            if (result.examEnded){
+                showExamEnded(result.message);
+            } else if (result.alreadySubmitted){
+                document.getElementById('alreadySubmittedModal').classList.add('active');
+            } else {
+                userData = { name: result.name || 'Candidate', email: email, domain: result.domain };
+                document.getElementById('checkinTicket').style.display = 'none';
+                document.getElementById('candidateName').textContent = userData.name;
+                document.getElementById('candidateDomain').textContent = userData.domain;
+                document.getElementById('confirmedTicket').style.display = 'block';
+            }
+        } else {
+            alert('Error: ' + result.message);
+        }
+    } catch(error){
+        console.error('Network Error:', error);
+        hideLoading();
+        alert('Network error: ' + error.message);
+    }
+});
+
+document.getElementById('reviewInstructionsBtn').addEventListener('click', () => {
+    document.getElementById('instructionsModal').classList.add('active');
+});
+
+function showExamEnded(message){
+    document.getElementById('checkinTicket').style.display = 'none';
+    document.getElementById('examEndedMessage').textContent = message || 'This exam has already ended.';
+    document.getElementById('examEndedTicket').style.display = 'block';
+}
+document.getElementById('cancelInstructionsBtn').addEventListener('click', () => {
+    document.getElementById('instructionsModal').classList.remove('active');
+});
+document.getElementById('closeAlreadySubmittedBtn').addEventListener('click', () => {
+    document.getElementById('alreadySubmittedModal').classList.remove('active');
+});
+document.getElementById('startExamBtn').addEventListener('click', startExam);
+
+async function startExam(){
+    document.getElementById('instructionsModal').classList.remove('active');
+    if (isMobileDevice()){ alert('Cannot start exam on mobile device.'); return; }
+
+    try{
+        cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById('camera').srcObject = cameraStream;
+        document.getElementById('cameraBox').srcObject = cameraStream;
+    } catch(err){
+        alert('Camera permission is required to start the exam!');
+        return;
+    }
+
+    try{
+        await document.documentElement.requestFullscreen();
+    } catch(err){
+        alert('Please allow fullscreen mode to start the exam');
+        return;
+    }
+
+    currentQuestions = questionBank[userData.domain].slice();
+    shuffleArray(currentQuestions);
+    currentQuestions = currentQuestions.slice(0, 50);
+    answers = new Array(currentQuestions.length).fill(null);
+
+    examTicketId = 'EXM-' + Date.now().toString(36).toUpperCase();
+    document.getElementById('examTicketId').textContent = examTicketId;
+
+    document.querySelector('.checkin-screen').classList.remove('active');
+    document.querySelector('.exam-screen').classList.add('active');
+
+    startTimer();
+    displayQuestion();
+
+    document.getElementById('detectionStatus').textContent = 'Loading face check…';
+    loadFaceModels().then(() => {
+        if (faceModelsLoaded) startFaceMonitoring();
+        else document.getElementById('detectionStatus').textContent = 'Face check unavailable';
+    });
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    examStartTime = Date.now();
+}
+
+function shuffleArray(array){
+    for (let i = array.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+/* ============ EXAM LOGIC ============ */
+function displayQuestion(){
+    const q = currentQuestions[currentQuestionIndex];
+    document.getElementById('questionText').textContent = `${currentQuestionIndex + 1}. ${q.q}`;
+    document.getElementById('currentQ').textContent = currentQuestionIndex + 1;
+    document.getElementById('totalQ').textContent = currentQuestions.length;
+
+    const optionsContainer = document.getElementById('optionsContainer');
+    optionsContainer.innerHTML = '';
+    const letters = ['A','B','C','D'];
+
+    q.options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        if (answers[currentQuestionIndex] === index) div.classList.add('selected');
+        div.innerHTML = `<span class="option-letter">${letters[index]}</span><span>${option}</span>`;
+        div.onclick = () => selectOption(index);
+        optionsContainer.appendChild(div);
+    });
+
+    updateProgress();
+}
+
+function selectOption(index){
+    answers[currentQuestionIndex] = index;
+    const options = document.querySelectorAll('.option');
+    options.forEach(o => o.classList.remove('selected'));
+    options[index].classList.add('selected');
+
+    setTimeout(() => {
+        if (currentQuestionIndex < currentQuestions.length - 1){
+            currentQuestionIndex++;
+            displayQuestion();
+        } else {
+            closeReason = 'Completed all questions';
+            submitExam();
+        }
+    }, 400);
+}
+
+function updateProgress(){
+    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+/* ============ TIMER ============ */
+function startTimer(){
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        const m = Math.floor(timeRemaining / 60);
+        const s = timeRemaining % 60;
+        document.getElementById('timer').textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        if (timeRemaining <= 0){
+            closeReason = 'Time expired';
+            submitExam();
+        }
+    }, 1000);
+}
+
+/* ============ REAL FACE MONITORING ============ */
+async function loadFaceModels(){
+    try{
+        await faceapi.nets.tinyFaceDetector.loadFromUri(FACE_MODEL_URL);
+        faceModelsLoaded = true;
+        console.log('✅ Face detection model loaded');
+    } catch(err){
+        faceModelsLoaded = false;
+        console.warn('⚠️ Face detection model failed to load - exam continues without face monitoring:', err);
+    }
+}
+
+function startFaceMonitoring(){
+    const videoEl = document.getElementById('cameraBox');
+    document.getElementById('detectionStatus').textContent = 'Face Detected';
+
+    faceCheckInterval = setInterval(async () => {
+        if (isSubmitting || !faceModelsLoaded) return;
+        try{
+            const detections = await faceapi.detectAllFaces(videoEl, new faceapi.TinyFaceDetectorOptions({ inputSize: 224 }));
+            if (detections.length === 0){
+                noFaceStreak++;
+                document.getElementById('detectionStatus').textContent = 'No Face Detected';
+                if (noFaceStreak >= 3){
+                    noFaceStreak = 0;
+                    triggerWarning('No face detected in camera');
+                }
+            } else if (detections.length > 1){
+                noFaceStreak = 0;
+                document.getElementById('detectionStatus').textContent = 'Multiple Faces Detected';
+                triggerWarning('Multiple faces detected in camera');
+            } else {
+                noFaceStreak = 0;
+                document.getElementById('detectionStatus').textContent = 'Face Detected';
+            }
+        } catch(err){
+            console.warn('Face check failed:', err);
+        }
+    }, 3000);
+}
+
+function triggerWarning(reason){
+    warningCount++;
+    document.getElementById('warningCount').textContent = warningCount;
+    document.getElementById('warningMsg').textContent = reason;
+    document.getElementById('warningIndicator').style.display = 'flex';
+
+    console.log(`Warning ${warningCount}: ${reason}`);
+
+    if (warningCount >= 3){
+        closeReason = `3 warnings reached (last: ${reason})`;
+        submitExam();
+        return;
+    }
+    setTimeout(() => { document.getElementById('warningIndicator').style.display = 'none'; }, 5000);
+}
+
+/* ============ PROCTORING SIGNALS ============ */
+function handleVisibilityChange(){
+    if (document.hidden && !isSubmitting){
+        closeReason = 'Tab switched / window minimized';
+        submitExam();
+    }
+}
+function handleFullscreenChange(){
+    if (!document.fullscreenElement && !isSubmitting){
+        closeReason = 'Exited fullscreen mode';
+        submitExam();
+    }
+}
+function handleBeforeUnload(e){
+    if (document.querySelector('.exam-screen').classList.contains('active') && !isSubmitting){
+        if (!closeReason) closeReason = 'Browser closed or refreshed before completion';
+        submitExamSync();
+        e.preventDefault();
+        e.returnValue = 'Your exam is being submitted. Please wait...';
+        return e.returnValue;
+    }
+}
+
+/* ============ SUBMISSION ============ */
+function submitExamSync(){
+    isSubmitting = true;
+    let score = 0;
+    currentQuestions.forEach((q, i) => { if (answers[i] === q.correct) score++; });
+    if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+
+    const submissionData = {
+        action: 'submitExam', name: userData.name, email: userData.email, domain: userData.domain,
+        score: score, warnings: warningCount,
+        closeReason: closeReason || 'Browser closed or refreshed before completion',
+        timestamp: new Date().toLocaleString()
+    };
+    const blob = new Blob([JSON.stringify(submissionData)], { type: 'application/json' });
+    navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob);
+    showCompletionScreen();
+}
+
+async function submitExam(){
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    let score = 0;
+    currentQuestions.forEach((q, i) => { if (answers[i] === q.correct) score++; });
+    if (!closeReason) closeReason = 'Completed all questions';
+
+    showCompletionScreen();
+    cleanupExamResources();
+    submitScoreInBackground(score);
+}
+
+function showCompletionScreen(){
+    document.querySelector('.exam-screen').classList.remove('active');
+    document.querySelector('.complete-screen').classList.add('active');
+
+    document.getElementById('completeName').textContent = userData.name;
+    document.getElementById('completeEmail').textContent = userData.email;
+    document.getElementById('completeTime').textContent = new Date().toLocaleString();
+    document.getElementById('completeStatus').textContent = closeReason;
+
+    const isClean = closeReason === 'Completed all questions' || closeReason === 'Time expired';
+    const eyebrow = document.getElementById('completionEyebrow');
+    const sealWrap = document.getElementById('completionSeal');
+    const sealIcon = document.getElementById('sealIcon');
+
+    if (isClean){
+        eyebrow.textContent = 'Examination Complete';
+        sealWrap.classList.remove('seal-red'); sealWrap.classList.add('seal-teal');
+        sealIcon.innerHTML = '<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><path d="M30 52 L44 66 L72 34" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
+    } else {
+        eyebrow.textContent = 'Examination Flagged & Ended';
+        sealWrap.classList.remove('seal-teal'); sealWrap.classList.add('seal-red');
+        sealIcon.innerHTML = '<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/><line x1="34" y1="34" x2="66" y2="66" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><line x1="66" y1="34" x2="34" y2="66" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>';
+    }
+}
+
+function cleanupExamResources(){
+    clearInterval(timerInterval);
+    if (faceCheckInterval) clearInterval(faceCheckInterval);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+    document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+    if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+}
+
+function submitScoreInBackground(score){
+    const submissionData = {
+        action: 'submitExam', name: userData.name, email: userData.email, domain: userData.domain,
+        score: score, warnings: warningCount, closeReason: closeReason,
+        timestamp: new Date().toLocaleString()
+    };
+    const blob = new Blob([JSON.stringify(submissionData)], { type: 'application/json' });
+    const beaconSent = navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob);
+    console.log('📤 Beacon submission:', beaconSent ? '✅ Success' : '❌ Failed');
+
+    setTimeout(() => {
+        const getUrl = `${GOOGLE_SCRIPT_URL}?action=submitExam&email=${encodeURIComponent(userData.email)}` +
+            `&score=${score}&domain=${encodeURIComponent(userData.domain)}&name=${encodeURIComponent(userData.name)}` +
+            `&warnings=${warningCount}&closeReason=${encodeURIComponent(closeReason)}`;
+        fetch(getUrl).then(r => r.json()).then(r => console.log('✅ GET backup submission:', r.success))
+            .catch(e => console.log('❌ GET backup failed:', e));
+    }, 100);
+}
+
+/* ============ SCREENSHOT / PROOF ============ */
+document.getElementById('screenshotBtn').addEventListener('click', () => {
+    const ticket = document.getElementById('hallTicket');
+    html2canvas(ticket, { backgroundColor: '#F4FAF6', scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        const safeEmail = (userData.email || 'candidate').replace(/[^a-z0-9]/gi, '_');
+        link.download = `exam-proof-${safeEmail}-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }).catch(err => {
+        console.error('Screenshot failed:', err);
+        alert('Could not generate the image automatically - please take a manual screenshot of this card instead.');
+    });
+});
+
+console.log("🎯 Online Exam System Loaded");
+</script>
+</body>
+</html>
