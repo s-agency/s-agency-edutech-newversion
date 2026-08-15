@@ -12,23 +12,6 @@
   gtag('config', 'G-KYMHYKRD9W');
 </script>
 
- <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1788595878478616');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 
 
   <!-- Favicon -->
@@ -544,11 +527,17 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   .popup-divider { height: 1px; background: #f0fdf4; margin: 0 28px; }
   .popup-body { padding: 22px 26px 28px; }
 
+  .section-label {
+    font-size: 11px; font-weight: 800;
+    color: #9ca3af; text-transform: uppercase;
+    letter-spacing: 0.8px; margin: 0 0 10px 2px;
+  }
+
   .domain-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .domain-card {
@@ -563,8 +552,9 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     gap: 10px;
     transition: all 0.22s ease;
     background: #fafafa;
-    overflow: hidden;
+    overflow: visible;
   }
+  .domain-card.has-badge { padding-top: 32px; }
   .domain-card input[type="radio"] {
     position: absolute; opacity: 0; width: 0; height: 0;
   }
@@ -580,21 +570,50 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
   }
   .domain-card:has(input:checked) .d-label { color: #15803d; }
-  .domain-card:has(input:checked)::after {
-    content: '✓';
+
+  /* Empty circle indicator that fills with a tick when selected */
+  .d-check {
     position: absolute; top: 10px; right: 10px;
     width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    background: #fff;
+    transition: all 0.2s ease;
+  }
+  .d-check::after {
+    content: '✓';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
     background: #16a34a; color: #fff;
     font-weight: 900; font-size: 11px;
-    border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    line-height: 20px; text-align: center;
+    opacity: 0; transform: scale(0.5);
+    transition: all 0.2s ease;
+  }
+  .domain-card:has(input:checked) .d-check {
+    border-color: #16a34a;
+    background: #16a34a;
+  }
+  .domain-card:has(input:checked) .d-check::after { opacity: 1; transform: scale(1); }
+
+  /* Rating / bestseller badge (grid cards) */
+  .d-badge {
+    position: absolute;
+    top: 8px; left: 10px;
+    font-size: 9px; font-weight: 800;
+    padding: 4px 9px; border-radius: 20px;
+    letter-spacing: 0.4px; text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 3;
+    background: linear-gradient(135deg,#fbbf24,#f59e0b);
+    color: #78350f;
+    box-shadow: 0 3px 10px rgba(245,158,11,0.35);
   }
 
   .d-info {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
   }
 
   .d-label {
@@ -603,24 +622,26 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     transition: color 0.2s;
   }
 
+  .d-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
   .d-duration {
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 600;
     color: #6b7280;
   }
 
-  /* Highlighted card (AI/ML - 3 Month) */
-  .domain-card.highlight-card {
-    border-color: #3b82f6;
-    background: #eff6ff;
-  }
-  .domain-card.highlight-card:hover {
-    border-color: #2563eb;
-    background: #dbeafe;
-  }
-  .domain-card.highlight-card .d-duration {
-    color: #2563eb;
+  .d-price {
+    font-size: 11.5px;
     font-weight: 800;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 1px 8px;
+    border-radius: 8px;
   }
 
   /* Icon box */
@@ -636,6 +657,88 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   .d-icon.webdev   { background: #f0fdf4; }
   .d-icon.frontend { background: #faf5ff; }
   .d-icon.data     { background: #fff7ed; }
+
+  /* Premium 3-month upsell card */
+  .premium-card {
+    position: relative;
+    display: block;
+    border-radius: 16px;
+    padding: 36px 44px 18px 18px;
+    margin-bottom: 18px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #052e1c 0%, #0f5132 45%, #16a34a 100%);
+    color: #fff;
+    border: 2px solid transparent;
+    transition: all 0.22s ease;
+    box-shadow: 0 10px 26px rgba(6,78,59,0.28);
+  }
+  .premium-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .premium-card input[type="radio"] {
+    position: absolute; opacity: 0; width: 0; height: 0;
+  }
+  .premium-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(6,78,59,0.38);
+  }
+  .premium-card:has(input:checked) {
+    border-color: #fbbf24;
+    box-shadow: 0 0 0 4px rgba(251,191,36,0.25), 0 14px 32px rgba(6,78,59,0.38);
+  }
+  .premium-card:has(input:checked) .premium-check::after {
+    opacity: 1; transform: scale(1);
+  }
+
+  .premium-card .d-badge {
+    top: 10px; left: 16px;
+    background: linear-gradient(135deg,#fde68a,#fbbf24);
+    color: #78350f;
+  }
+
+  .premium-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.28);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .premium-icon svg { width: 26px; height: 26px; }
+
+  .premium-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+  .premium-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 14px;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+  }
+  .premium-sub { font-size: 10.5px; color: rgba(255,255,255,0.72); line-height: 1.4; }
+  .premium-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .premium-meta .p-duration { font-size: 11px; font-weight: 700; color: #bbf7d0; }
+  .premium-price {
+    font-size: 13px; font-weight: 900; color: #052e1c;
+    background: #fde68a; padding: 2px 10px; border-radius: 8px;
+  }
+
+  /* Empty circle indicator, top-right, fills with a tick when selected */
+  .premium-check {
+    position: absolute; top: 14px; right: 16px;
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    background: transparent;
+  }
+  .premium-check::after {
+    content: '✓';
+    position: absolute; inset: -2px;
+    color: #052e1c; background: #fbbf24;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900;
+    opacity: 0; transform: scale(0.5);
+    transition: all 0.2s ease;
+  }
 
   /* Button */
   .continue-btn {
@@ -654,9 +757,15 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     box-shadow: 0 8px 28px rgba(34,197,94,0.4);
   }
 
+  .popup-secure {
+    display: block; text-align: center;
+    margin-top: 12px; font-size: 11px;
+    color: #9ca3af;
+  }
+
   .popup-close {
     display: block; text-align: center;
-    margin-top: 14px; font-size: 12px;
+    margin-top: 8px; font-size: 12px;
     color: #9ca3af; cursor: pointer; transition: color 0.2s;
   }
   .popup-close:hover { color: #6b7280; }
@@ -680,11 +789,14 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     <div class="popup-divider"></div>
 
     <div class="popup-body">
+
       <div class="domain-options">
 
         <!-- AI / ML - 2 Month -->
-        <label class="domain-card">
-          <input type="radio" name="domain" value="intern-aiml.html">
+        <label class="domain-card has-badge">
+          <input type="radio" name="domain" value="https://smartpay.easebuzz.in/179742/339f37bcb32c4db4a6dc1bb7a18df1a2">
+          <span class="d-badge">🌟 Most Rated</span>
+          <span class="d-check"></span>
           <div class="d-icon aiml">
             <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 6C10 4.9 10.9 4 12 4C13.1 4 14 4.9 14 6" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
@@ -701,36 +813,17 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
           </div>
           <div class="d-info">
             <span class="d-label">AI / ML</span>
-            <span class="d-duration">2 Month</span>
-          </div>
-        </label>
-
-        <!-- AI / ML - 3 Month (highlighted) -->
-        <label class="domain-card highlight-card">
-          <input type="radio" name="domain" value="3skill-3months-aiml-internship-course.html">
-          <div class="d-icon aiml">
-            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 6C10 4.9 10.9 4 12 4C13.1 4 14 4.9 14 6" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M8 8.5C6.6 8.5 5.5 9.6 5.5 11C5.5 11.8 5.9 12.5 6.5 13C5.6 13.4 5 14.3 5 15.5C5 17.2 6.3 18.5 8 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M18 8.5C19.4 8.5 20.5 9.6 20.5 11C20.5 11.8 20.1 12.5 19.5 13C20.4 13.4 21 14.3 21 15.5C21 17.2 19.7 18.5 18 18.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M8 18.5C8 19.9 9.1 21 10.5 21H15.5C16.9 21 18 19.9 18 18.5V8C18 6.9 17.1 6 16 6H10C8.9 6 8 6.9 8 8V18.5Z" stroke="#3b82f6" stroke-width="1.5"/>
-              <line x1="11" y1="10" x2="15" y2="10" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
-              <line x1="11" y1="13" x2="15" y2="13" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
-              <line x1="11" y1="16" x2="15" y2="16" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
-              <circle cx="13" cy="10" r="1" fill="#2563eb"/>
-              <circle cx="13" cy="13" r="1" fill="#2563eb"/>
-              <circle cx="13" cy="16" r="1" fill="#2563eb"/>
-            </svg>
-          </div>
-          <div class="d-info">
-            <span class="d-label">AI / ML</span>
-            <span class="d-duration">3 Month</span>
+            <div class="d-meta">
+              <span class="d-duration">2 Month</span>
+              <span class="d-price">₹499</span>
+            </div>
           </div>
         </label>
 
         <!-- Web Development -->
         <label class="domain-card">
-          <input type="radio" name="domain" value="internship-web-development.html">
+          <input type="radio" name="domain" value="https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e">
+          <span class="d-check"></span>
           <div class="d-icon webdev">
             <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="3" y="4" width="20" height="18" rx="3" stroke="#16a34a" stroke-width="1.5"/>
@@ -744,33 +837,17 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
           </div>
           <div class="d-info">
             <span class="d-label">Web Development</span>
-            <span class="d-duration">2 Month</span>
-          </div>
-        </label>
-
-        <!-- Frontend -->
-        <label class="domain-card">
-          <input type="radio" name="domain" value="internship-frontend-development.html">
-          <div class="d-icon frontend">
-            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="20" height="20" rx="3" stroke="#9333ea" stroke-width="1.5"/>
-              <rect x="6" y="7" width="6" height="5" rx="1.5" fill="#e9d5ff" stroke="#a855f7" stroke-width="1"/>
-              <rect x="14" y="7" width="6" height="2" rx="1" fill="#d8b4fe"/>
-              <rect x="14" y="11" width="4" height="2" rx="1" fill="#ede9fe"/>
-              <rect x="6" y="14" width="14" height="2" rx="1" fill="#f3e8ff"/>
-              <rect x="6" y="18" width="9" height="2" rx="1" fill="#faf5ff" stroke="#c084fc" stroke-width="0.8"/>
-              <path d="M19 17l1.5 4-1.5-1-1 1.5L16.5 18z" fill="#9333ea" stroke="#7e22ce" stroke-width="0.5"/>
-            </svg>
-          </div>
-          <div class="d-info">
-            <span class="d-label">Frontend Dev</span>
-            <span class="d-duration">2 Month</span>
+            <div class="d-meta">
+              <span class="d-duration">2 Month</span>
+              <span class="d-price">₹499</span>
+            </div>
           </div>
         </label>
 
         <!-- Data Analytics -->
         <label class="domain-card">
-          <input type="radio" name="domain" value="Internship-Data-Analytics.html">
+          <input type="radio" name="domain" value="https://smartpay.easebuzz.in/179742/49d8699604a146caa25d6cabf4068f33">
+          <span class="d-check"></span>
           <div class="d-icon data">
             <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="5" y1="21" x2="22" y2="21" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
@@ -786,16 +863,77 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
           </div>
           <div class="d-info">
             <span class="d-label">Data Analytics</span>
-            <span class="d-duration">2 Month</span>
+            <div class="d-meta">
+              <span class="d-duration">2 Month</span>
+              <span class="d-price">₹499</span>
+            </div>
+          </div>
+        </label>
+
+        <!-- Frontend -->
+        <label class="domain-card">
+          <input type="radio" name="domain" value="https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e">
+          <span class="d-check"></span>
+          <div class="d-icon frontend">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="20" height="20" rx="3" stroke="#9333ea" stroke-width="1.5"/>
+              <rect x="6" y="7" width="6" height="5" rx="1.5" fill="#e9d5ff" stroke="#a855f7" stroke-width="1"/>
+              <rect x="14" y="7" width="6" height="2" rx="1" fill="#d8b4fe"/>
+              <rect x="14" y="11" width="4" height="2" rx="1" fill="#ede9fe"/>
+              <rect x="6" y="14" width="14" height="2" rx="1" fill="#f3e8ff"/>
+              <rect x="6" y="18" width="9" height="2" rx="1" fill="#faf5ff" stroke="#c084fc" stroke-width="0.8"/>
+              <path d="M19 17l1.5 4-1.5-1-1 1.5L16.5 18z" fill="#9333ea" stroke="#7e22ce" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="d-info">
+            <span class="d-label">Frontend Dev</span>
+            <div class="d-meta">
+              <span class="d-duration">2 Month</span>
+              <span class="d-price">₹499</span>
+            </div>
           </div>
         </label>
 
       </div>
 
+      <p class="section-label">Advanced track</p>
+
+      <!-- AI / ML - 3 Month (premium upsell) -->
+      <label class="premium-card">
+        <input type="radio" name="domain" value="3month-cerificate-based course.html">
+        <span class="d-badge">🔥 Most Purchased</span>
+        <span class="premium-check"></span>
+        <div class="premium-body">
+          <div class="premium-icon">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 6C10 4.9 10.9 4 12 4C13.1 4 14 4.9 14 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 8.5C6.6 8.5 5.5 9.6 5.5 11C5.5 11.8 5.9 12.5 6.5 13C5.6 13.4 5 14.3 5 15.5C5 17.2 6.3 18.5 8 18.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18 8.5C19.4 8.5 20.5 9.6 20.5 11C20.5 11.8 20.1 12.5 19.5 13C20.4 13.4 21 14.3 21 15.5C21 17.2 19.7 18.5 18 18.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 18.5C8 19.9 9.1 21 10.5 21H15.5C16.9 21 18 19.9 18 18.5V8C18 6.9 17.1 6 16 6H10C8.9 6 8 6.9 8 8V18.5Z" stroke="#fff" stroke-width="1.5"/>
+              <line x1="11" y1="10" x2="15" y2="10" stroke="#bbf7d0" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="13" x2="15" y2="13" stroke="#bbf7d0" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="11" y1="16" x2="15" y2="16" stroke="#bbf7d0" stroke-width="1.2" stroke-linecap="round"/>
+              <circle cx="13" cy="10" r="1" fill="#fbbf24"/>
+              <circle cx="13" cy="13" r="1" fill="#fbbf24"/>
+              <circle cx="13" cy="16" r="1" fill="#fbbf24"/>
+            </svg>
+          </div>
+          <div class="premium-info">
+            <span class="premium-label">AI / ML — Advanced Track</span>
+            <span class="premium-sub">Certificate-based deep dive, extra projects & mentorship</span>
+            <div class="premium-meta">
+              <span class="p-duration">3 Month</span>
+              <span class="premium-price">₹699</span>
+            </div>
+          </div>
+        </div>
+      </label>
+
       <button class="continue-btn" onclick="continueDomain()">
         Continue &rarr;
       </button>
 
+      <span class="popup-secure">🔒 Secure payment powered by Easebuzz</span>
       <span class="popup-close" onclick="document.getElementById('domainPopup').style.display='none'">
         ✕ Cancel
       </span>
@@ -1729,41 +1867,61 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 
   <div class="domains-grid">
 
-    <!-- AIML -->
-    <div class="dcard aiml" onclick="window.open('intern-aiml.html', '_blank')">
-      <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
 
-        <div class="dcard-icons">
-          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
-          <div class="dcard-icon" style="background:#1e293b;font-size:20px;">🤖</div>
-          <div class="dcard-icon" style="background:#0f172a;font-size:20px;">🧠</div>
-          <div class="dcard-icon" style="background:#ede9fe;font-size:20px;">📊</div>
-        </div>
-        <div class="dcard-domain-label">AI & Machine Learning</div>
-      </div>
-      <div class="dcard-body">
-        <div class="dcard-domain-tag">🤖 AIML</div>
-        <h3>AI / ML<br> 2 Months Internship</h3>
-        <p>Build real ML models under mentor guidance and complete an industry project in 2 months.</p>
-        <div class="dcard-techs">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Pandas</span>
-          <span class="tech-pill">Scikit-learn</span>
-          <span class="tech-pill">Deep Learning</span>
-          <span class="tech-pill">NLP</span>
-        </div>
-        <div class="dcard-footer">
-          <div class="refund-note">
-            <strong>🔥 100% Refundable</strong>
-            <span>Returned after completion</span>
-          </div>
-          <a href="intern-aiml.html" class="dcard-apply">Apply Now →</a>
-        </div>
-      </div>
+<!-- AIML 2 MONTH -->
+
+   <div class="dcard aiml"
+     onclick="window.open('https://smartpay.easebuzz.in/179742/339f37bcb32c4db4a6dc1bb7a18df1a2', '_blank')">
+
+  <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
+
+    <div class="dcard-icons">
+      <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+      <div class="dcard-icon" style="background:#1e293b;font-size:20px;">🤖</div>
+      <div class="dcard-icon" style="background:#0f172a;font-size:20px;">🧠</div>
+      <div class="dcard-icon" style="background:#ede9fe;font-size:20px;">📊</div>
     </div>
 
+    <div class="dcard-domain-label">AI & Machine Learning</div>
+  </div>
+
+  <div class="dcard-body">
+    <div class="dcard-domain-tag">🤖 AIML</div>
+
+    <h3>AI / ML <br>2 Months Internship</h3>
+
+    <p>
+      Build real ML models under mentor guidance and complete an industry
+      project in 2 months.
+    </p>
+
+    <div class="dcard-techs">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">Pandas</span>
+      <span class="tech-pill">Scikit-learn</span>
+      <span class="tech-pill">Deep Learning</span>
+      <span class="tech-pill">NLP</span>
+    </div>
+
+    <div class="dcard-footer">
+      <div class="refund-note">
+        <strong>₹499 (100% Refundable)</strong>
+        <span>Returned after completion</span>
+      </div>
+
+      <a href="https://smartpay.easebuzz.in/179742/339f37bcb32c4db4a6dc1bb7a18df1a2"
+         target="_blank"
+         class="dcard-apply"
+         onclick="event.stopPropagation();">
+        Apply Now →
+      </a>
+    </div>
+  </div>
+
+</div>
+
     <!-- AIML 3-MONTH DEDICATED PROGRAM (FEATURED / MOST PURCHASED) - 2ND POSITION -->
-    <div class="dcard aiml featured" onclick="window.open('3skill-3months-aiml-internship-course.html', '_blank')">
+    <div class="dcard aiml featured" onclick="window.open('3month-cerificate-based course.html', '_blank')">
       <div class="most-purchased-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.4 7 .8-5.2 4.8 1.5 6.9L12 17.6 5.8 21l1.5-6.9L2.1 9.3l7-.9L12 2z"/></svg>Most Purchased</div>
       <div class="dcard-head" style="background: linear-gradient(145deg,#1e1b4b,#312e81);">
         <div class="dcard-icons">
@@ -1789,112 +1947,165 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
         </div>
         <div class="dcard-footer">
           <div class="refund-note">
-            <strong>🔥 100% Refundable</strong>
+            <strong>699 (100% Refundable)</strong>
             <span>Returned after completion</span>
           </div>
-          <a href="3skill-3months-aiml-internship-course.html" class="dcard-apply">Apply Now →</a>
+          <a href="3month-cerificate-based course.html" class="dcard-apply">Apply Now →</a>
         </div>
       </div>
     </div>
 
-    <!-- WEB DEVELOPMENT -->
-    <div class="dcard webdev" onclick="window.open('internship-web-development.html', '_blank')">
-      <div class="dcard-head">
+   <!-- WEB DEVELOPMENT -->
+<div class="dcard webdev"
+     onclick="window.open('https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e', '_blank')">
 
-        <div class="dcard-icons">
-          <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
-          <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
-          <div class="dcard-icon" style="background:#3c873a;font-size:20px;">🟢</div>
-          <div class="dcard-icon" style="background:#4db33d;font-size:20px;">🍃</div>
-        </div>
-        <div class="dcard-domain-label">Full Stack Web Development</div>
-      </div>
-      <div class="dcard-body">
-        <div class="dcard-domain-tag">💻 WEB DEVELOPMENT</div>
-        <h3>Web Dev<br>Internship</h3>
-        <p>Build real full-stack web apps under mentor guidance and complete an industry project in 2 months.</p>
-        <div class="dcard-techs">
-          <span class="tech-pill">React.js</span>
-          <span class="tech-pill">Node.js</span>
-          <span class="tech-pill">Express</span>
-          <span class="tech-pill">MongoDB</span>
-          <span class="tech-pill">JavaScript</span>
-        </div>
-        <div class="dcard-footer">
-          <div class="refund-note">
-            <strong>🔥 100% Refundable</strong>
-            <span>Returned after completion</span>
-          </div>
-          <a href="internship-web-development.html" class="dcard-apply">Apply Now →</a>
-        </div>
-      </div>
+  <div class="dcard-head">
+
+    <div class="dcard-icons">
+      <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
+      <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
+      <div class="dcard-icon" style="background:#3c873a;font-size:20px;">🟢</div>
+      <div class="dcard-icon" style="background:#4db33d;font-size:20px;">🍃</div>
     </div>
 
-    <!-- DATA ANALYTICS -->
-    <div class="dcard analytics" onclick="window.open('Internship-Data-Analytics.html', '_blank')">
-      <div class="dcard-head" style="background: linear-gradient(145deg,#451a03,#92400e);">
+    <div class="dcard-domain-label">Full Stack Web Development</div>
+  </div>
 
-        <div class="dcard-icons">
-          <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
-          <div class="dcard-icon" style="background:#fff;font-size:20px;">📊</div>
-          <div class="dcard-icon" style="background:#217346;font-size:20px;">📗</div>
-          <div class="dcard-icon" style="background:#f2c811;font-size:20px;">⚡</div>
-        </div>
-        <div class="dcard-domain-label">Data Analytics</div>
-      </div>
-      <div class="dcard-body">
-        <div class="dcard-domain-tag">📊 DATA ANALYTICS</div>
-        <h3>Data Analytics<br>Internship</h3>
-        <p>Analyze real datasets, build dashboards and deliver actionable insights for industry projects in 2 months.</p>
-        <div class="dcard-techs">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">SQL</span>
-          <span class="tech-pill">Power BI</span>
-          <span class="tech-pill">Excel</span>
-          <span class="tech-pill">Matplotlib</span>
-        </div>
-        <div class="dcard-footer">
-          <div class="refund-note">
-            <strong>🔥 100% Refundable</strong>
-            <span>Returned after completion</span>
-          </div>
-          <a href="Internship-Data-Analytics.html" class="dcard-apply">Apply Now →</a>
-        </div>
-      </div>
+  <div class="dcard-body">
+    <div class="dcard-domain-tag">💻 WEB DEVELOPMENT</div>
+
+    <h3>Web Dev<br>Internship</h3>
+
+    <p>
+      Build real full-stack web apps under mentor guidance and complete an
+      industry project in 2 months.
+    </p>
+
+    <div class="dcard-techs">
+      <span class="tech-pill">React.js</span>
+      <span class="tech-pill">Node.js</span>
+      <span class="tech-pill">Express</span>
+      <span class="tech-pill">MongoDB</span>
+      <span class="tech-pill">JavaScript</span>
     </div>
 
-    <!-- FRONTEND -->
-    <div class="dcard frontend" onclick="window.open('internship-frontend-development.html', '_blank')">
-      <div class="dcard-head" style="background: linear-gradient(145deg,#0c2a4a,#0c4a6e);">
+    <div class="dcard-footer">
+      <div class="refund-note">
+        <strong>₹499 (100% Refundable)</strong>
+        <span>Returned after completion</span>
+      </div>
 
-        <div class="dcard-icons">
-          <div class="dcard-icon" style="background:#e34f26;font-size:18px;font-weight:900;color:#fff;">H</div>
-          <div class="dcard-icon" style="background:#1572b6;font-size:18px;font-weight:900;color:#fff;">C</div>
-          <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
-          <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
-        </div>
-        <div class="dcard-domain-label">Frontend Development</div>
-      </div>
-      <div class="dcard-body">
-        <div class="dcard-domain-tag">🎨 FRONTEND DEV</div>
-        <h3>Frontend Dev<br>Internship</h3>
-        <p>Build stunning UIs and pixel-perfect responsive websites under mentor guidance in 2 months.</p>
-        <div class="dcard-techs">
-          <span class="tech-pill">HTML5</span>
-          <span class="tech-pill">CSS3</span>
-          <span class="tech-pill">JavaScript</span>
-          <span class="tech-pill">React.js</span>
-          <span class="tech-pill">Tailwind</span>
-        </div>
-        <div class="dcard-footer">
-          <div class="refund-note">
-            <strong>🔥 100% Refundable</strong>
-            <span>Returned after completion</span>
-          </div>
-          <a href="internship-frontend-development.html" class="dcard-apply">Apply Now →</a>
-        </div>
-      </div>
+      <a href="https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e"
+         target="_blank"
+         class="dcard-apply"
+         onclick="event.stopPropagation();">
+        Apply Now →
+      </a>
     </div>
+  </div>
+
+</div>
+
+   <!-- DATA ANALYTICS -->
+<div class="dcard analytics"
+     onclick="window.open('https://smartpay.easebuzz.in/179742/49d8699604a146caa25d6cabf4068f33', '_blank')">
+
+  <div class="dcard-head" style="background: linear-gradient(145deg,#451a03,#92400e);">
+
+    <div class="dcard-icons">
+      <div class="dcard-icon" style="background:#fbbf24;color:#1c1917;font-size:17px;font-weight:900;">Py</div>
+      <div class="dcard-icon" style="background:#fff;font-size:20px;">📊</div>
+      <div class="dcard-icon" style="background:#217346;font-size:20px;">📗</div>
+      <div class="dcard-icon" style="background:#f2c811;font-size:20px;">⚡</div>
+    </div>
+
+    <div class="dcard-domain-label">Data Analytics</div>
+  </div>
+
+  <div class="dcard-body">
+    <div class="dcard-domain-tag">📊 DATA ANALYTICS</div>
+
+    <h3>Data Analytics<br>Internship</h3>
+
+    <p>
+      Analyze real datasets, build dashboards and deliver actionable insights
+      for industry projects in 2 months.
+    </p>
+
+    <div class="dcard-techs">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">SQL</span>
+      <span class="tech-pill">Power BI</span>
+      <span class="tech-pill">Excel</span>
+      <span class="tech-pill">Matplotlib</span>
+    </div>
+
+    <div class="dcard-footer">
+      <div class="refund-note">
+        <strong>₹499 (100% Refundable)</strong>
+        <span>Returned after completion</span>
+      </div>
+
+      <a href="https://smartpay.easebuzz.in/179742/49d8699604a146caa25d6cabf4068f33"
+         target="_blank"
+         class="dcard-apply"
+         onclick="event.stopPropagation();">
+        Apply Now →
+      </a>
+    </div>
+  </div>
+</div>
+
+   <!-- FRONTEND DEVELOPMENT -->
+<div class="dcard frontend"
+     onclick="window.open('https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e', '_blank')">
+
+  <div class="dcard-head" style="background: linear-gradient(145deg,#0c2a4a,#0c4a6e);">
+
+    <div class="dcard-icons">
+      <div class="dcard-icon" style="background:#e34f26;font-size:18px;font-weight:900;color:#fff;">H</div>
+      <div class="dcard-icon" style="background:#1572b6;font-size:18px;font-weight:900;color:#fff;">C</div>
+      <div class="dcard-icon" style="background:#f7df1e;color:#000;font-size:17px;font-weight:900;">JS</div>
+      <div class="dcard-icon" style="background:#20232a;font-size:20px;">⚛️</div>
+    </div>
+
+    <div class="dcard-domain-label">Frontend Development</div>
+  </div>
+
+  <div class="dcard-body">
+    <div class="dcard-domain-tag">🎨 FRONTEND DEV</div>
+
+    <h3>Frontend Dev<br>Internship</h3>
+
+    <p>
+      Build stunning UIs and pixel-perfect responsive websites under mentor
+      guidance in 2 months.
+    </p>
+
+    <div class="dcard-techs">
+      <span class="tech-pill">HTML5</span>
+      <span class="tech-pill">CSS3</span>
+      <span class="tech-pill">JavaScript</span>
+      <span class="tech-pill">React.js</span>
+      <span class="tech-pill">Tailwind</span>
+    </div>
+
+    <div class="dcard-footer">
+      <div class="refund-note">
+        <strong>₹499 (100% Refundable)</strong>
+        <span>Returned after completion</span>
+      </div>
+
+      <a href="https://smartpay.easebuzz.in/179742/4c1a87e664e44a189a0ca50d5d0a585e"
+         target="_blank"
+         class="dcard-apply"
+         onclick="event.stopPropagation();">
+        Apply Now →
+      </a>
+    </div>
+  </div>
+
+</div>
 
   </div>
 
