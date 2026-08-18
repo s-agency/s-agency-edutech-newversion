@@ -79,6 +79,8 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 @keyframes spin-once{to{transform:rotate(360deg);}}
 .refresh-btn:disabled{opacity:.5;cursor:not-allowed;}
 .switch-email{background:none;border:none;color:var(--ink-soft);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;margin-top:10px;}
+.logout-btn{background:#fff;border:1.5px solid var(--danger);color:var(--danger);border-radius:999px;padding:8px 16px;font-family:'Poppins';font-weight:700;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:filter .15s ease, background .15s ease;}
+.logout-btn:hover{background:var(--danger-bg);filter:brightness(0.98);}
 
 .grid2{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-bottom:16px;align-items:start;}
 .stack-col{display:flex;flex-direction:column;gap:16px;}
@@ -192,13 +194,16 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
         <div>
           <div class="idcard-name" id="dashName">—</div>
           <div class="idcard-email" id="dashEmail">—</div>
-          <button class="switch-email" id="switchEmailBtn">Not you? Switch email</button>
         </div>
       </div>
       <div class="chip-row">
         <span class="chip" id="dashDomain">Domain</span>
         <span class="chip" id="dashBatch">Batch</span>
         <button class="refresh-btn" id="refreshBtn" title="Refresh dashboard">🔄</button>
+        <button class="logout-btn" id="logoutBtn" title="Logout">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </button>
       </div>
     </div>
 
@@ -296,6 +301,17 @@ const PROJECT_BANK = {
     { title: 'Student Placement Prediction System', brief: 'https://drive.google.com/drive/folders/10u555ZJAhGG5dutxNYDeZB3eSz1XiA1S?usp=sharing' },
     { title: 'Customer Churn Prediction System', brief: 'https://drive.google.com/drive/folders/1S-mnGevv6T1IOKLPMk3PfqZwwAcaEXuD?usp=sharing' },
     { title: 'Fake Job Posting Detection', brief: 'https://drive.google.com/drive/folders/1kJksBC8z95U7OSMjJEUsuGh2mbC-W-WH?usp=sharing' }
+  ],
+  // Separate track for AIML students on the 3-month program — DIFFERENT
+  // projects from the regular 2-month 'AIML' domain above. Set Domain to
+  // exactly "AIML (3 Month)" for these students on the sheet.
+  // ⚠️ These 4 titles/links are placeholders (copied from AIML above) —
+  // replace them with the actual different projects for this track.
+  'AIML (3 Month)': [
+    { title: 'Wine Quality Prediction System', brief: 'https://drive.google.com/drive/folders/1xFdJrx7yvIAERLUVYytsDw_UArgwZg6v?usp=sharing' },
+    { title: 'Student Placement Prediction System', brief: 'https://drive.google.com/drive/folders/10u555ZJAhGG5dutxNYDeZB3eSz1XiA1S?usp=sharing' },
+    { title: 'Customer Churn Prediction System', brief: 'https://drive.google.com/drive/folders/1S-mnGevv6T1IOKLPMk3PfqZwwAcaEXuD?usp=sharing' },
+    { title: 'Fake Job Posting Detection', brief: 'https://drive.google.com/drive/folders/1kJksBC8z95U7OSMjJEUsuGh2mbC-W-WH?usp=sharing' }
   ]
 };
 
@@ -373,7 +389,40 @@ function genericFallbackSchedule(batchDate, months){
   return segs;
 }
 
-function getProjectSchedule(batchDate, months){
+/**
+ * DOMAIN-SPECIFIC SCHEDULES — checked BEFORE the Month-based builders above.
+ * Use this when a particular domain/track needs a schedule tied to fixed
+ * calendar days rather than "N days after batch". Add more domains here
+ * the same way as new specially-timed tracks come up.
+ */
+const DOMAIN_SCHEDULE_BUILDERS = {
+  // AIML's 3-month track: batch is always the 30th of a month. Every
+  // project window uses fixed calendar days in the following months,
+  // regardless of exactly which day the batch itself falls on.
+  //   P1: 20th–30th of (batch month + 1)
+  //   P2: 20th–30th of (batch month + 2)
+  //   P3: 10th–20th of (batch month + 3)
+  //   P4: 21st–30th of (batch month + 3)
+  'AIML (3 Month)': function(batchDate){
+    var y = batchDate.getFullYear();
+    var m = batchDate.getMonth();
+    function at(monthOffset, day, endOfDay){
+      var d = new Date(y, m + monthOffset, day);
+      if(endOfDay) d.setHours(23, 59, 59, 999);
+      return d;
+    }
+    return [
+      { open: at(1, 20), close: at(1, 30, true) },
+      { open: at(2, 20), close: at(2, 30, true) },
+      { open: at(3, 10), close: at(3, 20, true) },
+      { open: at(3, 21), close: at(3, 30, true) }
+    ];
+  }
+};
+
+function getProjectSchedule(batchDate, months, domain){
+  var domainBuilder = DOMAIN_SCHEDULE_BUILDERS[domain];
+  if(domainBuilder) return domainBuilder(batchDate, months);
   var builder = PROJECT_SCHEDULE_BUILDERS[months];
   if(builder) return builder(batchDate, months);
   return genericFallbackSchedule(batchDate, months);
@@ -563,7 +612,7 @@ function renderProject(projects, data, penaltyGranted, student){
 
   var batchDate = new Date(windowInfo.opensISO + 'T00:00:00');
   var months = parseInt(student.month, 10);
-  var segments = getProjectSchedule(batchDate, months).slice(0, projects.length);
+  var segments = getProjectSchedule(batchDate, months, student.domain).slice(0, projects.length);
   var now = new Date();
 
   var deadlineISO = windowInfo.deadlineISO;
@@ -877,11 +926,11 @@ document.getElementById('notifyModalCloseBtn').addEventListener('click', functio
   document.getElementById('notifyModal').classList.add('hidden');
 });
 
-document.getElementById('switchEmailBtn').addEventListener('click', function(){
+document.getElementById('logoutBtn').addEventListener('click', function(){
   localStorage.removeItem('trainingStudentEmail');
-  STATE = { email: null };
-  document.getElementById('emailInput').value = '';
-  showScreen('gate');
+  localStorage.removeItem('hubEmail');
+  localStorage.removeItem('hubRole');
+  window.location.href = 'main-login.html';
 });
 
 document.getElementById('refreshBtn').addEventListener('click', function(){
