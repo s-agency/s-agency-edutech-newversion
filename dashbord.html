@@ -21,6 +21,7 @@
   --radius:18px;
 }
 *{box-sizing:border-box;}
+html,body{overflow-x:hidden;max-width:100%;}
 body{margin:0;background:var(--page-bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
 h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 
@@ -39,8 +40,8 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 .card p{color:var(--ink-soft);font-size:13.5px;margin:0 0 22px;}
 
 /* ---------- Animated sliding switch ---------- */
-.role-switch{position:relative;display:flex;background:var(--brand-light);border-radius:999px;padding:4px;margin-bottom:22px;border:1px solid #DCEFE1;}
-.switch-thumb{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);box-shadow:0 6px 14px -4px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.35);transition:transform .32s cubic-bezier(.65,0,.35,1), width .32s cubic-bezier(.65,0,.35,1);z-index:0;}
+.role-switch{position:relative;display:flex;background:var(--brand-light);border-radius:999px;padding:4px;margin-bottom:22px;border:1px solid #DCEFE1;overflow:hidden;}
+.switch-thumb{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);box-shadow:0 6px 14px -4px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.35);transition:transform .32s cubic-bezier(.65,0,.35,1), width .32s cubic-bezier(.65,0,.35,1), height .32s cubic-bezier(.65,0,.35,1);z-index:0;}
 .role-tab{position:relative;z-index:1;flex:1;border:none;background:transparent;padding:10px 8px;border-radius:999px;font-family:'Poppins';font-weight:700;font-size:12.5px;color:var(--ink-soft);cursor:pointer;transition:color .22s ease;white-space:nowrap;}
 .role-tab.active{color:#fff;}
 
@@ -80,9 +81,9 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
   .card{padding:26px 18px;border-radius:20px;}
   .card h1{font-size:18px;}
   .card p{font-size:12.5px;margin-bottom:18px;}
-  .role-switch{padding:3px;margin-bottom:18px;}
+  .role-switch{padding:3px;margin-bottom:18px;align-items:stretch;}
   .switch-thumb{top:3px;bottom:3px;left:3px;}
-  .role-tab{padding:9px 2px;font-size:10.5px;letter-spacing:-.01em;}
+  .role-tab{padding:9px 4px;font-size:11px;white-space:normal;line-height:1.25;word-break:break-word;}
   .card input{padding:11px 13px;font-size:14px;margin-bottom:14px;}
   .btn{padding:12px 16px;font-size:14px;}
   .info-note{padding:9px 11px;gap:6px;}
@@ -90,7 +91,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
   .modal-box{padding:26px 20px;}
 }
 @media(max-width:340px){
-  .role-tab{font-size:9.5px;padding:8px 1px;}
+  .role-tab{font-size:9.5px;padding:8px 2px;}
 }
 </style>
 </head>
@@ -175,6 +176,7 @@ function moveThumbTo(tabEl){
   var boxRect = switchBox.getBoundingClientRect();
   var tabRect = tabEl.getBoundingClientRect();
   thumb.style.width = tabRect.width + 'px';
+  thumb.style.height = '';
   thumb.style.transform = 'translateX(' + (tabRect.left - boxRect.left - 4) + 'px)';
 }
 
@@ -188,10 +190,14 @@ document.querySelectorAll('.role-tab').forEach(function(tab){
 });
 
 // Position the thumb correctly once layout is ready (fonts loaded etc.)
-window.addEventListener('load', function(){
-  var activeTab = document.querySelector('.role-tab.active');
-  if(activeTab) moveThumbTo(activeTab);
-});
+function initThumbPosition(){
+  requestAnimationFrame(function(){
+    var activeTab = document.querySelector('.role-tab.active');
+    if(activeTab) moveThumbTo(activeTab);
+  });
+}
+window.addEventListener('load', initThumbPosition);
+document.addEventListener('DOMContentLoaded', initThumbPosition);
 window.addEventListener('resize', function(){
   var activeTab = document.querySelector('.role-tab.active');
   if(activeTab) moveThumbTo(activeTab);
