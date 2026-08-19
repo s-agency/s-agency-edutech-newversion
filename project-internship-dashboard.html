@@ -499,15 +499,30 @@ function getAssignedProjects(domain, monthCell){
 function computeProjectSegments(opensISO, deadlineISO, count){
   if(!opensISO || !deadlineISO || !count) return [];
   var start = new Date(opensISO + 'T00:00:00');
-  var end = new Date(deadlineISO + 'T23:59:59');
-  var totalMs = end.getTime() - start.getTime();
-  if(totalMs <= 0) return [];
-  var segMs = totalMs / count;
+  var deadlineDayStart = new Date(deadlineISO + 'T00:00:00');
+  var totalDays = Math.round((deadlineDayStart - start) / 86400000) + 1;
+  if(totalDays < count) totalDays = count;
+
   var segments = [];
+  var prevDayOffset = 0;
   for(var i = 0; i < count; i++){
-    var segStart = new Date(start.getTime() + i * segMs);
-    var segEnd = (i === count - 1) ? end : new Date(start.getTime() + (i + 1) * segMs);
+    var cumulativeDays = Math.round(totalDays * (i + 1) / count);
+    if(cumulativeDays <= prevDayOffset) cumulativeDays = prevDayOffset + 1;
+
+    var segStart = new Date(start.getTime());
+    segStart.setDate(segStart.getDate() + prevDayOffset);
+
+    var segEnd;
+    if(i === count - 1){
+      segEnd = new Date(deadlineISO + 'T23:59:59');
+    } else {
+      segEnd = new Date(start.getTime());
+      segEnd.setDate(segEnd.getDate() + cumulativeDays - 1);
+      segEnd.setHours(23, 59, 59, 999);
+    }
+
     segments.push({ index: i, start: segStart, end: segEnd });
+    prevDayOffset = cumulativeDays;
   }
   return segments;
 }

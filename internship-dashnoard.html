@@ -323,6 +323,10 @@ function getDomainProjects(domain){
 // ---------- date helpers ----------
 function addMonths(date, n){ return new Date(date.getFullYear(), date.getMonth() + n, date.getDate()); }
 function addDays(date, n){ var d = new Date(date.getTime()); d.setDate(d.getDate() + n); return d; }
+// A deadline should stay open through the WHOLE day it falls on — without
+// this, a plain "new Date(y,m,d)" defaults to midnight (00:00:00), so the
+// window would already look closed the instant that day begins.
+function endOfDay(date){ var d = new Date(date.getTime()); d.setHours(23, 59, 59, 999); return d; }
 function todayISODate(){
   var d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -354,7 +358,7 @@ const PROJECT_SCHEDULE_BUILDERS = {
     for(var i = 0; i < 4; i++){
       var open = addDays(month2Start, i * 7);
       var close = (i === 3) ? finalDeadline : addDays(month2Start, (i+1) * 7);
-      segs.push({ open: open, close: close });
+      segs.push({ open: open, close: endOfDay(close) });
     }
     return segs;
   },
@@ -365,10 +369,10 @@ const PROJECT_SCHEDULE_BUILDERS = {
     var p3Close = addDays(m2End, 10);
     var finalDeadline = addMonths(batchDate, months);
     return [
-      { open: batchDate, close: m1End },
-      { open: m1End, close: m2End },
-      { open: m2End, close: p3Close },
-      { open: p3Close, close: finalDeadline }
+      { open: batchDate, close: endOfDay(m1End) },
+      { open: m1End, close: endOfDay(m2End) },
+      { open: m2End, close: endOfDay(p3Close) },
+      { open: p3Close, close: endOfDay(finalDeadline) }
     ];
   }
 };
@@ -384,7 +388,7 @@ function genericFallbackSchedule(batchDate, months){
     var open = addDays(start, i * 7);
     if(open >= finalDeadline) break;
     var close = (i === count - 1) ? finalDeadline : addDays(start, (i+1) * 7);
-    segs.push({ open: open, close: close > finalDeadline ? finalDeadline : close });
+    segs.push({ open: open, close: endOfDay(close > finalDeadline ? finalDeadline : close) });
   }
   return segs;
 }
