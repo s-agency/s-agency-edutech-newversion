@@ -41,7 +41,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 
 /* ---------- Animated sliding switch ---------- */
 .role-switch{position:relative;display:flex;background:var(--brand-light);border-radius:999px;padding:4px;margin-bottom:22px;border:1px solid #DCEFE1;overflow:hidden;}
-.switch-thumb{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);box-shadow:0 6px 14px -4px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.35);transition:transform .32s cubic-bezier(.65,0,.35,1), width .32s cubic-bezier(.65,0,.35,1), height .32s cubic-bezier(.65,0,.35,1);z-index:0;}
+.switch-thumb{position:absolute;top:4px;left:4px;border-radius:999px;background:linear-gradient(180deg,var(--brand-bright) 0%,var(--brand) 55%,var(--brand-dark) 100%);box-shadow:0 6px 14px -4px rgba(18,128,56,.5), inset 0 1px 0 rgba(255,255,255,.35);transition:transform .32s cubic-bezier(.65,0,.35,1), width .32s cubic-bezier(.65,0,.35,1), height .32s cubic-bezier(.65,0,.35,1);z-index:0;}
 .role-tab{position:relative;z-index:1;flex:1;border:none;background:transparent;padding:10px 8px;border-radius:999px;font-family:'Poppins';font-weight:700;font-size:12.5px;color:var(--ink-soft);cursor:pointer;transition:color .22s ease;white-space:nowrap;}
 .role-tab.active{color:#fff;}
 
@@ -59,11 +59,11 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 .info-note-icon{flex:none;font-size:15px;line-height:1.3;}
 .info-note-text{font-size:12px;color:var(--brand-dark);line-height:1.5;}
 
-.error-msg{font-size:13px;color:var(--danger);margin-top:14px;}
+.error-msg{font-size:13px;color:var(--danger);margin-top:14px;line-height:1.5;}
 
 .loader{width:36px;height:36px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--brand);animation:spin .8s linear infinite;margin-bottom:16px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-#redirecting p{color:var(--ink-soft);font-size:14px;margin-bottom:14px;}
+#checking p, #redirecting p{color:var(--ink-soft);font-size:14px;margin-bottom:14px;}
 .switch-link{background:none;border:none;color:var(--ink-soft);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;}
 
 /* ---------- Info popup modal ---------- */
@@ -81,17 +81,14 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
   .card{padding:26px 18px;border-radius:20px;}
   .card h1{font-size:18px;}
   .card p{font-size:12.5px;margin-bottom:18px;}
-  .role-switch{padding:3px;margin-bottom:18px;align-items:stretch;}
-  .switch-thumb{top:3px;bottom:3px;left:3px;}
-  .role-tab{padding:9px 4px;font-size:11px;white-space:normal;line-height:1.25;word-break:break-word;}
+  .role-switch{flex-wrap:wrap;padding:3px;gap:4px;margin-bottom:18px;}
+  .role-tab{flex:1 1 calc(50% - 2px);padding:10px 4px;font-size:12px;white-space:normal;line-height:1.25;}
+  .role-tab[data-role="employee"]{flex:1 1 100%;}
   .card input{padding:11px 13px;font-size:14px;margin-bottom:14px;}
   .btn{padding:12px 16px;font-size:14px;}
   .info-note{padding:9px 11px;gap:6px;}
   .info-note-text{font-size:11px;}
   .modal-box{padding:26px 20px;}
-}
-@media(max-width:340px){
-  .role-tab{font-size:9.5px;padding:8px 2px;}
 }
 </style>
 </head>
@@ -126,6 +123,13 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
     </div>
   </section>
 
+  <section id="checking" class="screen">
+    <div class="card">
+      <div class="loader" style="margin-left:auto;margin-right:auto;"></div>
+      <p id="checkingText">Checking your account…</p>
+    </div>
+  </section>
+
   <section id="redirecting" class="screen">
     <div class="card">
       <div class="loader" style="margin-left:auto;margin-right:auto;"></div>
@@ -147,14 +151,24 @@ h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
 
 <script>
 /**
- * Paste each role's live dashboard page URL here. Selecting a tab and
- * submitting redirects STRAIGHT to that one dashboard — no other sheet or
- * backend gets touched at all.
+ * For each role, paste BOTH its backend API URL (the Apps Script Web
+ * App .../exec link — used only to silently check "does this email exist
+ * here?") and its live dashboard PAGE URL (where the person actually gets
+ * sent once the email is confirmed to exist).
  */
-const ROLE_DASHBOARD_URLS = {
-  training: 'internship-dashnoard.html',
-  project: 'project-internship-dashboard.html',
-  employee: '3skill-mentor-dashboard.html'
+const ROLE_CONFIG = {
+  training: {
+    apiUrl: 'https://script.google.com/macros/s/AKfycbxgmkkYg7UkPsIejoWbnqsLpHR2luSGu4N_-cINH8qBrCi7wPov1stR9j4d2aRdwfju/exec',
+    dashboardUrl: 'internship-dashnoard.html'
+  },
+  project: {
+    apiUrl: 'https://script.google.com/macros/s/AKfycbx_a5Y3-tj1-HNpk0TBPvxqM1AuSefX4TSQiwLR7zrmfoi3g6VqIcz3ahHSbSUrIVKz1w/exec',
+    dashboardUrl: 'project-internship-dashboard.html'
+  },
+  employee: {
+    apiUrl: 'https://script.google.com/macros/s/AKfycbyA7TgCIrv3YSG5MeIW3Eq_KlVBOtv_8SFWfVUBxMoUxYYc1xSs2Y5tc_Pg7EytyI9pCw/exec',
+    dashboardUrl: '3skill-mentor-dashboard.html'
+  }
 };
 
 var selectedRole = 'training'; // Training Students is the default tab
@@ -169,6 +183,16 @@ function buildRedirectUrl(dashboardUrl, email){
   return dashboardUrl + sep + 'email=' + encodeURIComponent(email);
 }
 
+// Checks the SELECTED role's own backend only — never touches the other
+// two roles' sheets at all.
+function checkEmailExists(apiUrl, email){
+  var url = apiUrl + '?action=getDashboardData&email=' + encodeURIComponent(email);
+  return fetch(url)
+    .then(function(res){ return res.json(); })
+    .then(function(data){ return !!(data && data.found); })
+    .catch(function(){ return null; }); // null = network/error, distinct from "not found"
+}
+
 // ---------- Animated sliding switch ----------
 function moveThumbTo(tabEl){
   var thumb = document.getElementById('switchThumb');
@@ -176,8 +200,8 @@ function moveThumbTo(tabEl){
   var boxRect = switchBox.getBoundingClientRect();
   var tabRect = tabEl.getBoundingClientRect();
   thumb.style.width = tabRect.width + 'px';
-  thumb.style.height = '';
-  thumb.style.transform = 'translateX(' + (tabRect.left - boxRect.left - 4) + 'px)';
+  thumb.style.height = tabRect.height + 'px';
+  thumb.style.transform = 'translate(' + (tabRect.left - boxRect.left - 4) + 'px, ' + (tabRect.top - boxRect.top - 4) + 'px)';
 }
 
 document.querySelectorAll('.role-tab').forEach(function(tab){
@@ -186,10 +210,10 @@ document.querySelectorAll('.role-tab').forEach(function(tab){
     tab.classList.add('active');
     selectedRole = tab.getAttribute('data-role');
     moveThumbTo(tab);
+    document.getElementById('formError').style.display = 'none';
   });
 });
 
-// Position the thumb correctly once layout is ready (fonts loaded etc.)
 function initThumbPosition(){
   requestAnimationFrame(function(){
     var activeTab = document.querySelector('.role-tab.active');
@@ -213,6 +237,9 @@ document.getElementById('emailInput').addEventListener('input', function(){
   var email = this.value.trim();
   document.getElementById('continueBtn').disabled = email.indexOf('@') === -1;
 });
+document.getElementById('emailInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && !document.getElementById('continueBtn').disabled) document.getElementById('continueBtn').click();
+});
 
 document.getElementById('continueBtn').addEventListener('click', function(){
   var email = document.getElementById('emailInput').value.trim();
@@ -225,17 +252,41 @@ document.getElementById('continueBtn').addEventListener('click', function(){
     return;
   }
 
-  var dashboardUrl = ROLE_DASHBOARD_URLS[selectedRole];
-  if(!dashboardUrl){
+  var config = ROLE_CONFIG[selectedRole];
+  if(!config){
     errEl.textContent = 'This login type is not configured yet — contact admin.';
     errEl.style.display = 'block';
     return;
   }
 
-  localStorage.setItem('hubEmail', email);
-  localStorage.setItem('hubRole', selectedRole);
-  window.location.href = buildRedirectUrl(dashboardUrl, email);
+  showScreen('checking');
+  checkEmailExists(config.apiUrl, email).then(function(found){
+    if(found === true){
+      localStorage.setItem('hubEmail', email);
+      localStorage.setItem('hubRole', selectedRole);
+      window.location.href = buildRedirectUrl(config.dashboardUrl, email);
+      return;
+    }
+
+    // found === false (verified not in the sheet) OR null (network error) —
+    // either way, stay right here on the login page. Never send them on to
+    // a dashboard that won't recognize them.
+    showScreen('loginForm');
+    if(found === false){
+      errEl.textContent = "We couldn't find this email for " + roleLabel(selectedRole) + ". Double-check it, or it may take up to 24 hours to activate after enrollment.";
+    } else {
+      errEl.textContent = 'Something went wrong while checking your account. Please try again.';
+    }
+    errEl.style.display = 'block';
+  });
 });
+
+function roleLabel(role){
+  if(role === 'training') return 'Training Students';
+  if(role === 'project') return 'Project Students';
+  if(role === 'employee') return 'Employee';
+  return role;
+}
 
 document.getElementById('cancelRedirectBtn').addEventListener('click', function(){
   clearTimeout(window.__hubRedirectTimer);
@@ -244,20 +295,39 @@ document.getElementById('cancelRedirectBtn').addEventListener('click', function(
   showScreen('loginForm');
 });
 
-// ---------- Auto-redirect if we already know who this is ----------
+// ---------- Auto-redirect if we already know who this is (previously verified) ----------
 (function(){
   var savedEmail = localStorage.getItem('hubEmail');
   var savedRole = localStorage.getItem('hubRole');
   if(!savedEmail || !savedRole) return;
 
-  var dashboardUrl = ROLE_DASHBOARD_URLS[savedRole];
-  if(!dashboardUrl) return;
+  var config = ROLE_CONFIG[savedRole];
+  if(!config) return;
 
   showScreen('redirecting');
   window.__hubRedirectTimer = setTimeout(function(){
-    window.location.href = buildRedirectUrl(dashboardUrl, savedEmail);
+    window.location.href = buildRedirectUrl(config.dashboardUrl, savedEmail);
   }, 700);
 })();
 </script>
+  <script>
+  // Disable Right Click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable Keyboard Shortcuts (like F12, Ctrl+Shift+I, Ctrl+U)
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+      (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+    </script>
 </body>
 </html>
