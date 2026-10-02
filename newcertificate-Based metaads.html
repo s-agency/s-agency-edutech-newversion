@@ -31,12 +31,13 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 
 
+
   <!-- Favicon -->
   <link rel="icon" href="download.png" type="image/x-icon">
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>3Skill – Summer Internship 2026</title>
+  <title>3Skill – Winter Internship 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -473,12 +474,73 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
       .cta-buttons { flex-direction: column; gap: 10px; width: 100%; align-items: stretch; }
       .cta-buttons .btn-cta, .cta-buttons .btn-download { width: 100%; text-align: center; padding: 15px; font-size: 16px; border-radius: 12px; flex: unset; }
     }
+
+    /* =====================================================
+       ❄️ WINTER FEEL (green theme same, sirf snow + tag)
+       ===================================================== */
+
+    /* NAV – same white nav, bas halka green border + pill + snow */
+    nav { border-bottom: 2px solid var(--green-border); overflow: hidden; }
+    .nav-left { display: flex; align-items: center; position: relative; z-index: 1; }
+    nav .btn-signin { position: relative; z-index: 1; }
+    .nav-winter-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-left: 14px;
+      padding: 5px 12px;
+      background: var(--green-pale);
+      border: 1.5px solid var(--green-border);
+      border-radius: 20px;
+      font-size: 12px; font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* SNOWFALL (hero + nav) */
+    .snow {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: hidden;
+      z-index: 0;
+    }
+    .snow span {
+      position: absolute;
+      top: -20px; left: var(--l);
+      font-size: calc(var(--s) * 2.2);
+      line-height: 1;
+      color: #86efac;
+      opacity: 0.75;
+      text-shadow: 0 0 6px rgba(34,197,94,0.35);
+      animation: snowfall var(--t) linear var(--d) infinite;
+    }
+    .snow span::before { content: '\2744'; }
+    @keyframes snowfall {
+      0%   { top: -20px;  transform: translateX(0) rotate(0deg); }
+      50%  { transform: translateX(22px) rotate(180deg); }
+      100% { top: 105%;   transform: translateX(-10px) rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .snow { display: none; } }
+
+    /* WINTER TAG (green) */
+    .winter-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px; margin-bottom: 14px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: #fff;
+      border-radius: 20px;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.4px;
+      box-shadow: 0 4px 14px rgba(22,163,74,0.35);
+    }
+
+    @media (max-width: 600px) {
+      .nav-winter-pill { margin-left: 8px; padding: 4px 9px; font-size: 11px; }
+      .winter-tag { font-size: 12px; padding: 6px 12px; }
+    }
   </style>
 </head>
 <body>
 
 
-<!-- Domain Popup -->
+<!-- Domain Popup (compact version) -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -491,15 +553,19 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    padding: 20px;
+    padding: 12px;
+    box-sizing: border-box;
   }
 
   .popup-box {
     background: #fff;
-    border-radius: 24px;
-    max-width: 460px;
-    width: 90%;
-    overflow: hidden;
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(34,197,94,0.1);
     animation: popIn 0.4s cubic-bezier(.22,1,.36,1) forwards;
     font-family: 'DM Sans', sans-serif;
@@ -510,76 +576,75 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     position: absolute; top: 0; left: 0; right: 0;
     height: 4px;
     background: linear-gradient(90deg, #16a34a, #22c55e, #86efac);
+    z-index: 5;
   }
   @keyframes popIn {
-    from { transform: scale(0.88) translateY(20px); opacity: 0; }
+    from { transform: scale(0.9) translateY(16px); opacity: 0; }
     to   { transform: scale(1) translateY(0); opacity: 1; }
   }
 
   .popup-header {
-    padding: 32px 32px 20px;
+    padding: 18px 22px 10px;
     text-align: center;
     background: linear-gradient(160deg, #f0fdf4 0%, #fff 60%);
   }
   .popup-tag {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex; align-items: center; gap: 5px;
     background: #dcfce7; border: 1px solid #bbf7d0;
-    color: #16a34a; font-size: 11px; font-weight: 700;
-    padding: 5px 14px; border-radius: 20px;
-    letter-spacing: 0.8px; text-transform: uppercase;
-    margin-bottom: 14px;
+    color: #16a34a; font-size: 10px; font-weight: 700;
+    padding: 3px 11px; border-radius: 20px;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    margin-bottom: 8px;
   }
   .popup-header h2 {
     font-family: 'Syne', sans-serif;
-    font-size: 26px; font-weight: 900;
-    color: #111; margin: 0 0 8px;
-    letter-spacing: -0.5px; line-height: 1.2;
+    font-size: 21px; font-weight: 900;
+    color: #111; margin: 0 0 4px;
+    letter-spacing: -0.4px; line-height: 1.2;
   }
   .popup-header h2 span { color: #16a34a; }
   .popup-header p {
-    font-size: 13px; color: #6b7280;
-    margin: 0; line-height: 1.6;
+    font-size: 12px; color: #6b7280;
+    margin: 0; line-height: 1.4;
   }
 
-  .popup-divider { height: 1px; background: #f0fdf4; margin: 0 28px; }
-  .popup-body { padding: 22px 26px 28px; }
+  .popup-body { padding: 8px 18px 14px; }
 
   .section-label {
-    font-size: 11px; font-weight: 800;
+    font-size: 10px; font-weight: 800;
     color: #9ca3af; text-transform: uppercase;
-    letter-spacing: 0.8px; margin: 0 0 10px 2px;
+    letter-spacing: 0.8px; margin: 2px 0 6px 2px;
   }
 
   .domain-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin: 8px 0 10px;
   }
 
   .domain-card {
     position: relative;
     border: 1.5px solid #e5e7eb;
-    padding: 16px 14px;
-    border-radius: 14px;
+    padding: 10px 28px 10px 10px;
+    border-radius: 12px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
     transition: all 0.22s ease;
     background: #fafafa;
     overflow: visible;
+    min-width: 0;
   }
-  .domain-card.has-badge { padding-top: 32px; }
   .domain-card input[type="radio"] {
     position: absolute; opacity: 0; width: 0; height: 0;
   }
   .domain-card:hover {
     border-color: #22c55e;
     background: #f0fdf4;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(34,197,94,0.12);
+    box-shadow: 0 4px 14px rgba(34,197,94,0.12);
   }
   .domain-card:has(input:checked) {
     border-color: #16a34a;
@@ -588,10 +653,10 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   }
   .domain-card:has(input:checked) .d-label { color: #15803d; }
 
-  /* Empty circle indicator that fills with a tick when selected */
   .d-check {
-    position: absolute; top: 10px; right: 10px;
-    width: 20px; height: 20px;
+    position: absolute; top: 50%; right: 8px;
+    transform: translateY(-50%);
+    width: 17px; height: 17px;
     border-radius: 50%;
     border: 2px solid #d1d5db;
     background: #fff;
@@ -602,7 +667,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     position: absolute; inset: -2px;
     border-radius: 50%;
     background: #16a34a; color: #fff;
-    font-weight: 900; font-size: 11px;
+    font-weight: 900; font-size: 10px;
     display: flex; align-items: center; justify-content: center;
     opacity: 0; transform: scale(0.5);
     transition: all 0.2s ease;
@@ -613,136 +678,135 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   }
   .domain-card:has(input:checked) .d-check::after { opacity: 1; transform: scale(1); }
 
-  /* Rating / bestseller badge (grid cards) */
+  /* Badge now floats on the card border, so it adds NO extra height */
   .d-badge {
     position: absolute;
-    top: 8px; left: 10px;
-    font-size: 9px; font-weight: 800;
-    padding: 4px 9px; border-radius: 20px;
+    top: -8px; left: 10px;
+    font-size: 8.5px; font-weight: 800;
+    padding: 2px 8px; border-radius: 20px;
     letter-spacing: 0.4px; text-transform: uppercase;
     white-space: nowrap;
     z-index: 3;
     background: linear-gradient(135deg,#fbbf24,#f59e0b);
     color: #78350f;
-    box-shadow: 0 3px 10px rgba(245,158,11,0.35);
+    box-shadow: 0 2px 8px rgba(245,158,11,0.35);
   }
 
   .d-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
+    min-width: 0;
   }
 
   .d-label {
-    font-size: 13px; font-weight: 700;
-    color: #374151; line-height: 1.3;
+    font-size: 12.5px; font-weight: 700;
+    color: #374151; line-height: 1.2;
     transition: color 0.2s;
   }
 
   .d-meta {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     flex-wrap: wrap;
   }
 
   .d-duration {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     color: #6b7280;
   }
 
   .d-price {
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 800;
     color: #15803d;
     background: #dcfce7;
-    padding: 1px 8px;
-    border-radius: 8px;
+    padding: 0 7px;
+    border-radius: 7px;
   }
 
-  /* Icon box */
   .d-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
+    width: 34px; height: 34px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .d-icon svg { width: 26px; height: 26px; }
+  .d-icon svg { width: 21px; height: 21px; }
 
   .d-icon.aiml     { background: #eff6ff; }
   .d-icon.webdev   { background: #f0fdf4; }
   .d-icon.frontend { background: #faf5ff; }
   .d-icon.data     { background: #fff7ed; }
 
-  /* Premium 3-month upsell card */
+  /* Premium 3-month upsell card (compact) */
   .premium-card {
     position: relative;
     display: block;
-    border-radius: 16px;
-    padding: 36px 44px 18px 18px;
-    margin-bottom: 18px;
+    border-radius: 14px;
+    padding: 12px 42px 12px 12px;
+    margin: 12px 0 12px;
     cursor: pointer;
     background: linear-gradient(135deg, #052e1c 0%, #0f5132 45%, #16a34a 100%);
     color: #fff;
     border: 2px solid transparent;
     transition: all 0.22s ease;
-    box-shadow: 0 10px 26px rgba(6,78,59,0.28);
+    box-shadow: 0 8px 20px rgba(6,78,59,0.26);
   }
   .premium-body {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
   }
   .premium-card input[type="radio"] {
     position: absolute; opacity: 0; width: 0; height: 0;
   }
   .premium-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 32px rgba(6,78,59,0.38);
+    box-shadow: 0 12px 26px rgba(6,78,59,0.36);
   }
   .premium-card:has(input:checked) {
     border-color: #fbbf24;
-    box-shadow: 0 0 0 4px rgba(251,191,36,0.25), 0 14px 32px rgba(6,78,59,0.38);
+    box-shadow: 0 0 0 4px rgba(251,191,36,0.25), 0 12px 26px rgba(6,78,59,0.36);
   }
   .premium-card:has(input:checked) .premium-check::after {
     opacity: 1; transform: scale(1);
   }
 
   .premium-card .d-badge {
-    top: 10px; left: 16px;
+    top: -9px; left: 14px;
     background: linear-gradient(135deg,#fde68a,#fbbf24);
     color: #78350f;
   }
 
   .premium-icon {
-    width: 46px; height: 46px; border-radius: 12px;
+    width: 38px; height: 38px; border-radius: 10px;
     background: rgba(255,255,255,0.14);
     border: 1px solid rgba(255,255,255,0.28);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .premium-icon svg { width: 26px; height: 26px; }
+  .premium-icon svg { width: 22px; height: 22px; }
 
-  .premium-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+  .premium-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
   .premium-label {
     font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 14px;
-    line-height: 1.3;
+    font-weight: 800; font-size: 13px;
+    line-height: 1.25;
     letter-spacing: -0.2px;
   }
-  .premium-sub { font-size: 10.5px; color: rgba(255,255,255,0.72); line-height: 1.4; }
-  .premium-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
-  .premium-meta .p-duration { font-size: 11px; font-weight: 700; color: #bbf7d0; }
+  .premium-sub { font-size: 10px; color: rgba(255,255,255,0.72); line-height: 1.3; }
+  .premium-meta { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .premium-meta .p-duration { font-size: 10.5px; font-weight: 700; color: #bbf7d0; }
   .premium-price {
-    font-size: 13px; font-weight: 900; color: #052e1c;
-    background: #fde68a; padding: 2px 10px; border-radius: 8px;
+    font-size: 12px; font-weight: 900; color: #052e1c;
+    background: #fde68a; padding: 0 9px; border-radius: 7px;
   }
 
-  /* Empty circle indicator, top-right, fills with a tick when selected */
   .premium-check {
-    position: absolute; top: 14px; right: 16px;
-    width: 22px; height: 22px; border-radius: 50%;
+    position: absolute; top: 50%; right: 12px;
+    transform: translateY(-50%);
+    width: 20px; height: 20px; border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.5);
     background: transparent;
   }
@@ -752,45 +816,45 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     color: #052e1c; background: #fbbf24;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 900;
+    font-size: 11px; font-weight: 900;
     opacity: 0; transform: scale(0.5);
     transition: all 0.2s ease;
   }
 
-  /* Button */
   .continue-btn {
     width: 100%;
     background: linear-gradient(135deg, #16a34a, #22c55e);
     color: #fff; border: none;
-    padding: 15px; border-radius: 14px;
+    padding: 12px; border-radius: 12px;
     cursor: pointer;
     font-family: 'Syne', sans-serif;
-    font-size: 15px; font-weight: 800;
+    font-size: 14px; font-weight: 800;
     transition: all 0.2s;
-    box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    box-shadow: 0 4px 16px rgba(34,197,94,0.3);
   }
   .continue-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 28px rgba(34,197,94,0.4);
+    box-shadow: 0 8px 24px rgba(34,197,94,0.4);
   }
 
-  .popup-secure {
-    display: block; text-align: center;
-    margin-top: 12px; font-size: 11px;
-    color: #9ca3af;
+  .popup-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 8px; padding: 0 2px;
   }
-
+  .popup-secure { font-size: 10.5px; color: #9ca3af; }
   .popup-close {
-    display: block; text-align: center;
-    margin-top: 8px; font-size: 12px;
-    color: #9ca3af; cursor: pointer; transition: color 0.2s;
+    font-size: 11.5px; color: #9ca3af; cursor: pointer; transition: color 0.2s;
   }
   .popup-close:hover { color: #6b7280; }
 
   @media (max-width: 400px) {
-    .popup-header { padding: 24px 18px 16px; }
-    .popup-header h2 { font-size: 21px; }
-    .popup-body { padding: 18px 14px 22px; }
+    .popup-header { padding: 16px 14px 8px; }
+    .popup-header h2 { font-size: 19px; }
+    .popup-body { padding: 6px 12px 12px; }
+    .domain-card { padding: 9px 26px 9px 8px; gap: 7px; }
+    .d-icon { width: 30px; height: 30px; }
+    .d-icon svg { width: 19px; height: 19px; }
+    .d-label { font-size: 12px; }
   }
 </style>
 
@@ -798,19 +862,17 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
   <div class="popup-box">
 
     <div class="popup-header">
-      <div class="popup-tag">🎓 Summer Internship 2026</div>
+      <div class="popup-tag">❄️ Winter Internship 2026</div>
       <h2>Pick Your <span>Domain</span></h2>
-      <p>Choose what you want to master this summer.<br>Real projects. Real mentorship. IIT Kharagpur.</p>
+      <p>Real projects. Real mentorship. IIT Kharagpur.</p>
     </div>
-
-    <div class="popup-divider"></div>
 
     <div class="popup-body">
 
       <div class="domain-options">
 
         <!-- AI / ML - 2 Month -->
-        <label class="domain-card has-badge">
+        <label class="domain-card">
           <input type="radio" name="domain" value="https://rzp.io/rzp/3skillcourse">
           <span class="d-badge">🌟 Most Rated</span>
           <span class="d-check"></span>
@@ -853,7 +915,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
             </svg>
           </div>
           <div class="d-info">
-            <span class="d-label">Web Development</span>
+            <span class="d-label">Web Dev</span>
             <div class="d-meta">
               <span class="d-duration">2 Month</span>
               <span class="d-price">₹499</span>
@@ -937,7 +999,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
           </div>
           <div class="premium-info">
             <span class="premium-label">AI / ML — Advanced Track</span>
-            <span class="premium-sub">Certificate-based deep dive, extra projects & mentorship</span>
+            <span class="premium-sub">Certificate, extra projects & mentorship</span>
             <div class="premium-meta">
               <span class="p-duration">3 Month</span>
               <span class="premium-price">₹699</span>
@@ -950,10 +1012,10 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
         Continue &rarr;
       </button>
 
-      <span class="popup-secure">🔒 Secure payment powered by Easebuzz</span>
-      <span class="popup-close" onclick="document.getElementById('domainPopup').style.display='none'">
-        ✕ Cancel
-      </span>
+      <div class="popup-footer">
+        <span class="popup-secure">🔒 Secure payment by Easebuzz</span>
+        <span class="popup-close" onclick="document.getElementById('domainPopup').style.display='none'">✕ Cancel</span>
+      </div>
     </div>
 
   </div>
@@ -973,49 +1035,85 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#">
-    <svg class="logo-icon" viewBox="0 0 38 38" fill="none">
-      <rect width="38" height="38" rx="10" fill="#dcfce7"/>
-      <text x="19" y="26" text-anchor="middle" font-size="16" font-weight="900" font-family="Nunito,sans-serif" fill="#15803d">3S</text>
-    </svg>
-    3Skill
-  </a>
- <button class="btn-signin" onclick="window.location.href='main-login.html'">
-  Dashboard
-</button>
+  <div class="snow" aria-hidden="true">
+    <span style="--l:8%;  --s:5px; --t:6s; --d:0s"></span>
+    <span style="--l:22%; --s:4px; --t:7s; --d:2s"></span>
+    <span style="--l:38%; --s:6px; --t:6s; --d:4s"></span>
+    <span style="--l:55%; --s:4px; --t:8s; --d:1s"></span>
+    <span style="--l:70%; --s:5px; --t:7s; --d:3s"></span>
+    <span style="--l:84%; --s:6px; --t:6s; --d:5s"></span>
+    <span style="--l:94%; --s:4px; --t:8s; --d:2.5s"></span>
+  </div>
+  <div class="nav-left">
+    <a class="logo" href="#">
+      <svg class="logo-icon" viewBox="0 0 38 38" fill="none">
+        <rect width="38" height="38" rx="10" fill="#dcfce7"/>
+        <text x="19" y="26" text-anchor="middle" font-size="16" font-weight="900" font-family="Nunito,sans-serif" fill="#15803d">3S</text>
+      </svg>
+      3Skill
+    </a>
+    <span class="nav-winter-pill">❄️ Winter 2026</span>
+  </div>
+
+  <button class="btn-signin" onclick="window.location.href='main-login.html'">
+    Dashboard
+  </button>
 </nav>
 
 <!-- HERO -->
 <div class="hero-wrapper">
+
+  <!-- SNOWFALL -->
+  <div class="snow" aria-hidden="true">
+    <span style="--l:4%;  --s:6px; --t:9s;  --d:0s"></span>
+    <span style="--l:11%; --s:4px; --t:12s; --d:2s"></span>
+    <span style="--l:18%; --s:8px; --t:10s; --d:4s"></span>
+    <span style="--l:26%; --s:5px; --t:13s; --d:1s"></span>
+    <span style="--l:33%; --s:7px; --t:9s;  --d:5s"></span>
+    <span style="--l:41%; --s:4px; --t:11s; --d:3s"></span>
+    <span style="--l:48%; --s:6px; --t:14s; --d:0.5s"></span>
+    <span style="--l:55%; --s:8px; --t:10s; --d:6s"></span>
+    <span style="--l:62%; --s:5px; --t:12s; --d:2.5s"></span>
+    <span style="--l:69%; --s:7px; --t:9s;  --d:4.5s"></span>
+    <span style="--l:76%; --s:4px; --t:13s; --d:1.5s"></span>
+    <span style="--l:83%; --s:6px; --t:11s; --d:3.5s"></span>
+    <span style="--l:90%; --s:8px; --t:10s; --d:0.8s"></span>
+    <span style="--l:96%; --s:5px; --t:12s; --d:5.5s"></span>
+  </div>
+
   <div class="hero">
 
     <!-- LEFT -->
     <div class="hero-left">
+
+      <div>
+        <span class="winter-tag">❄️ Winter Internship 2026</span>
+      </div>
 
       <div class="badge">🏛️ Registered Under <span>DPIIT</span>, Govt. of India</div>
 
       <h1 class="hero-title">
         India's #1
         <span class="highlight">
-          <span class="ps-brush">Live Internship
+          <span class="ps-brush">Winter Internship
             <svg class="brush-svg" viewBox="0 0 300 18" preserveAspectRatio="none">
               <path d="M4 14 Q30 4 75 10 Q130 16 180 8 Q230 2 260 11 Q280 16 296 10"
                 stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
               <path d="M8 16 Q60 8 120 13 Q175 17 220 9 Q255 5 292 13"
-                stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+                stroke="#86efac" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
             </svg>
-          </span><br>Training Program
+          </span><br>Live Training Program
         </span>
       </h1>
 
       <p class="hero-subtitle">
-        Join our <strong>Sep 2 Month  Internship</strong> and work on real industry projects with expert mentorship and certification.
+        Join our <strong>Winter 2026 – 2 Month Internship</strong> and work on real industry projects with expert mentorship and certification.
         Top performing students will get a chance to visit the <strong>IIT Kharagpur campus.</strong>
       </p>
 
       <!-- MOBILE PILL -->
       <div class="mob-hero-pill">
-        <span class="mob-pill-tag">🛡️ Secure your slot in our live Summer Internship Program and start building real industry skills with expert mentors.</span>
+        <span class="mob-pill-tag">🛡️ Secure your slot in our live Winter Internship Program and start building real industry skills with expert mentors.</span>
       </div>
 
       <!-- DESKTOP PRICING BLOCK -->
@@ -1053,30 +1151,19 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
         </div>
 
         <div class="pricing-seats-badge">
-         <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
-
-<script>
-  var seats = [50, 45, 40, 30, 35, 20, 10];
-  
-  // Date ko seed ki tarah use karo - har din ek fixed number aayega
-  var today = new Date();
-  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  var index = seed % seats.length;
-  
-  document.getElementById("seatCount").textContent = seats[index];
-</script>
+          🔥 <strong><span class="seat-num"></span> seats left</strong> at this price — batch filling fast!
         </div>
       </div>
 
       <div class="cta-buttons">
-  <a href="javascript:void(0)" class="btn-cta" onclick="openDomainPopup()">
-    Book Your Slot Now
-  </a>
+        <a href="javascript:void(0)" class="btn-cta" onclick="openDomainPopup()">
+          Book Your Slot Now
+        </a>
 
-  <a href="3skill-allprogrampdf.pdf" class="btn-download">
-    Download Brochure
-  </a>
-</div>
+        <a href="3skill-allprogrampdf.pdf" class="btn-download">
+          Download Brochure
+        </a>
+      </div>
 
     </div>
 
@@ -1171,18 +1258,8 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
             <span class="mob-remaining-sub">No Hidden Charges ✅</span>
           </div>
         </div>
-       <div class="mob-seats-badge">🔥 <strong><span id="seatCount"></span> seats left</strong> at this price — batch filling fast!</div>
+        <div class="mob-seats-badge">🔥 <strong><span class="seat-num"></span> seats left</strong> at this price — batch filling fast!</div>
 
-<script>
-  var seats = [50, 45, 40, 30, 35, 20, 10];
-  
-  // Date ko seed ki tarah use karo - har din ek fixed number aayega
-  var today = new Date();
-  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  var index = seed % seats.length;
-  
-  document.getElementById("seatCount").textContent = seats[index];
-</script>
         <div class="mob-steps">
           <div class="mob-step mob-step--1">
             <div class="mob-step-num">1</div>
@@ -1216,24 +1293,22 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 <!-- MOBILE STICKY ENROLL -->
 <div class="mobile-sticky">
   <div class="mob-seats-badge" style="text-align:center; margin-bottom:8px; font-size:12px;">
-    🔥 <strong><span id="seatCountMobile"></span> seats left</strong> at this price — batch filling fast!
+    🔥 <strong><span class="seat-num"></span> seats left</strong> at this price — batch filling fast!
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
     <a href="javascript:void(0)" class="btn-enroll" onclick="openDomainPopup()" style="flex:1;">Book Your Slot Now</a>
   </div>
 </div>
 
+<!-- SEAT COUNTER (ek hi script, sab jagah same number) -->
 <script>
   var seats = [50, 45, 40, 30, 35, 20, 10];
-
   var today = new Date();
   var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  var index = seed % seats.length;
-  var seatNum = seats[index];
-
-  // Dono jagah same number aayega
-  document.getElementById("seatCount").textContent = seatNum;
-  document.getElementById("seatCountMobile").textContent = seatNum;
+  var seatNum = seats[seed % seats.length];
+  document.querySelectorAll(".seat-num").forEach(function (el) {
+    el.textContent = seatNum;
+  });
 </script>
 <style>
    /* MOBILE STICKY ENROLL */
@@ -3010,7 +3085,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
       </div>
       <div class="yt-channel-text">
         <strong>3Skill Official</strong>
-        <span>Summer Internship 2026 · IIT Kharagpur</span>
+        <span>Winter Internship 2026 · IIT Kharagpur</span>
       </div>
     </div>
     <div class="yt-info-right">
@@ -3547,7 +3622,7 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
         <div class="faq-q-left"><span class="faq-emoji">💡</span><span class="faq-q-text">What is the 2-Month Internship Program?</span></div>
         <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
       </button>
-      <div class="faq-a"><p>Our 2-Month Summer Internship is divided into two phases — Month 1 is live classes with expert mentors, and Month 2 is a hands-on project phase where you build real industry projects. You also get a certificate and a chance to visit IIT Kharagpur campus.</p></div>
+      <div class="faq-a"><p>Our 2-Month Winter Internship is divided into two phases — Month 1 is live classes with expert mentors, and Month 2 is a hands-on project phase where you build real industry projects. You also get a certificate and a chance to visit IIT Kharagpur campus.</p></div>
     </div>
 
     <div class="faq-item">
@@ -4262,6 +4337,8 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
 
 
 
+
+
 <script>
   // Disable Right Click
   document.addEventListener('contextmenu', function(e) {
@@ -4281,8 +4358,6 @@ src="https://www.facebook.com/tr?id=1788595878478616&ev=PageView&noscript=1"
     }
   });
     </script>
-
-
 
 </body>
 </html>
